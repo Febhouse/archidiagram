@@ -181,7 +181,9 @@ const rightFaqs = faqs.slice(midIndex);
 		<!-- Iframe Container -->
 		<div class="flex-1 w-full h-full bg-slate-950">
 			<iframe
-				src="https://ai.febhouse.com/chat/DHgHVZzreBkrUhgz"
+				id="main-ai-iframe"
+				data-src="https://ai.febhouse.com/chat/DHgHVZzreBkrUhgz"
+				src="about:blank"
 				class="w-full h-full border-0"
 				allow="microphone; clipboard-write"
 				title="Febhouse AI Chat"
@@ -194,8 +196,12 @@ const rightFaqs = faqs.slice(midIndex);
 <script is:inline>
 window.toggleMainAiChat = function() {
 	const win = document.getElementById('main-ai-chat-window');
+	const iframe = document.getElementById('main-ai-iframe');
 	if (win) {
 		if (win.classList.contains('hidden')) {
+			if (iframe && (!iframe.src || iframe.src.includes('about:blank'))) {
+				iframe.src = iframe.getAttribute('data-src') || '';
+			}
 			win.classList.remove('hidden');
 			win.classList.add('flex');
 		} else {
