@@ -16,7 +16,7 @@ In architectural design, **context analysis** is the process of understanding ev
 
 Rather than working with assumptions, a diagram lets you communicate clearly with clients, consultants, and approval authorities. And with the help of digital tools, making these diagrams can be both fast and accurate.
 
- ![](https://sundiagram.com/images/2025/07/20250703-SAMPLE-25-style2-1.jpg)
+![Context Analysis Diagram](/images/2025/07/20250703-SAMPLE-25-style2.jpg)
 
 ## Tools Used in This Project 
 
@@ -55,7 +55,7 @@ Too often, site analysis diagrams are either too rough or too time-consuming to 
 
 Whether you’re working on early concepts, preparing for client meetings, or applying for permits, this method saves time and improves quality.
 
- ![Context Analysis diagram -1b](https://sundiagram.com/images/2025/07/20250707-SAMPLE-25-style1-2.jpg)
+![Context Analysis diagram -1b](/images/2025/07/20250703-SAMPLE-25-style2.jpg)
 
 ## Download project files
 

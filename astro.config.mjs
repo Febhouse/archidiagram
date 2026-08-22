@@ -18,6 +18,8 @@ export default defineConfig({
     '/blog/2025-01-10-3d-symbol': '/dynamic-symbols',
     '/blog/2025-05-07-3d-symbols-for-architectural-diagram': '/dynamic-symbols',
     '/sun-path-diagram': '/sun-diagram',
+    '/create-architectural-diagrams-using-sketchup': '/create-architectural-diagrams-updated-workflow-aug-2025',
+    '/blog/2025-06-20-create-architectural-diagrams-using-sketchup': '/create-architectural-diagrams-updated-workflow-aug-2025',
   },
   integrations: [mdx(), sitemap(), partytown()],
 

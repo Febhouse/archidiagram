@@ -10,21 +10,23 @@ tags: 'tutorial'
 
 Most current 3D design software shares a significant blind spot when it comes to environmental analysis: they fail to comprehend the dynamic nature of real-world time.
 
- ![3D Sun path - Paris](/images/2026/03/PARIS-copy.jpg)The root of this issue is **DST (Daylight Saving Time)**. This is a real-world convention where clocks are set forward by one hour during the summer months, observed by many countries worldwide. When architects work on global projects using standard 3D tools, they typically lock in a static time zone (UTC) for the entire project. As a result, their shadow simulations become completely misaligned with actual local time for half of the year.
+![3D Sun path - Paris](/images/2026/03/PARIS-copy.jpg)
+
+The root of this issue is **DST (Daylight Saving Time)**. This is a real-world convention where clocks are set forward by one hour during the summer months, observed by many countries worldwide. When architects work on global projects using standard 3D tools, they typically lock in a static time zone (UTC) for the entire project. As a result, their shadow simulations become completely misaligned with actual local time for half of the year.
 
 Let’s examine this simulation error across two different hemispheres:
 
- <figure>[![Visualizing the DST impact in Sydney](/images/2026/03/SYDNEY-1-Zip.gif)](/images/2026/03/SYDNEY-1-Zip.gif)</figure>
+![Visualizing the DST impact in Sydney](/images/2026/03/SYDNEY-1-Zip.gif)
 
-### [Case Study 1: Sydney, Australia (Southern Hemisphere)](/images/2026/03/SYDNEY-1-Zip.gif)
+### Case Study 1: Sydney, Australia (Southern Hemisphere)
 
 ***Figure 1**: Visualizing the DST impact in Sydney. When fixed to standard time (UTC+10), the December summer simulation is misaligned with actual local time.*   
   
 In Sydney, summer occurs in December. During this period, DST is active, making the actual real-world time zone UTC+11. If a designer locks the environment to standard time (UTC+10) year-round, the sun's position and the resulting shadows at any given hour in December will lag exactly one hour behind reality
 
- <figure>[![sun path at france](/images/2026/03/PARIS-GIF-Zip.gif)](/images/2026/03/PARIS-GIF-Zip.gif)</figure>
+![sun path at france](/images/2026/03/PARIS-GIF-Zip.gif)
 
-### [Case Study 2: Paris, France (Northern Hemisphere)](/images/2026/03/PARIS-GIF-Zip.gif)
+### Case Study 2: Paris, France (Northern Hemisphere)
 
 ***Figure 2**: In Paris, the summer sun path (June) requires a shift to UTC+2. Without it, the entire lighting analysis for the warmest months is compromised.*   
 Conversely, in the Northern Hemisphere, summer falls in June. Paris operates on standard time (UTC+1) in the winter but shifts to UTC+2 during the summer months. Forgetting to manually adjust this offset when rendering a June solar study means presenting false daylight data to clients.

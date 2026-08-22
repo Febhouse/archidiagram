@@ -16,6 +16,7 @@ export const REDIRECTED_LEGACY_SLUGS = [
 	'dynamic-symbols-for-architectural-diagram',
 	'3d-symbol',
 	'3d-symbols-for-architectural-diagram',
+	'create-architectural-diagrams-using-sketchup',
 ];
 
 export function isPublishablePost(post: { id: string; data: { tags?: string } }) {
