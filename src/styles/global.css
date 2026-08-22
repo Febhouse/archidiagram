@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-primary: #f59e0b;
+  --color-primary-hover: #d97706;
+  --color-accent: #0ea5e9;
+  --color-surface: #f8fafc;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans bg-slate-50 text-slate-900 antialiased selection:bg-amber-500/20 selection:text-amber-700 transition-colors duration-300;
+  }
+
+  html.dark body {
+    @apply bg-slate-950 text-slate-100;
+  }
+}
+
+/* Custom Utilities for Horizontal Scroll Tabs & Clean UI */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Clean Article Typography Styles */
+.article-content {
+  display: flow-root !important;
+  @apply text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed space-y-6;
+}
+
+.article-content h1 {
+  @apply text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mt-10 mb-5 leading-tight;
+}
+
+.article-content h2 {
+  @apply text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight mt-12 mb-4 pb-2 border-b border-slate-200 dark:border-slate-800;
+}
+
+.article-content h3 {
+  @apply text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mt-8 mb-3;
+}
+
+.article-content p {
+  @apply mb-5 leading-relaxed text-slate-700 dark:text-slate-300;
+}
+
+.article-content a {
+  @apply text-amber-600 dark:text-amber-400 font-semibold hover:underline transition-colors;
+}
+
+.article-content ul {
+  @apply list-disc list-inside space-y-2 mb-6 pl-2 text-slate-700 dark:text-slate-300;
+}
+
+.article-content ol {
+  @apply list-decimal list-inside space-y-2 mb-6 pl-2 text-slate-700 dark:text-slate-300;
+}
+
+/* Universal rounded corners matching button border-radius (8px / 0.5rem) */
+img {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Circular Images / Avatars Override */
+img.rounded-full,
+.rounded-full,
+.author-avatar {
+  border-radius: 9999px !important;
+}
+
+.article-content img:not(.rounded-full):not(.author-avatar) {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  border: none !important;
+  @apply my-8 max-w-full h-auto mx-auto;
+}
+
+.article-content blockquote {
+  @apply border-l-4 border-amber-500 bg-amber-50 dark:bg-slate-900/80 p-4 sm:p-5 rounded-r-xl italic text-slate-700 dark:text-slate-300 my-6;
+}
+
+.article-content hr {
+  @apply border-slate-200 dark:border-slate-800 my-10;
+  clear: both;
+}
+
+/* Download Button Component */
+.download-btn-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  clear: both !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.download-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.625rem !important;
+  padding: 0.65rem 1.25rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  line-height: 1.25rem !important;
+  border-radius: 0.5rem !important;
+  text-decoration: none !important;
+  border: 1px solid #cbd5e1 !important;
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  margin: 0.75rem 0 !important;
+  cursor: pointer !important;
+}
+
+html.dark .download-btn {
+  border-color: #334155 !important;
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.download-btn:hover {
+  background-color: #e2e8f0 !important;
+  border-color: #f59e0b !important;
+  color: #0f172a !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  text-decoration: none !important;
+}
+
+html.dark .download-btn:hover {
+  background-color: #334155 !important;
+  border-color: #f59e0b !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15) !important;
+}
+
+.download-btn:active {
+  transform: translateY(0) !important;
+}
+
+.download-btn svg {
+  width: 1.125rem !important;
+  height: 1.125rem !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.2s ease !important;
+}
+
+.download-btn:hover svg {
+  transform: translateY(1px) !important;
+}
+
+/* YouTube Video Wrappers */
+/* YouTube Standard Video (Horizontal 16:9 - Full width aligned with container edges) */
+.video-standard-wrapper {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 2rem 0 !important;
+  border-radius: 1rem !important;
+  overflow: hidden !important;
+  aspect-ratio: 16 / 9 !important;
+  background-color: #020617 !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05) !important;
+  clear: both !important;
+}
+
+html.dark .video-standard-wrapper {
+  border-color: #1e293b !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.video-standard-wrapper iframe {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+}
+
+/* YouTube Shorts Video (Vertical 9:16 - Fluid Float Layout) */
+.video-shorts-wrapper {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 9 / 16 !important;
+  background-color: #020617 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 1rem !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.dark .video-shorts-wrapper {
+  border-color: #1e293b !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.video-shorts-wrapper iframe {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+}
+
+/* Floated Shorts Container for Desktop */
+@media (min-width: 768px) {
+  .video-shorts-float {
+    float: right !important;
+    width: 44% !important;
+    max-width: 500px !important;
+    min-width: 300px !important;
+    margin-left: 2.5rem !important;
+    margin-bottom: 2rem !important;
+    margin-top: 0.5rem !important;
+    clear: right !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .video-shorts-float {
+    float: none !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 2rem auto !important;
+    clear: both !important;
+  }
+}

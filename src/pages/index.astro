@@ -1,0 +1,141 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Card from '../components/Card.astro';
+import ToolsShowcase from '../components/ToolsShowcase.astro';
+import HeroCoverSlider from '../components/HeroCoverSlider.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import { SITE_DESCRIPTION, SITE_TITLE, isPublishablePost } from '../consts';
+import { getCollection } from 'astro:content';
+
+// ONLY publish posts that explicitly have tags and are not dedicated landing pages/redirects
+const posts = (await getCollection('blog'))
+	.filter(isPublishablePost)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<BaseHead title={`${SITE_TITLE} - Master Architectural Diagrams`} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-amber-500/20 selection:text-amber-700 transition-colors duration-300">
+		<Header />
+
+		<main class="w-full">
+			<!-- 🚀 HERO VIDEO COVER SLIDER SECTION (3 Major Categories: Tutorials, Free Downloads, Toolkits) -->
+			<HeroCoverSlider />
+
+			<!-- 🛠 3 CORE TOOLS SHOWCASE SECTION (The Most Popular Extension Packs) -->
+			<ToolsShowcase />
+
+			<!-- 📂 RESOURCES SECTION WITH HORIZONTAL FILTER TABS -->
+			<section id="resources" class="py-20 w-full mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 max-w-[1920px]">
+				<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+					<div>
+						<span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold tracking-widest uppercase bg-amber-500/10 text-amber-800 dark:text-amber-400 border border-amber-500/20 mb-3">
+							📚 TUTORIALS & RESOURCES
+						</span>
+						<h2 class="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+							Browse All Resources & Diagrams
+						</h2>
+					</div>
+				</div>
+
+				<!-- HORIZONTAL FILTER TABS -->
+				<div class="relative mb-10 overflow-hidden">
+					<div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 pt-1 border-b border-slate-200 dark:border-slate-800" id="filter-tabs-container">
+						<button data-category="ALL" class="tab-btn active px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm shrink-0 cursor-pointer">
+							[ALL]
+						</button>
+						<button data-category="tutorial" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
+							[WORKFLOW & TIPS]
+						</button>
+						<button data-category="sample project" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
+							[SAMPLE PROJECTS]
+						</button>
+						<button data-category="presentation template" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
+							[PRESENTATION & SITE ANALYSIS TEMPLATES]
+						</button>
+						<button data-category="other resources" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
+							[SKETCHUP EXTENSIONS]
+						</button>
+					</div>
+				</div>
+
+				<!-- POSTS GRID (Only published tagged posts) -->
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="posts-grid">
+					{posts.map((post) => {
+						const tagValue = (post.data.tags || "").trim().toLowerCase();
+						return (
+							<div class="post-card-item" data-post-tag={tagValue}>
+								<Card 
+									id={post.id}
+									title={post.data.title}
+									description={post.data.description}
+									pubDate={post.data.pubDate}
+									heroImage={post.data.heroImage}
+									tags={post.data.tags}
+								/>
+							</div>
+						);
+					})}
+				</div>
+			</section>
+
+			<!-- ❓ TECHNICAL SUPPORT & FAQ ACCORDION (Show it Better "What would you like to know about us?") -->
+			<FaqAccordion />
+		</main>
+
+		<Footer />
+
+		<!-- Interactive Tag Filter Script -->
+		<script>
+			const tabBtns = document.querySelectorAll('.tab-btn');
+			const postItems = document.querySelectorAll('.post-card-item');
+
+			function activateCategoryTab(category: string) {
+				const targetCat = (category || 'all').toLowerCase();
+
+				// Update Tab Buttons UI
+				tabBtns.forEach(b => {
+					const cat = (b.getAttribute('data-category') || '').toLowerCase();
+					if (cat === targetCat) {
+						b.classList.remove('bg-slate-100', 'dark:bg-slate-800/80', 'text-slate-600', 'dark:text-slate-300');
+						b.classList.add('bg-slate-900', 'dark:bg-white', 'text-white', 'dark:text-slate-900', 'shadow-sm');
+					} else {
+						b.classList.remove('bg-slate-900', 'dark:bg-white', 'text-white', 'dark:text-slate-900', 'shadow-sm');
+						b.classList.add('bg-slate-100', 'dark:bg-slate-800/80', 'text-slate-600', 'dark:text-slate-300');
+					}
+				});
+
+				// Filter Post Items
+				postItems.forEach(item => {
+					const itemTag = (item.getAttribute('data-post-tag') || '').toLowerCase();
+					if (targetCat === 'all') {
+						(item as HTMLElement).style.display = 'block';
+					} else if (targetCat === 'tutorial' && itemTag === 'tutorial') {
+						(item as HTMLElement).style.display = 'block';
+					} else if (targetCat === 'sample project' && itemTag === 'sample project') {
+						(item as HTMLElement).style.display = 'block';
+					} else if (targetCat === 'presentation template' && itemTag === 'presentation template') {
+						(item as HTMLElement).style.display = 'block';
+					} else if (targetCat === 'other resources' && (itemTag === 'other resources' || itemTag.includes('resource') || itemTag.includes('extension'))) {
+						(item as HTMLElement).style.display = 'block';
+					} else {
+						(item as HTMLElement).style.display = 'none';
+					}
+				});
+			}
+
+			// Add click listeners to tab buttons
+			tabBtns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					const category = btn.getAttribute('data-category') || 'ALL';
+					activateCategoryTab(category);
+				});
+			});
+		</script>
+	</body>
+</html>

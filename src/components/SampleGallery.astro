@@ -1,0 +1,91 @@
+---
+interface GalleryItem {
+	title: string;
+	category: string;
+	image: string;
+	description: string;
+}
+
+const galleryItems: GalleryItem[] = [
+	{
+		title: "Climatic Site Analysis & Solar Orientation",
+		category: "Sun Diagram",
+		image: "/images/2026/01/Climatic-Site-Analysis.jpg",
+		description: "3D sun path simulation and solar orientation overlay in SketchUp."
+	},
+	{
+		title: "Interior Shadow Analysis Section",
+		category: "Shadow Slice",
+		image: "/images/2026/02/interior-shadow-analysis-03.jpg",
+		description: "Automated interior shadow perspective section generated with Shadow Slice."
+	},
+	{
+		title: "Dynamic 3D Vector Symbols",
+		category: "Dynamic Symbols",
+		image: "/images/2025/05/Dynamic-Symbols-for-Architectural-Diagram-1.jpg",
+		description: "Parametric diagrammatic symbols for traffic, wind flow, and functional zoning."
+	},
+	{
+		title: "Urban Context Analysis Diagram",
+		category: "Site Analysis",
+		image: "/images/2026/01/Context-Analysis-Diagram-1.jpg",
+		description: "Surrounding building massing, setback mapping, and urban context study."
+	},
+	{
+		title: "Canva A3 Architectural Presentation Sheet",
+		category: "Presentation Template",
+		image: "/images/2025/02/Presentation-A3-01.jpg",
+		description: "Professional A3 architectural layout template ready for Canva."
+	},
+	{
+		title: "Daylight Optimization Townhouse Study",
+		category: "Solar Analysis",
+		image: "/images/2026/03/Daylight-optimization.jpg",
+		description: "Direct sunlight penetration and natural daylight optimization diagram."
+	}
+];
+---
+
+<section id="gallery" class="py-20 bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
+	<div class="max-w-[1200px] mx-auto px-4 sm:px-6">
+		<div class="text-center max-w-2xl mx-auto mb-12">
+			<span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold tracking-widest uppercase bg-sky-500/10 text-sky-700 dark:text-sky-400 border border-sky-500/20 mb-3">
+				🎨 GALLERY & SAMPLE PROJECTS
+			</span>
+			<h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-3">
+				Architectural Diagram Samples
+			</h2>
+			<p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base font-light">
+				Real-world diagram outputs created with Sun Diagram, Dynamic Symbols, Shadow Slice, and Canva templates.
+			</p>
+		</div>
+
+		<!-- Gallery Grid -->
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+			{galleryItems.map(item => (
+				<div class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+					<div class="relative aspect-[16/10] overflow-hidden bg-slate-200 dark:bg-slate-800">
+						<img 
+							src={item.image} 
+							alt={item.title} 
+							loading="lazy" 
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+							onerror="this.onerror=null; this.src='/images/2025/01/3D-Symbol-01.jpg';"
+						/>
+						<div class="absolute top-3 left-3 bg-slate-900/85 backdrop-blur-md text-amber-400 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-slate-700/60">
+							{item.category}
+						</div>
+					</div>
+					<div class="p-5 flex flex-col flex-grow">
+						<h3 class="text-base font-bold text-slate-900 dark:text-white mb-1 group-hover:text-amber-500 transition-colors line-clamp-1">
+							{item.title}
+						</h3>
+						<p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed line-clamp-2">
+							{item.description}
+						</p>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>

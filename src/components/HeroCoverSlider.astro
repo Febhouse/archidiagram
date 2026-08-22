@@ -1,0 +1,333 @@
+---
+interface Slide {
+	id: string;
+	category: string;
+	shortLabel: string;
+	badge: string;
+	badgeIcon: string;
+	title: string;
+	highlight: string;
+	description: string;
+	imgDark: string;
+	imgLight: string;
+	btn: {
+		text: string;
+		actionType: 'tab-filter' | 'scroll' | 'link';
+		target: string;
+	};
+}
+
+const slides: Slide[] = [
+	{
+		id: 'tutorials',
+		category: 'TUTORIALS & TIPS',
+		shortLabel: 'TUTORIALS',
+		badge: 'TUTORIALS & TIPS',
+		badgeIcon: '🎬',
+		title: 'Master Architectural Diagrams',
+		highlight: 'Step-by-Step Workflows',
+		description: 'Comprehensive guides, solar study workflows, and clear diagram techniques for SketchUp, Photoshop & Canva.',
+		imgDark: '/images/COVER/cover01_dark.webp',
+		imgLight: '/images/COVER/cover01_light.webp',
+		btn: {
+			text: 'Explore Tutorials & Tips ↓',
+			actionType: 'tab-filter',
+			target: 'tutorial'
+		}
+	},
+	{
+		id: 'samples',
+		category: 'FREE DOWNLOAD SAMPLE',
+		shortLabel: 'SAMPLES',
+		badge: 'FREE DOWNLOAD SAMPLES',
+		badgeIcon: '🎁',
+		title: 'Free 3D Project Files',
+		highlight: '& SketchUp Models',
+		description: 'Download free 3D models, site analysis sample files, dynamic symbols, and environmental study models.',
+		imgDark: '/images/COVER/cover02_dark.webp',
+		imgLight: '/images/COVER/cover02_light.webp',
+		btn: {
+			text: 'Get Sample Projects ↓',
+			actionType: 'tab-filter',
+			target: 'sample project'
+		}
+	},
+	{
+		id: 'templates',
+		category: 'PRESENTATION TEMPLATES',
+		shortLabel: 'TEMPLATES',
+		badge: 'PRESENTATION & ANALYSIS',
+		badgeIcon: '📐',
+		title: 'Presentation & Analysis Boards',
+		highlight: 'Ready-To-Use Layouts',
+		description: 'Clean Canva presentation board templates, site analysis diagrams, and monochrome graphic assets.',
+		imgDark: '/images/COVER/cover03_dark.webp',
+		imgLight: '/images/COVER/cover03_light.webp',
+		btn: {
+			text: 'Explore Presentation Templates ↓',
+			actionType: 'tab-filter',
+			target: 'presentation template'
+		}
+	},
+	{
+		id: 'toolkits',
+		category: 'EXTENSION TOOLKITS',
+		shortLabel: 'TOOLKITS',
+		badge: 'SKETCHUP EXTENSIONS',
+		badgeIcon: '⚡',
+		title: 'Supercharge Your Diagrams',
+		highlight: 'With 3 Core Extensions',
+		description: 'Sun Diagram, Dynamic Symbols & Shadow Slice — purpose-built SketchUp tools to speed up diagramming by 10x.',
+		imgDark: '/images/COVER/cover04_dark.webp',
+		imgLight: '/images/COVER/cover04_light.webp',
+		btn: {
+			text: 'Essential Workflows & Tools ↓',
+			actionType: 'scroll',
+			target: 'tools'
+		}
+	}
+];
+---
+
+<!-- 🚀 FULL-BLEED 1920x800 COVER SLIDER (Optimized WebP + 3s Auto Crossfade) -->
+<section class="relative w-full overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white select-none transition-colors duration-300 m-0 p-0" id="hero-cover-slider">
+	
+	<!-- 1920x800 Aspect Ratio Viewport -->
+	<div class="relative w-full aspect-[4/3] sm:aspect-[16/9] lg:aspect-[1920/800] min-h-[480px] sm:min-h-[540px] md:min-h-[580px] lg:min-h-[640px] overflow-hidden group">
+		
+		<!-- Stacked Slides for Smooth FadeIn / FadeOut Crossfade -->
+		<div class="relative w-full h-full">
+			{slides.map((slide, index) => (
+				<div 
+					class={`slide-item absolute inset-0 w-full h-full transition-opacity duration-400 ease-in-out bg-slate-50 dark:bg-slate-950 ${index === 0 ? 'opacity-100 pointer-events-auto z-20' : 'opacity-0 pointer-events-none z-10'}`} 
+					data-slide-index={index}
+				>
+					
+					<!-- 🌙 Dark Mode Image (WebP) -->
+					<img
+						src={slide.imgDark}
+						alt={`${slide.title} Dark Cover`}
+						class="absolute inset-0 w-full h-full object-cover pointer-events-none hidden dark:block"
+						loading={index === 0 ? "eager" : "lazy"}
+						decoding="async"
+					/>
+
+					<!-- ☀️ Light Mode Image (WebP) -->
+					<img
+						src={slide.imgLight}
+						alt={`${slide.title} Light Cover`}
+						class="absolute inset-0 w-full h-full object-cover pointer-events-none block dark:hidden"
+						loading={index === 0 ? "eager" : "lazy"}
+						decoding="async"
+					/>
+
+					<!-- Content Container (Overlay Text + 1 Single Clean CTA Button) -->
+					<div class="relative z-20 w-full h-full flex flex-col justify-end max-w-[1920px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 pb-12 sm:pb-16 md:pb-20">
+						<div class="max-w-3xl">
+							<!-- Category Badge -->
+							<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-white/90 dark:bg-slate-900/90 text-amber-700 dark:text-amber-400 border border-amber-500/30 mb-3 sm:mb-4 backdrop-blur-md w-fit shadow-sm">
+								<span>{slide.badgeIcon}</span>
+								<span>{slide.badge}</span>
+							</div>
+
+							<!-- Big Headline -->
+							<h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-3 sm:mb-4 drop-shadow-sm">
+								{slide.title} <br class="hidden sm:inline" />
+								<span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-sky-600 dark:from-amber-400 dark:via-amber-300 dark:to-sky-300">
+									{slide.highlight}
+								</span>
+							</h1>
+
+							<!-- Description Subtitle -->
+							<p class="text-xs sm:text-sm md:text-base text-slate-700 dark:text-slate-200 max-w-2xl font-normal leading-relaxed mb-6 sm:mb-8 drop-shadow-sm line-clamp-2 sm:line-clamp-3">
+								{slide.description}
+							</p>
+
+							<!-- Single Focused Action Button -->
+							<div class="flex items-center">
+								<button
+									type="button"
+									class="slider-action-btn px-6 sm:px-7 py-3.5 sm:py-4 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-950 bg-amber-400 hover:bg-amber-300 shadow-sm hover:shadow-md transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2 cursor-pointer"
+									data-action-type={slide.btn.actionType}
+									data-target={slide.btn.target}
+								>
+									<span>{slide.btn.text}</span>
+								</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			))}
+		</div>
+
+		<!-- Sleek Bottom-Right Navigation Arrows (Low down to avoid obscuring text) -->
+		<div class="absolute bottom-5 sm:bottom-8 md:bottom-10 right-4 sm:right-8 md:right-12 lg:right-16 z-30 flex items-center gap-2 sm:gap-3 bg-white/80 dark:bg-slate-950/70 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-md">
+			<button
+				id="slider-prev-btn"
+				type="button"
+				aria-label="Previous Slide"
+				title="Previous Slide"
+				class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/90 dark:bg-slate-900/90 hover:bg-amber-400 dark:hover:bg-amber-400 text-slate-800 dark:text-white hover:text-slate-950 dark:hover:text-slate-950 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+				</svg>
+			</button>
+
+			<button
+				id="slider-next-btn"
+				type="button"
+				aria-label="Next Slide"
+				title="Next Slide"
+				class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/90 dark:bg-slate-900/90 hover:bg-amber-400 dark:hover:bg-amber-400 text-slate-800 dark:text-white hover:text-slate-950 dark:hover:text-slate-950 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+				</svg>
+			</button>
+		</div>
+
+	</div>
+</section>
+
+<!-- Fade Transition Slider Controller Script -->
+<script>
+	const totalSlides = 4;
+	let currentIndex = 0;
+	let autoPlayTimer: any = null;
+	const slideDuration = 4000; // 4 seconds per slide for comfortable reading
+
+	const slideItems = document.querySelectorAll('.slide-item');
+	const prevBtn = document.getElementById('slider-prev-btn');
+	const nextBtn = document.getElementById('slider-next-btn');
+	const sliderFrame = document.querySelector('#hero-cover-slider');
+
+	// Crossfade between slides
+	function goToSlide(index: number) {
+		if (index < 0) index = totalSlides - 1;
+		if (index >= totalSlides) index = 0;
+		currentIndex = index;
+
+		// Fade-in active slide, fade-out other slides
+		slideItems.forEach((item, i) => {
+			if (i === currentIndex) {
+				item.classList.remove('opacity-0', 'pointer-events-none', 'z-10');
+				item.classList.add('opacity-100', 'pointer-events-auto', 'z-20');
+			} else {
+				item.classList.remove('opacity-100', 'pointer-events-auto', 'z-20');
+				item.classList.add('opacity-0', 'pointer-events-none', 'z-10');
+			}
+		});
+
+		resetAutoPlay();
+	}
+
+	function nextSlide() {
+		goToSlide(currentIndex + 1);
+	}
+
+	function prevSlide() {
+		goToSlide(currentIndex - 1);
+	}
+
+	function resetAutoPlay() {
+		if (autoPlayTimer) clearInterval(autoPlayTimer);
+		autoPlayTimer = setInterval(nextSlide, slideDuration);
+	}
+
+	// Button Click Handlers
+	prevBtn?.addEventListener('click', (e) => {
+		e.preventDefault();
+		prevSlide();
+	});
+
+	nextBtn?.addEventListener('click', (e) => {
+		e.preventDefault();
+		nextSlide();
+	});
+
+	// Pause on hover
+	sliderFrame?.addEventListener('mouseenter', () => {
+		if (autoPlayTimer) clearInterval(autoPlayTimer);
+	});
+
+	sliderFrame?.addEventListener('mouseleave', () => {
+		resetAutoPlay();
+	});
+
+	// Touch Swipe Support for Mobile & Tablets
+	let touchStartX = 0;
+	let touchEndX = 0;
+
+	sliderFrame?.addEventListener('touchstart', (e: any) => {
+		touchStartX = e.changedTouches[0].screenX;
+	}, { passive: true });
+
+	sliderFrame?.addEventListener('touchend', (e: any) => {
+		touchEndX = e.changedTouches[0].screenX;
+		handleSwipe();
+	}, { passive: true });
+
+	function handleSwipe() {
+		const swipeThreshold = 50;
+		if (touchEndX < touchStartX - swipeThreshold) {
+			nextSlide();
+		}
+		if (touchEndX > touchStartX + swipeThreshold) {
+			prevSlide();
+		}
+	}
+
+	// Handle Interactive Action Jump & Tab Filter Selection
+	function handleActionClick(actionType: string | null, target: string | null) {
+		if (!actionType || !target) return;
+
+		if (actionType === 'scroll') {
+			const targetEl = document.getElementById(target);
+			if (targetEl) {
+				const headerOffset = 80;
+				const elementPosition = targetEl.getBoundingClientRect().top;
+				const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+				window.scrollTo({
+					top: offsetPosition,
+					behavior: 'smooth'
+				});
+			}
+		} else if (actionType === 'tab-filter') {
+			// Trigger filter tab
+			const targetTabBtn = document.querySelector(`.tab-btn[data-category="${target}"]`) as HTMLButtonElement;
+			if (targetTabBtn) {
+				targetTabBtn.click();
+			}
+
+			// Scroll down to Resources section smoothly
+			const resourcesSection = document.getElementById('resources');
+			if (resourcesSection) {
+				const headerOffset = 80;
+				const elementPosition = resourcesSection.getBoundingClientRect().top;
+				const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+				window.scrollTo({
+					top: offsetPosition,
+					behavior: 'smooth'
+				});
+			}
+		} else if (actionType === 'link') {
+			window.open(target, '_blank');
+		}
+	}
+
+	// Attach listener to all action buttons inside slider
+	const allActionBtns = document.querySelectorAll('.slider-action-btn');
+	allActionBtns.forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			e.preventDefault();
+			const actionType = btn.getAttribute('data-action-type');
+			const target = btn.getAttribute('data-target');
+			handleActionClick(actionType, target);
+		});
+	});
+
+	// Initialize first slide on load
+	goToSlide(0);
+</script>
