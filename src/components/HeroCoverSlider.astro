@@ -103,20 +103,13 @@ const slides: Slide[] = [
 					data-slide-index={index}
 				>
 					
-					<!-- 🌙 Dark Mode Image (WebP) -->
-					<img
-						src={slide.imgDark}
-						alt={`${slide.title} Dark Cover`}
-						class="absolute inset-0 w-full h-full object-cover pointer-events-none hidden dark:block"
-						loading={index === 0 ? "eager" : "lazy"}
-						decoding="async"
-					/>
-
-					<!-- ☀️ Light Mode Image (WebP) -->
+					<!-- 🖼️ Smart Theme Cover Image (Single img tag, downloads ONLY active theme image) -->
 					<img
 						src={slide.imgLight}
-						alt={`${slide.title} Light Cover`}
-						class="absolute inset-0 w-full h-full object-cover pointer-events-none block dark:hidden"
+						data-dark={slide.imgDark}
+						data-light={slide.imgLight}
+						alt={`${slide.title} Cover`}
+						class="hero-cover-img absolute inset-0 w-full h-full object-cover pointer-events-none"
 						loading={index === 0 ? "eager" : "lazy"}
 						decoding="async"
 					/>
@@ -190,6 +183,24 @@ const slides: Slide[] = [
 
 	</div>
 </section>
+
+<!-- Smart Cover Image Theme Sync Script -->
+<script is:inline>
+	(function() {
+		function updateHeroCoverImages() {
+			const isDark = document.documentElement.classList.contains('dark') || localStorage.getItem('theme') === 'dark';
+			const imgs = document.querySelectorAll('.hero-cover-img');
+			imgs.forEach(function(img) {
+				const target = isDark ? img.getAttribute('data-dark') : img.getAttribute('data-light');
+				if (target && img.getAttribute('src') !== target) {
+					img.setAttribute('src', target);
+				}
+			});
+		}
+		updateHeroCoverImages();
+		window.addEventListener('theme-change', updateHeroCoverImages);
+	})();
+</script>
 
 <!-- Fade Transition Slider Controller Script -->
 <script>

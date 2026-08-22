@@ -120,6 +120,7 @@ import { SITE_TITLE } from '../consts';
 		themeBtn.addEventListener('click', () => {
 			const isDark = document.documentElement.classList.toggle('dark');
 			localStorage.setItem('theme', isDark ? 'dark' : 'light');
+			window.dispatchEvent(new CustomEvent('theme-change'));
 		});
 	}
 </script>
