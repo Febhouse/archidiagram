@@ -103,14 +103,15 @@ const slides: Slide[] = [
 					data-slide-index={index}
 				>
 					
-					<!-- 🖼️ Smart Theme Cover Image (Single img tag, downloads ONLY active theme image) -->
+					<!-- 🖼️ Smart Progressive Cover Image (Initial load fetches ONLY Slide 0) -->
 					<img
-						src={slide.imgLight}
+						src={index === 0 ? slide.imgLight : "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 800'%3E%3C/svg%3E"}
 						data-dark={slide.imgDark}
 						data-light={slide.imgLight}
 						alt={`${slide.title} Cover`}
 						class="hero-cover-img absolute inset-0 w-full h-full object-cover pointer-events-none"
 						loading={index === 0 ? "eager" : "lazy"}
+						fetchpriority={index === 0 ? "high" : "low"}
 						decoding="async"
 					/>
 
@@ -184,21 +185,47 @@ const slides: Slide[] = [
 	</div>
 </section>
 
-<!-- Smart Cover Image Theme Sync Script -->
+<!-- Progressive Cover Image Theme Sync & Deferred Loader Script -->
 <script is:inline>
 	(function() {
-		function updateHeroCoverImages() {
+		function getTargetSrc(img) {
 			const isDark = document.documentElement.classList.contains('dark') || localStorage.getItem('theme') === 'dark';
-			const imgs = document.querySelectorAll('.hero-cover-img');
+			return isDark ? img.getAttribute('data-dark') : img.getAttribute('data-light');
+		}
+
+		function loadImg(img) {
+			if (!img) return;
+			const target = getTargetSrc(img);
+			if (target && img.getAttribute('src') !== target) {
+				img.setAttribute('src', target);
+			}
+		}
+
+		const imgs = document.querySelectorAll('.hero-cover-img');
+
+		// 1. Immediately ensure Slide 0 has the active theme image
+		if (imgs.length > 0) {
+			loadImg(imgs[0]);
+		}
+
+		// 2. Preload remaining slides (1, 2, 3) 800ms AFTER initial page load completes
+		window.addEventListener('load', function() {
+			setTimeout(function() {
+				for (let i = 1; i < imgs.length; i++) {
+					loadImg(imgs[i]);
+				}
+			}, 800);
+		});
+
+		// 3. Listen for theme toggles
+		window.addEventListener('theme-change', function() {
 			imgs.forEach(function(img) {
-				const target = isDark ? img.getAttribute('data-dark') : img.getAttribute('data-light');
-				if (target && img.getAttribute('src') !== target) {
-					img.setAttribute('src', target);
+				const src = img.getAttribute('src');
+				if (src && !src.startsWith('data:')) {
+					loadImg(img);
 				}
 			});
-		}
-		updateHeroCoverImages();
-		window.addEventListener('theme-change', updateHeroCoverImages);
+		});
 	})();
 </script>
 
@@ -214,11 +241,25 @@ const slides: Slide[] = [
 	const nextBtn = document.getElementById('slider-next-btn');
 	const sliderFrame = document.querySelector('#hero-cover-slider');
 
+	function ensureSlideLoaded(index: number) {
+		const targetImg = slideItems[index]?.querySelector('.hero-cover-img');
+		if (targetImg) {
+			const isDark = document.documentElement.classList.contains('dark') || localStorage.getItem('theme') === 'dark';
+			const targetSrc = isDark ? targetImg.getAttribute('data-dark') : targetImg.getAttribute('data-light');
+			if (targetSrc && targetImg.getAttribute('src') !== targetSrc) {
+				targetImg.setAttribute('src', targetSrc);
+			}
+		}
+	}
+
 	// Crossfade between slides
 	function goToSlide(index: number) {
 		if (index < 0) index = totalSlides - 1;
 		if (index >= totalSlides) index = 0;
 		currentIndex = index;
+
+		// Ensure target slide image is loaded before transition
+		ensureSlideLoaded(currentIndex);
 
 		// Fade-in active slide, fade-out other slides
 		slideItems.forEach((item, i) => {
