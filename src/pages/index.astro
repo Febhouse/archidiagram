@@ -129,6 +129,20 @@ const posts = (await getCollection('blog'))
 				});
 			}
 
+			function handleCategoryLinkClick(category: string) {
+				activateCategoryTab(category);
+				const resourcesEl = document.getElementById('resources');
+				if (resourcesEl) {
+					const headerOffset = 80;
+					const elementPosition = resourcesEl.getBoundingClientRect().top;
+					const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+					window.scrollTo({
+						top: offsetPosition,
+						behavior: 'smooth'
+					});
+				}
+			}
+
 			// Add click listeners to tab buttons
 			tabBtns.forEach(btn => {
 				btn.addEventListener('click', () => {
@@ -136,6 +150,25 @@ const posts = (await getCollection('blog'))
 					activateCategoryTab(category);
 				});
 			});
+
+			// Add click listeners to all links targeting a category
+			const categoryLinks = document.querySelectorAll('[data-category-target]');
+			categoryLinks.forEach(link => {
+				link.addEventListener('click', (e) => {
+					const targetCat = link.getAttribute('data-category-target');
+					if (targetCat && (window.location.pathname === '/' || window.location.pathname === '')) {
+						e.preventDefault();
+						handleCategoryLinkClick(targetCat);
+					}
+				});
+			});
+
+			// Check URL query parameters or hash on initial load
+			const urlParams = new URLSearchParams(window.location.search);
+			const catParam = urlParams.get('category');
+			if (catParam) {
+				handleCategoryLinkClick(catParam);
+			}
 		</script>
 	</body>
 </html>
