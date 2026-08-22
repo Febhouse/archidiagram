@@ -118,7 +118,7 @@ const tools: Tool[] = [
 					<!-- GIF Animation Preview -->
 					{tool.previewImg && (
 						<div class="w-full aspect-[4/3] sm:aspect-video md:aspect-[4/3] lg:aspect-video bg-slate-100 dark:bg-slate-900 relative overflow-hidden">
-							<img src={tool.previewImg} alt={`${tool.name} function preview`} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+							<img src={tool.previewImg} alt={`${tool.name} function preview`} loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
 						</div>
 					)}
 
