@@ -2,7 +2,7 @@
 title: 'Project example 25'
 description: '- Learn how to build a professional Context Analysis diagram using the Sun Diagram plugin and Dynamic Symbols for SketchUp.\n'
 pubDate: '2025-07-07T12:00:52+07:00'
-heroImage: '/images/2025/07/20250703-SAMPLE-25-style2.jpg'
+heroImage: '/images/2026/03/SAMPLE-25.jpg'
 tags: 'sample project'
 ---
 
