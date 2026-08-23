@@ -1,9 +1,10 @@
 ---
 title: 'Project example 54'
-description: 'Free urban site analysis sample in SketchUp showing high-density tower massing, solar access obstruction, and wind corridors.'
+description: 'Download this free Urban Site Analysis Diagram for SketchUp. Master the workflow for high-density contexts, 3D sun paths, and wind flow analysis.'
 pubDate: '2026-01-16T15:24:09+07:00'
 heroImage: '/images/2026/01/20251125-3DFILE-copy.jpg'
 tags: 'sample project'
+software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
 
 # Site Analysis Diagram in SketchUp: Free Urban Sample (Project 54) 

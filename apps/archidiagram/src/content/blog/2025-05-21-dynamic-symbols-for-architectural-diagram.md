@@ -4,6 +4,7 @@ description: 'Explore Dynamic Symbols for SketchUp to quickly place, customize, 
 pubDate: '2025-05-21T15:03:58+07:00'
 heroImage: '/images/2025/05/DYNAMIC-SYMBOLS-GIF.gif'
 tags: 'other resources'
+software: 'SketchUp'
 ---
 
 # Dynamic Symbols for SketchUp – Speed Up Your Diagram Process

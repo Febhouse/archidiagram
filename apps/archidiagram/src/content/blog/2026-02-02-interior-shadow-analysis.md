@@ -1,9 +1,11 @@
 ---
 title: 'Project example 62'
-description: 'Free interior shadow study sample project using sliced view techniques to visualize natural light penetration inside living spaces.'
+description: 'Download this free Interior Shadow Analysis sample for SketchUp. Master the workflow of simulating Natural Light inside your floor plans using Shadow Slice and Sun Diagram.'
 pubDate: '2026-02-02T22:49:48+07:00'
 heroImage: '/images/2026/02/COVER.jpg'
 tags: 'sample project'
+software: 'SketchUp, Sun Diagram, Shadow Slice'
+
 ---
 
 # Interior Shadow Analysis in SketchUp: Free Natural Light Study Sample (Project 62) 

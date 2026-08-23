@@ -4,9 +4,10 @@ description: "Professional solar and site analysis service to help you validate 
 pubDate: 2026-01-20
 heroImage: "/images/2026/01/SAMPLE-57cover.jpg"
 tags: "other resources"
+software: 'SketchUp, Sun Diagram'
 ---
 
-# Custom Architectural Diagram &amp; Site Analysis Service
+# Custom Architectural Diagram & Site Analysis Service
 
 Professional solar and site analysis service to help you validate design impacts with precision and clarity
 

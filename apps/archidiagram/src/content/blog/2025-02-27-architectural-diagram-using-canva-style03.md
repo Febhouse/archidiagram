@@ -1,9 +1,10 @@
 ---
 title: 'Architectural diagram with Canva template (style 03)'
-description: 'Combine SketchUp diagram exports with Canva templates (Style 03) for rapid poster layout creation.'
+description: 'Creating architectural diagrams with Canva is easy and professional. Motion symbols and notes are already integrated into the diagram. You just need to adjust the positions and directions to fit your project'
 pubDate: '2025-02-27T10:44:16+07:00'
 heroImage: '/images/2025/11/ARDIAGRAM-STYLE3Plus-1_Page_1.jpg'
 tags: 'presentation template'
+software: 'Canva'
 ---
 
 # Architectural diagram with Canva template

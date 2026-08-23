@@ -4,6 +4,7 @@ description: 'Bring your architectural diagrams to life with Dynamic Symbols, a 
 pubDate: 2025-10-29
 heroImage: '/images/2026/01/DYNAMICSYMBOLS.gif'
 tags: 'other resources'
+software: 'SketchUp, Dynamic Symbols'
 ---
 
 <div class="space-y-12">

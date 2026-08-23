@@ -1,9 +1,10 @@
 ---
 title: 'Project example 42'
-description: 'Free 3D massing sample file to analyze surrounding building heights, scale, privacy, and contextual solar access in dense urban settings.'
+description: 'Download this free Surrounding Buildings Diagram for SketchUp. Analyze urban massing, building heights, and solar access with this professional 3D sample file.'
 pubDate: '2026-01-17T14:48:18+07:00'
 heroImage: '/images/2026/01/975-Nostrand-Ave-2-cover.jpg'
 tags: 'sample project'
+software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
 
 # Surrounding Buildings Diagram in SketchUp: Free 3D Massing Sample

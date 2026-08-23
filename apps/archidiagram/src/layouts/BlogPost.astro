@@ -14,9 +14,44 @@ interface Props {
 	updatedDate?: Date;
 	heroImage?: string;
 	tags?: string;
+	software?: string | string[];
+	Software?: string | string[];
 }
 
-const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags, software, Software } = Astro.props;
+
+const softwareRaw = software || Software || '';
+const softwareList = Array.isArray(softwareRaw) 
+	? softwareRaw 
+	: (typeof softwareRaw === 'string' && softwareRaw.trim().length > 0)
+		? softwareRaw.split(',').map(s => s.trim()).filter(Boolean)
+		: [];
+
+function getSoftwareBadge(sw: string) {
+	const name = sw.toLowerCase();
+	if (name.includes('sketchup')) {
+		return { label: sw, icon: '🛠️', class: 'bg-red-500/10 text-red-700 dark:text-red-300 border-red-500/20' };
+	} else if (name.includes('sun diagram')) {
+		return { label: sw, icon: '☀️', class: 'bg-amber-500/10 text-amber-800 dark:text-amber-300 border-amber-500/20' };
+	} else if (name.includes('dynamic symbols')) {
+		return { label: sw, icon: '⚡', class: 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-500/20' };
+	} else if (name.includes('shadow slice')) {
+		return { label: sw, icon: '📐', class: 'bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/20' };
+	} else if (name.includes('photoshop')) {
+		return { label: sw, icon: '🎨', class: 'bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/20' };
+	} else if (name.includes('canva')) {
+		return { label: sw, icon: '✨', class: 'bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-500/20' };
+	} else if (name.includes('powerpoint')) {
+		return { label: sw, icon: '📊', class: 'bg-orange-500/10 text-orange-700 dark:text-orange-300 border-orange-500/20' };
+	} else if (name.includes('indesign')) {
+		return { label: sw, icon: '📄', class: 'bg-pink-500/10 text-pink-700 dark:text-pink-300 border-pink-500/20' };
+	} else if (name.includes('rwind')) {
+		return { label: sw, icon: '💨', class: 'bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-500/20' };
+	} else if (name.includes('gemini')) {
+		return { label: sw, icon: '🤖', class: 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/20' };
+	}
+	return { label: sw, icon: '💻', class: 'bg-slate-500/10 text-slate-700 dark:text-slate-300 border-slate-500/20' };
+}
 
 // Determine clean tag label
 let tagLabel = "TUTORIAL & TIPS";
@@ -104,6 +139,23 @@ relatedPosts = relatedPosts
 							{description}
 						</p>
 					)}
+
+					{softwareList.length > 0 && (
+						<div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-6 pt-1">
+							<span class="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1">
+								Software Used:
+							</span>
+							{softwareList.map(sw => {
+								const badge = getSoftwareBadge(sw);
+								return (
+									<span class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono font-bold border ${badge.class}`}>
+										<span>{badge.icon}</span>
+										<span>{badge.label}</span>
+									</span>
+								);
+							})}
+						</div>
+					)}
 				</header>
 
 				<!-- Article Body Content (Full width matching header edges) -->
@@ -167,6 +219,7 @@ relatedPosts = relatedPosts
 									pubDate={post.data.pubDate}
 									heroImage={post.data.heroImage}
 									tags={post.data.tags}
+									software={post.data.software || (post.data as any).Software}
 								/>
 							))}
 						</div>

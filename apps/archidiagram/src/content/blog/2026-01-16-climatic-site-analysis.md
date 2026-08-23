@@ -1,6 +1,6 @@
 ---
 title: 'Project example 57'
-description: 'Free source files for climatic site analysis and solar orientation on sloped terrain to maximize passive heating and ventilation.'
+description: 'Download free source files for a Climatic Site Analysis in SketchUp. Master the workflow for solar orientation, topography analysis, and wind patterns on sloped terrain.'
 pubDate: '2026-01-16T11:46:46+07:00'
 heroImage: '/images/2026/01/SAMPLE-57cover.jpg'
 tags: 'sample project'

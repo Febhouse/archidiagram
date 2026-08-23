@@ -1,9 +1,10 @@
 ---
 title: 'Project example 19'
-description: 'Download original SketchUp source files for sunlight analysis video demonstrations combining Sun Diagram and CapCut.'
+description: 'Download original SketchUp source files for sunlight analysis video demonstrations combining Sun Diagram and Photoshop.'
 pubDate: '2025-05-12T14:23:29+07:00'
 heroImage: '/images/2025/05/Sunlight-Analysis-cover.jpg'
 tags: 'sample project'
+software: 'SketchUp, Adobe Photoshop'
 ---
 
 # Sample Project: Sunlight Analysis Video

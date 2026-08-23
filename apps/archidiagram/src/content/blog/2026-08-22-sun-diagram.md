@@ -1,9 +1,10 @@
 ---
 title: 'Sun Diagram: 3D Sun Path & Solar Analysis Plugin for SketchUp'
-description: 'Create scientifically accurate 3D Sun paths, real-time shadow simulations, and 4K batch shadow exports directly in SketchUp.'
+description: 'Sun Diagram is an extension for creating 3D sun paths and analyzing sunlight in architectural projects.'
 pubDate: 2026-06-19
 heroImage: '/images/2026/01/SHADOWANALYSIS-DEC-CROPlogo.gif'
 tags: 'other resources'
+Software: 'SketchUp, Sun Diagram'
 ---
 
 <div class="space-y-12">

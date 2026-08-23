@@ -1,9 +1,10 @@
 ---
 title: 'Daylight Saving Time (DST): Why Standard 3D Software Fails at Global Solar Analysis'
-description: 'Why standard 3D software fails at global solar analysis when ignoring Daylight Saving Time (DST) offsets across southern and northern hemispheres.'
+description: 'Discover why Daylight Saving Time (DST) causes 1-hour errors in standard 3D solar analysis and how Sun Diagram Studio automates time zone adjustments.'
 pubDate: '2026-03-12T10:42:03+07:00'
 heroImage: '/images/2026/03/SYDNEY-copy.jpg'
 tags: 'tutorial'
+software: 'SketchUp, Sun Diagram' 
 ---
 
 # Daylight Saving Time (DST): Why Standard 3D Software Fails at Global Solar Analysis

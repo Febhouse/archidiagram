@@ -1,9 +1,11 @@
 ---
 title: 'AI Project 01'
-description: 'Free AI prompt and workflow to transform standard SketchUp exports into dark-mode architectural diagrams with glowing neon lines.'
+description: 'Learn how to create a stunning AI Architecture diagram with this free prompt (AI Sample 01). Transform your standard SketchUp exports into glowing, neon-styled urban analysis.'
 pubDate: '2026-03-02T10:06:34+07:00'
 heroImage: '/images/2026/03/20260109-AI-900x900-1.jpg'
 tags: 'sample project'
+software: 'SketchUp, Sun Diagram, Dynamic Symbols, Gemini'
+
 ---
 
 # AI Architecture Diagram: Free Neon Effect Prompt (AI Sample 01)

@@ -1,9 +1,10 @@
 ---
-title: 'Presentation Layout Template &#8211; A3'
-description: 'A3 presentation board templates and layout tips for architectural diagrams and site analysis reports.'
+title: 'Presentation template to help you create a professional and clear presentation.'
+description: 'Presentation template (A3) This is a sample presentation file for architectural projects, designed to help you create a professional and clear presentation. The file provides a logical structure, including essential sections such as project introduction, design goals, space analysis, design alternatives, and innovative solutions. Illustrative images, technical drawings, and 3D renderings are integrated to highlight.'
 pubDate: '2025-02-16T10:52:09+07:00'
 heroImage: '/images/2025/11/Horizontal_Book_Mockup_4.jpg.webp'
 tags: 'presentation template'
+software: 'PowerPoint, Canva, InDesign'
 ---
 
 # Presentation template (A3)

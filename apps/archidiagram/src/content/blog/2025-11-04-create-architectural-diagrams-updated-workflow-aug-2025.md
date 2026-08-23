@@ -1,6 +1,6 @@
 ---
-title: 'Create Architectural Diagrams Updated Workflow Aug 2025'
-description: 'Updated step-by-step workflow for creating professional architectural diagrams in SketchUp using Sun Diagram and Dynamic Symbols.'
+title: 'Tutorial: Create Architectural Diagram with Sun Diagram & Dynamic Symbols'
+description: 'In this tutorial, we’re sharing the updated workflow for creating an architectural diagram animation.'
 pubDate: '2025-11-04T00:25:43+07:00'
 heroImage: '/images/2025/11/SITEANALYSIS-COVER.jpg'
 tags: 'tutorial'

@@ -4,6 +4,7 @@ description: 'Learn how to build a professional Context Analysis diagram using t
 pubDate: '2025-07-07T12:00:52+07:00'
 heroImage: '/images/2026/03/SAMPLE-25.jpg'
 tags: 'sample project'
+software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
 
 # How to Create a Context Analysis Diagram with Sun Path &amp; Dynamic Symbols in SketchUp 

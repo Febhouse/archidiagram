@@ -4,6 +4,7 @@ description: 'Climatic Analysis Diagram combining sun path direction, prevailing
 pubDate: '2025-06-16T15:35:46+07:00'
 heroImage: '/images/2025/06/THUNGNAI-1024.jpg'
 tags: 'sample project'
+software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
 
 # Climatic Analysis Diagram – Combining Sun Path and Passive Design Strategy

@@ -1,9 +1,10 @@
 ---
 title: 'Project example 66'
-description: 'Automate section perspectives in SketchUp with Shadow Slice 2.0. Learn how to maintain accurate interior shadows and custom section fills.'
+description: 'Download a free 3D SketchUp sample file to experience the power of Shadow Slice 2.0.'
 pubDate: '2026-06-25T16:53:34+07:00'
 heroImage: '/images/2026/06/20260625-1.jpg'
 tags: 'sample project'
+software: 'SketchUp, Shadow Slice'
 ---
 
 # Elevate Your Section Perspectives: Experience Shadow Slice 2.0 (Free Sample File Inside)

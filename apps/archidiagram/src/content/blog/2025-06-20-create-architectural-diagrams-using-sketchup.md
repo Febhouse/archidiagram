@@ -4,6 +4,7 @@ description: 'Comprehensive guide to creating architectural diagrams in SketchUp
 pubDate: '2025-06-20T09:17:17+07:00'
 heroImage: '/images/2025/06/architectural-768.jpg'
 tags: 'sample project'
+software: 'SketchUp'
 ---
 
 # Step-by-Step Guide: Create Architectural Diagrams Using SketchUp

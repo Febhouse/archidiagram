@@ -1,9 +1,11 @@
 ---
 title: 'Project example 56'
-description: 'Free sample files for residential site analysis. Optimize natural ventilation, winter solar gain, and privacy from neighboring houses.'
+description: 'For residential projects, “context” isn’t just about the city—it’s about comfort. This sample project (Project 56) provides the complete source files for a Residential Site Analysis, specifically tailored for townhouses and single-family homes.'
 pubDate: '2026-01-16T15:56:41+07:00'
 heroImage: '/images/2026/01/SAMPLE-56-COVER1000x1000.jpg'
 tags: 'sample project'
+software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+
 ---
 
 # Residential Site Analysis Diagram in SketchUp: Free Sample (Project 56)

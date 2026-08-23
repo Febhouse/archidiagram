@@ -1,9 +1,10 @@
 ---
-title: 'Tutorial on how to create a ventilation analysis diagram'
-description: 'How to create ventilation analysis diagrams in SketchUp showing airflow paths and passive cooling strategies.'
+title: 'Tutorial: Create Ventilation Analysis Diagram with SketchUp, Rwind & Photoshop'
+description: 'Here’s a step-by-step tutorial on how to create a ventilation analysis diagram using Rwind and Photoshop.'
 pubDate: '2025-03-25T11:18:34+07:00'
 heroImage: '/images/2025/03/BACKGROUND-STEP-6-768-1.jpg'
 tags: 'tutorial'
+software: 'SketchUp, Photoshop, Rwind'
 ---
 
 # Tutorial on how to create a ventilation analysis diagram

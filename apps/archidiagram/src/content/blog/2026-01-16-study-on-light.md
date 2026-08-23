@@ -1,9 +1,12 @@
 ---
 title: 'Project example 53'
-description: 'Free source files for a study on light & location in SketchUp. Learn how to analyze seasonal sun path variation and shadow angles.'
+description: 'Download free source files for a Light & Location Study in SketchUp. Explore the workflow for 3D sun paths, shadow analysis, and diagrammatic symbols.'
 pubDate: '2026-01-16T14:38:47+07:00'
 heroImage: '/images/2026/01/Cover.jpg'
 tags: 'sample project'
+software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+
+
 ---
 
 # A Study on Light &amp; Location in SketchUp: Free Source Files 

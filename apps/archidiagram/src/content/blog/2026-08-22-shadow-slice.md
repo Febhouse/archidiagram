@@ -1,9 +1,10 @@
 ---
-title: 'Shadow Slice Pro 2.0: Interior Shadow & Section Tool For SketchUp'
+title: 'Shadow Slice: Interior Shadow & Section Tool For SketchUp'
 description: 'Cut away walls and roofs while keeping their natural shadows. The perfect tool for interior sunlight simulation and perspective section diagrams.'
 pubDate: 2026-06-18
 heroImage: '/images/2026/06/Feature02.gif'
 tags: 'other resources'
+software: 'SketchUp, Shadow Slice'
 ---
 
 <div class="space-y-12">

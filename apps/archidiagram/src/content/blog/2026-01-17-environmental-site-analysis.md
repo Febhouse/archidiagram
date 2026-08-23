@@ -1,9 +1,10 @@
 ---
 title: 'Project example 39'
-description: 'Master 3D environmental site analysis diagrams in SketchUp combining solar dome paths, wind vectors, and site constraints into one view.'
+description: 'Download this free 3D Environmental Site Analysis Diagram for SketchUp. Master the workflow of visualizing sun paths, wind, and views using Sun Diagram and Dynamic Symbols.'
 pubDate: '2026-01-17T15:45:31+07:00'
 heroImage: '/images/2026/01/SAMPLE-39-VIEW1-cover.jpg'
 tags: 'sample project'
+software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
 
 # Mastering the Environmental Site Analysis Diagram in SketchUp 

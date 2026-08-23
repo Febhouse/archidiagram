@@ -1,9 +1,10 @@
 ---
 title: 'Project example 65'
-description: 'Real-world shadow analysis case study and free SketchUp model. Learn how to present minimalist, factual shadow data for council approvals.'
+description: 'Real-world shadow analysis case study and free SketchUp model.'
 pubDate: '2026-05-24T21:48:56+07:00'
 heroImage: '/images/2026/05/20260521-SECTION-copy.jpg'
 tags: 'sample project'
+software: 'SketchUp, Shadow Slice'  
 ---
 
 # Real-World Shadow Analysis Case Study: Free SketchUp File (Sample-65)

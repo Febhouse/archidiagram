@@ -4,6 +4,8 @@ description: 'Download Sample-64 free SketchUp model and learn how to generate 3
 pubDate: '2026-03-13T23:18:50+07:00'
 heroImage: '/images/2026/03/SAMPLE-64-cover.jpg'
 tags: 'sample project'
+software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+
 ---
 
 # Quick Site Analysis in SketchUp: Free Sample File (Sample-64)

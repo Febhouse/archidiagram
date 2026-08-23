@@ -1,9 +1,10 @@
 ---
 title: 'Motion Symbols for Architectural Diagram'
-description: 'Animate architectural flow diagrams using motion symbols in SketchUp for presentation videos and social media reels.'
+description: 'Motion symbols for Architectural Diagrams  Motion symbols included the Canva template. This template is used to create site analysis diagrams, shadow analysis, and include them in project presentations.'
 pubDate: '2025-03-01T21:14:56+07:00'
 heroImage: '/images/2025/03/Motion-symbols-for-Architectural-diagram-HORIZONTAL2-768.gif'
 tags: 'presentation template'
+software: 'Canva'
 ---
 
 # Motion symbols for Architectural Diagrams

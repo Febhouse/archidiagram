@@ -9,9 +9,10 @@ interface Props {
 	heroImage?: string;
 	tags?: string;
 	category?: string;
+	software?: string | string[];
 }
 
-const { id, title, description, pubDate, heroImage, tags, category } = Astro.props;
+const { id, title, description, pubDate, heroImage, tags, category, software } = Astro.props;
 
 // Determine clean display label from frontmatter tags or fallback
 let displayCategory = category || "TUTORIAL & TIPS";
@@ -35,6 +36,40 @@ const cleanDescription = (description || '')
 	.replace(/^[\s\-]+/, '')
 	.replace(/\\n/g, ' ')
 	.trim();
+
+// Parse Software list for badge icons
+const softwareRaw = software || '';
+const softwareList = Array.isArray(softwareRaw) 
+	? softwareRaw 
+	: (typeof softwareRaw === 'string' && softwareRaw.trim().length > 0)
+		? softwareRaw.split(',').map(s => s.trim()).filter(Boolean)
+		: [];
+
+function getSoftwareBadge(sw: string) {
+	const name = sw.toLowerCase();
+	if (name.includes('sketchup')) {
+		return { label: sw, icon: '🛠️', class: 'bg-red-500/10 text-red-700 dark:text-red-300 border-red-500/20' };
+	} else if (name.includes('sun diagram')) {
+		return { label: sw, icon: '☀️', class: 'bg-amber-500/10 text-amber-800 dark:text-amber-300 border-amber-500/20' };
+	} else if (name.includes('dynamic symbols')) {
+		return { label: sw, icon: '⚡', class: 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-500/20' };
+	} else if (name.includes('shadow slice')) {
+		return { label: sw, icon: '📐', class: 'bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/20' };
+	} else if (name.includes('photoshop')) {
+		return { label: sw, icon: '🎨', class: 'bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/20' };
+	} else if (name.includes('canva')) {
+		return { label: sw, icon: '✨', class: 'bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-500/20' };
+	} else if (name.includes('powerpoint')) {
+		return { label: sw, icon: '📊', class: 'bg-orange-500/10 text-orange-700 dark:text-orange-300 border-orange-500/20' };
+	} else if (name.includes('indesign')) {
+		return { label: sw, icon: '📄', class: 'bg-pink-500/10 text-pink-700 dark:text-pink-300 border-pink-500/20' };
+	} else if (name.includes('rwind')) {
+		return { label: sw, icon: '💨', class: 'bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-500/20' };
+	} else if (name.includes('gemini')) {
+		return { label: sw, icon: '🤖', class: 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/20' };
+	}
+	return { label: sw, icon: '💻', class: 'bg-slate-500/10 text-slate-700 dark:text-slate-300 border-slate-500/20' };
+}
 ---
 
 <article class="group relative bg-white dark:bg-slate-900 rounded-[8px] border border-slate-200 dark:border-slate-800 p-[10px] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
@@ -74,9 +109,23 @@ const cleanDescription = (description || '')
 			</h3>
 
 			{cleanDescription && (
-				<p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm line-clamp-2 leading-relaxed mb-4">
+				<p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm line-clamp-2 leading-relaxed mb-3.5">
 					{cleanDescription}
 				</p>
+			)}
+
+			{softwareList.length > 0 && (
+				<div class="flex flex-wrap gap-1.5 mb-3.5">
+					{softwareList.map(sw => {
+						const badge = getSoftwareBadge(sw);
+						return (
+							<span class={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-mono font-bold tracking-tight border ${badge.class}`}>
+								<span>{badge.icon}</span>
+								<span>{badge.label}</span>
+							</span>
+						);
+					})}
+				</div>
 			)}
 
 			<div class="mt-auto pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-amber-600 dark:text-amber-400 group-hover:text-amber-500 uppercase tracking-wider">

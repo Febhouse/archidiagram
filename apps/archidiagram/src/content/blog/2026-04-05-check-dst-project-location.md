@@ -1,9 +1,10 @@
 ---
 title: 'Guide: How to Determine if Your Project Location Requires Daylight Saving Time (DST)'
-description: 'Comprehensive guide to determine if your architectural project location uses Daylight Saving Time (DST) for accurate shadow simulations.'
+description: 'This guide will help you quickly and accurately determine whether you need to enable DST when setting up your sun data for your site.'
 pubDate: '2026-04-05T17:02:10+07:00'
 heroImage: '/images/2026/04/check-dst-location.jpg'
 tags: 'tutorial'
+software: 'SketchUp, Sun Diagram'
 ---
 
 # Guide: How to Determine if Your Project Location Requires Daylight Saving Time (DST)

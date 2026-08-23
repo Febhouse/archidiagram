@@ -1,6 +1,6 @@
 ---
 title: 'Project example 45'
-description: 'Free urban site context diagram sample file demonstrating street network connectivity, neighbor massing, and solar exposure in 3D.'
+description: 'Download this free Context Analysis Diagram for SketchUp. Visualize urban connectivity, traffic flow arrows, and 3D solar envelopes using this professional sample file.'
 pubDate: '2026-01-16T22:48:10+07:00'
 heroImage: '/images/2026/01/SAMPLE-45-1-cover.jpg'
 tags: 'sample project'

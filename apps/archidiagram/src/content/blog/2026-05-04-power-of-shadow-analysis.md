@@ -1,9 +1,10 @@
 ---
-title: 'Shadow Analysis: Ensuring Design Integrity &amp; Comfort'
-description: 'Evaluate overshadowing, optimize facade shading devices, and ensure local planning compliance with a detailed SketchUp shadow analysis workflow.'
+title: 'The Power of Shadow Analysis: Ensuring Design Integrity & Comfort'
+description: 'Shadow Analysis project I conducted for a site in NSW, Australia.'
 pubDate: '2026-05-04T22:18:15+07:00'
 heroImage: '/images/2026/05/shadow-analysis.jpg'
 tags: 'sample project'
+software: 'SketchUp, Sun Diagram'
 ---
 
 # The Power of Shadow Analysis: Ensuring Design Integrity &amp; Comfort 
