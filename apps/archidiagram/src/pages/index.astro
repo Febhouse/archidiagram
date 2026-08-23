@@ -43,23 +43,66 @@ const posts = (await getCollection('blog'))
 					</div>
 				</div>
 
-				<!-- HORIZONTAL FILTER TABS -->
-				<div class="relative mb-10 overflow-hidden">
-					<div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 pt-1 border-b border-slate-200 dark:border-slate-800" id="filter-tabs-container">
-						<button data-category="ALL" class="tab-btn active px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm shrink-0 cursor-pointer">
-							[ALL]
+				<!-- HORIZONTAL FILTER TABS (Category & Software) -->
+				<div class="space-y-4 mb-10">
+					<!-- Category Filter Tabs -->
+					<div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 pt-1 border-b border-slate-200 dark:border-slate-800" id="filter-tabs-container">
+						<button data-category="ALL" class="tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm shrink-0 cursor-pointer">
+							[ALL CATEGORIES]
 						</button>
-						<button data-category="tutorial" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
+						<button data-category="tutorial" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
 							[WORKFLOW & TIPS]
 						</button>
-						<button data-category="sample project" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
+						<button data-category="sample project" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
 							[SAMPLE PROJECTS]
 						</button>
-						<button data-category="presentation template" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
+						<button data-category="presentation template" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
 							[PRESENTATION & SITE ANALYSIS TEMPLATES]
 						</button>
-						<button data-category="other resources" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
+						<button data-category="other resources" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 cursor-pointer">
 							[SKETCHUP EXTENSIONS]
+						</button>
+					</div>
+
+					<!-- Software Filter Pills -->
+					<div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 pt-1" id="software-filter-container">
+						<span class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 shrink-0 mr-1 hidden sm:inline">
+							Software:
+						</span>
+						<button data-software="ALL" class="sw-filter-btn active inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-amber-500 text-slate-950 shadow-sm shrink-0 cursor-pointer border border-amber-500">
+							<span>All Software</span>
+						</button>
+						<button data-software="sketchup" class="sw-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-transparent shrink-0 cursor-pointer">
+							<img src="/images/LOGO/SketchUp-logo.svg" alt="SketchUp" class="w-3.5 h-3.5 object-contain" />
+							<span>SketchUp</span>
+						</button>
+						<button data-software="sun diagram" class="sw-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-transparent shrink-0 cursor-pointer">
+							<img src="/images/LOGO/SunDiagram-logo.svg" alt="Sun Diagram" class="w-3.5 h-3.5 object-contain" />
+							<span>Sun Diagram</span>
+						</button>
+						<button data-software="dynamic symbols" class="sw-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-transparent shrink-0 cursor-pointer">
+							<img src="/images/LOGO/dynamic-symbols-logo.svg" alt="Dynamic Symbols" class="w-3.5 h-3.5 object-contain" />
+							<span>Dynamic Symbols</span>
+						</button>
+						<button data-software="shadow slice" class="sw-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-transparent shrink-0 cursor-pointer">
+							<img src="/images/LOGO/Shadowslice-logo.svg" alt="Shadow Slice" class="w-3.5 h-3.5 object-contain" />
+							<span>Shadow Slice</span>
+						</button>
+						<button data-software="photoshop" class="sw-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-transparent shrink-0 cursor-pointer">
+							<img src="/images/LOGO/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="w-3.5 h-3.5 object-contain" />
+							<span>Photoshop</span>
+						</button>
+						<button data-software="canva" class="sw-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-transparent shrink-0 cursor-pointer">
+							<img src="/images/LOGO/canva-icon.svg" alt="Canva" class="w-3.5 h-3.5 object-contain" />
+							<span>Canva</span>
+						</button>
+						<button data-software="powerpoint" class="sw-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-transparent shrink-0 cursor-pointer">
+							<img src="/images/LOGO/Microsoft_Office_PowerPoint_(2025–present).svg" alt="PowerPoint" class="w-3.5 h-3.5 object-contain" />
+							<span>PowerPoint</span>
+						</button>
+						<button data-software="indesign" class="sw-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-transparent shrink-0 cursor-pointer">
+							<img src="/images/LOGO/Adobe_InDesign_CC_icon.svg" alt="InDesign" class="w-3.5 h-3.5 object-contain" />
+							<span>InDesign</span>
 						</button>
 					</div>
 				</div>
@@ -68,8 +111,9 @@ const posts = (await getCollection('blog'))
 				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="posts-grid">
 					{posts.map((post) => {
 						const tagValue = (post.data.tags || "").trim().toLowerCase();
+						const softwareValue = ((post.data.software || (post.data as any).Software) || "").trim().toLowerCase();
 						return (
-							<div class="post-card-item" data-post-tag={tagValue}>
+							<div class="post-card-item" data-post-tag={tagValue} data-post-software={softwareValue}>
 								<Card 
 									id={post.id}
 									title={post.data.title}
@@ -91,18 +135,20 @@ const posts = (await getCollection('blog'))
 
 		<Footer />
 
-		<!-- Interactive Tag Filter Script -->
+		<!-- Interactive Combined Filter Script (Category + Software) -->
 		<script>
 			const tabBtns = document.querySelectorAll('.tab-btn');
+			const swBtns = document.querySelectorAll('.sw-filter-btn');
 			const postItems = document.querySelectorAll('.post-card-item');
 
-			function activateCategoryTab(category: string) {
-				const targetCat = (category || 'all').toLowerCase();
+			let activeCategory = 'all';
+			let activeSoftware = 'all';
 
-				// Update Tab Buttons UI
+			function applyFilters() {
+				// Update Category Tab UI
 				tabBtns.forEach(b => {
 					const cat = (b.getAttribute('data-category') || '').toLowerCase();
-					if (cat === targetCat) {
+					if (cat === activeCategory) {
 						b.classList.remove('bg-slate-100', 'dark:bg-slate-800/80', 'text-slate-600', 'dark:text-slate-300');
 						b.classList.add('bg-slate-900', 'dark:bg-white', 'text-white', 'dark:text-slate-900', 'shadow-sm');
 					} else {
@@ -111,18 +157,44 @@ const posts = (await getCollection('blog'))
 					}
 				});
 
+				// Update Software Tab UI
+				swBtns.forEach(b => {
+					const sw = (b.getAttribute('data-software') || '').toLowerCase();
+					if (sw === activeSoftware) {
+						b.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300', 'border-transparent');
+						b.classList.add('bg-amber-500', 'text-slate-950', 'shadow-sm', 'border-amber-500');
+					} else {
+						b.classList.remove('bg-amber-500', 'text-slate-950', 'shadow-sm', 'border-amber-500');
+						b.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300', 'border-transparent');
+					}
+				});
+
 				// Filter Post Items
 				postItems.forEach(item => {
 					const itemTag = (item.getAttribute('data-post-tag') || '').toLowerCase();
-					if (targetCat === 'all') {
-						(item as HTMLElement).style.display = 'block';
-					} else if (targetCat === 'tutorial' && itemTag === 'tutorial') {
-						(item as HTMLElement).style.display = 'block';
-					} else if (targetCat === 'sample project' && itemTag === 'sample project') {
-						(item as HTMLElement).style.display = 'block';
-					} else if (targetCat === 'presentation template' && itemTag === 'presentation template') {
-						(item as HTMLElement).style.display = 'block';
-					} else if (targetCat === 'other resources' && (itemTag === 'other resources' || itemTag.includes('resource') || itemTag.includes('extension'))) {
+					const itemSw = (item.getAttribute('data-post-software') || '').toLowerCase();
+
+					let matchCategory = false;
+					if (activeCategory === 'all') {
+						matchCategory = true;
+					} else if (activeCategory === 'tutorial' && itemTag === 'tutorial') {
+						matchCategory = true;
+					} else if (activeCategory === 'sample project' && itemTag === 'sample project') {
+						matchCategory = true;
+					} else if (activeCategory === 'presentation template' && itemTag === 'presentation template') {
+						matchCategory = true;
+					} else if (activeCategory === 'other resources' && (itemTag === 'other resources' || itemTag.includes('resource') || itemTag.includes('extension'))) {
+						matchCategory = true;
+					}
+
+					let matchSoftware = false;
+					if (activeSoftware === 'all') {
+						matchSoftware = true;
+					} else if (itemSw.includes(activeSoftware)) {
+						matchSoftware = true;
+					}
+
+					if (matchCategory && matchSoftware) {
 						(item as HTMLElement).style.display = 'block';
 					} else {
 						(item as HTMLElement).style.display = 'none';
@@ -131,7 +203,8 @@ const posts = (await getCollection('blog'))
 			}
 
 			function handleCategoryLinkClick(category: string) {
-				activateCategoryTab(category);
+				activeCategory = (category || 'all').toLowerCase();
+				applyFilters();
 				const resourcesEl = document.getElementById('resources');
 				if (resourcesEl) {
 					const headerOffset = 80;
@@ -144,11 +217,19 @@ const posts = (await getCollection('blog'))
 				}
 			}
 
-			// Add click listeners to tab buttons
+			// Add click listeners to category tab buttons
 			tabBtns.forEach(btn => {
 				btn.addEventListener('click', () => {
-					const category = btn.getAttribute('data-category') || 'ALL';
-					activateCategoryTab(category);
+					activeCategory = (btn.getAttribute('data-category') || 'ALL').toLowerCase();
+					applyFilters();
+				});
+			});
+
+			// Add click listeners to software filter buttons
+			swBtns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					activeSoftware = (btn.getAttribute('data-software') || 'ALL').toLowerCase();
+					applyFilters();
 				});
 			});
 
@@ -167,8 +248,15 @@ const posts = (await getCollection('blog'))
 			// Check URL query parameters or hash on initial load
 			const urlParams = new URLSearchParams(window.location.search);
 			const catParam = urlParams.get('category');
+			const swParam = urlParams.get('software');
 			if (catParam) {
-				handleCategoryLinkClick(catParam);
+				activeCategory = catParam.toLowerCase();
+			}
+			if (swParam) {
+				activeSoftware = swParam.toLowerCase();
+			}
+			if (catParam || swParam) {
+				applyFilters();
 			}
 		</script>
 	</body>
