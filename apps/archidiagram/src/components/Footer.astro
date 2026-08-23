@@ -3,62 +3,52 @@ import { SITE_TITLE } from '../consts';
 const today = new Date();
 ---
 
-<footer class="bg-slate-900 text-slate-300 border-t border-slate-800 py-12 sm:py-16 transition-colors duration-300">
+<footer class="bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800 py-12 sm:py-16 transition-colors duration-300">
 	<div class="w-full mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 max-w-[1920px]">
-		<div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-			<!-- Brand Info with Febhouse Logo -->
-			<div class="md:col-span-2 space-y-4">
-				<div class="flex items-center gap-3">
-					<img 
-						src="/images/2026/05/LOGO_FEBHOUSE1.svg" 
-						alt="Febhouse Logo" 
-						class="w-9 h-9 object-contain"
-						onerror="this.onerror=null; this.src='/images/2025/03/FEBHOUSE-LOGO600x600.png';"
-					/>
-					<span class="text-xl font-black tracking-tight text-white uppercase">
-						{SITE_TITLE}
-					</span>
-				</div>
-				<p class="text-slate-400 text-sm leading-relaxed max-w-sm">
-					Architectural diagram resources, free tutorials, SketchUp extensions, 3D dynamic symbols, and presentation templates for architects and design students worldwide.
-				</p>
-			</div>
+        
+        <!-- Social Icons -->
+        <div class="flex gap-5 mb-8 text-slate-900 dark:text-white items-center">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/febhouse_com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-amber-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M16.5 7.5v.01" /></svg>
+            </a>
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@febhouse" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="hover:text-amber-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-tiktok"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 7.917v4.034a9.948 9.948 0 0 1 -5 -1.951v4.5a6.5 6.5 0 1 1 -8 -6.326v4.326a2.5 2.5 0 1 0 4 2v-11.5h4.083a6.005 6.005 0 0 0 4.917 4.917z" /></svg>
+            </a>
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@febhouse_com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="hover:text-amber-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-youtube"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8z" /><path d="M10 9l5 3l-5 3z" /></svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/namnguyen-febhouse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hover:text-amber-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-linkedin"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg>
+            </a>
+            <!-- Facebook -->
+            <a href="https://web.facebook.com/Febhousedotcom" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-amber-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
+            </a>
+            <!-- Email -->
+            <a href="mailto:info@febhouse.com" aria-label="Email" class="hover:text-amber-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+            </a>
+        </div>
 
-			<!-- Core Extensions -->
-			<div class="space-y-3">
-				<h4 class="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">
-					3 Core Extensions
-				</h4>
-				<ul class="space-y-2 text-sm">
-					<li><a href="#tools" class="hover:text-white transition-colors">Sun Diagram</a></li>
-					<li><a href="#tools" class="hover:text-white transition-colors">Dynamic Symbols</a></li>
-					<li><a href="#tools" class="hover:text-white transition-colors">Shadow Slice</a></li>
-				</ul>
-			</div>
+        <div class="text-[15px] space-y-1.5 mb-12">
+            <p>&copy; {today.getFullYear()} Febhouse Studio</p>
+            <p>Contact: <a href="mailto:info@febhouse.com" class="text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors">info@febhouse.com</a></p>
+            <p>ArchiDiagram — Educational Platform for Architects</p>
+            <p>Part of the Febhouse Creative Ecosystem</p>
+        </div>
 
-			<!-- Quick Links -->
-			<div class="space-y-3">
-				<h4 class="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">
-					Resources & Legal
-				</h4>
-				<ul class="space-y-2 text-sm">
-					<li><a href="#resources" class="hover:text-white transition-colors">Tutorials & Workflows</a></li>
-					<li><a href="#faq" class="hover:text-white transition-colors">FAQ & Technical Support</a></li>
-					<li><a href="https://febhouse.com/privacy-policy/" target="_blank" rel="noopener" class="hover:text-white transition-colors">Privacy Policy</a></li>
-					<li><a href="https://febhouse.com/terms-of-use/" target="_blank" rel="noopener" class="hover:text-white transition-colors">Terms of Use</a></li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-4">
-			<p>&copy; {today.getFullYear()} {SITE_TITLE}. Developed by Febhouse. All rights reserved.</p>
-			<div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-				<a href="https://febhouse.com/privacy-policy/" target="_blank" rel="noopener" class="hover:text-white transition-colors">Privacy Policy</a>
-				<a href="https://febhouse.com/terms-of-use/" target="_blank" rel="noopener" class="hover:text-white transition-colors">Terms of Use</a>
-				<a href="https://febhouse.com/refund-policy/" target="_blank" rel="noopener" class="hover:text-white transition-colors">Refund Policy</a>
-				<a href="https://febhouse.com/legal-notice/" target="_blank" rel="noopener" class="hover:text-white transition-colors">Legal Notice</a>
-				<a href="#tools" class="text-amber-400 hover:underline font-bold ml-2">Back to top ↑</a>
-			</div>
-		</div>
+        <div class="flex flex-wrap items-center gap-2 text-[15px]">
+            <a href="https://febhouse.com/privacy-policy/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 dark:hover:text-white transition-colors">Privacy Policy</a>
+            <span class="text-slate-300 dark:text-slate-700">|</span>
+            <a href="https://febhouse.com/terms-of-use/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 dark:hover:text-white transition-colors">Terms of Use</a>
+            <span class="text-slate-300 dark:text-slate-700">|</span>
+            <a href="https://febhouse.com/refund-policy/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 dark:hover:text-white transition-colors">Refund Policy</a>
+            <span class="text-slate-300 dark:text-slate-700">|</span>
+            <a href="https://febhouse.com/legal-notice/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 dark:hover:text-white transition-colors">Legal Notice</a>
+        </div>
 	</div>
 </footer>

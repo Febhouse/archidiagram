@@ -15,7 +15,8 @@
     scroll-behavior: smooth;
   }
 
-  body {
+  body, button, input, select, textarea {
+    font-family: 'Quicksand', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     @apply font-sans bg-slate-50 text-slate-900 antialiased selection:bg-amber-500/20 selection:text-amber-700 transition-colors duration-300;
   }
 
