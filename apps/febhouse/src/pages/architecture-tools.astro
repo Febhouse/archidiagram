@@ -1,0 +1,179 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<BaseHead title={`Architecture Tools - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-amber-500/20 selection:text-amber-700 transition-colors duration-300">
+		<Header />
+
+		<main class="w-full flex flex-col items-center">
+			<section class="w-full mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-16 md:py-24 flex flex-col items-center text-center max-w-[1920px]">
+				
+				<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 mb-5">
+					⚡ RECOMMENDED WORKFLOWS & TOOLS
+				</div>
+				<h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+					Essential Workflows & Tools
+				</h1>
+				<p class="text-slate-600 dark:text-slate-300 mb-12 text-lg max-w-3xl">
+					Accelerate your environmental analysis, shadow sectioning, and diagram presentation in SketchUp.
+				</p>
+
+				<div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 text-left">
+					
+					<!-- Dynamic Symbols -->
+					<div class="flex flex-col bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all h-full">
+						<div class="mb-6 rounded-lg overflow-hidden flex items-center justify-center border-0 bg-slate-50 dark:bg-slate-800/50 min-h-[220px]">
+							<a href="https://dynamicsymbols.com/" target="_blank" rel="noopener noreferrer">
+								<img src="/images/LOGO/DYNAMICSYMBOLS.gif" alt="Dynamic Symbols" class="w-full h-auto max-h-[260px] object-contain rounded-lg shadow-none border-0 mix-blend-multiply dark:mix-blend-normal" style="border-radius: 8px !important; box-shadow: none !important; border: none !important;" />
+							</a>
+						</div>
+						
+						<div class="flex-grow flex flex-col">
+							<div class="flex items-center gap-3 mb-4">
+								<img src="/images/LOGO/dynamic-symbols-logo.svg" alt="Dynamic Symbols Logo" class="w-8 h-8 rounded-none border-0 shadow-none !rounded-none" style="border-radius: 0 !important;" />
+								<h2 class="text-2xl font-bold text-slate-900 dark:text-white">
+									<a href="https://dynamicsymbols.com/" class="hover:text-amber-500 transition-colors" target="_blank" rel="noopener noreferrer">1. Dynamic Symbols</a>
+								</h2>
+							</div>
+							
+							<p class="text-slate-600 dark:text-slate-300 text-sm mb-6 flex-grow leading-relaxed">
+								Dynamic Symbols is a SketchUp extension (plugin) that allows you to create animated symbols and switch between different states with just one click.
+							</p>
+							
+							<ul class="text-sm text-slate-700 dark:text-slate-300 space-y-3 mb-8">
+								<li class="flex items-start gap-2.5">
+									<span class="text-amber-500 font-bold">✓</span>
+									<span>1. One-Click Symbol Change — Keep Position, Size & Rotation.</span>
+								</li>
+								<li class="flex items-start gap-2.5">
+									<span class="text-amber-500 font-bold">✓</span>
+									<span>2. One-Click Color Change — Keep Position & Orientation.</span>
+								</li>
+								<li class="flex items-start gap-2.5">
+									<span class="text-amber-500 font-bold">✓</span>
+									<span>3. Create Animation.</span>
+								</li>
+							</ul>
+							
+							<div class="flex flex-col gap-3 mt-auto">
+								<a href="https://extensions.sketchup.com/extension/21085584-a984-474d-8407-33087adec402/dynamic-symbols" target="_blank" rel="noopener noreferrer" class="w-full text-center px-4 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl transition-colors text-xs shadow-sm uppercase tracking-wide">
+									Free Download from Extension Warehouse →
+								</a>
+								<a href="https://dynamicsymbols.com/" target="_blank" rel="noopener noreferrer" class="w-full text-center px-4 py-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl transition-colors text-xs shadow-sm uppercase tracking-wide">
+									Learn About Dynamic Symbols
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Sun Diagram -->
+					<div class="flex flex-col bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all h-full">
+						<div class="mb-6 rounded-lg overflow-hidden flex items-center justify-center border-0 bg-slate-50 dark:bg-slate-800/50 min-h-[220px]">
+							<a href="https://sundiagram.com/" target="_blank" rel="noopener noreferrer">
+								<img src="/images/LOGO/SHADOWANALYSIS-DEC-CROPlogo.gif" alt="Sun Diagram" class="w-full h-auto max-h-[260px] object-contain rounded-lg shadow-none border-0 mix-blend-multiply dark:mix-blend-normal" style="border-radius: 8px !important; box-shadow: none !important; border: none !important;" />
+							</a>
+						</div>
+						
+						<div class="flex-grow flex flex-col">
+							<div class="flex items-center gap-3 mb-4">
+								<img src="/images/LOGO/SunDiagram-logo.svg" alt="Sun Diagram Logo" class="w-8 h-8 rounded-none border-0 shadow-none !rounded-none" style="border-radius: 0 !important;" />
+								<h2 class="text-2xl font-bold text-slate-900 dark:text-white">
+									<a href="https://sundiagram.com/" class="hover:text-amber-500 transition-colors" target="_blank" rel="noopener noreferrer">2. Sun Diagram</a>
+								</h2>
+							</div>
+							
+							<p class="text-slate-600 dark:text-slate-300 text-sm mb-6 flex-grow leading-relaxed">
+								Sun Diagram is a SketchUp extension (plugin) designed to create 3D Sun paths and analyze sunlight for architecture projects.
+							</p>
+							
+							<ul class="text-sm text-slate-700 dark:text-slate-300 space-y-3 mb-8">
+								<li class="flex items-start gap-2.5">
+									<span class="text-amber-500 font-bold">✓</span>
+									<span>1. Create Sunpath.</span>
+								</li>
+								<li class="flex items-start gap-2.5">
+									<span class="text-amber-500 font-bold">✓</span>
+									<span>2. Shadow Analysis.</span>
+								</li>
+								<li class="flex items-start gap-2.5">
+									<span class="text-amber-500 font-bold">✓</span>
+									<span>3. Batch Export Shadows.</span>
+								</li>
+								<li class="flex items-start gap-2.5">
+									<span class="text-amber-500 font-bold">✓</span>
+									<span>4. Diagram Styles.</span>
+								</li>
+							</ul>
+							
+							<div class="flex flex-col gap-3 mt-auto">
+								<a href="https://extensions.sketchup.com/extension/5aa1ab3d-36ff-4510-ae63-84f677a36f3a/sun-diagram" target="_blank" rel="noopener noreferrer" class="w-full text-center px-4 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl transition-colors text-xs shadow-sm uppercase tracking-wide">
+									Free Download from Extension Warehouse →
+								</a>
+								<a href="https://sundiagram.com/" target="_blank" rel="noopener noreferrer" class="w-full text-center px-4 py-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl transition-colors text-xs shadow-sm uppercase tracking-wide">
+									Learn About Sun Diagram
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Shadow Slice -->
+					<div class="flex flex-col bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all h-full">
+						<div class="mb-6 rounded-lg overflow-hidden flex items-center justify-center border-0 bg-slate-50 dark:bg-slate-800/50 min-h-[220px]">
+							<a href="https://archidiagram.com/shadow-slice/" target="_blank" rel="noopener noreferrer">
+								<img src="/images/LOGO/Feature02.gif" alt="Shadow Slice" class="w-full h-auto max-h-[260px] object-contain rounded-lg shadow-none border-0 mix-blend-multiply dark:mix-blend-normal" style="border-radius: 8px !important; box-shadow: none !important; border: none !important;" />
+							</a>
+						</div>
+						
+						<div class="flex-grow flex flex-col">
+							<div class="flex items-center gap-3 mb-4">
+								<img src="/images/LOGO/Shadowslice-logo.svg" alt="Shadow Slice Logo" class="w-8 h-8 rounded-none border-0 shadow-none !rounded-none" style="border-radius: 0 !important;" />
+								<h2 class="text-2xl font-bold text-slate-900 dark:text-white">
+									<a href="https://archidiagram.com/shadow-slice/" class="hover:text-amber-500 transition-colors" target="_blank" rel="noopener noreferrer">3. Shadow Slice</a>
+								</h2>
+							</div>
+							
+							<p class="text-slate-600 dark:text-slate-300 text-sm mb-6 flex-grow leading-relaxed">
+								Interior Shadow & Section Tool for SketchUp. Cut away walls and roofs while keeping their natural shadows. The perfect tool for interior sunlight simulation.
+							</p>
+							
+							<ul class="text-sm text-slate-700 dark:text-slate-300 space-y-3 mb-8">
+								<li class="flex items-start gap-2.5">
+									<span class="text-amber-500 font-bold">✓</span>
+									<span>1. 1-Click Slicing.</span>
+								</li>
+								<li class="flex items-start gap-2.5">
+									<span class="text-amber-500 font-bold">✓</span>
+									<span>2. Centralized Visual Dashboard.</span>
+								</li>
+								<li class="flex items-start gap-2.5">
+									<span class="text-amber-500 font-bold">✓</span>
+									<span>3. Smart Style Management.</span>
+								</li>
+							</ul>
+							
+							<div class="flex flex-col gap-3 mt-auto">
+								<a href="https://extensions.sketchup.com/extension/e10f7017-931a-45a9-8e5d-d65df0926ddd/shadow-slice" target="_blank" rel="noopener noreferrer" class="w-full text-center px-4 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl transition-colors text-xs shadow-sm uppercase tracking-wide">
+									Free Download from Extension Warehouse →
+								</a>
+								<a href="https://archidiagram.com/shadow-slice/" target="_blank" rel="noopener noreferrer" class="w-full text-center px-4 py-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl transition-colors text-xs shadow-sm uppercase tracking-wide">
+									Learn About Shadow Slice
+								</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>

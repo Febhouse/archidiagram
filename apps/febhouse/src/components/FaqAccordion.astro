@@ -1,0 +1,131 @@
+---
+interface FaqItem {
+	question: string;
+	answer: string;
+}
+
+const faqs: FaqItem[] = [
+	{
+		question: "What is ArchiDiagram.com?",
+		answer: "ArchiDiagram.com is an online platform that provides architectural diagram resources, free tutorials, templates, symbols, and workflow tools to help architects present design ideas clearly and more efficiently."
+	},
+	{
+		question: "Are all resources on ArchiDiagram.com free?",
+		answer: "Many resources—including tutorials, sample files, and basic diagram templates—are completely free. Some advanced tools and premium templates may require purchase through Gumroad."
+	},
+	{
+		question: "Do I need SketchUp to use the diagram templates?",
+		answer: "Not all templates require SketchUp. ArchiDiagram provides files for various formats, including SketchUp (.skp), Photoshop (.psd), and Canva templates. You can choose the format that fits your workflow."
+	},
+	{
+		question: "What are Sun Diagram and Dynamic Symbols?",
+		answer: "They are professional architectural plugins (offering Free, Studio, and Pro versions). Sun Diagram provides sun path + shadow analysis for SketchUp. Dynamic Symbols provides smart diagram symbols for faster architectural presentations. Both plugins support the diagram workflows featured on ArchiDiagram.com."
+	},
+	{
+		question: "Do I need to use the Pro or Studio versions of the plugins to follow the tutorials?",
+		answer: "No. Most tutorials can be completed without the paid versions. However, using Sun Diagram (Pro/Studio) and Dynamic Symbols (Pro/Studio) will produce more accurate diagrams and reduce the amount of manual work required."
+	},
+	{
+		question: "Can I use the resources for commercial projects?",
+		answer: "Yes. All free templates and symbols can be used for commercial architectural projects. However, the sample files provided on the website are based on real projects, so you may not include them in your portfolio or professional profile unless you have received explicit permission from us."
+	},
+	{
+		question: "Where can I find examples of architectural diagrams?",
+		answer: "You can explore real examples through Tutorial pages, Free sample files, and Instagram / YouTube tutorials published by Febhouse. These samples show complete workflows from concept to final diagram."
+	},
+	{
+		question: "How do I download the free templates / free sample files?",
+		answer: "For resources hosted on Gumroad with a '$0+' price, you can download them for free by entering 0 in the price box and clicking 'I want this!'. For resources distributed via Instagram, simply comment on the corresponding post, and we will send you a Google Drive download link through DM."
+	},
+	{
+		question: "Who is behind ArchiDiagram.com?",
+		answer: "ArchiDiagram is developed and maintained by Nam Nguyen (Nguyen Ha Nam) — the founder of Febhouse. He is an Architect and Software Developer specializing in SketchUp extensions and architectural visualization tools."
+	},
+	{
+		question: "How can I contact support directly?",
+		answer: "For general support, custom diagram inquiries, or file issues, email info@febhouse.com. Support is available daily."
+	},
+	{
+		question: "How does Sun Diagram calculate solar positions?",
+		answer: "Sun Diagram uses astronomical solar equations based on latitude and longitude coordinates to calculate real-world solar azimuth and altitude angles for any hour, day, and month of the year."
+	},
+	{
+		question: "Can I animate my diagram symbols without video editing software?",
+		answer: "Yes! With Dynamic Symbols, you can click 'Create Animation' to generate sequential SketchUp scenes automatically, and then export high-quality video animations directly via File → Export → Animation."
+	}
+];
+
+// Split FAQs into 2 equal columns for wide layout
+const midIndex = Math.ceil(faqs.length / 2);
+const leftFaqs = faqs.slice(0, midIndex);
+const rightFaqs = faqs.slice(midIndex);
+---
+
+<section id="faq" class="py-20 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300 w-full">
+	<!-- Full-width container matching Header and Resources grid exactly (max-w-[1920px]) -->
+	<div class="w-full mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 max-w-[1920px]">
+		<!-- Section Header -->
+		<div class="text-center mb-12">
+			<span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold tracking-widest uppercase bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 mb-3">
+				❓ FREQUENTLY ASKED QUESTIONS
+			</span>
+			<h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-3">
+				Help Center & Technical FAQ
+			</h2>
+			<p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mb-6">
+				Find quick answers to common questions about our extensions, tutorials, and architectural resources.
+			</p>
+
+			<!-- Clean Single AI Trigger Button -->
+			<div class="inline-flex items-center gap-3 p-2 px-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
+				<span class="text-xs text-slate-600 dark:text-slate-300 font-medium">Need instant answers?</span>
+				<button 
+					type="button" 
+					onclick="window.toggleMainAiChat()"
+					class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm transition-all flex items-center gap-2 cursor-pointer active:scale-95"
+				>
+					<span>🤖</span>
+					<span>Chat with Febhouse AI</span>
+				</button>
+			</div>
+		</div>
+
+		<!-- 2-COLUMN FULL-WIDTH FAQ ACCORDION -->
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+			<!-- Left Column -->
+			<div class="space-y-4">
+				{leftFaqs.map((faq) => (
+					<details class="group bg-white dark:bg-slate-800/90 rounded-2xl border border-slate-200 dark:border-slate-700/70 p-5 sm:p-6 [&_summary::-webkit-details-marker]:hidden transition-all duration-200 open:border-amber-400/60 open:shadow-md">
+						<summary class="flex items-center justify-between cursor-pointer font-bold text-slate-900 dark:text-white text-base select-none list-none gap-4">
+							<span class="group-open:text-amber-600 dark:group-open:text-amber-400 transition-colors">{faq.question}</span>
+							<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 flex items-center justify-center text-slate-500 dark:text-slate-300 group-open:rotate-180 group-open:bg-amber-400 group-open:text-slate-950 transition-all shrink-0">
+								<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+								</svg>
+							</div>
+						</summary>
+						<p class="mt-4 text-slate-600 dark:text-slate-300 text-sm leading-relaxed pl-1 border-t border-slate-100 dark:border-slate-700/60 pt-3" set:html={faq.answer} />
+					</details>
+				))}
+			</div>
+
+			<!-- Right Column -->
+			<div class="space-y-4">
+				{rightFaqs.map((faq) => (
+					<details class="group bg-white dark:bg-slate-800/90 rounded-2xl border border-slate-200 dark:border-slate-700/70 p-5 sm:p-6 [&_summary::-webkit-details-marker]:hidden transition-all duration-200 open:border-amber-400/60 open:shadow-md">
+						<summary class="flex items-center justify-between cursor-pointer font-bold text-slate-900 dark:text-white text-base select-none list-none gap-4">
+							<span class="group-open:text-amber-600 dark:group-open:text-amber-400 transition-colors">{faq.question}</span>
+							<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 flex items-center justify-center text-slate-500 dark:text-slate-300 group-open:rotate-180 group-open:bg-amber-400 group-open:text-slate-950 transition-all shrink-0">
+								<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+								</svg>
+							</div>
+						</summary>
+						<p class="mt-4 text-slate-600 dark:text-slate-300 text-sm leading-relaxed pl-1 border-t border-slate-100 dark:border-slate-700/60 pt-3" set:html={faq.answer} />
+					</details>
+				))}
+			</div>
+		</div>
+	</div>
+
+</section>

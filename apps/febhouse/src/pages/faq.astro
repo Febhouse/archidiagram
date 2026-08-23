@@ -1,0 +1,131 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+interface FaqItem {
+	question: string;
+	answer: string;
+}
+
+const faqs: FaqItem[] = [
+	{
+		question: "What is Febhouse?",
+		answer: "Febhouse is a creative architecture studio founded and led by <strong><a href='https://www.linkedin.com/in/namnguyen-febhouse/' target='_blank' class='text-amber-600 hover:underline'>Mr. Nam Nguyen (Nguyễn Hà Nam)</a></strong>. As the core brand behind Sun Diagram, Dynamic Symbols, and ArchiDiagram.<br/>We combine architectural design with digital tools to help architects visualize ideas more clearly."
+	},
+	{
+		question: "Who is the founder of Febhouse?",
+		answer: "Febhouse was founded by <strong>Nguyễn Hà Nam</strong> (known professionally as <strong>Nam Nguyen</strong>), an architect and software developer dedicated to optimizing architectural workflows."
+	},
+	{
+		question: "How can I contact support?",
+		answer: "Support channels:<br/>- <strong>Email:</strong> <a href='mailto:info@febhouse.com' class='text-amber-600 hover:underline'>info@febhouse.com</a><br/>- <strong>Instagram DM:</strong> <a href='https://www.instagram.com/febhouse_com/' target='_blank' class='text-amber-600 hover:underline'>@febhouse_com</a><br/>- <strong>Facebook Group:</strong> <a href='https://web.facebook.com/groups/archidiagram' target='_blank' class='text-amber-600 hover:underline'>ArchiDiagram</a> (community support & discussion)"
+	},
+	{
+		question: "How fast do you reply?",
+		answer: "We usually respond within <strong>24–48 hours</strong> on business days."
+	},
+	{
+		question: "Are the resources free?",
+		answer: "Some resources are free. Advanced or premium resources require a paid license. Each item will indicate clearly whether it is Free or Pro."
+	},
+	{
+		question: "Are there sample projects or templates?",
+		answer: "Yes — sample projects, diagrams, and templates are available on <strong><a href='https://archidiagram.com/' target='_blank' class='text-amber-600 hover:underline'>ArchiDiagram.com</a></strong>."
+	},
+	{
+		question: "Where can I find tutorials?",
+		answer: "Full tutorials are available at <strong>ArchiDiagram.com</strong> and on our YouTube/Instagram channels."
+	}
+];
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<BaseHead title={`FAQ - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-amber-500/20 selection:text-amber-700 transition-colors duration-300">
+		<Header />
+
+		<main class="w-full flex flex-col items-center">
+			<section class="w-full mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-16 md:py-24 flex flex-col items-start text-left max-w-[1920px]">
+				
+				<h1 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+					Frequently Asked Questions — Febhouse Support
+				</h1>
+				<p class="text-slate-600 dark:text-slate-300 mb-12">
+					This FAQ page provides general information about Febhouse and how to reach support.<br/>
+					For tool-specific FAQs, please use the dedicated links below.
+				</p>
+
+				<div class="w-full mb-12">
+					<h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-6">
+						1. General
+					</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+						{faqs.map((faq) => (
+							<details class="group bg-white dark:bg-slate-900 rounded-[8px] border border-slate-200 dark:border-slate-800 p-5 sm:p-6 [&_summary::-webkit-details-marker]:hidden transition-all duration-200 open:border-amber-400/60 open:shadow-sm">
+								<summary class="flex items-center justify-between cursor-pointer font-bold text-slate-900 dark:text-white text-base select-none list-none gap-4">
+									<span class="group-open:text-amber-600 dark:group-open:text-amber-400 transition-colors">{faq.question}</span>
+									<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-300 group-open:rotate-180 group-open:bg-amber-400 group-open:text-slate-950 group-open:border-amber-400 transition-all shrink-0">
+										<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" class="group-open:hidden" />
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20 12H4" class="hidden group-open:block" />
+										</svg>
+									</div>
+								</summary>
+								<p class="mt-4 text-slate-600 dark:text-slate-300 text-sm leading-relaxed pl-1 pt-3 border-t border-slate-100 dark:border-slate-800" set:html={faq.answer} />
+							</details>
+						))}
+					</div>
+				</div>
+
+				<div class="w-full mb-12">
+					<h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-4">
+						2. Tool-Specific FAQs
+					</h2>
+					<p class="text-slate-600 dark:text-slate-300 mb-6">
+						FAQs for individual tools and platforms are available on their dedicated sites:
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4">
+						<a href="https://archidiagram.com/#faq" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 border border-slate-300 dark:border-slate-700 rounded-[8px] font-bold text-sm text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shadow-sm bg-white dark:bg-slate-900">
+							Archi Diagram FAQ
+						</a>
+						<a href="https://sundiagram.com/#faq" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 border border-slate-300 dark:border-slate-700 rounded-[8px] font-bold text-sm text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shadow-sm bg-white dark:bg-slate-900">
+							Sun Diagram Plugin FAQ
+						</a>
+						<a href="https://dynamicsymbols.com/#faq" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 border border-slate-300 dark:border-slate-700 rounded-[8px] font-bold text-sm text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shadow-sm bg-white dark:bg-slate-900">
+							Dynamic Symbols Plugin FAQ
+						</a>
+					</div>
+				</div>
+
+				<div class="w-full">
+					<h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-4">
+						3. Need More Help?
+					</h2>
+					<p class="text-slate-600 dark:text-slate-300 mb-4">
+						If you didn't find the answer you were looking for, feel free to reach out.<br/>
+						We're here to help.
+					</p>
+					<div class="text-slate-600 dark:text-slate-300 mb-6">
+						<p class="font-bold text-slate-900 dark:text-white mb-2">Support channels:</p>
+						<ul class="list-disc list-inside space-y-1 ml-4">
+							<li><strong>Email:</strong> <a href="mailto:info@febhouse.com" class="text-amber-600 hover:underline">info@febhouse.com</a></li>
+							<li><strong>Instagram DM:</strong> <a href="https://www.instagram.com/febhouse_com/" target="_blank" class="text-amber-600 hover:underline">@febhouse_com</a></li>
+							<li><strong>Facebook Group:</strong> <a href="https://web.facebook.com/groups/archidiagram" target="_blank" class="text-amber-600 hover:underline">ArchiDiagram</a> (community support & discussion)</li>
+						</ul>
+					</div>
+					<p class="text-slate-600 dark:text-slate-300 italic">
+						Thank you for supporting Febhouse.
+					</p>
+				</div>
+
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>

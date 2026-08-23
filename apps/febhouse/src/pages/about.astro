@@ -1,0 +1,134 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<BaseHead title={`About - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-amber-500/20 selection:text-amber-700 transition-colors duration-300">
+		<Header />
+
+		<main class="w-full flex flex-col items-center">
+			<section class="w-full mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-16 md:py-24 flex flex-col items-start text-left space-y-12 max-w-[1920px]">
+				
+				<div>
+					<h1 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-8">
+						About Febhouse
+					</h1>
+					
+					<h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-4">
+						Introduction
+					</h2>
+					<div class="text-slate-600 dark:text-slate-300 space-y-4 mb-8">
+						<p>
+							<strong>Febhouse</strong> is an independent architectural studio that develops design projects and professional digital tools to support architects in visualization, analysis, and communication.
+						</p>
+						<p>
+							We focus on connecting architecture and technology through both built work and software development, with a strong emphasis on diagram clarity, sunlight analysis, and sustainable design thinking.
+						</p>
+					</div>
+
+					<!-- Founder Card -->
+					<div class="flex flex-col sm:flex-row gap-6 bg-white dark:bg-slate-900 rounded-[8px] border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+						<div class="flex-shrink-0">
+							<a href="https://gravatar.com/nghanam" target="_blank" rel="noopener noreferrer">
+								<img src="/images/2026/01/NAMNH-1920-1024x572.jpg" alt="Nam Nguyen" class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-full !shadow-none !border-0" style="border-radius: 9999px !important; box-shadow: none !important; border: none !important;" />
+							</a>
+						</div>
+						<div class="flex flex-col">
+							<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Founder</h3>
+							<p class="text-sm text-slate-600 dark:text-slate-300 mb-3">
+								<strong>Mr. Nam Nguyen (Nguyễn Hà Nam) — Architect & Software Developer.</strong><br/>
+								Nam is an architect who develops professional SketchUp extensions and diagram systems to improve how architects study sunlight, environmental conditions, and conceptual design.
+							</p>
+							<p class="text-sm text-slate-600 dark:text-slate-300 mb-3">
+								He is the creator of <a href="https://sundiagram.com/" class="text-amber-600 hover:underline">Sun Diagram</a>, <a href="https://dynamicsymbols.com/" class="text-amber-600 hover:underline">Dynamic Symbols</a>, and <a href="https://archidiagram.com/shadow-slice/" class="text-amber-600 hover:underline">Shadow Slice</a> — tools used by architects worldwide for visualization and architectural workflows.
+							</p>
+							<p class="text-sm text-slate-600 dark:text-slate-300">
+								He also shares tutorials, templates, and resources through ArchiDiagram.com, helping architects improve their diagram skills and presentation methods.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-4">
+						Expertise
+					</h2>
+					<p class="text-slate-600 dark:text-slate-300 mb-4">We work across:</p>
+					<ul class="list-disc list-inside text-slate-600 dark:text-slate-300 space-y-2 mb-6 ml-4">
+						<li><a href="/architecture-projects/" class="font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors">Architecture & Landscape</a></li>
+						<li><a href="/diagrams/" class="font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors">Architectural Diagram Systems</a></li>
+						<li><a href="/architecture-tools/" class="font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors">SketchUp Extensions & Digital Tools</a></li>
+					</ul>
+					<p class="text-slate-600 dark:text-slate-300">
+						Our approach integrates real architectural practice with software development to create tools that directly support architectural workflows.
+					</p>
+				</div>
+
+				<div>
+					<h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-4">
+						Philosophy
+					</h2>
+					<p class="text-slate-600 dark:text-slate-300">
+						We believe architects should spend their time <strong>designing, not battling software</strong>. Born from real-world architectural practice, our philosophy is to bridge the gap between complex spatial ideas and clear visual communication. We build intuitive, smart tools that remove technical barriers, allowing designers to focus entirely on what matters most: creativity and spatial storytelling.
+					</p>
+				</div>
+
+				<div>
+					<h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-4">
+						Recognition
+					</h2>
+					<p class="text-slate-600 dark:text-slate-300 mb-4">
+						<strong>Febhouse</strong> is a <strong>Verified SketchUp Extension Vendor</strong> on the <a href="https://extensions.sketchup.com/developer/582b09fa-9fe2-4248-b9e8-80dc7af69a76" class="text-amber-600 hover:underline">SketchUp Extension Warehouse</a>.
+					</p>
+					<p class="text-slate-600 dark:text-slate-300">
+						Our extensions, including <a href="https://sundiagram.com/" class="text-amber-600 hover:underline font-bold">Sun Diagram</a>, <a href="https://dynamicsymbols.com/" class="text-amber-600 hover:underline font-bold">Dynamic Symbols</a>, and <a href="https://archidiagram.com/shadow-slice/" class="text-amber-600 hover:underline font-bold">Shadow Slice</a>, are used by architects, urban designers, and students worldwide for sunlight analysis, visualization, and architectural diagram production.
+					</p>
+				</div>
+
+				<div class="w-full">
+					<h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-6">
+						Febhouse Ecosystem
+					</h2>
+					<!-- ArchiDiagram Ecosystem Card -->
+					<div class="w-full flex flex-col sm:flex-row gap-6 bg-white dark:bg-slate-900 rounded-[8px] border border-slate-200 dark:border-slate-800 p-6 shadow-sm mb-12">
+						<div class="flex-shrink-0 flex items-center justify-center bg-slate-50 dark:bg-slate-800 w-32 h-32 rounded-[8px]">
+							<a href="https://archidiagram.com/" target="_blank" rel="noopener noreferrer">
+								<img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="Febhouse Logo" class="w-full h-full object-contain !shadow-none !border-0 p-4" style="box-shadow: none !important; border: none !important;" />
+							</a>
+						</div>
+						<div class="flex flex-col justify-center">
+							<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">
+								<a href="https://archidiagram.com/" class="hover:text-amber-500 transition-colors" target="_blank" rel="noopener noreferrer">ArchiDiagram.com</a>
+							</h3>
+							<p class="text-sm text-slate-600 dark:text-slate-300">
+								ArchiDiagram.com — A platform providing tutorials, tools, and resources to help architects create clear and professional architectural diagrams.
+							</p>
+						</div>
+					</div>
+
+					<div class="text-center w-full">
+						<p class="text-slate-600 dark:text-slate-300 mb-2 font-medium">
+							Thank you for being part of this journey — where architecture meets technology.
+						</p>
+						<p class="text-slate-600 dark:text-slate-300 mb-6 text-sm">
+							Ready to upgrade your architectural workflow?
+						</p>
+						<a href="https://extensions.sketchup.com/developer/582b09fa-9fe2-4248-b9e8-80dc7af69a76" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-2.5 border border-slate-300 dark:border-slate-700 rounded-full font-bold text-sm text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shadow-sm">
+							Shop All Extensions
+						</a>
+					</div>
+				</div>
+				
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>

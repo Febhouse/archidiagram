@@ -1,24 +1,20 @@
 {
-  "name": "archidiagram-v3",
+  "name": "archidiagram-monorepo",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "pnpm --parallel --filter \"./apps/*\" dev",
+    "dev:archidiagram": "pnpm --filter @apps/archidiagram dev",
+    "dev:febhouse": "pnpm --filter @apps/febhouse dev",
+    "build": "pnpm --filter \"./apps/*\" build",
+    "build:archidiagram": "pnpm --filter @apps/archidiagram build",
+    "build:febhouse": "pnpm --filter @apps/febhouse build"
   },
-  "dependencies": {
-    "@astrojs/mdx": "^7.0.5",
-    "@astrojs/partytown": "^2.1.7",
-    "@astrojs/rss": "^4.0.19",
-    "@astrojs/sitemap": "^3.7.3",
-    "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.1.6",
-    "sharp": "^0.35.0",
-    "tailwindcss": "^4.3.3"
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "@tailwindcss/vite",
+      "sharp"
+    ]
   }
 }

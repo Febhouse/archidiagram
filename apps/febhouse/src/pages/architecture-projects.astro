@@ -1,0 +1,104 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const rawContent = fs.readFileSync(path.resolve('./src/data/architecture-projects.md'), 'utf-8');
+
+// Parse heading and intro
+const lines = rawContent.split('\n');
+let titleText = "Architecture Projects";
+const introLines = [];
+let i = 0;
+if (lines[0].trim() === '---') {
+  i = 1;
+  while (lines[i].trim() !== '---' && i < lines.length) i++;
+  i++;
+}
+while (i < lines.length) {
+  const line = lines[i];
+  if (line.startsWith('## ')) {
+    titleText = line.replace('## ', '').replace('&amp;', '&').trim();
+  } else if (line.match(/^\[\!\[/)) {
+    break;
+  } else if (line.trim().length > 0) {
+    introLines.push(line.trim());
+  }
+  i++;
+}
+const introHtml = introLines.join('<br><br>');
+
+// Split by projects
+const remainingContent = rawContent.substring(rawContent.indexOf(lines[i] || ''));
+const projectBlocks = remainingContent.split(/(?=\[\!\[)/).filter(b => b.trim().length > 0);
+
+const projects = projectBlocks.map(block => {
+  const imgMatch = block.match(/\[\!\[([^\]]*)\]\((.*?)\)\]\((.*?)\)/);
+  const alt = imgMatch ? imgMatch[1] : '';
+  const src = imgMatch ? imgMatch[2] : '';
+  const imgLink = imgMatch ? imgMatch[3] : '';
+
+  const titleMatch = block.match(/### \[(.*?)\]\((.*?)\)/);
+  const pTitle = titleMatch ? titleMatch[1] : '';
+  const pLink = titleMatch ? titleMatch[2] : '';
+
+  let descriptionHtml = '';
+  if (titleMatch) {
+    const descRaw = block.substring(block.indexOf(titleMatch[0]) + titleMatch[0].length).trim();
+    descriptionHtml = descRaw
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-amber-600 hover:underline font-bold">$1</a>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br/>')
+      .replace(/<u>/g, '')
+      .replace(/<\/u>/g, '');
+    descriptionHtml = `<p>${descriptionHtml}</p>`;
+  }
+
+  return { alt, src, imgLink, pTitle, pLink, descriptionHtml };
+});
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<BaseHead title={`${titleText} - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-amber-500/20 selection:text-amber-700 transition-colors duration-300">
+		<Header />
+
+		<main class="w-full flex flex-col items-center">
+			<section class="w-full mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-16 md:py-24 flex flex-col items-start text-left max-w-[1920px]">
+				
+				<h1 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+					{titleText}
+				</h1>
+				<p class="text-slate-600 dark:text-slate-300 mb-12 text-lg" set:html={introHtml}></p>
+
+				<div class="w-full space-y-12">
+					{projects.map(project => (
+						<div class="flex flex-col md:flex-row gap-8 bg-white dark:bg-slate-900 rounded-[8px] border border-slate-200 dark:border-slate-800 p-[10px] shadow-sm transition-shadow hover:shadow-md items-start">
+							<div class="w-full md:w-1/2 flex-shrink-0">
+								<a href={project.imgLink}>
+									<img src={project.src} alt={project.alt || project.pTitle} class="w-full h-auto rounded-[8px] object-cover" style="border-radius: 8px !important; box-shadow: none !important; border: none !important;" />
+								</a>
+							</div>
+							<div class="w-full md:w-1/2 flex flex-col">
+								<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+									<a href={project.pLink} class="hover:text-amber-500 transition-colors">{project.pTitle}</a>
+								</h2>
+								<div class="text-slate-600 dark:text-slate-300 space-y-3 text-sm md:text-base leading-relaxed" set:html={project.descriptionHtml}></div>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>

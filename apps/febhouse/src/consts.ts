@@ -1,0 +1,39 @@
+// Place any global data in this file.
+// You can import this data from anywhere in your site by using the `import` keyword.
+
+export const SITE_TITLE = 'Febhouse';
+export const SITE_DESCRIPTION = 'Official Febhouse Website — Professional SketchUp Extensions, Architectural Plugins & Workflows.';
+
+export const DEDICATED_LANDING_PAGE_SLUGS = [
+	'sun-diagram',
+	'dynamic-symbols',
+	'shadow-slice',
+];
+
+export const REDIRECTED_LEGACY_SLUGS = [
+	'custom-diagram-service',
+	'sun-path-diagram',
+	'dynamic-symbols-for-architectural-diagram',
+	'3d-symbol',
+	'3d-symbols-for-architectural-diagram',
+	'create-architectural-diagrams-using-sketchup',
+	'straight-hand-drawn',
+	'pen-blue',
+	'negative',
+	'clean-lines',
+	'sketchy-line',
+];
+
+export function isPublishablePost(post: { id: string; data: { tags?: string | string[] } }) {
+	if (!post.data.tags) return false;
+	const tagsStr = Array.isArray(post.data.tags) ? post.data.tags.join(',') : post.data.tags;
+	if (tagsStr.trim() === '') return false;
+	const cleanSlug = post.id.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+	return !REDIRECTED_LEGACY_SLUGS.includes(cleanSlug);
+}
+
+export function isDynamicSlugRoute(post: { id: string; data: { tags?: string | string[] } }) {
+	if (!isPublishablePost(post)) return false;
+	const cleanSlug = post.id.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+	return !DEDICATED_LANDING_PAGE_SLUGS.includes(cleanSlug);
+}
