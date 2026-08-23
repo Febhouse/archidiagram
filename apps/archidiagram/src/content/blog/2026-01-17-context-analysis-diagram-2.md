@@ -1,6 +1,6 @@
 ---
 title: 'Project example 41'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Free sample project to visualize broader urban fabric, traffic flows, and environmental context shaping your architectural site.'
 pubDate: '2026-01-17T15:23:31+07:00'
 heroImage: '/images/2026/01/SAMPLE-41-1-cover.jpg'
 tags: 'sample project'

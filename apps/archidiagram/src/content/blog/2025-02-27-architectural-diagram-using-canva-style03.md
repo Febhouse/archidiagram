@@ -1,6 +1,6 @@
 ---
 title: 'Architectural diagram with Canva template (style 03)'
-description: 'No description provided'
+description: 'Combine SketchUp diagram exports with Canva templates (Style 03) for rapid poster layout creation.'
 pubDate: '2025-02-27T10:44:16+07:00'
 heroImage: '/images/2025/11/ARDIAGRAM-STYLE3Plus-1_Page_1.jpg'
 tags: 'presentation template'

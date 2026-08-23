@@ -1,6 +1,6 @@
 ---
 title: 'Project example 62'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Free interior shadow study sample project using sliced view techniques to visualize natural light penetration inside living spaces.'
 pubDate: '2026-02-02T22:49:48+07:00'
 heroImage: '/images/2026/02/COVER.jpg'
 tags: 'sample project'

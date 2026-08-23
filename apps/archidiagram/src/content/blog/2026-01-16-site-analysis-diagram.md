@@ -1,6 +1,6 @@
 ---
 title: 'Project example 54'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Free urban site analysis sample in SketchUp showing high-density tower massing, solar access obstruction, and wind corridors.'
 pubDate: '2026-01-16T15:24:09+07:00'
 heroImage: '/images/2026/01/20251125-3DFILE-copy.jpg'
 tags: 'sample project'

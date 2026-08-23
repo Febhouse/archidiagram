@@ -1,6 +1,6 @@
 ---
 title: 'Project example 39'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Master 3D environmental site analysis diagrams in SketchUp combining solar dome paths, wind vectors, and site constraints into one view.'
 pubDate: '2026-01-17T15:45:31+07:00'
 heroImage: '/images/2026/01/SAMPLE-39-VIEW1-cover.jpg'
 tags: 'sample project'

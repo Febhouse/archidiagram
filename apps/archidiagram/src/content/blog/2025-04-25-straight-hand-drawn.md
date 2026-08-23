@@ -1,6 +1,6 @@
 ---
-title: 'Straight hand drawn for Sun Diagram (Style-05)'
-description: '- Straight hand drawn style for sun diagram - This is a straight hand-drawn style I customized for the Sun Path — a clean, geometric sketch look.'
+title: 'Straight hand drawn'
+description: 'Straight hand drawn style for sun diagram — a clean, geometric sketch look customized for Sun Path presentations.'
 pubDate: '2025-04-25T00:18:54+07:00'
 heroImage: '/images/2025/04/STYLE-5-COVER-1-1.jpg'
 tags: 'sample project'

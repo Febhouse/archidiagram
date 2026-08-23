@@ -30,6 +30,11 @@ if (tagStr.includes("sample project") || tagStr.includes("sample")) {
 
 // Clean original root-level SEO slug
 const cleanSlug = id.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+
+const cleanDescription = (description || '')
+	.replace(/^[\s\-]+/, '')
+	.replace(/\\n/g, ' ')
+	.trim();
 ---
 
 <article class="group relative bg-white dark:bg-slate-900 rounded-[8px] border border-slate-200 dark:border-slate-800 p-[10px] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
@@ -68,9 +73,9 @@ const cleanSlug = id.replace(/^\d{4}-\d{2}-\d{2}-/, '');
 				{title}
 			</h3>
 
-			{description && (
+			{cleanDescription && (
 				<p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm line-clamp-2 leading-relaxed mb-4">
-					{description}
+					{cleanDescription}
 				</p>
 			)}
 

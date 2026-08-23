@@ -1,6 +1,6 @@
 ---
 title: 'Architectural diagram with Canva template (style 02)'
-description: 'No description provided'
+description: 'Create black and white architectural diagrams using SketchUp vector exports and Canva graphic design tools.'
 pubDate: '2025-02-19T10:38:27+07:00'
 heroImage: '/images/2025/11/ArchitecturalDiagram-BW_Page_1.jpg'
 tags: 'presentation template'

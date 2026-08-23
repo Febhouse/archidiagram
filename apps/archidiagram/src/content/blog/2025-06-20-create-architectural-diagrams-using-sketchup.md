@@ -1,6 +1,6 @@
 ---
 title: 'Step-by-Step Guide: Create Architectural Diagrams Using SketchUp'
-description: 'No description provided'
+description: 'Comprehensive guide to creating architectural diagrams in SketchUp from 3D sun paths to dynamic vector symbols.'
 pubDate: '2025-06-20T09:17:17+07:00'
 heroImage: '/images/2025/06/architectural-768.jpg'
 tags: 'sample project'

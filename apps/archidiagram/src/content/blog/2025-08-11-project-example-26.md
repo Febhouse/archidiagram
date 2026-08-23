@@ -1,6 +1,6 @@
 ---
 title: 'Project example 26'
-description: '- Project Sample for Site Diagram includes: 3D Sun Path &amp; 3D Symbols: created with the Sun Diagram Plugin &amp; Dynamic Symbols Plugin,'
+description: 'Project Sample for Site Diagram includes: 3D Sun Path &amp; 3D Symbols created with Sun Diagram Plugin &amp; Dynamic Symbols Plugin.'
 pubDate: '2025-08-11T15:39:37+07:00'
 heroImage: '/images/2025/08/STYLE-06-scaled-1-e1773389554390.jpg'
 tags: 'sample project'

@@ -1,6 +1,6 @@
 ---
 title: 'Project example 65'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Real-world shadow analysis case study and free SketchUp model. Learn how to present minimalist, factual shadow data for council approvals.'
 pubDate: '2026-05-24T21:48:56+07:00'
 heroImage: '/images/2026/05/20260521-SECTION-copy.jpg'
 tags: 'sample project'

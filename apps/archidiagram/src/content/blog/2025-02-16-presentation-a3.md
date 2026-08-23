@@ -1,6 +1,6 @@
 ---
 title: 'Presentation Layout Template &#8211; A3'
-description: 'No description provided'
+description: 'A3 presentation board templates and layout tips for architectural diagrams and site analysis reports.'
 pubDate: '2025-02-16T10:52:09+07:00'
 heroImage: '/images/2025/11/Horizontal_Book_Mockup_4.jpg.webp'
 tags: 'presentation template'

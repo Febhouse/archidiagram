@@ -1,6 +1,6 @@
 ---
 title: 'Clean lines style for Sun Diagram (Style-01)'
-description: '- Clean line style for Sun Diagram, it is based on vector of 3D sun path, clean lines, and perfect for client presentations.'
+description: 'Clean line style for Sun Diagram based on 3D sun path vectors — clean lines, ideal for technical and client presentations.'
 pubDate: '2025-04-25T15:26:48+07:00'
 heroImage: '/images/2025/04/STYLE-1-COVER-1-1.jpg'
 tags: 'sample project'

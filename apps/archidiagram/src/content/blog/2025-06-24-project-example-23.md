@@ -1,6 +1,6 @@
 ---
 title: 'Project example 23'
-description: '- Site Context Map using Dynamic Symbols and Sun Diagram in SketchUp. Easily highlight roads, functions, flows, and light access in one layered'
+description: 'Site Context Map using Dynamic Symbols and Sun Diagram in SketchUp. Easily highlight roads, functions, flows, and light access in one layered diagram.'
 pubDate: '2025-06-24T20:34:35+07:00'
 heroImage: '/images/2025/06/58-2B-600x600-1.jpg'
 tags: 'sample project'

@@ -1,6 +1,7 @@
 ---
 id: 948
 title: 'THE LEAF TOWN'
+description: 'Khu đô thị sinh thái The Leaf Town với quy hoạch bền vững, không gian xanh và giải pháp kiến trúc khí hậu.'
 pubDate: '2023-05-24T22:33:58+07:00'
 author: admin
 excerpt: ''

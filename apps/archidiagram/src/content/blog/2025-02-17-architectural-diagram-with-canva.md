@@ -1,6 +1,6 @@
 ---
 title: 'Architectural diagram with Canva template (style 01)'
-description: 'No description provided'
+description: 'Workflow tutorial on pairing SketchUp Sun Diagram outputs with Canva graphic assets for board layouts.'
 pubDate: '2025-02-17T10:30:25+07:00'
 heroImage: '/images/2025/11/Architectural-diagrams-style1_Page_1-1.jpg'
 tags: 'presentation template'

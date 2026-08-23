@@ -1,6 +1,6 @@
 ---
 title: 'Shadow Analysis: Ensuring Design Integrity &amp; Comfort'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Evaluate overshadowing, optimize facade shading devices, and ensure local planning compliance with a detailed SketchUp shadow analysis workflow.'
 pubDate: '2026-05-04T22:18:15+07:00'
 heroImage: '/images/2026/05/shadow-analysis.jpg'
 tags: 'sample project'

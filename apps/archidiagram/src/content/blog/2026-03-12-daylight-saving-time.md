@@ -1,6 +1,6 @@
 ---
 title: 'Daylight Saving Time (DST): Why Standard 3D Software Fails at Global Solar Analysis'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Why standard 3D software fails at global solar analysis when ignoring Daylight Saving Time (DST) offsets across southern and northern hemispheres.'
 pubDate: '2026-03-12T10:42:03+07:00'
 heroImage: '/images/2026/03/SYDNEY-copy.jpg'
 tags: 'tutorial'

@@ -1,6 +1,7 @@
 ---
 id: 1650
 title: 'NEO-CLASSICAL ECOLOGICAL HOUSE'
+description: 'Nhà tân cổ điển sinh thái kết nối hài hòa giữa kiến trúc tân cổ điển và các tiêu chí kiến trúc sinh thái.'
 pubDate: '2023-08-04T16:45:43+07:00'
 author: admin
 excerpt: ''

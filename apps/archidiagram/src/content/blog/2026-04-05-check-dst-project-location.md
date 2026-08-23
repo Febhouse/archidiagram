@@ -1,6 +1,6 @@
 ---
 title: 'Guide: How to Determine if Your Project Location Requires Daylight Saving Time (DST)'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Comprehensive guide to determine if your architectural project location uses Daylight Saving Time (DST) for accurate shadow simulations.'
 pubDate: '2026-04-05T17:02:10+07:00'
 heroImage: '/images/2026/04/check-dst-location.jpg'
 tags: 'tutorial'

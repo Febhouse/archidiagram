@@ -1,6 +1,6 @@
 ---
 title: 'Dynamic Symbols for Architectural Diagram'
-description: 'No description provided'
+description: 'Explore Dynamic Symbols for SketchUp to quickly place, customize, and animate 2D and 3D architectural diagram markers.'
 pubDate: '2025-05-21T15:03:58+07:00'
 heroImage: '/images/2025/05/DYNAMIC-SYMBOLS-GIF.gif'
 tags: 'other resources'

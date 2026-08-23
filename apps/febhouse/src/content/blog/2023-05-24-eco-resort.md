@@ -1,6 +1,7 @@
 ---
 id: 933
 title: 'THUNG NAI ECO-RESORT'
+description: 'Resort sinh thái Thung Nai là một khu tổ hợp khách sạn và bungalow ven hồ với kiến trúc độc đáo gắn liền với địa hình tự nhiên.'
 pubDate: '2023-05-24T22:18:52+07:00'
 author: admin
 excerpt: ''

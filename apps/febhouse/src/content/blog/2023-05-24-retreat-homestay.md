@@ -1,6 +1,7 @@
 ---
 id: 968
 title: 'RETREAT HOMESTAY'
+description: 'Dự án thiết kế Homestay Retreat hòa mình vào thiên nhiên, tối ưu ánh sáng tự nhiên và thông gió tự nhiên.'
 pubDate: '2023-05-24T22:47:31+07:00'
 author: admin
 excerpt: ''

@@ -1,6 +1,6 @@
 ---
 title: 'Project example 19'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Download original SketchUp source files for sunlight analysis video demonstrations combining Sun Diagram and CapCut.'
 pubDate: '2025-05-12T14:23:29+07:00'
 heroImage: '/images/2025/05/Sunlight-Analysis-cover.jpg'
 tags: 'sample project'

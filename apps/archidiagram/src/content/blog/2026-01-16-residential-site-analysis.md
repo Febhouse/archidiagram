@@ -1,6 +1,6 @@
 ---
 title: 'Project example 56'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Free sample files for residential site analysis. Optimize natural ventilation, winter solar gain, and privacy from neighboring houses.'
 pubDate: '2026-01-16T15:56:41+07:00'
 heroImage: '/images/2026/01/SAMPLE-56-COVER1000x1000.jpg'
 tags: 'sample project'

@@ -1,6 +1,6 @@
 ---
 title: 'Project example 66'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Automate section perspectives in SketchUp with Shadow Slice 2.0. Learn how to maintain accurate interior shadows and custom section fills.'
 pubDate: '2026-06-25T16:53:34+07:00'
 heroImage: '/images/2026/06/20260625-1.jpg'
 tags: 'sample project'

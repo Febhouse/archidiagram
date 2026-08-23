@@ -1,6 +1,6 @@
 ---
 title: 'Project example 42'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Free 3D massing sample file to analyze surrounding building heights, scale, privacy, and contextual solar access in dense urban settings.'
 pubDate: '2026-01-17T14:48:18+07:00'
 heroImage: '/images/2026/01/975-Nostrand-Ave-2-cover.jpg'
 tags: 'sample project'

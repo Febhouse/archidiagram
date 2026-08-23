@@ -1,6 +1,6 @@
 ---
 title: '3D Symbols for Architectural Diagram'
-description: 'No description provided'
+description: 'Free 3D symbol library for SketchUp architectural diagrams including circulation arrows, wind flows, and site tags.'
 pubDate: '2025-05-07T12:14:00+07:00'
 heroImage: '/images/2025/05/3D-SYMBOL-cover.jpg'
 tags: 'presentation template'

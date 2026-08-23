@@ -1,6 +1,6 @@
 ---
 title: 'Project example 63'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Free sample project for a small 1-story townhouse demonstrating passive design, natural light penetration, and daylighting optimization.'
 pubDate: '2026-03-10T21:47:27+07:00'
 heroImage: '/images/2026/03/Daylight-Optimization-cover.jpg'
 tags: 'sample project'

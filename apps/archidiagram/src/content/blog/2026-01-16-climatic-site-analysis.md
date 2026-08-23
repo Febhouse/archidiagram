@@ -1,6 +1,6 @@
 ---
 title: 'Project example 57'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Free source files for climatic site analysis and solar orientation on sloped terrain to maximize passive heating and ventilation.'
 pubDate: '2026-01-16T11:46:46+07:00'
 heroImage: '/images/2026/01/SAMPLE-57cover.jpg'
 tags: 'sample project'

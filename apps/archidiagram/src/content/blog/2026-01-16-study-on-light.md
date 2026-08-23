@@ -1,6 +1,6 @@
 ---
 title: 'Project example 53'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Free source files for a study on light & location in SketchUp. Learn how to analyze seasonal sun path variation and shadow angles.'
 pubDate: '2026-01-16T14:38:47+07:00'
 heroImage: '/images/2026/01/Cover.jpg'
 tags: 'sample project'

@@ -1,6 +1,7 @@
 ---
 id: 2826
 title: 'ECO-TOWNHOUSE ARCHITECTURE'
+description: 'Dự án nhà phố sinh thái tích hợp giải pháp lấy sáng và thông gió tự nhiên hiệu quả cho đô thị.'
 pubDate: '2025-02-06T12:37:58+07:00'
 author: admin
 excerpt: ''

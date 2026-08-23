@@ -1,6 +1,7 @@
 ---
 id: 2859
 title: 'MATSE II &#8211; COFFEE'
+description: 'Thiết kế quán cafe Matse Coffee phong cách mở, tạo điểm nhấn không gian và trải nghiệm độc đáo cho khách hàng.'
 pubDate: '2025-02-06T14:48:48+07:00'
 author: admin
 excerpt: ''

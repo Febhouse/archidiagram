@@ -1,6 +1,6 @@
 ---
 title: 'Project example 24'
-description: '- Environmental Analysis using the Sun Diagram plugin to simulate sunlight and shade, combined with Dynamic Symbols to represent climate layers.'
+description: 'Environmental Analysis using the Sun Diagram plugin to simulate sunlight and shade, combined with Dynamic Symbols to represent climate layers.'
 pubDate: '2025-06-30T11:52:03+07:00'
 heroImage: '/images/2025/06/SAMPLE-24-STYLE02-resized.jpg'
 tags: 'sample project'

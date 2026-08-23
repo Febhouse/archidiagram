@@ -1,6 +1,6 @@
 ---
 title: 'AI Project 01'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Free AI prompt and workflow to transform standard SketchUp exports into dark-mode architectural diagrams with glowing neon lines.'
 pubDate: '2026-03-02T10:06:34+07:00'
 heroImage: '/images/2026/03/20260109-AI-900x900-1.jpg'
 tags: 'sample project'

@@ -1,6 +1,6 @@
 ---
 title: 'Project example 45'
-description: '- How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
+description: 'Free urban site context diagram sample file demonstrating street network connectivity, neighbor massing, and solar exposure in 3D.'
 pubDate: '2026-01-16T22:48:10+07:00'
 heroImage: '/images/2026/01/SAMPLE-45-1-cover.jpg'
 tags: 'sample project'

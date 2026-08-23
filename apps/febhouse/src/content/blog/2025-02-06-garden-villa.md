@@ -1,6 +1,7 @@
 ---
 id: 2923
 title: 'ECO-GARDEN VILLA'
+description: 'Biệt thự sân vườn Garden Villa kết hợp hài hòa giữa không gian sống hiện đại và cảnh quan tự nhiên.'
 pubDate: '2025-02-06T16:35:54+07:00'
 author: admin
 excerpt: ''
