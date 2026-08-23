@@ -4,6 +4,7 @@ description: 'In this tutorial, we’re sharing the updated workflow for creatin
 pubDate: '2025-11-04T00:25:43+07:00'
 heroImage: '/images/2025/11/SITEANALYSIS-COVER.jpg'
 tags: 'tutorial'
+software: 'SketchUp, Sun Diagram, Dynamic Symbols, Photoshop'
 ---
 
 # Tutorial: Create an Architectural Diagram using SketchUp
