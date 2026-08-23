@@ -113,12 +113,12 @@ const tools: Tool[] = [
 		<!-- 3 Core Tools Grid with Official Extension Logos -->
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 			{tools.map((tool) => (
-				<div class="group relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-amber-500/60 rounded-3xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-sm hover:shadow-xl">
+				<div class="group relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-amber-500/60 rounded-[8px] p-[10px] overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-sm hover:shadow-xl">
 					
 					<!-- GIF Animation Preview -->
 					{tool.previewImg && (
-						<div class="w-full aspect-[4/3] sm:aspect-video md:aspect-[4/3] lg:aspect-video bg-slate-100 dark:bg-slate-900 relative overflow-hidden">
-							<img src={tool.previewImg} alt={`${tool.name} function preview`} loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+						<div class="w-full aspect-[4/3] sm:aspect-video md:aspect-[4/3] lg:aspect-video bg-slate-100 dark:bg-slate-900 relative overflow-hidden rounded-[8px]">
+							<img src={tool.previewImg} alt={`${tool.name} function preview`} loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out rounded-[8px]" style="border-radius: 8px !important; box-shadow: none !important; border: none !important;" />
 						</div>
 					)}
 

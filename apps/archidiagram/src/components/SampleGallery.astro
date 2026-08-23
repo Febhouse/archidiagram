@@ -63,20 +63,21 @@ const galleryItems: GalleryItem[] = [
 		<!-- Gallery Grid -->
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 			{galleryItems.map(item => (
-				<div class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-					<div class="relative aspect-[16/10] overflow-hidden bg-slate-200 dark:bg-slate-800">
+				<div class="group bg-white dark:bg-slate-900 rounded-[8px] border border-slate-200 dark:border-slate-800 p-[10px] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+					<div class="relative aspect-[16/10] overflow-hidden rounded-[8px] bg-slate-200 dark:bg-slate-800">
 						<img 
 							src={item.image} 
 							alt={item.title} 
 							loading="lazy" 
-							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-[8px]"
+							style="border-radius: 8px !important; box-shadow: none !important; border: none !important;"
 							onerror="this.onerror=null; this.src='/images/2025/01/3D-Symbol-01.jpg';"
 						/>
 						<div class="absolute top-3 left-3 bg-slate-900/85 backdrop-blur-md text-amber-400 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-slate-700/60">
 							{item.category}
 						</div>
 					</div>
-					<div class="p-5 flex flex-col flex-grow">
+					<div class="p-4 flex flex-col flex-grow">
 						<h3 class="text-base font-bold text-slate-900 dark:text-white mb-1 group-hover:text-amber-500 transition-colors line-clamp-1">
 							{item.title}
 						</h3>
