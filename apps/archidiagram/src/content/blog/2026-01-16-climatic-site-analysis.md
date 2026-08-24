@@ -15,8 +15,6 @@ This SketchUp model demonstrates how to analyze a site with complex topography, 
 
  ![Climatic Site Analysis](/images/2026/01/SAMPLE-57-VIEW03-copy.jpg)
 
-<iframe src="https://3dwarehouse.sketchup.com/embed/de68dc90-0344-4440-9f1e-8ea54236d2e9?token=NUhD_CVlgkg=&binaryName=s21" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="450" allowfullscreen></iframe>
-
 ## Why Focus on Solar Orientation?
 
 Orientation is the single most important passive design decision. By studying the climatic conditions early, you can:
