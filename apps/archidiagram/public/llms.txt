@@ -1,0 +1,13 @@
+# ArchiDiagram
+
+> ArchiDiagram provides professional SketchUp plugins, presentation templates, and tutorials for architects and design students to create stunning architectural diagrams and site analysis.
+
+## Key Plugins & Tools
+- **Sun Diagram**: 3D Sun Path & Solar Analysis Plugin for SketchUp.
+- **Dynamic Symbols**: Animated SketchUp components (GIF/MP4) for architectural presentation.
+- **Shadow Slice**: Automated section cut shadows for SketchUp.
+
+## Resources
+- Main Website: https://archidiagram.com
+- Sitemap: https://archidiagram.com/sitemap-index.xml
+- Author: Nam Nguyen (Architect & Software Developer, Founder of Febhouse)

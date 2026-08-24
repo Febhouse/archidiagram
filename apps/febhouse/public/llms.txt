@@ -1,0 +1,13 @@
+# Febhouse
+
+> Febhouse is an architectural design studio and software developer creating specialized tools and resources for architects. Founded by architect Nam Nguyen.
+
+## Products & Services
+- **Architecture Projects**: Eco-resorts, homestays, townhouses, and villas.
+- **Architecture Tools**: Professional SketchUp extensions including Sun Diagram, Dynamic Symbols, and Shadow Slice.
+- **Custom Diagram Service**: Professional solar and site analysis service to help validate design impacts.
+
+## Resources
+- Main Website: https://febhouse.com
+- Sitemap: https://febhouse.com/sitemap-index.xml
+- Author: Nam Nguyen
