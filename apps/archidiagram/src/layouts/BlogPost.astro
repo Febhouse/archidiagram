@@ -248,7 +248,32 @@ relatedPosts = relatedPosts
 
 					const ytRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:shorts\/|watch\?(?:.*&)?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i;
 
-					function handleYouTubeEmbed(targetEl, videoId, isShort) {
+					function extractStartTime(url) {
+						try {
+							// Handle raw text urls that might lack protocol
+							const fullUrl = url.startsWith('http') ? url : 'https://' + url;
+							const urlObj = new URL(fullUrl);
+							let t = urlObj.searchParams.get('t') || urlObj.searchParams.get('start');
+							if (!t) return '';
+							
+							let seconds = 0;
+							if (typeof t === 'string' && t.match(/[hms]/)) {
+								const hMatch = t.match(/(\d+)h/);
+								const mMatch = t.match(/(\d+)m/);
+								const sMatch = t.match(/(\d+)s/);
+								if (hMatch) seconds += parseInt(hMatch[1], 10) * 3600;
+								if (mMatch) seconds += parseInt(mMatch[1], 10) * 60;
+								if (sMatch) seconds += parseInt(sMatch[1], 10);
+							} else {
+								seconds = parseInt(t, 10) || 0;
+							}
+							return seconds > 0 ? `&start=${seconds}` : '';
+						} catch (e) {
+							return '';
+						}
+					}
+
+					function handleYouTubeEmbed(targetEl, videoId, isShort, startTimeParam) {
 						const parentP = targetEl.tagName === 'P' ? targetEl : targetEl.closest('p');
 						const elementToReplace = parentP || targetEl;
 
@@ -267,7 +292,7 @@ relatedPosts = relatedPosts
 
 							const floatWrapper = document.createElement('div');
 							floatWrapper.className = 'video-shorts-float';
-							floatWrapper.innerHTML = `<div class="video-shorts-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1" title="YouTube Shorts" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>`;
+							floatWrapper.innerHTML = `<div class="video-shorts-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1${startTimeParam}" title="YouTube Shorts" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>`;
 
 							if (nearestHeading && nearestHeading.parentNode) {
 								nearestHeading.after(floatWrapper);
@@ -279,7 +304,7 @@ relatedPosts = relatedPosts
 							// Standard 16:9 horizontal video (100% full width aligned with container edges)
 							const wrapper = document.createElement('div');
 							wrapper.className = 'video-standard-wrapper';
-							wrapper.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>`;
+							wrapper.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1${startTimeParam}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>`;
 							elementToReplace.replaceWith(wrapper);
 						}
 					}
@@ -298,7 +323,8 @@ relatedPosts = relatedPosts
 
 							const videoId = ytMatch[1];
 							const isShort = href.includes('/shorts/') || link.innerText.toLowerCase().includes('short');
-							handleYouTubeEmbed(link, videoId, isShort);
+							const startTimeParam = extractStartTime(href);
+							handleYouTubeEmbed(link, videoId, isShort, startTimeParam);
 						}
 					}
 
@@ -311,7 +337,12 @@ relatedPosts = relatedPosts
 						if (rawMatch) {
 							const videoId = rawMatch[1];
 							const isShort = text.includes('/shorts/');
-							handleYouTubeEmbed(p, videoId, isShort);
+							
+							// Find the exact matched URL substring to extract parameters
+							const matchedUrl = text.match(/https?:\/\/[^\s<]+/);
+							const startTimeParam = matchedUrl ? extractStartTime(matchedUrl[0]) : '';
+							
+							handleYouTubeEmbed(p, videoId, isShort, startTimeParam);
 						}
 					}
 
