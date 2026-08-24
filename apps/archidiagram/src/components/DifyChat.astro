@@ -1,0 +1,72 @@
+﻿---
+// Dify AI Chat Widget Component
+---
+
+<!-- Dify AI Chat Widget -->
+<div id="main-ai-chat-window" class="hidden fixed bottom-20 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[420px] h-[580px] max-h-[82vh] z-50 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
+    <!-- Header -->
+    <div class="px-4 py-3 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+        <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm border border-amber-500/30">
+                <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="Febhouse" class="w-5 h-5 object-contain" />
+            </div>
+            <div>
+                <div class="text-sm font-bold leading-tight">Febhouse AI Assistant</div>
+                <div class="text-[11px] text-emerald-400 flex items-center gap-1.5 font-medium">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online 24/7
+                </div>
+            </div>
+        </div>
+        <button type="button" onclick="window.toggleMainAiChat()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer" aria-label="Close AI Chat">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+    </div>
+
+    <!-- Lazy-Loaded Iframe -->
+    <div class="flex-1 w-full h-full bg-slate-950">
+        <iframe
+            id="main-ai-iframe"
+            data-src="https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx"
+            src="about:blank"
+            class="w-full h-full border-0"
+            allow="microphone; clipboard-write"
+            title="Febhouse AI Chat"
+        ></iframe>
+    </div>
+</div>
+
+<!-- Floating Action Button -->
+<button 
+    id="global-ai-floating-btn"
+    type="button"
+    onclick="window.toggleMainAiChat()"
+    aria-label="Open Febhouse AI Chat"
+    class="group flex items-center gap-2.5 fixed bottom-6 right-6 z-50 px-4 py-3 rounded-full bg-slate-900 dark:bg-amber-500 text-white dark:text-slate-950 font-bold text-sm shadow-2xl hover:scale-105 active:scale-95 transition-all border border-slate-700 dark:border-amber-400 cursor-pointer"
+>
+    <span class="relative flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+    </span>
+    <svg class="w-5 h-5 text-amber-400 dark:text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+    <span class="tracking-wide">Ask Feb AI</span>
+</button>
+
+<script is:inline>
+window.toggleMainAiChat = function() {
+	const win = document.getElementById('main-ai-chat-window');
+	const iframe = document.getElementById('main-ai-iframe');
+	if (win) {
+		if (win.classList.contains('hidden')) {
+			if (iframe && (!iframe.src || iframe.src.includes('about:blank'))) {
+				iframe.src = iframe.getAttribute('data-src') || '';
+			}
+			win.classList.remove('hidden');
+			win.classList.add('flex');
+		} else {
+			win.classList.add('hidden');
+			win.classList.remove('flex');
+		}
+	}
+};
+</script>
+

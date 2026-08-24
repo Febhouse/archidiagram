@@ -1,4 +1,4 @@
----
+﻿---
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
@@ -42,110 +42,6 @@ const { title, description, heroImage, difyChatUrl, botName = "AI Assistant" } =
 			</div>
 		</main>
 
-		<!-- Dify AI Assistant Floating Widget (If provided for the page) -->
-		{difyChatUrl && (
-			<aside aria-label="AI Chat Assistant">
-				<!-- Floating Trigger Button -->
-				<div class="fixed bottom-6 right-6 z-40">
-					<button
-						id="ai-chat-toggle-btn"
-						type="button"
-						aria-label={`Chat with ${botName}`}
-						class="group flex items-center gap-2.5 px-4 py-3 rounded-full bg-slate-900 dark:bg-amber-500 text-white dark:text-slate-950 font-bold text-sm shadow-2xl hover:scale-105 active:scale-95 transition-all border border-slate-700 dark:border-amber-400 cursor-pointer"
-					>
-						<span class="relative flex h-3 w-3">
-							<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-							<span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-						</span>
-						<svg class="w-5 h-5 text-amber-400 dark:text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-						</svg>
-						<span class="tracking-wide">Ask {botName}</span>
-					</button>
-				</div>
-
-				<!-- AI Chat Modal Window -->
-				<div
-					id="ai-chat-modal"
-					class="hidden fixed bottom-20 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[420px] h-[580px] max-h-[82vh] z-50 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200"
-				>
-					<!-- Chat Header -->
-					<div class="px-4 py-3 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
-						<div class="flex items-center gap-2.5">
-							<div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm border border-amber-500/30">
-								🤖
-							</div>
-							<div>
-								<div class="text-sm font-bold leading-tight">{botName}</div>
-								<div class="text-[11px] text-emerald-400 flex items-center gap-1.5 font-medium">
-									<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online 24/7
-								</div>
-							</div>
-						</div>
-						<div class="flex items-center gap-1">
-							<!-- Close Button -->
-							<button
-								id="ai-chat-close-btn"
-								type="button"
-								aria-label="Close AI Chat"
-								class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
-							>
-								<svg class="w-5 h-5 fill-none" viewBox="0 0 24 24" stroke="currentColor">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-								</svg>
-							</button>
-						</div>
-					</div>
-
-					<!-- Iframe Container -->
-					<div class="flex-1 w-full h-full bg-slate-900">
-						<iframe
-							src={difyChatUrl}
-							class="w-full h-full border-0"
-							allow="microphone; clipboard-write"
-							title={`${botName} Webchat`}
-						></iframe>
-					</div>
-				</div>
-
-				<script is:inline>
-					window.openLandingAiChat = function() {
-						const chatModal = document.getElementById('ai-chat-modal');
-						if (chatModal) {
-							chatModal.classList.remove('hidden');
-							chatModal.classList.add('flex');
-						}
-					};
-
-					window.closeLandingAiChat = function() {
-						const chatModal = document.getElementById('ai-chat-modal');
-						if (chatModal) {
-							chatModal.classList.add('hidden');
-							chatModal.classList.remove('flex');
-						}
-					};
-
-					const toggleBtn = document.getElementById('ai-chat-toggle-btn');
-					const closeBtn = document.getElementById('ai-chat-close-btn');
-					const chatModal = document.getElementById('ai-chat-modal');
-
-					if (toggleBtn && chatModal) {
-						toggleBtn.addEventListener('click', () => {
-							const isHidden = chatModal.classList.contains('hidden');
-							if (isHidden) {
-								window.openLandingAiChat();
-							} else {
-								window.closeLandingAiChat();
-							}
-						});
-					}
-
-					if (closeBtn && chatModal) {
-						closeBtn.addEventListener('click', window.closeLandingAiChat);
-					}
-				</script>
-			</aside>
-		)}
 
 		<Footer />
 	</body>
