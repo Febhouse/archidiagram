@@ -35,7 +35,7 @@ We provide **site-specific analytical diagrams**, including:
 
 https://www.youtube.com/watch?v=H99ZyHeyzgg
 
-### **1. Site &amp; Context Analysis Diagrams**
+### **1. Site & Context Analysis Diagrams**
 
 For architects, engineers, and students who need clear site analysis diagrams to support design development and presentations
 
@@ -49,7 +49,7 @@ For architects, engineers, and students who need clear site analysis diagrams to
 
 https://www.youtube.com/watch?v=Iqnq-_WzxZY
 
-### **2. Sun &amp; Shadow Impact Analysis**
+### **2. Sun & Shadow Impact Analysis**
 
 For shadow studies, sunlight verification, and neighboring impact checks  
 between existing or proposed buildings.
@@ -112,7 +112,7 @@ Final pricing depends on:
 
 🎓 **Academic projects** may be eligible for a reduced rate upon request.
 
-## Tools &amp; Methods
+## Tools & Methods
 
 We work primarily with:
 
@@ -134,13 +134,13 @@ This ensures consistency between **custom services, plugins, and tutorials**.
 
 Choose the service that best fits your case and view full details on Fiverr.
 
-### **Site &amp; Context Analysis Diagrams**
+### **Site & Context Analysis Diagrams**
 
 For architects, engineers, and students who need clear site analysis diagrams to support design development and presentations
 
  [ 👉 View Site Analysis Service ](https://www.fiverr.com/s/99DybaE)
 
-### **Sun &amp; Shadow Impact Analysis**
+### **Sun & Shadow Impact Analysis**
 
 For shadow studies, sunlight verification, and neighboring impact checks  
 between existing or proposed buildings.

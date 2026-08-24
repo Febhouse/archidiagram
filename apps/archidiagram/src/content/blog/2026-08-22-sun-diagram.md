@@ -4,7 +4,7 @@ description: 'Sun Diagram is an extension for creating 3D sun paths and analyzin
 pubDate: 2026-06-19
 heroImage: '/images/2026/01/SHADOWANALYSIS-DEC-CROPlogo.gif'
 tags: 'other resources'
-Software: 'SketchUp, Sun Diagram'
+software: 'SketchUp, Sun Diagram'
 ---
 
 <div class="space-y-12">
