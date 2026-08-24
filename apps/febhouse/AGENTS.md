@@ -91,7 +91,7 @@ This document contains **mandatory design, architectural, UI/UX, and performance
       <div class="px-4 py-3 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
           <div class="flex items-center gap-2.5">
               <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm border border-amber-500/30">
-                  ðŸ¤–
+                  <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="Febhouse" class="w-5 h-5 object-contain" />
               </div>
               <div>
                   <div class="text-sm font-bold leading-tight">Febhouse AI Assistant</div>
@@ -177,4 +177,5 @@ npm run build
 # Preview build output locally
 npm run preview
 ```
+
 
