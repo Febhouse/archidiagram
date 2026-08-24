@@ -44,4 +44,4 @@ Want to see how it's done up close? Download the project files below to study th
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1ckkeil1ckeph0-uYqo3r7qdJmKxl9gOJ/view?usp=sharing)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/PROJECT-20.zip)

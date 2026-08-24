@@ -38,6 +38,6 @@ Ready to test the workflow? Download the practice file below!
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1VDGKef89C7GqooIg1HhXoXckiFBEkgu2/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-64.zip)
 
 *(Looking for a detailed, step-by-step explanation of this process? Check out our complete, in-depth guide here: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*

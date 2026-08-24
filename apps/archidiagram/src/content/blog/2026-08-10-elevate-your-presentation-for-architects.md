@@ -30,4 +30,4 @@ I’ve prepared a **Sample File** with scenes set up exactly like in the video. 
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1Vv63zkY2UfAqRnAWVG0KNTomEI5EgvdZ/view?usp=sharing)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-68.zip)

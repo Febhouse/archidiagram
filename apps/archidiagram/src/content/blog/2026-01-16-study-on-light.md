@@ -78,4 +78,4 @@ Ready to explore the setup? Download the free files below to test this workflow 
 
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/StudyonLight)
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1iPab36LC7bp9PGSYXohaV_M7yIYOu-XS/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-53.zip)

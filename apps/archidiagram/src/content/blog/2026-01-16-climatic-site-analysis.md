@@ -75,4 +75,4 @@ Grab the free files below, explore how it's built, and start applying this analy
 
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/ClimaticSiteAnalysis)
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1IcnrSgkGk2hCTk-0cKUdBDkd57BQB0mU/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-57.zip)

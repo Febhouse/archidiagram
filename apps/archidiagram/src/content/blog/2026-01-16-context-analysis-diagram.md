@@ -64,4 +64,4 @@ Grab the free files below, see how the layers are organized, and elevate your ne
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1ozEjVJCJ9bu25QyR_U5DmYgndDq2gKlk/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-45.zip)

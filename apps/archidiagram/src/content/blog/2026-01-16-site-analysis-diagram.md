@@ -65,6 +65,6 @@ Grab the free files below, see how we set up the scenes, and start applying this
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these resources helpful and would like to support my work, you can download them via **Gumroad** (where you can enter $0 or leave a small tip).*
 
-[ Free download via Gumroad ](https://febhouse.gumroad.com/l/siteanalysisdiagram)
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/siteanalysisdiagram)
 
-[ Free download via GoogleDrive ](https://drive.google.com/file/d/1tFJwEeHvYaM4mX1yAf1NBrzBrOcwU-Kx/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-54.zip)

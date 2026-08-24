@@ -56,6 +56,6 @@ Want to see exactly how this was set up? Download the project files below!
 
 [ DOWNLOAD VIA KO-FI ](https://ko-fi.com/s/a57775d8de)
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1KVavjTr0iVqXTD6X2wOQ93-1cH6mXOTN/view?usp=sharing)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-25.zip)
 
 *(Need a detailed, step-by-step tutorial on this process? Check out our complete guide here: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*

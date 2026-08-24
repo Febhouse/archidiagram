@@ -75,4 +75,4 @@ Want to test this workflow yourself? Download the sample package below, which in
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1LtHLwwd4DYkkWW9o_3FCB_geAA7UWD3t/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/AI_SAMPLE-01.zip)

@@ -64,4 +64,4 @@ Use this sample as a template to dramatically improve your site analysis present
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1IbbC2_-j2OxL0TLSu0EdeR_Ml5xZ7m3Y/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-42.zip)

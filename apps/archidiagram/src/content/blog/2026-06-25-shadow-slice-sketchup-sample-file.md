@@ -41,4 +41,4 @@ You can download the exact SketchUp file used in the video to test out the secti
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1DWZsYMcOYTB3tna5SVwwHoAXHzEBnWf9/view?usp=sharing)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-66.zip)

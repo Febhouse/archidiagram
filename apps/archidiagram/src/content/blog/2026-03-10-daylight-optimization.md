@@ -64,4 +64,4 @@ Grab the free files below, see how we set up the lighting, and learn how to deli
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1PnRp2kIH-0wDbFdAnsZoWTW4CIUfOgOj/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-63.zip)

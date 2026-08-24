@@ -64,4 +64,4 @@ Grab the free files below, see how the 3D layers are built, and apply this techn
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1l3VbL50LbivoaL7pIgaRwkAomaCNGJdp/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-39.zip)

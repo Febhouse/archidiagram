@@ -67,4 +67,4 @@ Grab the free files below to practice your interior lighting analysis and delive
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1GMaF4aaPdJk5j0mmoVWBHFxnl9o5jZ5W/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-62.zip)

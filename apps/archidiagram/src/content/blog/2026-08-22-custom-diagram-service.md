@@ -58,7 +58,7 @@ between existing or proposed buildings.
 - 3D reconstruction of existing buildings for shadow verification
 - Mutual shadow impact checks between neighboring buildings
 
-**[🗃 Download the sample files and source files.](https://drive.google.com/file/d/1IpG-AffarUWEORplsmTQkJhL3luif14Y/)**
+**[🗃 Download the sample files and source files.](https://assets.archidiagram.com/Samples/SUN-SHADOW-ANALYSIS.zip)**
 
 **[👉 View Shadow Analysis Service](https://www.fiverr.com/s/m5GjQGb)**
 

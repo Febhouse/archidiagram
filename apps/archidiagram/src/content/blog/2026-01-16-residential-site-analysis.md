@@ -77,4 +77,4 @@ Use this file as a template for your next housing project to impress clients wit
 
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Residential-Site-Analysis)
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1BP_zVVyVhKxq1bKKTIlBXJHcmWZpK7MQ/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-56.zip)

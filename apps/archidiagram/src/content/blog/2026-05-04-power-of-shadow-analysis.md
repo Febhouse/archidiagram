@@ -57,4 +57,4 @@ Ready to explore the setup? Download the free files below to test this workflow 
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1IpG-AffarUWEORplsmTQkJhL3luif14Y/)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SUN-SHADOW-ANALYSIS.zip)

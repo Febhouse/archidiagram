@@ -38,4 +38,4 @@ Explore the file, dissect the layers, and see exactly how these extensions inter
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1glwJknZKhMhIoJMQNP-o4CyF34vOskGu/view?usp=sharing)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-65.zip)

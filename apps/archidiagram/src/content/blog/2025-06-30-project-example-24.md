@@ -51,6 +51,6 @@ Want to dissect the layers and see how it works? Download the free project file 
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1I_XNZyIYHThu1E77xCRhhb3GscQjzFR1/view?usp=sharing)
+[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-24.zip)
 
 *(Need a step-by-step tutorial on this workflow? Check out our updated guide: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*
