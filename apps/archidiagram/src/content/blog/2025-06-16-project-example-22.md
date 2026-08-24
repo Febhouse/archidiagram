@@ -7,56 +7,43 @@ tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
 
-# Climatic Analysis Diagram – Combining Sun Path and Passive Design Strategy
+# Climatic Analysis Diagram – Combining Sun Path and Passive Design Strategies
 
- https://www.youtube.com/watch?v=owC8izwrK0g
+https://www.youtube.com/watch?v=owC8izwrK0g
 
 ## What is Climatic Analysis in Architecture?
 
-**Climatic Analysis** is a method of studying a site's climate conditions — such as sun direction, wind flow, temperature patterns, and humidity — to inform design decisions that enhance comfort, reduce energy use, and respond to local environmental challenges.
+**Climatic Analysis** is the study of a site's environmental conditions—like sun direction, wind flow, temperature, and humidity. We use this data to make design decisions that enhance comfort, reduce energy use, and respond to local challenges.
 
-Instead of forcing a building to fight against nature, we design to work **with** it. That’s the principle behind **passive design**, and climatic analysis is its foundation.
+Instead of forcing a building to fight against nature, we design to work **with** it. That’s the core principle of **passive design**, and a solid climatic analysis is its foundation.
 
-In this article, I’ll show how I created a **Climatic Analysis Diagram** using the **Sun Diagram plugin** and **Dynamic Symbols** — all inside **SketchUp**. This method is fast, visual, and ideal for early design stages.
+In this sample project (Project 22), I’ll show you how I built a 3D **Climatic Analysis Diagram** using the **Sun Diagram** and **Dynamic Symbols** plugins—all entirely inside SketchUp. This method is incredibly fast, highly visual, and perfect for early design stages.
 
  ![Climatic Analysis Diagram](/images/2025/06/THUNGNAI-2-1920-1.jpg)
 
-## Tools Used
+## The Tools Used
 
-- To build the diagram shown in this post, I used two key tools inside **SketchUp**:
-    
-    
-    - **Sun Diagram** (SketchUp Plugin):  
-        This plugin lets you generate accurate **sun path** and **shadow analysis** for any time and date. It helps visualize how sunlight affects the site and nearby buildings — essential for context awareness and passive design decisions.
-    
-    User guide for Sun Diagram is available here: <https://sundiagram.com/sun-diagram>
-    
-    
-    - **Dynamic Symbols** (SketchUp Plugin):  
-        Dynamic Symbols is a SketchUp plugin that allows you to create animated symbols and switch between different states with just one click.
-    
-    User guide for Dynamic Symbols is available here: <https://sundiagram.com/dynamic-symbols/>
-    
-    
-    - Both tools are designed to speed up the diagramming process while keeping your presentation clear and professional.
+To build the diagram shown in the video, I relied on two specialized SketchUp plugins:
+
+- **[Sun Diagram](https://sundiagram.com/sun-diagram):** Generates an accurate 3D sun path and shadow analysis for any time and date. It visually proves how sunlight affects the site and nearby buildings—essential data for passive design.
+- **[Dynamic Symbols](https://sundiagram.com/dynamic-symbols/):** Drops in animated 3D symbols (like wind arrows) that you can toggle and adjust with a single click.
+
+Both tools are designed to speed up the diagramming process while keeping your presentations clean and professional.
 
  ![Climatic Analysis Diagram-2](/images/2025/06/THUNGNAI-4-1920-1.jpg)
 
 ## Final Thoughts
 
-Understanding your site’s climate is not just good design — it’s essential for creating spaces that are healthy, energy-efficient, and responsive.  
-With **Sun Diagram** and **Dynamic Symbols**, you can analyze, visualize, and communicate climate strategies early — without needing complex software.
+Understanding your site’s climate isn't just good design—it’s mandatory for creating spaces that are healthy and energy-efficient. With **Sun Diagram** and **Dynamic Symbols**, you can visualize and communicate these strategies early, without ever needing complex external software.
 
-This approach is perfect for students, professionals, and firms looking to **upgrade their site analysis workflow**.
+This approach is perfect for students, professionals, and firms looking to seriously upgrade their site analysis workflow.
 
-More diagram templates and tutorials are coming soon — stay tuned!
+## Download Project Files
 
-## Download project files
+Want to dissect the layers and see how it works? Download the free project file below!
 
-You can download the project file from the link:
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
- [ Free download via GoogleDrive ](https://drive.google.com/file/d/1m20DAgQfrqabOHZD53lYrpg8NVXyk6S1/view?usp=sharing)
+[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1m20DAgQfrqabOHZD53lYrpg8NVXyk6S1/view?usp=sharing)
 
-## Step-by-Step Guide: Create Architectural Diagrams Using SketchUp
-
-/create-architectural-diagrams-using-sketchup/
+*(Need a step-by-step tutorial on this workflow? Check out our updated guide: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*

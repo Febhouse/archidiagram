@@ -7,46 +7,45 @@ tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
 
-# Free Download – Project Sample for Site Diagram, 3D Sun Path &amp; Symbols
+# Free Download – Project Sample for Site Diagram, 3D Sun Path & Symbols
 
 https://www.youtube.com/watch?v=y4_BT6MSDm4
 
-## FREE Project Sample that includes:
+## What's Included in This Free Sample?
 
-- **Site Diagram** – Clear, well-structured layout, easy to customize for any project.
-- **3D Sun Path** – Created with the **Sun Diagram Plugin**, visualizing sunlight and shadow at different times of the day.
-- **3D Symbols** – A professional set of diagram symbols made with the **Dynamic Symbols Plugin**, making your drawings both beautiful and technically accurate.
+This sample project (Project 26) provides a complete, ready-to-use SketchUp setup for environmental site analysis. It includes:
+
+- **Site Diagram:** A clean, well-structured layout that you can easily customize for your own projects.
+- **3D Sun Path:** Generated using the **Sun Diagram Plugin** to visualize exactly how sunlight and shadows behave across different times of the day.
+- **3D Symbols:** A professional set of diagram symbols made with the **Dynamic Symbols Plugin**, ensuring your drawings are both beautiful and technically accurate.
 
  ![Project Sample for Site Diagram](/images/2025/08/STYLE-06-scaled-1.jpg)
 
-## Tools Used in This Project 
+## The Tools Used in This Project 
 
-To build the diagram shown in this post, I used two key tools inside **SketchUp**:
+To build the diagram shown in the video, I relied on two specialized SketchUp plugins:
 
-- **Sun Diagram** (SketchUp Plugin):  
-    This plugin lets you generate accurate **sun path** and **shadow analysis** for any time and date. It helps visualize how sunlight affects the site and nearby buildings — essential for context awareness and passive design decisions. User guide for Sun Diagram is available here: <https://sundiagram.com/sun-diagram>
-- **Dynamic Symbols** (SketchUp Plugin):  
-    Dynamic Symbols is a SketchUp plugin that allows you to create animated symbols and switch between different states with just one click. User guide for Dynamic Symbols is available here: <https://sundiagram.com/dynamic-symbols/>
-- Both tools are designed to speed up the diagramming process while keeping your presentation clear and professional. Download plugins for free here:
+- **[Sun Diagram](https://sundiagram.com/sun-diagram):** Generates an accurate 3D sun path and shadow analysis for any time and date. It visually proves how sunlight affects the site and nearby buildings—essential data for context awareness and passive design.
+- **[Dynamic Symbols](https://sundiagram.com/dynamic-symbols/):** Drops in animated 3D symbols that you can toggle and adjust with a single click.
 
-[ Free download Sun Diagram ](https://extensions.sketchup.com/extension/5aa1ab3d-36ff-4510-ae63-84f677a36f3a/sun-diagram)
+Both tools are designed to speed up the diagramming process while keeping your presentations clean and professional. 
 
-[ Free download Dynamic Symbols plugin ](https://extensions.sketchup.com/extension/21085584-a984-474d-8407-33087adec402/dynamic-symbols)
+> **Get Started:** Both plugins are available for free on the SketchUp Extension Warehouse!
+> - [ Free download Sun Diagram ](https://extensions.sketchup.com/extension/5aa1ab3d-36ff-4510-ae63-84f677a36f3a/sun-diagram)
+> - [ Free download Dynamic Symbols plugin ](https://extensions.sketchup.com/extension/21085584-a984-474d-8407-33087adec402/dynamic-symbols)
 
 ![](/images/2025/08/STYLE-02-scaled-1.jpg)
-
-## Download project files
-
-You can download the project file from the link:
-
- [ Free download via GoogleDrive ](https://drive.google.com/file/d/1e7gfZu31thPHF1zzEcyzpuYbSWmyOXlO/view?usp=drive_link)
 
 ## Final Thoughts 
 
 If you're an architect, designer, or student looking to upgrade your diagramming workflow, try combining **Sun Diagram** with **Dynamic Symbols**. They’re lightweight, flexible, and perfect for producing high-quality visuals right inside SketchUp.
 
-If you found this useful, feel free to share or tag me. More diagram templates and tutorials are coming soon!
+## Download Project Files
 
-## Step-by-Step Guide: Create Architectural Diagrams Using SketchUp
+Want to dissect the layers and see how it works? Download the free project file below!
 
-- [/create-architectural-diagrams-using-sketchup/](/create-architectural-diagrams-using-sketchup/)
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
+
+[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1e7gfZu31thPHF1zzEcyzpuYbSWmyOXlO/view?usp=drive_link)
+
+*(Need a step-by-step tutorial on this workflow? Check out our updated guide: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*

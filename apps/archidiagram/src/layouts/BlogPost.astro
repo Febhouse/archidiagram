@@ -85,6 +85,22 @@ if (relatedPosts.length < 3) {
 relatedPosts = relatedPosts
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
+
+// Prepare JSON-LD Schema
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description || title,
+  "image": heroImage ? new URL(heroImage, Astro.site).toString() : '',
+  "datePublished": pubDate.toISOString(),
+  "dateModified": (updatedDate || pubDate).toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": "Nam Nguyen",
+    "url": "https://archidiagram.com"
+  }
+};
 ---
 
 <!doctype html>
@@ -109,6 +125,7 @@ relatedPosts = relatedPosts
 				background: transparent !important;
 			}
 		</style>
+		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 	</head>
 	<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-amber-500/20 selection:text-amber-700 transition-colors duration-300">
 		<Header />

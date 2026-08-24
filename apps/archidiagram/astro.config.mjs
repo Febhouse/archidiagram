@@ -9,7 +9,7 @@ import partytown from '@astrojs/partytown';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://archidiagram.com',
   redirects: {
     '/dynamic-symbols-for-architectural-diagram': '/dynamic-symbols',
     '/3d-symbol': '/dynamic-symbols',

@@ -9,7 +9,7 @@ software: 'SketchUp, Adobe Photoshop'
 
 # Sample Project: Sunlight Analysis Video
 
-Test the workflow. Check compatibility. See the final result.
+Test the workflow, check compatibility, and see exactly how the final result was made.
 
 https://www.youtube.com/watch?v=SRIVfQLtsqw
 
@@ -17,47 +17,44 @@ https://www.youtube.com/watch?v=SRIVfQLtsqw
 
 This page provides the **source project files** used to create the sunlight analysis video shown above.
 
-The finished result is presented in the video, while this download gives you access to the **original SketchUp source files** behind that process.
+The finished result is in the video, but this download gives you access to the **original SketchUp source files** so you can look under the hood.
 
 Use these files to:
+- Explore the project setup behind the final video.
+- Test out the Sun Diagram plugin on your own SketchUp environment.
+- Reuse or adapt the workflow for your own projects.
 
-- Explore the project setup behind the final video
-- Test Sun Diagram on your own SketchUp
-- Reuse or adapt the workflow for your own projects
-
-👉 **To use the diagram features shown in these source files, you’ll need to install the Sun Diagram plugin.**  
-The free version is available on the SketchUp Extension Warehouse or at SunDiagram.com.
+> **Get Started:** To use the advanced diagram features shown in these source files, you’ll need to install the **Sun Diagram** plugin. A free version is available on the SketchUp Extension Warehouse or at [SunDiagram.com](https://sundiagram.com).
 
 ## Preview: Final Result
 
-The video above shows the **finished sunlight analysis output** created from this sample project.
+The video above showcases the **finished sunlight analysis output** created directly from this sample project.
 
 ## Workflow Overview
 
-This sample follows a straightforward workflow commonly used for sunlight and shadow visualization:
+This sample follows a straightforward workflow used for sunlight and shadow visualization:
 
-1. **Generate a 3D Sun Path** using the Sun Diagram plugin
-2. **Export key shadow frames** from SketchUp
-3. **Assemble images into a short animation**
-4. **Final edit** for presentation (timing, layout, transitions)
+1. **Generate a 3D Sun Path** using the Sun Diagram plugin.
+2. **Export key shadow frames** from SketchUp.
+3. **Assemble images into a short animation.**
+4. **Final edit** for presentation (timing, layout, transitions).
 
-This page focuses on the **source files**, not detailed instructions.
+*(Note: This page focuses on providing the **source files**, not detailed step-by-step instructions).*
 
-👉 A full step-by-step tutorial is available here: Updating...
+👉 Need the full tutorial? **[Check out the step-by-step guide here](/create-architectural-diagrams-updated-workflow-aug-2025/)**
 
 ## What this sample includes
 
-✔ Prepared SketchUp project file  
-✔ Photoshop source file  
-✔ Workflow overview (PDF)
+- ✔ Prepared SketchUp project file  
+- ✔ Photoshop source file  
+- ✔ Workflow overview (PDF)
 
 ## Download Sample Project Files
 
-🔽 **Download options:**
+Grab the free files below, dissect the layers, and start applying this technique to your own presentations!
 
- [ Free download via Gumroad ](https://febhouse.gumroad.com/l/sunlightanalysis)Or
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these resources helpful and would like to support my work, you can download them via **Gumroad** (where you can enter $0 or leave a small tip).*
 
- [ Free download via GoogleDrive ](https://drive.google.com/file/d/1mv38bJnog3wp1HRpImHbinuK6kZpRihw/view)On Gumroad, simply enter **$0** in the “Name a fair price” box to download for free.  
-(No bank or card information required.)
+[ Free download via Gumroad ](https://febhouse.gumroad.com/l/sunlightanalysis)
 
-If you want to support me, you can enter any amount you wish. Thank you!
+[ Free download via GoogleDrive ](https://drive.google.com/file/d/1mv38bJnog3wp1HRpImHbinuK6kZpRihw/view)

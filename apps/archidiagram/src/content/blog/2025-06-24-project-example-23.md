@@ -5,72 +5,55 @@ pubDate: '2025-06-24T20:34:35+07:00'
 heroImage: '/images/2025/06/58-2B-600x600-1.jpg'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
-
 ---
 
-# Site Context Mapping with Dynamic Symbols in SketchUp – Fast &amp; Flexible Diagramming 
+# Site Context Mapping with Dynamic Symbols in SketchUp – Fast & Flexible Diagramming 
 
- https://www.youtube.com/watch?v=PxbwlZcXd4U
+https://www.youtube.com/watch?v=PxbwlZcXd4U
 
 ## Why Site Context Mapping Is Important
 
-Every project begins with a **place** — and understanding that place is essential to designing something meaningful.  
-**Site Context Mapping** is the process of identifying and visualizing what surrounds your project site: adjacent buildings, roads, open spaces, traffic, public infrastructure, views, and even local activities.
+Every project begins with a **place**—and understanding that place is essential to designing something meaningful.  
+**Site Context Mapping** is how we visualize what surrounds a project: adjacent buildings, roads, open spaces, traffic, public infrastructure, and views.
 
-Without a clear context diagram, your design risks becoming isolated or disconnected.  
-With the right tools, creating one can be quick, precise, and visually compelling.
+Without a clear context diagram, your design risks feeling isolated or disconnected. With the right tools, creating one is quick, precise, and visually compelling.
 
-In this post, I’ll walk you through how I created a **Site Context Map** using only **SketchUp**, the **Sun Diagram plugin**, and a file of **Dynamic Symbols**.
+In this sample project (Project 23), I’ll walk you through how I built a 3D **Site Context Map** using only **SketchUp**, the **Sun Diagram plugin**, and **Dynamic Symbols**.
 
  ![Site Context Mapping-2](/images/2025/06/58-3-5.jpg) ![Site Context Mapping](/images/2025/06/58-3B-9.jpg)
 
-## Tools Used in the Diagram
+## The Tools Used in the Diagram
 
-- To build the diagram shown in this post, I used two key tools inside **SketchUp**:
-    
-    
-    - **Sun Diagram** (SketchUp Plugin):  
-        This plugin lets you generate accurate **sun path** and **shadow analysis** for any time and date. It helps visualize how sunlight affects the site and nearby buildings — essential for context awareness and passive design decisions.
-    
-    User guide for Sun Diagram is available here: <https://sundiagram.com/sun-diagram>
-    
-    
-    - **Dynamic Symbols** (SketchUp Plugin):  
-        Dynamic Symbols is a SketchUp plugin that allows you to create animated symbols and switch between different states with just one click.
-    
-    User guide for Dynamic Symbols is available here: <https://sundiagram.com/dynamic-symbols/>
-    
-    
-    - Both tools are designed to speed up the diagramming process while keeping your presentation clear and professional.
+To build the diagram shown in the video, I relied on two specialized SketchUp plugins:
 
-## Step-by-Step Guide: Create Architectural Diagrams Using SketchUp
+- **[Sun Diagram](https://sundiagram.com/sun-diagram):** Generates an accurate 3D sun path and shadow analysis for any time and date. It visually proves how sunlight affects the site and nearby buildings—essential data for context awareness and passive design.
+- **[Dynamic Symbols](https://sundiagram.com/dynamic-symbols/):** Drops in animated 3D symbols (like wind arrows or zoning markers) that you can toggle and adjust with a single click.
 
-- [/create-architectural-diagrams-using-sketchup/](/create-architectural-diagrams-using-sketchup/)
+Both tools speed up the diagramming process while keeping your presentations clean and professional.
 
 ## Benefits of This Workflow
 
-- **Efficient:** Built entirely in SketchUp, from modeling to layout
-- **Editable:** Symbols and layers stay dynamic and reusable
-- **Professional:** Great for reports, permits, or design presentations
-- **Visual:** Helps clients and stakeholders immediately understand the site’s context
-
-## Download project files
-
-You can download the project file from the link:
-
- [ Free download via Gumroad ](https://febhouse.gumroad.com/l/siteanalysis-23)Or
-
- [ Free download via Ko-fi ](https://ko-fi.com/s/001767805a)In Gumroad, you just need to enter **0$** in the “**Name a fair price:**” box and you’ll be able to **download it for free** (You won’t need to enter any bank account information)
-
-If you want to support me, you can enter any amount you wish. Thank you!
-
- [ Free download via GoogleDrive ](https://drive.google.com/file/d/1jP5sX8h-AQGZFbyHu6rBsTZy81YdnA3V/view?usp=sharing)
+- **Efficient:** Built entirely in SketchUp, from modeling to layout.
+- **Editable:** Symbols and layers stay dynamic and reusable.
+- **Professional:** Perfect for reports, council permits, or design presentations.
+- **Visual:** Helps clients and stakeholders immediately understand the site’s context.
 
 ## Final Thoughts
 
-Understanding the surrounding context is not just a technical step — it’s where good design begins.  
-By combining **Sun Diagram** and **Dynamic Symbols** in SketchUp, you can build strong, clear, and compelling diagrams with minimal effort.
+Understanding the surrounding context isn't just a technical step—it’s where good design begins. By combining **Sun Diagram** and **Dynamic Symbols** in SketchUp, you can build strong, clear, and compelling diagrams with minimal effort.
 
-Use this method early in your process to unlock deeper design thinking — and communicate it with confidence.
+Use this method early in your process to unlock deeper design thinking and communicate it with total confidence.
 
-More templates and workflow guides coming soon!
+## Download Project Files
+
+Want to dissect the layers and see how it works? Download the free project file below!
+
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these resources helpful and would like to support my work, you can download them via **Gumroad** or **Ko-fi** (where you can enter $0 or leave a small tip).*
+
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/siteanalysis-23)
+
+[ DOWNLOAD VIA KO-FI ](https://ko-fi.com/s/001767805a)
+
+[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1jP5sX8h-AQGZFbyHu6rBsTZy81YdnA3V/view?usp=sharing)
+
+*(Need a step-by-step tutorial on this workflow? Check out our updated guide: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*

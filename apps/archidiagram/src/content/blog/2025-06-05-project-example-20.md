@@ -9,36 +9,39 @@ software: 'Sun Diagram, Dynamic Symbols, Photoshop'
 
 # How to Create a Site Analysis Video with Sun Diagram, Photoshop, and CapCut
 
- https://www.youtube.com/watch?v=lg9PcXtOMtU
+Want to create an animated Site Analysis video like the one below? This sample project (Project 20) walks you through the exact pipeline I use, from SketchUp to the final CapCut edit.
 
-## 🔹 Step 1: Create a 3D Sun Path using the Sun Diagram plugin 
+https://www.youtube.com/watch?v=lg9PcXtOMtU
 
-Use the **Sun Diagram** plugin to generate a 3D visualization of the sun’s path in your architectural model.  
-👉 You can download the plugin here: <https://sundiagram.com/sun-diagram>
+## 🔹 Step 1: Create a 3D Sun Path 
 
-## 🔹 Step 2: Put the symbols
+First, use the **Sun Diagram** plugin to generate a highly accurate 3D visualization of the sun’s path right over your architectural model.  
+👉 Download the plugin here: [sundiagram.com/sun-diagram](https://sundiagram.com/sun-diagram)
 
-Using Dynamic symbols, you can easily download it for free here: /dynamic-symbols-for-architectural-diagram/
+## 🔹 Step 2: Add Your Symbols
 
-or use the Dynamic Symbols plugin to create 3D symbols User guide for Dynamic Symbols is available here: <https://sundiagram.com/dynamic-symbols/>
+Next, drop in your wind arrows, pedestrian markers, and access nodes.
+- You can use our free static [Dynamic Symbols](/dynamic-symbols-for-architectural-diagram/).
+- Or, use the full **Dynamic Symbols Plugin** to create advanced 3D markers. (User guide: [sundiagram.com/dynamic-symbols](https://sundiagram.com/dynamic-symbols/))
 
-## 🔹 Step 3: Export images from Sun Diagram 
+## 🔹 Step 3: Export the Image Sequence
 
-Export images using the plugin Sun Diagram
+Use the export tools built into the Sun Diagram plugin to automatically export a sequence of images (shadow frames) as the sun moves across your site.
 
-## 🔹 Step 4: Combine images into a video using Photoshop 
+## 🔹 Step 4: Combine Images into a Video 
 
-I merged the images sequence into a video timeline.
+Open **Photoshop** (or any video tool like Premiere/After Effects) and merge the exported image sequence into a video timeline.  
+*(Not sure how? Here's a quick 1-minute guide on [how to combine images into a video](https://www.youtube.com/shorts/KE7OucYvafA)).*
 
-Instructions for combining images into a video here <https://www.youtube.com/shorts/KE7OucYvafA>
+## 🔹 Step 5: Final Polish in CapCut 
 
-## 🔹 Step 5: Final edit with CapCut 
+Finally, I import the raw video into **CapCut** for the finishing touches—adding background music, smooth transitions, text overlays, and final layout.  
+🎬 This is where everything comes together into a clear, engaging presentation!
 
-Finally, I imported the video into **CapCut** for clean editing — adding background music, smooth transitions, and final layout.  
-🎬 This is where the video comes together into a clear and engaging visual.
+## Download Project Files
 
-## 3. Download project files
+Want to see how it's done up close? Download the project files below to study the exact SketchUp setup.
 
-You can download the project file from the link:
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
- [ Free download via GoogleDrive ](https://drive.google.com/file/d/1ckkeil1ckeph0-uYqo3r7qdJmKxl9gOJ/view?usp=sharing)
+[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1ckkeil1ckeph0-uYqo3r7qdJmKxl9gOJ/view?usp=sharing)

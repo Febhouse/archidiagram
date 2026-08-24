@@ -9,28 +9,25 @@ software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 
 # Project example 68: Elevate Your Presentation for Architects with Sun Diagram & Shadow Slice ☀️
 
-Hi everyone,
+Thorough Site Analysis and sunlight studies are the core of any compelling **Architectural Presentation**. Today, I want to share an incredibly fast, intuitive workflow that happens entirely inside SketchUp.
 
-Conducting thorough Site Analysis and studying sunlight are core elements of creating a compelling **Presentation for Architects**. Today, I want to share a incredibly fast and intuitive workflow right inside SketchUp!
-
-![🎬](https://s.w.org/images/core/emoji/17.0.2/svg/1f3ac.svg) *In the short video below, I demonstrate how to combine these two tools to create professional **Architectural Diagrams** in just a few minutes:*
+*In the short video below, I demonstrate how to combine two powerful tools to create professional **Architectural Diagrams** in just a few minutes:*
 
  ![Presentation for Architects](/images/2026/08/elevate-presentation-sun-diagram-sketchup.jpg)
 
-## Why use Sun Diagram and Shadow Slice?
+## Why Use Sun Diagram and Shadow Slice?
 
-🔹 **Sun Diagram:** Helps you set up a 3D sun path diagram, accurately tracking the sunlight direction based on specific times and the real-world geographic location of your project.
+- **Sun Diagram:** Instantly generates a 3D sun path, accurately tracking sunlight direction based on real-world time and geography.
+- **Shadow Slice:** The perfect solution for analyzing how sunlight penetrates the *interior* of your building. It’s built specifically for generating rapid, accurate analytical **Shadow Diagrams** (no rendering required).
 
-🔹 **Shadow Slice:** The perfect solution for checking exactly how sunlight enters the *interior* of a building. This tool is designed specifically to help you generate analytical **Shadow Diagrams** quickly and accurately (Note: this tool is optimized for analytical diagrams, not for rendering).
-
-Combining this duo will add technical depth to your architectural analysis drawings while keeping them highly visual and easy to explain to clients or professors.
+Combining this duo adds serious technical depth to your analysis drawings, while keeping them highly visual and easy to explain to clients or professors.
 
 https://www.youtube.com/shorts/JREfPBkYxcE
 
-## Download Links: 🔗
+## Download Sample File
 
-🎁 **Try it yourself:** I’ve prepared a **Sample File** (with scenes set up exactly like in the video). You can download it to play around and experience how convenient these toolkits are!
+I’ve prepared a **Sample File** with scenes set up exactly like in the video. Download it below to play around and see just how fast this workflow really is!
 
-👉 Download the Sample File and Plugins:
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
- [ Free Download via Google Drive ](https://drive.google.com/file/d/1Vv63zkY2UfAqRnAWVG0KNTomEI5EgvdZ/view?usp=sharing)
+[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1Vv63zkY2UfAqRnAWVG0KNTomEI5EgvdZ/view?usp=sharing)

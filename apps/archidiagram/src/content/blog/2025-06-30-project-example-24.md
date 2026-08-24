@@ -6,63 +6,51 @@ heroImage: '/images/2025/06/SAMPLE-24-STYLE02-resized.jpg'
 tags: 'sample project'
 ---
 
-# Environmental Analysis in Architecture – Sun &amp; Wind Mapping Using SketchUp Tools 
+# Environmental Analysis in Architecture – Sun & Wind Mapping Using SketchUp Tools 
 
- https://www.youtube.com/watch?v=AtUqw1FCQHs
+https://www.youtube.com/watch?v=AtUqw1FCQHs
 
 ## Why Environmental Analysis Matters
 
-In architectural design, **Environmental Analysis** helps us understand how natural forces interact with a site. Sunlight, wind, noise, humidity, and vegetation all play a role in shaping comfortable, sustainable spaces.
+In architectural design, **Environmental Analysis** is how we understand the natural forces interacting with our site. Sunlight, wind, noise, humidity, and vegetation all play a massive role in shaping comfortable, sustainable spaces.
 
-Ignoring environmental factors can lead to overheating rooms, poor ventilation, or unpleasant outdoor areas. That’s why architects use environmental diagrams to make data-informed design decisions early in the process — and to explain them clearly to others.
+If you ignore these factors, you risk designing rooms that overheat, suffer from poor ventilation, or have unusable outdoor areas. That’s why we rely on environmental diagrams to make data-informed design decisions early on—and to explain those choices clearly to clients.
 
-In this post, I’ll show you how I created an **Environmental Analysis Diagram** using the **Sun Diagram plugin** and a library of **Dynamic Symbols** in SketchUp.
+In this sample project (Project 24), I’ll show you how I built a robust **Environmental Analysis Diagram** right inside SketchUp.
 
  ![Environmental Analysis -1](/images/2025/06/SAMPLE-24-STYLE02-2-1-scaled-1.jpg) ![Environmental Analysis -2](/images/2025/06/SAMPLE-24-STYLE01-2-scaled-1.jpg)
 
-## Tools Used in This Diagram
+## The Tools Used in This Diagram
 
-To build the diagram shown in this post, I used two key tools inside **SketchUp**:
+To build this diagram, I used two key tools:
 
-- **Sun Diagram** (SketchUp Plugin):  
-    This plugin lets you generate accurate **sun path** and **shadow analysis** for any time and date. It helps visualize how sunlight affects the site and nearby buildings — essential for context awareness and passive design decisions.
+- **[Sun Diagram](https://sundiagram.com/sun-diagram):** Generates an accurate 3D sun path and shadow analysis for any time and date. Essential for testing passive design decisions.
+- **[Dynamic Symbols](https://sundiagram.com/dynamic-symbols/):** Drops in animated 3D symbols that you can switch and adjust with a single click.
 
-User guide for Sun Diagram is available here: <https://sundiagram.com/sun-diagram>
+Both tools are designed to speed up diagramming while keeping your presentation looking highly professional. 
 
-- **Dynamic Symbols** (SketchUp Plugin):  
-    Dynamic Symbols is a SketchUp plugin that allows you to create animated symbols and switch between different states with just one click.
-
-User guide for Dynamic Symbols is available here: <https://sundiagram.com/dynamic-symbols/>
-
-- Both tools are designed to speed up the diagramming process while keeping your presentation clear and professional. Download plugins for free here:
-
-[ Free download Sun Diagram ](https://extensions.sketchup.com/extension/5aa1ab3d-36ff-4510-ae63-84f677a36f3a/sun-diagram)
-
-[ Free download Dynamic Symbols plugin ](https://extensions.sketchup.com/extension/21085584-a984-474d-8407-33087adec402/dynamic-symbols)
-
-## Step-by-Step Guide: Create Architectural Diagrams Using SketchUp
-
-- [/create-architectural-diagrams-using-sketchup/](/create-architectural-diagrams-using-sketchup/)
+> **Get Started:** Both plugins are available for free on the SketchUp Extension Warehouse!
+> - [ Free download Sun Diagram ](https://extensions.sketchup.com/extension/5aa1ab3d-36ff-4510-ae63-84f677a36f3a/sun-diagram)
+> - [ Free download Dynamic Symbols plugin ](https://extensions.sketchup.com/extension/21085584-a984-474d-8407-33087adec402/dynamic-symbols)
 
 ## Benefits of This Approach
 
-With this diagram, you can:
-
-- Make better **passive design decisions**
-- Communicate clearly with clients and stakeholders
-- Save time by not switching between software
-- Keep your diagram **editable** and integrated within your design model
-
-Architects and students alike can benefit from a clear, structured workflow like this — especially in early design stages.
-
-## Download project files
-
-You can download the project file from the link:
-
- [ Free download via GoogleDrive ](https://drive.google.com/file/d/1I_XNZyIYHThu1E77xCRhhb3GscQjzFR1/view?usp=sharing)
+With this workflow, you can:
+- Make much better **passive design decisions**.
+- Communicate your intent clearly to clients and stakeholders.
+- Save hours by not constantly switching between 3D software and Illustrator.
+- Keep your diagram **editable** directly within your design model.
 
 ## Final Thoughts
 
-Creating an **Environmental Analysis Diagram** doesn’t have to be complicated or time-consuming. With tools like **Sun Diagram** and **Dynamic Symbols**, you can generate data-driven, visually clear diagrams right inside SketchUp — without plugins overload or switching to Illustrator.
+Creating an **Environmental Analysis Diagram** doesn’t have to be a complicated, time-consuming nightmare. With tools like **Sun Diagram** and **Dynamic Symbols**, you can generate data-driven, visually stunning diagrams entirely inside SketchUp.
 
-Stay tuned for more diagram templates, and feel free to use this one in your own projects.
+## Download Project Files
+
+Want to dissect the layers and see how it works? Download the free project file below!
+
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
+
+[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1I_XNZyIYHThu1E77xCRhhb3GscQjzFR1/view?usp=sharing)
+
+*(Need a step-by-step tutorial on this workflow? Check out our updated guide: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*

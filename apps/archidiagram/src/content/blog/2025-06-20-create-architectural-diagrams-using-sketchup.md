@@ -9,41 +9,39 @@ software: 'SketchUp'
 
 # Step-by-Step Guide: Create Architectural Diagrams Using SketchUp
 
-Architectural diagrams not only need to look aesthetically pleasing, but they must also convey the **design intent**, **natural conditions**, and **functional logic**. Below is the process I follow to create accurate, visually appealing site analysis diagrams.
+Architectural diagrams should look great while clearly showing your design intent and site conditions. Here's my process for building clean, accurate site analysis diagrams entirely in SketchUp.
 
-**Updated August 2025:**
+> [!WARNING]
+> **Updated August 2025:**
+> This tutorial is an older workflow. We’ve since released **Sun Diagram 3.0** and **Dynamic Symbols 2.0** which automate a lot of these steps. 
+> 👉 Check out the updated, much faster workflow here: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**
 
-This tutorial is somewhat outdated as we have released **Sun Diagram 3.0** and **Dynamic Symbols 2.0**, which include features for greater automation. The updated version of the tutorial can be found at this link:
-
-[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)
-
-Thank you for visiting!
-
-<section></section><section></section> https://www.youtube.com/watch?v=4bFSWw3rnGE
+https://www.youtube.com/watch?v=4bFSWw3rnGE
 
 ## Applicable for:
 
 1. Site analysis diagrams
 2. Sun path and shadow studies
-3. Architectural diagram
+3. Architectural presentations
 4. and more
 
 ## Softwares used:
 
-1. SketchUp: Modeling and editing 3D before export
-2. Sun Diagram (plugin for SketchUp): Create 3D Sun Path
+1. **SketchUp**: For modeling and assembling the diagram.
+2. **Sun Diagram**: SketchUp plugin to generate the 3D Sun Path.
 
- [ Reference Diagrams ](https://sundiagram.com/download-example-projects/)
+ [ Browse All Resources & Diagrams ](/#resources)
 
 ## All Resources used in the tutorial are included
 
-*Sun Diagram plugin: <https://Sundiagram.com/sun-diagram>*
+- **Sun Diagram plugin**: [Sundiagram.com](https://sundiagram.com/sun-diagram)
+- **Dynamic Symbols**: [/dynamic-symbols-for-architectural-diagram/](/dynamic-symbols-for-architectural-diagram/)
 
-*Dynamic symbols: [/dynamic-symbols-for-architectural-diagram/](/dynamic-symbols-for-architectural-diagram/)*
+Want to follow along? Download the exact project file we use in this video:
 
-*File example:*
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these tutorials helpful and would like to support my work, you can download them via **Gumroad** (where you can enter $0 or leave a small tip).*
 
- [ DOWNLOAD FILE ](https://drive.google.com/file/d/1rlKtbxue3d_PeTu8_TQTOWCiiLCozdO2/view?usp=sharing)
+[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1rlKtbxue3d_PeTu8_TQTOWCiiLCozdO2/view?usp=sharing)
 
 ## Tutorial (step-by-step guide and videos):
 
@@ -53,91 +51,64 @@ Thank you for visiting!
 [Step 4: Create 3D Sun Path with Sun Diagram](#step4)  
 [Step 5: Add Dynamic Symbols to the Diagram](#step5)
 
-**Let's get started !**
+**Let's get started!**
 
+<a id="step1"></a>
 ## STEP 1: Customize Style in SketchUp
 
 https://www.youtube.com/watch?v=4bFSWw3rnGE
 
-***Updated Workflow — August 2025**: Step 1 can be skip by using the Style Library feature in Sun Diagram — just switch the style to Style 02.*
+*(**Updated Workflow:** Skip this step entirely by using the Style Library in Sun Diagram 3.0—just switch to Style 02!)*
 
- <details id="e-n-accordion-item-5620"> <summary aria-controls="e-n-accordion-item-5620" aria-expanded="false" data-accordion-index="1" tabindex="0"> Previous Workflow (Old Method) <svg aria-hidden="true" viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg> <svg aria-hidden="true" viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg> </summary>1. Open Default tray&gt; Styles  
-    – Under Edge Settings, set Color to “By Material” instead of the default. This allows you to easily change the color of lines in your diagram (e.g., change colors for sun paths, vegetation, contour lines, etc.) without affecting the entire model.
-2. Under Background Settings:  
-    – Turn off the “Sky” option  
-    – Change the background color to a neutral or dark color to make the graphical elements stand out more.  
-    → This is an important step to make your diagram look professional and clean.
+<details id="e-n-accordion-item-5620"> 
+<summary aria-controls="e-n-accordion-item-5620" aria-expanded="false" data-accordion-index="1" tabindex="0"> Previous Workflow (Old Method) </summary>
 
- </details>
+1. Open `Default tray > Styles`.
+2. Under **Edge Settings**, set the color to "By Material". This lets you individually color lines (sun paths, trees, contours) without messing up the whole model.
+3. Under **Background Settings**: Turn off "Sky" and change the background to a solid neutral/dark color. This makes your graphics pop!
+</details>
 
+<a id="step2"></a>
 ## STEP 2: Import Terrain and Map Data
 
 https://www.youtube.com/watch?v=4bFSWw3rnGE
 
-1. Go to File &gt; Add Location  
-    – Enter the location name or coordinates  
-    – Click Set Location, then continue by selecting Add Context
-2. 📥 Choose the elements you want to include:
-    1. Flat site
-    2. Elevated site
-    3. Map texture
-    4. Terrain mesh
-    5. 3D building
-3. Once selected, highlight the area you want to focus on and click Import Site Context. SketchUp will automatically download terrain data and satellite maps.
+1. Go to `File > Add Location`.
+2. Type your project address and click **Add Context**.
+3. Check the boxes for Elevated site, Map texture, and Terrain mesh, then hit **Import**. SketchUp handles the rest!
 
+<a id="step3"></a>
 ## STEP 3: Create Terrain and Contour Lines
 
 https://www.youtube.com/watch?v=4bFSWw3rnGE
 
-1. In the Tag (Layer) panel:  
-    – Turn off the flat map layer, and turn on the terrain layer.
-2. Draw a series of rectangles at 10-meter intervals, perpendicular to the terrain.  
-    → Group these rectangles into Components for easier management.
-3. Use Intersect Faces &gt; With Model to create intersections between the flat planes and terrain.  
-    → These intersection lines will be the contour lines.
-4. Delete any unnecessary flat surfaces, leaving just the contour lines. Then, color them according to elevation to visually represent the terrain.
+1. Hide your flat map layer and keep only the 3D terrain visible.
+2. Draw a large flat rectangle below your site and duplicate it upwards every 10 meters. Group these rectangles.
+3. Select the rectangles and the terrain, right-click, and choose `Intersect Faces > With Model`.
+4. Delete the rectangles. You're left with perfect contour lines hugging your terrain!
 
+<a id="step4"></a>
 ## STEP 4: Create 3D Sun Path with Sun Diagram
 
 https://www.youtube.com/watch?v=4bFSWw3rnGE
 
-1. [**Sun Diagram (SketchUp Plugin)**](https://Sundiagram.com/sun-diagram)  
-    – Choose **From Model** mode (since you’ve already added the location in Step 2).  
-    – Disable the **DST** option if working in Vietnam or regions without daylight saving time.
-2. Adjust the size of the sun path to fit your diagram, and then change the color of the sun path using the following steps:
-3. 1. Set Edge color to “By Material”
-    2. Open the sun path group, press **Ctrl+A** to select all elements, then press **B** (Paint Bucket tool)
-    3. Choose the color you want and click to apply it to the sun path.
+1. Open **Sun Diagram**. Select **From Model** (since you set the location in Step 2).
+2. Disable the **DST** option if your project is in a region without daylight saving time.
+3. Scale the sun path to fit your site. 
+4. To color it: Set your SketchUp edge color to "By Material", open the sun path group, select all (`Ctrl+A`), and use the Paint Bucket (`B`) to apply your desired color.
 
+<a id="step5"></a>
 ## STEP 5: Add Dynamic Symbols to the Diagram
 
 https://www.youtube.com/watch?v=4bFSWw3rnGE
 
-[**Dynamic Symbols**](/dynamic-symbols-for-architectural-diagram/) (available for free at <a data-end="2976" data-start="2932" href="" rel="noopener" target="_new">ArchiDiagram.com</a>)  
-– Copy and paste them into your diagram  
-– Right-click the symbol → Choose **Dynamic Components &gt; Component Options**  
-→ Here, you can change:  
-✔ Shape  
-✔ Size  
-✔ Color
-
-⚡ Dynamic symbols act as smart components, saving time on presentations and eliminating the need for redundant drawings.
-
-*(Updated August 2025) You can use the Dynamic Symbols plugin — it allows you to add motion to symbols if needed.)*
+1. Install the **Dynamic Symbols** plugin.
+2. Drop symbols into your scene. 
+3. Right-click any symbol and select `Dynamic Components > Component Options` to easily tweak its shape, size, and color.
+*(**Updated Workflow:** Dynamic Symbols 2.0 now lets you animate these directly!)*
 
 ## **Final Result** 
 
-[ FREE DOWNLOAD ](https://drive.google.com/file/d/1rlKtbxue3d_PeTu8_TQTOWCiiLCozdO2/view?usp=sharing)
+With just SketchUp and [Sun Diagram](https://sundiagram.com/), you can quickly generate clean site analysis diagrams, accurate sun/shadow studies, and high-res vector exports.
 
-With just **SketchUp** and plugin [**<u>Sun diagram</u>**](https://sundiagram.com/sun-diagram), you can easily create:
-
-Site analysis diagrams
-
-Sun path and shadow studies
-
-High-resolution, print-ready vector diagrams
-
-👉 Follow **[Febhouse](https://www.instagram.com/febhouse_com/)** for more diagram resources, plugin updates, and easy-to-understand tutorials.  
-📩 Have questions or want to receive a sample file? Drop a comment below!
-
-Thanks for watching !
+👉 Follow **[Febhouse](https://www.instagram.com/febhouse_com/)** for more diagram resources and quick tutorials!

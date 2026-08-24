@@ -5,14 +5,15 @@ pubDate: '2026-01-16T15:56:41+07:00'
 heroImage: '/images/2026/01/SAMPLE-56-COVER1000x1000.jpg'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
-
 ---
 
 # Residential Site Analysis Diagram in SketchUp: Free Sample (Project 56)
 
-For residential projects, "context" isn't just about the city—it's about comfort. This sample project (Project 56) provides the complete **source files** for a **Residential Site Analysis**, specifically tailored for townhouses and single-family homes.
+For residential projects, "context" isn't just about the city skyline—it's about personal comfort. 
 
-This SketchUp file demonstrates how to visualize the micro-climate of a living space, ensuring that your design maximizes natural ventilation and daylighting while maintaining privacy from neighbors.
+This sample project (Project 56) provides the complete **source files** for a **Residential Site Analysis**, specifically tailored for townhouses and single-family homes.
+
+This SketchUp file demonstrates how to visualize the micro-climate of a living space. It ensures your design maximizes natural ventilation and daylighting while protecting your client's privacy from the neighbors.
 
  ![Residential Site Analysis](/images/2026/01/SAMPLE-56-VIEW02-copy.jpg)
 
@@ -21,8 +22,8 @@ This SketchUp file demonstrates how to visualize the micro-climate of a living s
 In housing design, clients care deeply about how natural forces affect their daily lives. A detailed analysis helps you answer questions like:
 
 - **Natural Ventilation:** How do seasonal breezes flow through the site? (Crucial for passive cooling).
-- **Solar Access:** Will the courtyard get enough winter sun? Will the bedroom overheat in summer?
-- **Privacy &amp; Shadows:** How do shadows from adjacent houses impact the property?
+- **Solar Access:** Will the courtyard get enough winter sun? Will the master bedroom overheat in summer?
+- **Privacy & Shadows:** How do shadows from adjacent houses impact the property?
 
 ## What This Sample Includes
 
@@ -30,30 +31,32 @@ This download contains the original SketchUp source files used to generate the d
 
 ### **1. Seasonal Wind Analysis**
 
-The diagram distinguishes between different wind types (e.g., "Prevailing Breezes") using color-coded arrows. *(**Workflow Note:** These curved, flowing arrows are created with **Dynamic Symbols**, allowing you to visualize airflow patterns around obstacles easily).*
+The diagram distinguishes between different wind types (like "Prevailing Breezes") using color-coded arrows. 
+*(**Workflow Note:** These curved, flowing arrows are created with **Dynamic Symbols**, allowing you to easily visualize airflow patterns around obstacles).*
 
-### **2. Solar Path &amp; Shadow Study**
+### **2. Solar Path & Shadow Study**
 
-A localized **3D Sun Path** shows the exact position of the sun relative to the rooflines. *(**Pro Tip:** This yellow sun path and the precise shadow calculations were generated using the **Sun Diagram** plugin, essential for proving solar access compliance).*
+A localized **3D Sun Path** shows the exact position of the sun relative to the rooflines. 
+*(**Pro Tip:** This yellow sun path and the precise shadow calculations were generated using the **Sun Diagram** plugin—an essential tool for proving solar access compliance).*
 
 ### **3. Detailed Site Annotation**
 
-Clear markers for noise sources, views, and main access points help tell the story of the site.
+Clear markers for noise sources, views, and main access points help tell the complete story of the site.
 
 ## Workflow Overview
 
 This sample follows a straightforward workflow commonly used for sunlight and shadow visualization:
 
-1. Step 1: Import Terrain and Map Data
-2. Step 2: Generate Contour Lines
-3. Step 3: Create a 3D Sun Path using Sun Diagram Plugin
-4. Step 4: Add Symbols with Dynamic Symbols Plugin
-5. Step 5: Create a Shadow Analysis using Sun Diagram
-6. Step 6: Generate dynamic symbols to represent the Site analysis
+1. **Step 1:** Import Terrain and Map Data
+2. **Step 2:** Generate Contour Lines
+3. **Step 3:** Create a 3D Sun Path using the Sun Diagram Plugin
+4. **Step 4:** Add Symbols with the Dynamic Symbols Plugin
+5. **Step 5:** Create a Shadow Analysis using Sun Diagram
+6. **Step 6:** Generate dynamic symbols to represent the Site analysis
 
-This page focuses on the **source files**, not detailed instructions.
+*(Note: This page focuses on providing the **source files**, not detailed instructions).*
 
-👉 A full step-by-step tutorial is available here: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**
+👉 Need the full tutorial? **[Check out the step-by-step guide here](/create-architectural-diagrams-updated-workflow-aug-2025/)**
 
 https://www.youtube.com/shorts/3Rnyb3TY_Lg
 
@@ -68,11 +71,10 @@ To replicate this detailed residential analysis or use the assets in your own wo
 
 ## Download Sample Project Files
 
-This sample project is available for **free download**. Use it as a template for your next housing project to impress clients with a clear analysis of their future home's environment.
+Use this file as a template for your next housing project to impress clients with a crystal-clear analysis of their future home's environment.
 
- [ Free download via Gumroad ](https://febhouse.gumroad.com/l/Residential-Site-Analysis)Or
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these resources helpful and would like to support my work, you can download them via **Gumroad** (where you can enter $0 or leave a small tip).*
 
- [ Free download via GoogleDrive ](https://drive.google.com/file/d/1BP_zVVyVhKxq1bKKTIlBXJHcmWZpK7MQ/)On Gumroad, simply enter **$0** in the “Name a fair price” box to download for free.  
-(No bank or card information required.)
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Residential-Site-Analysis)
 
-If you want to support me, you can enter any amount you wish. Thank you!
+[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1BP_zVVyVhKxq1bKKTIlBXJHcmWZpK7MQ/)

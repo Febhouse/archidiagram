@@ -5,7 +5,6 @@ pubDate: '2026-03-13T23:18:50+07:00'
 heroImage: '/images/2026/03/SAMPLE-64-cover.jpg'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
-
 ---
 
 # Quick Site Analysis in SketchUp: Free Sample File (Sample-64)
@@ -28,13 +27,17 @@ https://www.youtube.com/shorts/CxJ6mYoGgA4
 
 We’ve provided the exact base `.skp` file used in the video. Download it, open it up, and time yourself. To achieve the speed shown in the demonstration, you will utilize:
 
-- **Sun Diagram:** To instantly generate the location-accurate 3D solar dome and export the animation.
-- **Dynamic Symbols:** To rapidly place the 3D circulation arrows without manual modeling.
+- **[Sun Diagram](https://sundiagram.com/):** To instantly generate the location-accurate 3D solar dome and export the animation.
+- **[Dynamic Symbols](https://dynamicsymbols.com/):** To rapidly place the 3D circulation arrows without manual modeling.
 
-> **Try it out:** Free versions of both **Sun Diagram** and **Dynamic Symbols** are available right now on the **SketchUp Extension Warehouse**.
+> **Good News:** Free versions of both **Sun Diagram** and **Dynamic Symbols** are available right now on the **SketchUp Extension Warehouse**.
 
 ## Download Sample Project Files
 
-Ready to test the workflow? Download the practice file below.
+Ready to test the workflow? Download the practice file below!
 
- [ Free download via GoogleDrive ](https://drive.google.com/file/d/1VDGKef89C7GqooIg1HhXoXckiFBEkgu2/)*(Looking for a detailed, step-by-step explanation of this process? Check out our complete, in-depth guide here: [/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)*
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
+
+[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1VDGKef89C7GqooIg1HhXoXckiFBEkgu2/)
+
+*(Looking for a detailed, step-by-step explanation of this process? Check out our complete, in-depth guide here: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*

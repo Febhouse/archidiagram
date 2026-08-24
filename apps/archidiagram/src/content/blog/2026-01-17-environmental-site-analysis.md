@@ -9,55 +9,59 @@ software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 
 # Mastering the Environmental Site Analysis Diagram in SketchUp 
 
-Are you looking to elevate your early-concept presentations? An **Environmental Site Analysis Diagram** is crucial for showing clients and review panels exactly how natural forces shape your architectural decisions. This sample project (Project 39) provides a comprehensive **3D Architectural Diagram** template, moving beyond flat 2D mapping to layer multiple environmental factors into one coherent model.
+Need to level up your early-concept presentations? An **Environmental Site Analysis Diagram** shows clients exactly how natural forces (sun, wind, views) shape your design. 
+
+This sample project (Project 39) gives you a complete **3D Architectural Diagram** template, moving beyond flat 2D maps by layering everything into a single, cohesive 3D model.
 
  ![Environmental Site Analysis](/images/2026/01/SAMPLE-39-copy.jpg)
 
 ## Why Move to a 3D Architectural Diagram?
 
-In the early design phases, clarity is everything. Instead of separating data into disconnected slides, this 3D approach integrates layers into a single narrative. It helps you communicate:
+In early design phases, clarity is everything. Instead of splitting data across ten different slides, this 3D approach merges it all together. Use this style to show:
 
-- **Contextual Logic:** How the site dictates form.
-- **Visual Hierarchy:** Prioritizing key elements like sun, wind, and access without clutter.
-- **Professional Polish:** Ready for client presentations and design portfolios.
+- **Contextual Logic:** How the site's environment dictates the building's form.
+- **Visual Hierarchy:** Layering sun, wind, and access without making the image look cluttered.
+- **Professional Polish:** Instantly ready for client presentations or portfolios.
 
 ## What This Sample Focuses On
 
-This downloadable 3D diagram illustrates how to represent the following elements effectively using SketchUp:
+This SketchUp file demonstrates how to beautifully represent:
 
-### **1. Solar Studies &amp; 3D Sun Paths**
+### **1. Solar Studies & 3D Sun Paths**
 
-Learn how to visualize seasonal solar angles effectively.
+Visualize seasonal solar angles right over your site. 
+*(**Pro Tip:** We used the **Sun Diagram** plugin to instantly generate this location-accurate 3D sun path).*
 
-*(**Pro Tip:** The sun path geometry in this sample reflects the output of the **Sun Diagram** plugin, designed to help architects generate instant, location-accurate 3D sun paths).*
+### **2. Prevailing Winds & Airflow**
 
-### **2. Prevailing Winds &amp; Airflow**
+Clean, flowing arrows show wind movement across the site—crucial for planning passive cooling strategies.
 
-Clean visualization of wind direction and movement through the site to determine passive cooling strategies.
+### **3. View Corridors & Access Logic**
 
-### **3. View Corridors &amp; Access Logic**
-
-Highlighting visual focus points, driveway logic, and pedestrian entry points using clear, stylized markers. *(**Note:** To maintain consistency with arrows and annotations across your project, we recommend using **Dynamic Symbols**).*
+Highlight visual focus points, driveways, and pedestrian entries using crisp, stylized markers. 
+*(**Note:** We built these using **Dynamic Symbols** to keep all arrows and annotations consistent).*
 
 ## What’s Included in the Download?
 
-- **A Prepared 3D SketchUp File:** Contains the full environmental site analysis setup.
-- **Organized Tags/Layers:** For easy visibility control and workflow study.
-- **Clean Geometry:** Optimized for export or further styling in Photoshop/Illustrator.
+- **A Prepared 3D SketchUp File:** The full environmental site analysis setup.
+- **Organized Tags/Layers:** Toggle layers on and off to study the workflow.
+- **Clean Geometry:** Perfectly optimized for exporting or bringing into Photoshop/Illustrator.
 
 https://www.youtube.com/shorts/Hn07rPO3BRk
 
 ## How to Recreate This Workflow
 
-You can use this 3D diagram file to study how multiple factors are combined. To achieve the exact workflow used to build this, you can utilize the following tools:
+To recreate this clean 3D diagram style on your own projects, we highly recommend:
 
-- **For the Sun Path:** Use the [**Sun Diagram**](https://sundiagram.com/) plugin to generate accurate 3D sun path effortlessly.
-- **For Arrows &amp; Annotations:** Use [**Dynamic Symbols**](https://dynamicsymbols.com/) to quickly place and adjust 2D/3D graphic symbols within your model.
+1. **[Sun Diagram](https://sundiagram.com/):** For generating the accurate 3D sun path effortlessly.
+2. **[Dynamic Symbols](https://dynamicsymbols.com/):** For dropping in 2D/3D graphic symbols and arrows.
 
-> **Good News:** Free versions of both **Sun Diagram** and **Dynamic Symbols** are available directly on the **SketchUp Extension Warehouse**.
+> **Good News:** Free versions of both plugins are available on the **SketchUp Extension Warehouse**.
 
 ## Download Sample Project Files
 
-This sample project is available for **free download**. Use it to study the layering technique and apply it to your own residential or small-scale architectural projects.
+Grab the free files below, see how the 3D layers are built, and apply this technique to your next residential project!
 
- [ Free download via GoogleDrive ](https://drive.google.com/file/d/1l3VbL50LbivoaL7pIgaRwkAomaCNGJdp/)
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
+
+[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1l3VbL50LbivoaL7pIgaRwkAomaCNGJdp/)

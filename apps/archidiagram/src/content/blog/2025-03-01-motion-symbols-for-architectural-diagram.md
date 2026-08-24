@@ -7,38 +7,36 @@ tags: 'presentation template'
 software: 'Canva'
 ---
 
-# Motion symbols for Architectural Diagrams
+# Motion Symbols for Architectural Diagrams
 
- Motion symbols included the Canva template.
+Bring your architectural diagrams to life! This downloadable package provides a library of **Motion Symbols** fully integrated into a ready-to-use Canva template. 
 
-This template is used to create site analysis diagrams, shadow analysis, and include them in project presentations.
+This template is perfect for quickly creating dynamic site analysis diagrams, shadow studies, and engaging project presentations.
 
 https://youtu.be/ncJWyizv5j4
 
-## 1. Motion symbols open with software
+## How This Template Works
 
-File is Canva template, I have animated them. You can use them to create architectural diagrams
+This file is a native Canva template that I have pre-loaded with animated icons. **You do not need Canva Pro** to use these assets! You can drag, drop, and resize these motion symbols to fit the scale of any project.
 
-## 2. How to use 
+**Here's a step-by-step breakdown of the workflow (as shown in the video):**
 
-The file is a template I created using Canva, and I have integrated animated icons into it. It does not require Canva Pro.
+1. **[00:00]** Learn how to pull high-quality topographic images using Google Maps.
+2. **[00:14]** Open and set up the provided Canva template.
+3. **[00:20]** Insert your map image into the template and adjust its appearance for a professional look.
+4. **[00:51]** Copy and paste the animated symbols from the template's built-in symbol library directly onto your map.
+5. **[02:41]** Export your finished, animated site analysis to use in PowerPoint or as a standalone video.
 
-**Here's a step-by-step breakdown:**
+Want to see how it looks before downloading?
 
-1. First, the video explains how to get topographic images using Google Maps \[00:00\].
-2. Then, it explains how to use a Canva template, which can be found in the channel profile \[00:14\].
-3. Next, the video explains how to insert the image into the template and adjust its appearance \[00:20\].
-4. After that, the video explains how to copy and paste symbols from the template's symbol library \[00:51\].
-5. Finally, the video explains how to export the finished site analysis \[02:41\].
+👉 **[Preview the full template on Canva here](https://www.canva.com/design/DAGgfhrkge0/LFkOTo5OEnqQP4FcD6lsrQ/watch?utm_content=DAGgfhrkge0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha8bc396e02)**
 
-Please preview the sample:
+## Download the Canva Template
 
-[ Preview file ](https://www.canva.com/design/DAGgfhrkge0/LFkOTo5OEnqQP4FcD6lsrQ/watch?utm_content=DAGgfhrkge0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha8bc396e02)
+> *💡 **Note:** This template is available for a small fee. Your support helps keep this site running and allows me to create more tools for the architecture community. Thank you very much!*
 
-*(It will cost a small fee, please support me, thank you very much)*
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/motionsymbols-for-architecturaldiagram)
 
-[ Link to template via Gumroad ](https://febhouse.gumroad.com/l/motionsymbols-for-architecturaldiagram)
+[ DOWNLOAD VIA KO-FI ](https://ko-fi.com/s/ed7ac0dc80)
 
-[ Link to template via Ko-fi ](https://ko-fi.com/s/ed7ac0dc80)
-
-[ Download more Resources for Architects ](/#resources)
+[ Browse All Resources & Diagrams ](/#resources)

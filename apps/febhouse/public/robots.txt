@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://febhouse.com/sitemap-index.xml

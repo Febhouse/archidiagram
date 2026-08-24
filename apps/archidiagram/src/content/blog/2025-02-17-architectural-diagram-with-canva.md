@@ -7,32 +7,43 @@ tags: 'presentation template'
 software: 'Canva'
 ---
 
-# Architectural diagram with Canva template
+# Architectural Diagram with Canva Template (Style 01)
 
- https://youtu.be/SiLRXLJUnGghttps://youtu.be/vnIkhxApXZ8Creating architectural diagrams with Canva is easy and professional.
+Creating high-quality architectural diagrams doesn't have to require heavy software. With this pre-built Canva template, building professional diagrams is both fast and incredibly easy.
 
-Motion symbols and notes are already integrated into the diagram. You just need to adjust the positions and directions to fit your project.
+https://youtu.be/SiLRXLJUnGg
 
-However, the sun's path will vary depending on the research location. You can contact me to get the sun path for your project location.
+https://youtu.be/vnIkhxApXZ8
 
-Once you've completed your diagram, you can export an animated video or powerpoint presentation from Canva.
+Motion symbols, arrows, and text callouts are already integrated directly into the layout. All you need to do is drag, drop, and adjust the positions to fit your specific project.
 
-## 2. This template is ideal for architects, designers, and students
+*(Note: The exact sun path curve will vary depending on your site's location. If you need a customized sun path for your project coordinates, feel free to contact me!)*
 
-This template is used to create site analysis diagrams, shadow analysis, and include them in project presentations.
+Once you've completed your diagram, Canva makes it simple to export your work as an animated MP4 video or straight into a PowerPoint presentation.
 
-## 3. How to use
+## Who is This Template For?
 
-The file is a template I created using Canva, and I have integrated animated icons into it. It does not require Canva Pro.
+This template is perfect for architects, designers, and students who need to quickly create:
+- Site Analysis Diagrams
+- Shadow and Environmental Analysis
+- Engaging project presentation slides
 
-Please preview the sample
+## How to Use This Template
 
- [ Preview file ](https://www.canva.com/design/DAGfh4N0wxU/GKxk3xs0WiAidKFItv8vxQ/view?utm_content=DAGfh4N0wxU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h32909e5f96)Please visit the link below to use it.
+The file is a native Canva template that I’ve loaded with custom animated icons. **You do not need a Canva Pro account** to use it! 
 
-(It will cost a small fee, please support me, thank you very much)
+Want to see how it looks before downloading?
 
- [ Link to template via Gumroad ](https://febhouse.gumroad.com/l/Architecturaldiagram-canva)or
+👉 **[Preview the full template on Canva here](https://www.canva.com/design/DAGfh4N0wxU/GKxk3xs0WiAidKFItv8vxQ/view?utm_content=DAGfh4N0wxU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h32909e5f96)**
 
- [ Link to template via Ko-fi ](https://ko-fi.com/s/6ed99cc746)It includes both the horizontal and vertical version layouts.
+## Download the Canva Template
 
-Thank you for support !
+This template includes both horizontal and vertical layout versions to suit any presentation format.
+
+> *💡 **Note:** This template is available for a small fee. Your support helps keep this site running and allows me to create more tools for the architecture community. Thank you very much!*
+
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Architecturaldiagram-canva)
+
+[ DOWNLOAD VIA KO-FI ](https://ko-fi.com/s/6ed99cc746)
+
+Thank you for your support!

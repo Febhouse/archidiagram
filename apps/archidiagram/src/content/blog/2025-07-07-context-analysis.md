@@ -7,75 +7,55 @@ tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
 
-# How to Create a Context Analysis Diagram with Sun Path &amp; Dynamic Symbols in SketchUp 
+# How to Create a Context Analysis Diagram with Sun Path & Dynamic Symbols in SketchUp 
 
- https://www.youtube.com/watch?v=jUp8JCBoWmE
+https://www.youtube.com/watch?v=jUp8JCBoWmE
 
 ## What is Context Analysis in Architecture? 
 
-In architectural design, **context analysis** is the process of understanding everything that surrounds your site — physically, visually, environmentally, and culturally. It includes nearby buildings, roads, natural features, views, noise sources, and more. A good context analysis helps you make design decisions that are responsive and meaningful.
+In architectural design, **context analysis** is how we understand everything surrounding a site—physically, visually, environmentally, and culturally. It covers nearby buildings, roads, natural features, views, and noise sources. A strong context analysis is the backbone of responsive and meaningful design decisions.
 
-Rather than working with assumptions, a diagram lets you communicate clearly with clients, consultants, and approval authorities. And with the help of digital tools, making these diagrams can be both fast and accurate.
+Rather than working off assumptions, a clean diagram lets you communicate your constraints and opportunities clearly with clients, consultants, and approval authorities. 
 
 ![Context Analysis Diagram](/images/2025/07/20250703-SAMPLE-25-style2.jpg)
 
-## Tools Used in This Project 
+## The Tools Used in This Project 
 
-To build the diagram shown in this post, I used two key tools inside **SketchUp**:
+To build the diagram shown in the video, I used two key tools right inside **SketchUp**:
 
-- **Sun Diagram** (SketchUp Plugin):  
-    This plugin lets you generate accurate **sun path** and **shadow analysis** for any time and date. It helps visualize how sunlight affects the site and nearby buildings — essential for context awareness and passive design decisions.
+- **[Sun Diagram](https://sundiagram.com/sun-diagram):** Generates an accurate 3D sun path and shadow analysis for any time and date. It visually proves how sunlight affects the site and nearby buildings.
+- **[Dynamic Symbols](https://sundiagram.com/dynamic-symbols/):** Drops in animated 3D symbols that you can toggle and adjust with a single click.
 
-User guide for Sun Diagram is available here: <https://sundiagram.com/sun-diagram>
-
-- **Dynamic Symbols** (SketchUp Plugin):  
-    Dynamic Symbols is a SketchUp plugin that allows you to create animated symbols and switch between different states with just one click.
-
-User guide for Dynamic Symbols is available here: <https://sundiagram.com/dynamic-symbols/>
-
-- Both tools are designed to speed up the diagramming process while keeping your presentation clear and professional.
+Both tools are designed to drastically speed up your diagramming workflow while keeping presentations clear and professional.
 
 ## How the Diagram Was Created 
 
-Here’s a step-by-step overview of how I created the **Context Analysis** diagram for this project:
+Here’s a quick step-by-step of how I built this **Context Analysis** diagram:
 
-1. **Model the Basic Site and Surroundings**  
-    I imported the site plan and added rough massing for nearby buildings, roads, green areas, and major infrastructure. Keeping it simple at this stage helps you focus on layout and relationships.
-2. **Run Sun Path &amp; Shadow Analysis**  
-    Using the **Sun Diagram** plugin, I selected specific times of the day (9:00 AM, 12:00 PM, 3:00 PM) and dates (Equinox, Summer, Winter solstice) to generate the sun path and shadow lengths. This helps highlight which parts of the context are exposed to or blocked from sunlight.
-3. **Analyze Key Contextual Elements**  
-    I marked key views, noise sources, access points, and pedestrian flow directions. These influence the building orientation, entry location, and landscape buffers.
-4. **Add Dynamic Symbols for Clarity**  
-    I then used **Dynamic Symbols** to add arrows for wind and circulation, icons for buildings and traffic, and callouts for important notes. Since they’re already styled for architecture diagrams, it saved me tons of formatting time.
-5. **Compose the Layout**  
-    Finally, I exported a scene with proper composition, title, north arrow, scale bar, and a clean graphic style — all inside SketchUp.
+1. **Model the Basic Site and Surroundings:** I imported the site plan and added rough massing for nearby buildings, roads, and green areas. Keeping it simple at this stage helps focus on spatial relationships.
+2. **Run Sun Path & Shadow Analysis:** Using the **Sun Diagram** plugin, I selected specific times (9:00 AM, 12:00 PM, 3:00 PM) across key dates (solstices and equinoxes) to see exactly which parts of the site get sun or shade.
+3. **Analyze Key Contextual Elements:** I marked key views, noise sources, access points, and pedestrian flows. These directly influence building orientation and entry locations.
+4. **Add Dynamic Symbols for Clarity:** I used **Dynamic Symbols** to drop in wind arrows, circulation paths, and traffic icons. Since they’re already styled for architecture diagrams, it saved me hours of formatting.
+5. **Compose the Layout:** Finally, I exported the scene with proper composition, a north arrow, and a clean graphic style—all done inside SketchUp.
 
 ## Why This Matters 
 
-Too often, site analysis diagrams are either too rough or too time-consuming to produce. With the right tools, you can quickly produce **professional, data-driven visuals** that help you defend your design ideas and communicate them clearly.
+Too often, site analysis diagrams are either too rough to be useful or take way too long to produce. With the right tools, you can quickly create **professional, data-driven visuals** that help you defend your design ideas.
 
-Whether you’re working on early concepts, preparing for client meetings, or applying for permits, this method saves time and improves quality.
+Whether you’re in early concept phases, prepping for a client meeting, or applying for permits, this method saves time and elevates your work.
 
 ![Context Analysis diagram -1b](/images/2025/07/20250703-SAMPLE-25-style2.jpg)
 
-## Download project files
+## Download Project Files
 
-You can download the project file from the link:
+Want to see exactly how this was set up? Download the project files below!
 
- [ Free download via Gumroad ](https://febhouse.gumroad.com/l/projectexamples25)Or
+> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these resources helpful and would like to support my work, you can download them via **Gumroad** or **Ko-fi** (where you can enter $0 or leave a small tip).*
 
- [ Free download via Ko-fi ](https://ko-fi.com/s/a57775d8de)In Gumroad, you just need to enter **0$** in the “**Name a fair price:**” box and you’ll be able to **download it for free** (You won’t need to enter any bank account information)
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/projectexamples25)
 
-If you want to support me, you can enter any amount you wish. Thank you!
+[ DOWNLOAD VIA KO-FI ](https://ko-fi.com/s/a57775d8de)
 
- [ Free download via GoogleDrive ](https://drive.google.com/file/d/1KVavjTr0iVqXTD6X2wOQ93-1cH6mXOTN/view?usp=sharing)
+[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1KVavjTr0iVqXTD6X2wOQ93-1cH6mXOTN/view?usp=sharing)
 
-## Final Thoughts 
-
-If you're an architect, designer, or student looking to upgrade your diagramming workflow, try combining **Sun Diagram** with **Dynamic Symbols**. They’re lightweight, flexible, and perfect for producing high-quality visuals right inside SketchUp.
-
-If you found this useful, feel free to share or tag me. More diagram templates and tutorials are coming soon!
-
-## Step-by-Step Guide: Create Architectural Diagrams Using SketchUp
-
-- [/create-architectural-diagrams-using-sketchup/](/create-architectural-diagrams-using-sketchup/)
+*(Need a detailed, step-by-step tutorial on this process? Check out our complete guide here: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*
