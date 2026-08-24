@@ -1,5 +1,4 @@
 ---
-layout: ../layouts/BlogPost.astro
 title: 'About ArchiDiagram'
 description: 'ArchiDiagram is an online platform that provides architecture students, designers, and professionals with practical resources for creating clear, impactful architectural diagrams.'
 pubDate: '2025-11-28T22:04:04+07:00'

@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+import { Content, frontmatter } from './_about.md';
+---
+
+<Layout
+	title={frontmatter.title}
+	description={frontmatter.description}
+	pubDate={new Date(frontmatter.pubDate)}
+	heroImage={frontmatter.heroImage}
+>
+	<Content />
+</Layout>
