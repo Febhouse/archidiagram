@@ -2,7 +2,7 @@
 title: 'Tutorial: Create Architectural Diagram with Sun Diagram & Dynamic Symbols'
 description: 'In this tutorial, we’re sharing the updated workflow for creating an architectural diagram animation.'
 pubDate: '2025-11-04T00:25:43+07:00'
-heroImage: '/images/2025/11/SITEANALYSIS-COVER.jpg'
+heroImage: '/images/2026/08/architecturaldiagram.gif'
 tags: 'tutorial'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols, Photoshop'
 ---

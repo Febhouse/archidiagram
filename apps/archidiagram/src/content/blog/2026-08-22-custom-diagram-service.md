@@ -2,7 +2,7 @@
 title: "Custom Architectural Diagram & Site Analysis Service"
 description: "Professional solar and site analysis service to help you validate design impacts with precision, factual data, and presentation clarity."
 pubDate: 2026-01-20
-heroImage: "/images/2026/01/SAMPLE-57cover.jpg"
+heroImage: "/images/2026/08/Services.gif"
 tags: "other resources"
 software: 'SketchUp, Sun Diagram'
 ---

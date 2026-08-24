@@ -2,7 +2,7 @@
 title: 'Architectural diagram with Canva template (style 01)'
 description: 'Creating architectural diagrams with Canva is easy and professional. Motion symbols and notes are already integrated into the diagram. You just need to adjust the positions and directions to fit your project.'
 pubDate: '2025-02-17T10:30:25+07:00'
-heroImage: '/images/2025/11/Architectural-diagrams-style1_Page_1-1.jpg'
+heroImage: '/images/2026/08/Architectural-diagrams-Horizontal-768.gif'
 tags: 'presentation template'
 software: 'Canva'
 ---
