@@ -1,16 +1,167 @@
 ---
 import LandingLayout from '../layouts/LandingLayout.astro';
-import { Content, frontmatter } from './_about.md';
+
+const pageTitle = "About ArchiDiagram";
+const pageDesc = "ArchiDiagram is an online platform that provides architecture students, designers, and professionals with practical resources for creating clear, impactful architectural diagrams.";
+const heroImg = "/wp-content/uploads/2025/06/archidiagram.jpg";
 ---
 
-<LandingLayout
-	title={frontmatter.title}
-	description={frontmatter.description}
-	heroImage={frontmatter.heroImage}
->
-	<div class="max-w-3xl mx-auto w-full">
-		<article class="bg-white dark:bg-slate-900 p-6 sm:p-10 lg:p-12 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm article-content flow-root">
-			<Content />
-		</article>
-	</div>
+<LandingLayout title={pageTitle} description={pageDesc} heroImage={heroImg}>
+	<!-- Hero Section -->
+	<header class="text-center max-w-4xl mx-auto mb-16">
+		<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 mb-5">
+			👋 ABOUT US
+		</div>
+		<h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-6">
+			About ArchiDiagram
+		</h1>
+		<p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-light leading-relaxed max-w-3xl mx-auto mb-8">
+			{pageDesc}
+		</p>
+	</header>
+
+	<!-- The Founder Section -->
+	<section class="mb-24 flex flex-col md:flex-row gap-8 lg:gap-12 items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 lg:p-12 shadow-xl">
+		<div class="w-full md:w-1/2">
+			<img src="/images/2026/08/NAMNH-1920-1024x572.jpg" alt="Nam Nguyen - Founder of ArchiDiagram" class="rounded-2xl w-full h-auto object-cover shadow-md border border-slate-200 dark:border-slate-700">
+		</div>
+		<div class="w-full md:w-1/2">
+			<h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-4">Founded by Nam Nguyen</h2>
+			<p class="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed text-sm sm:text-base">
+				An architect, creator of <a href="https://febhouse.com/" target="_blank" class="text-amber-600 hover:underline font-bold">Febhouse Studio</a>, and a <a href="https://extensions.sketchup.com/developer/582b09fa-9fe2-4248-b9e8-80dc7af69a76" target="_blank" class="text-amber-600 hover:underline font-bold">Verified SketchUp Extension Vendor</a>, ArchiDiagram was born from a simple idea:
+			</p>
+			<blockquote class="border-l-4 border-amber-500 pl-4 italic text-slate-700 dark:text-slate-200 text-lg">
+				“Architectural diagrams should be easy, intuitive, and accessible for everyone—whether you're working on a school project or professional presentation.”
+			</blockquote>
+		</div>
+	</section>
+
+	<!-- Mission & Audience (Cards) -->
+	<section class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-8">
+		<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-lg">
+			<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ OUR MISSION ]</span>
+			<h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1 mb-6">Empowering Architects Visually</h3>
+			<p class="text-slate-600 dark:text-slate-300 text-sm mb-4 leading-relaxed">
+				At ArchiDiagram, our mission is to help architects communicate their ideas more clearly. We do this by offering:
+			</p>
+			<ul class="space-y-3 text-sm text-slate-700 dark:text-slate-300 list-disc list-inside">
+				<li>Free tutorials</li>
+				<li>Presentation templates</li>
+				<li>Diagram symbols &amp; assets</li>
+				<li>Workflow tools</li>
+				<li>SketchUp plugins that speed up diagram creation</li>
+			</ul>
+			<p class="mt-6 p-4 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300 font-medium italic">
+				All resources are designed to make the diagram-making process faster, cleaner, and more professional.
+			</p>
+		</div>
+
+		<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-lg">
+			<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ WHO WE SERVE ]</span>
+			<h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1 mb-6">Who Uses ArchiDiagram?</h3>
+			<p class="text-slate-600 dark:text-slate-300 text-sm mb-4 leading-relaxed">
+				ArchiDiagram has become a trusted resource for creative professionals worldwide:
+			</p>
+			<div class="grid grid-cols-2 gap-4 text-sm text-slate-700 dark:text-slate-300 font-medium">
+				<div class="flex items-center gap-2">🎓 Architecture students</div>
+				<div class="flex items-center gap-2">🏛️ Design studios</div>
+				<div class="flex items-center gap-2">👨‍🏫 Educators</div>
+				<div class="flex items-center gap-2">🏙️ Urban planners</div>
+				<div class="flex items-center gap-2">🎨 3D visualization artists</div>
+				<div class="flex items-center gap-2">👁️ Visual communicators</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- The Story -->
+	<section class="mb-24">
+		<div class="border-b border-slate-200 dark:border-slate-800 pb-3 mb-8">
+			<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ ORIGIN STORY ]</span>
+			<h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">The Story Behind ArchiDiagram</h2>
+		</div>
+		<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-10 shadow-sm leading-relaxed text-slate-600 dark:text-slate-300 text-sm sm:text-base space-y-4">
+			<p>
+				As an architect and content creator, Nam spent years producing architectural diagrams for real projects, competitions, and tutorials on platforms like YouTube, Instagram, and TikTok.
+			</p>
+			<p>
+				Throughout this journey, he noticed one problem:
+			</p>
+			<p class="font-bold text-slate-900 dark:text-white italic text-lg border-l-4 border-amber-500 pl-4 py-1 bg-amber-500/5">
+				👉 Most architects struggled with diagram presentation, even when their ideas were strong.
+			</p>
+			<p>
+				This led to the creation of ArchiDiagram in 2021 — a place where anyone can learn, download templates, and improve their design communication skills in a practical way.
+			</p>
+		</div>
+	</section>
+
+	<!-- Tools & Ecosystem -->
+	<section class="mb-24">
+		<div class="border-b border-slate-200 dark:border-slate-800 pb-3 mb-8">
+			<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ ECOSYSTEM ]</span>
+			<h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Our Tools &amp; Ecosystem</h2>
+		</div>
+
+		<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-10 shadow-xl">
+			<img src="/images/2026/08/FEBHOUSE-ECOSYSTEM-1536x847.jpg.webp" alt="Febhouse Ecosystem" class="w-full rounded-2xl mb-8 shadow-sm border border-slate-200 dark:border-slate-700">
+			
+			<p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mb-6">
+				ArchiDiagram is part of the Febhouse ecosystem—developed by a <a href="https://extensions.sketchup.com/developer/582b09fa-9fe2-4248-b9e8-80dc7af69a76" target="_blank" class="font-bold text-amber-600 hover:underline">Verified SketchUp Extension Vendor</a>—which includes:
+			</p>
+
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+				<a href="https://sundiagram.com/" target="_blank" class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 hover:border-amber-500 transition-colors group block">
+					<h4 class="font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-500">☀️ Sun Diagram</h4>
+					<p class="text-xs text-slate-600 dark:text-slate-300">A SketchUp plugin for visualizing sun paths, solar exposure, and shadow simulations.</p>
+				</a>
+				
+				<a href="https://dynamicsymbols.com/" target="_blank" class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 hover:border-amber-500 transition-colors group block">
+					<h4 class="font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-500">🔄 Dynamic Symbols</h4>
+					<p class="text-xs text-slate-600 dark:text-slate-300">A lightweight plugin that helps create editable, animated symbols for architectural diagrams.</p>
+				</a>
+
+				<a href="/shadow-slice/" class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 hover:border-amber-500 transition-colors group block">
+					<h4 class="font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-500">🔪 Shadow Slice</h4>
+					<p class="text-xs text-slate-600 dark:text-slate-300">Interior Shadow Analysis &amp; Sun Study Tool for SketchUp.</p>
+				</a>
+
+				<a href="/#Presentations" class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 hover:border-amber-500 transition-colors group block">
+					<h4 class="font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-500">📑 Architectural Templates</h4>
+					<p class="text-xs text-slate-600 dark:text-slate-300">Ready-to-use presentation templates to simplify your workflow.</p>
+				</a>
+			</div>
+			
+			<p class="mt-8 text-center font-bold text-slate-900 dark:text-white">
+				Together, these tools help architects present ideas with clarity and confidence.
+			</p>
+		</div>
+	</section>
+
+	<!-- Contact & Support -->
+	<section class="mb-16 text-center max-w-3xl mx-auto bg-gradient-to-b from-white to-slate-100 dark:from-slate-900 dark:to-slate-950 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl">
+		<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ CONNECT ]</span>
+		<h2 class="text-3xl font-black text-slate-900 dark:text-white mt-2 mb-4">Contact &amp; Support</h2>
+		<p class="text-slate-600 dark:text-slate-300 text-sm max-w-xl mx-auto mb-8">
+			For support, collaborations, or business inquiries, feel free to reach out to us. Follow us for tutorials &amp; updates!
+		</p>
+		
+		<div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+			<a href="mailto:info@febhouse.com" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm shadow-lg shadow-amber-500/20 transition-all">
+				📧 info@febhouse.com
+			</a>
+		</div>
+
+		<div class="flex flex-wrap items-center justify-center gap-4 text-sm font-bold">
+			<a href="https://www.instagram.com/febhouse_com" target="_blank" class="text-slate-700 dark:text-slate-300 hover:text-amber-500 transition-colors">Instagram</a>
+			<span class="text-slate-300 dark:text-slate-700">•</span>
+			<a href="https://www.tiktok.com/@febhouse" target="_blank" class="text-slate-700 dark:text-slate-300 hover:text-amber-500 transition-colors">TikTok</a>
+			<span class="text-slate-300 dark:text-slate-700">•</span>
+			<a href="https://www.youtube.com/@febhouse_com" target="_blank" class="text-slate-700 dark:text-slate-300 hover:text-amber-500 transition-colors">YouTube</a>
+		</div>
+
+		<p class="mt-8 text-xs text-slate-500 dark:text-slate-400 italic">
+			Every download, share, and feedback helps us build better tools for the architectural community worldwide. Thank you!
+		</p>
+	</section>
+
 </LandingLayout>
