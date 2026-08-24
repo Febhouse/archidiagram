@@ -1,5 +1,5 @@
 ---
-title: 'Elevate Your Presentation for Architects with Sun Diagram & Shadow Slice'
+title: 'Project example 68'
 description: 'How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
 pubDate: '2026-08-10T23:12:53+07:00'
 heroImage: '/images/2026/08/elevate-presentation-sun-diagram-sketchup.jpg'
@@ -7,7 +7,7 @@ tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
 
-# Elevate Your Presentation for Architects with Sun Diagram & Shadow Slice ☀️
+# Project example 68: Elevate Your Presentation for Architects with Sun Diagram & Shadow Slice ☀️
 
 Hi everyone,
 

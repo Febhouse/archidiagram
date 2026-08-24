@@ -1,4 +1,4 @@
-# FEBHOUSE V2 — Agent & Developer Guide
+﻿# FEBHOUSE V2 â€” Agent & Developer Guide
 
 This document contains **mandatory design, architectural, UI/UX, and performance rules** for the **Febhouse V2** website (`febhouse.com`). All AI assistants and developers working on this codebase MUST strictly follow these rules without exception.
 
@@ -15,7 +15,7 @@ This document contains **mandatory design, architectural, UI/UX, and performance
 
 ## 2. Mandatory UI / UX & Design System Specifications
 
-### 2.1 Border Radius (Bo Góc Standard `8px`)
+### 2.1 Border Radius (Bo GÃ³c Standard `8px`)
 - **Standard Radius**: All content cards, feature previews, diagram containers, code blocks, modal windows, and interactive buttons MUST use **`8px`** (`rounded-lg` / `border-radius: 8px !important;`).
 - **Author Avatar Exception**: The author profile image (`.author-avatar`, `.rounded-full`) in the *"About The Author"* section and footer MUST ALWAYS remain **100% circular (`border-radius: 9999px !important;`)** and must never be overridden by general image rules.
 
@@ -59,10 +59,10 @@ This document contains **mandatory design, architectural, UI/UX, and performance
 ## 4. Dify AI Chatbot Integration & UI Spec
 
 ### 4.1 HTTPS Protocol Enforcement
-- All Dify AI Chatbot iframe sources MUST strictly use `https://` (e.g., `https://ai.febhouse.com/chat/DHgHVZzreBkrUhgz`).
+- All Dify AI Chatbot iframe sources MUST strictly use `https://` (e.g., `https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx`).
 - Never use `http://` to prevent browser mixed-content security blocks.
 
-### 4.2 Floating AI Chat Trigger Button Spec (Góc Dưới Bên Phải)
+### 4.2 Floating AI Chat Trigger Button Spec (GÃ³c DÆ°á»›i BÃªn Pháº£i)
 - **Position**: `fixed bottom-6 right-6 z-50`.
 - **Styling**:
   ```html
@@ -91,7 +91,7 @@ This document contains **mandatory design, architectural, UI/UX, and performance
       <div class="px-4 py-3 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
           <div class="flex items-center gap-2.5">
               <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm border border-amber-500/30">
-                  🤖
+                  ðŸ¤–
               </div>
               <div>
                   <div class="text-sm font-bold leading-tight">Febhouse AI Assistant</div>
@@ -109,7 +109,7 @@ This document contains **mandatory design, architectural, UI/UX, and performance
       <div class="flex-1 w-full h-full bg-slate-950">
           <iframe
               id="main-ai-iframe"
-              data-src="https://ai.febhouse.com/chat/DHgHVZzreBkrUhgz"
+              data-src="https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx"
               src="about:blank"
               class="w-full h-full border-0"
               allow="microphone; clipboard-write"
@@ -119,7 +119,7 @@ This document contains **mandatory design, architectural, UI/UX, and performance
   </div>
   ```
 
-### 4.4 Tích Hợp Bot Dify Vào FAQ Accordion
+### 4.4 TÃ­ch Há»£p Bot Dify VÃ o FAQ Accordion
 In the FAQ Section (`src/components/FaqAccordion.astro`), place a direct action button in the section header alongside the title so users can trigger the AI Assistant directly:
 
 ```html
@@ -135,7 +135,7 @@ In the FAQ Section (`src/components/FaqAccordion.astro`), place a direct action 
             onclick="window.toggleMainAiChat()" 
             class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs font-bold hover:bg-amber-500/20 transition-colors self-start sm:self-auto cursor-pointer"
         >
-            ✨ Ask Febhouse AI Bot
+            âœ¨ Ask Febhouse AI Bot
         </button>
     </div>
 </section>
@@ -177,3 +177,4 @@ npm run build
 # Preview build output locally
 npm run preview
 ```
+
