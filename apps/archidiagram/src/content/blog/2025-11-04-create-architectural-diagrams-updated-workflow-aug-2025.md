@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Tutorial: Create Architectural Diagram with Sun Diagram & Dynamic Symbols'
 description: 'In this tutorial, we’re sharing the updated workflow for creating an architectural diagram animation.'
 pubDate: '2025-11-04T00:25:43+07:00'
@@ -36,7 +36,8 @@ https://www.youtube.com/watch?v=fqHZ3m-OYug
 
 All project files (2D + 3D) are included
 
- [ FREE DOWNLOAD VIA GOOGLE DRIVE ](https://drive.google.com/file/d/1JIU6Nrvut1YXfP7HKgXJGSyCnz-pIZTU/view?usp=sharing)Let’s get started.
+ [ FREE DOWNLOAD ](https://assets.archidiagram.com/Samples/TUTORIAL-2D%2B3DFILES.zip)
+ Let’s get started.
 
 ## Tutorial (step-by-step guide and videos):
 
@@ -51,6 +52,7 @@ All project files (2D + 3D) are included
 
 **Let's get started !**
 
+<a id="step1"></a>
 ## STEP 1: Import Terrain and Map Data
 
 https://www.youtube.com/watch?v=BuSYwEcNwWo
@@ -62,6 +64,7 @@ https://www.youtube.com/watch?v=BuSYwEcNwWo
 5. Highlight the area you want to focus on and click **Import Site Context**.
 6. SketchUp will automatically download terrain data and satellite maps
 
+<a id="step2"></a>
 ## STEP 2: Create Contour Lines
 
 https://www.youtube.com/watch?v=OWTfCmzZ7ww
@@ -76,6 +79,7 @@ https://www.youtube.com/watch?v=OWTfCmzZ7ww
 8. To ensure shadow reception when the satellite map opacity is low, create another identical terrain layer, **Explode** it , fill it with **white**, and place it slightly below (e.g., 0.2m gap) the satellite image layer.
 9. For uneven terrain, turn off the shadows cast onto the ground and keep only the shadows on the faces
 
+<a id="step3"></a>
 ## STEP 3: Create a 3D Sun Path with Sun Diagram Plugin
 
 https://www.youtube.com/watch?v=JuIJqWk_S0w
@@ -86,6 +90,7 @@ https://www.youtube.com/watch?v=JuIJqWk_S0w
 4. Move and scale the 3D Sun Path to fit your view; this won't affect the shadow results.
 5. Select the display style of the diagram using the 4th feature of Sun Diagram (e.g., choose **Style 01** for a bright-style diagram).
 
+<a id="step4"></a>
 ## STEP 4: Add Symbols (Wind, Views, etc.) with Dynamic Symbols Plugin
 
 https://www.youtube.com/watch?v=VOl67HeTK8M
@@ -96,6 +101,7 @@ https://www.youtube.com/watch?v=VOl67HeTK8M
 4. Rotate and scale it to fit your diagram.
 5. Color the symbols using the 3rd feature of Dynamic Symbols, or use SketchUp’s default materials.
 
+<a id="step5"></a>
 ## STEP 5: Create a Shadow Analysis using Sun Diagram
 
 https://www.youtube.com/watch?v=XfVejlkLRRA
@@ -113,6 +119,7 @@ https://www.youtube.com/watch?v=XfVejlkLRRA
 11. Export the file as a video.
 12. Repeat the process for multiple months (e.g., December, June, and September).
 
+<a id="step6"></a>
 ## STEP 6: Combine Images and Videos into a Final Animated Diagram
 
 https://www.youtube.com/watch?v=XDDJ7J3_zsE
@@ -133,6 +140,7 @@ https://www.youtube.com/watch?v=XDDJ7J3_zsE
 14. Reduce the opacity of the dynamic symbols video layer a little.
 15. Export the final combined video.
 
+<a id="final"></a>
 ## **Final Result** 
 
 https://www.youtube.com/watch?v=fqHZ3m-OYug
@@ -144,3 +152,5 @@ That’s it! 🎉 You now have a complete architectural diagram animation combin
 If you found this tutorial useful:  
 👉 Leave a comment and share your results.  
 👉 Follow us to get updates on new workflows and free resources.
+
+

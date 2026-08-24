@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Tutorial: Create Ventilation Analysis Diagram with SketchUp, Rwind & Photoshop'
 description: 'Here’s a step-by-step tutorial on how to create a ventilation analysis diagram using Rwind and Photoshop.'
 pubDate: '2025-03-25T11:18:34+07:00'
@@ -36,7 +36,7 @@ All files used in the tutorial *(3D model, trees.png, indoor.png) (FREE)*
 
  [  
  DOWNLOAD FILE  
- ](https://drive.google.com/drive/folders/1fVsfPCkovZHFd-UbA2Bp28pXPJxXvE8s?usp=sharing)
+ ](https://assets.archidiagram.com/Samples/VENTILATION%20TUTORIAL.zip)
 
 ## Tutorial (step-by-step guide and videos):
 
@@ -49,6 +49,7 @@ All files used in the tutorial *(3D model, trees.png, indoor.png) (FREE)*
 
 **Let's get started !**
 
+<a id="step1"></a>
 ## **STEP 1: Create a 3D model in SketchUp**
 
 https://www.youtube.com/watch?v=Ir4KS6us0HE
@@ -65,6 +66,7 @@ https://www.youtube.com/watch?v=Ir4KS6us0HE
     - **File &gt; Export &gt; 3D Model**
     - Select **STL format** and ensure the unit is set to **meters**.
 
+<a id="step2"></a>
 ## **STEP 2: Import the Model into Rwind Simulation**
 
 https://www.youtube.com/watch?v=Ir4KS6us0HE
@@ -79,6 +81,7 @@ https://www.youtube.com/watch?v=Ir4KS6us0HE
     - If studying only horizontal airflow, adjust the box height accordingly.
 5.
 
+<a id="step3"></a>
 ## **STEP 3: Set Up the Simulation in Rwind**
 
 https://www.youtube.com/watch?v=Ir4KS6us0HE
@@ -91,6 +94,7 @@ https://www.youtube.com/watch?v=Ir4KS6us0HE
 2. Click **OK**, then **Calculate Results**.
 3. Wait for the simulation to complete.
 
+<a id="step4"></a>
 ## **STEP 4: Visualizing Airflow**
 
 https://www.youtube.com/watch?v=Ir4KS6us0HE
@@ -110,6 +114,7 @@ https://www.youtube.com/watch?v=Ir4KS6us0HE
     - Click **Start**, then select **Flow Animation**.
     - Choose a **save location** and export the video.
 
+<a id="step5"></a>
 ## **STEP 5:Post-Processing in Photoshop**
 
 https://www.youtube.com/watch?v=Ir4KS6us0HE
@@ -124,8 +129,10 @@ https://www.youtube.com/watch?v=Ir4KS6us0HE
 8. Crop the video to focus on **key moments**.
 9. Export the **final processed video**.
 
+<a id="step6"></a>
 ## **Final Result** 
 
 https://www.youtube.com/watch?v=Ir4KS6us0HE
 
 Thanks for watching !
+

@@ -41,6 +41,12 @@ const posts = (await getCollection('blog'))
 							Browse All Resources & Diagrams
 						</h2>
 					</div>
+					<div class="relative w-full md:w-64 shrink-0">
+						<input type="text" id="search-input" placeholder="Search resources..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-sm font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-shadow" />
+						<svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+						</svg>
+					</div>
 				</div>
 
 				<!-- HORIZONTAL FILTER TABS (Category & Software) -->
@@ -117,7 +123,7 @@ const posts = (await getCollection('blog'))
 						const tagValue = (post.data.tags || "").trim().toLowerCase();
 						const softwareValue = ((post.data.software || (post.data as any).Software) || "").trim().toLowerCase();
 						return (
-							<div class="post-card-item" data-post-tag={tagValue} data-post-software={softwareValue}>
+							<div class="post-card-item" data-post-tag={tagValue} data-post-software={softwareValue} data-post-title={post.data.title.toLowerCase()} data-post-desc={(post.data.description || '').toLowerCase()}>
 								<Card 
 									id={post.id}
 									title={post.data.title}
@@ -144,9 +150,11 @@ const posts = (await getCollection('blog'))
 			const tabBtns = document.querySelectorAll('.tab-btn');
 			const swBtns = document.querySelectorAll('.sw-filter-btn');
 			const postItems = document.querySelectorAll('.post-card-item');
+			const searchInput = document.getElementById('search-input') as HTMLInputElement;
 
 			let activeCategory = 'all';
 			let activeSoftware = 'all';
+			let activeSearchQuery = '';
 
 			function applyFilters() {
 				// Update Category Tab UI
@@ -177,6 +185,13 @@ const posts = (await getCollection('blog'))
 				postItems.forEach(item => {
 					const itemTag = (item.getAttribute('data-post-tag') || '').toLowerCase();
 					const itemSw = (item.getAttribute('data-post-software') || '').toLowerCase();
+					const itemTitle = (item.getAttribute('data-post-title') || '').toLowerCase();
+					const itemDesc = (item.getAttribute('data-post-desc') || '').toLowerCase();
+
+					let matchSearch = true;
+					if (activeSearchQuery !== '') {
+						matchSearch = itemTitle.includes(activeSearchQuery) || itemDesc.includes(activeSearchQuery);
+					}
 
 					let matchCategory = false;
 					if (activeCategory === 'all') {
@@ -198,7 +213,7 @@ const posts = (await getCollection('blog'))
 						matchSoftware = true;
 					}
 
-					if (matchCategory && matchSoftware) {
+					if (matchCategory && matchSoftware && matchSearch) {
 						(item as HTMLElement).style.display = 'block';
 					} else {
 						(item as HTMLElement).style.display = 'none';
@@ -236,6 +251,14 @@ const posts = (await getCollection('blog'))
 					applyFilters();
 				});
 			});
+
+			// Add input listener to search input
+			if (searchInput) {
+				searchInput.addEventListener('input', (e) => {
+					activeSearchQuery = (e.target as HTMLInputElement).value.toLowerCase();
+					applyFilters();
+				});
+			}
 
 			// Add click listeners to all links targeting a category
 			const categoryLinks = document.querySelectorAll('[data-category-target]');
