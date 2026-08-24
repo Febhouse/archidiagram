@@ -13,6 +13,8 @@ Founded by [**Nam Nguyen (Nguyễn Hà Nam)**](https://www.linkedin.com/in/namng
 
 📌 *“Architectural diagrams should be easy, intuitive, and accessible for everyone—whether you're working on a school project or professional presentation.”*
 
+![Nam Nguyen](/images/2026/08/NAMNH-1920-1024x572.jpg)
+
 ## Our Mission
 
 At ArchiDiagram, our mission is to help architects communicate their ideas more clearly.  
