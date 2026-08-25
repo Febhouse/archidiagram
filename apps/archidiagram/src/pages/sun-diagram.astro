@@ -1,4 +1,4 @@
-﻿---
+---
 import LandingLayout from "../layouts/LandingLayout.astro";
 
 const pageTitle =
@@ -30,12 +30,41 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 			sunlight in architectural projects.
 		</h1>
 		<p
-			class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-light leading-relaxed max-w-3xl mx-auto"
+			class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-light leading-relaxed max-w-3xl mx-auto mb-8"
 		>
 			Accurate solar simulation, real-time interactive shadow studies,
 			daylight saving time calculations, and one-click batch animation
 			exports for SketchUp 2020–2026.
 		</p>
+
+		<div class="flex flex-col items-center justify-center gap-8 mt-10">
+			<!-- Trust Badge (Logo + Stars) -->
+			<div class="flex items-center gap-4 bg-white/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-4 pr-6 rounded-2xl shadow-sm backdrop-blur-md">
+				<img src="/images/LOGO/SunDiagram-logo.svg" alt="Sun Diagram Logo" class="w-14 h-14 object-contain drop-shadow-sm" />
+				<div class="flex flex-col items-start border-l border-slate-300 dark:border-slate-700 pl-4">
+					<a href="https://extensions.sketchup.com/search/?q=febhouse" target="_blank" rel="noopener" class="flex items-center gap-1 text-amber-500 text-lg mb-0.5 tracking-tighter hover:scale-105 transition-transform cursor-pointer" aria-label="5 stars">
+						★★★★★
+					</a>
+					<div class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5 leading-snug text-left">
+						Trusted by <strong class="text-slate-900 dark:text-white text-sm">38,000+</strong> users<br/>
+						<a href="https://extensions.sketchup.com/search/?q=febhouse" target="_blank" rel="noopener" class="text-amber-600 dark:text-amber-400 hover:underline inline-flex items-center gap-0.5 mt-0.5">
+							Verify on Extension Warehouse ↗
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main CTA Button -->
+			<a
+				href="#download"
+				class="px-8 py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm sm:text-base shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 transition-all transform hover:-translate-y-1 flex items-center gap-2"
+			>
+				<span>Get Sun Diagram</span>
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 animate-bounce" viewBox="0 0 20 20" fill="currentColor">
+					<path fill-rule="evenodd" d="M10 3a1 1 0 011 1v10.586l3.293-3.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 14.586V4a1 1 0 011-1z" clip-rule="evenodd" />
+				</svg>
+			</a>
+		</div>
 	</header>
 
 	<!-- FEATURES SECTION -->
@@ -65,33 +94,34 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 					<img
 						src="/images/2026/06/1F.gif"
 						alt="Create Sun path diagram"
-						class="w-full h-auto rounded-[8px] object-cover"
-						style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;"
+						class="w-full h-auto rounded-[8px] object-cover shadow-none border-none block"
 						loading="lazy"
 					/>
 				</div>
 				<div
 					class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4"
 				>
-					<a
-						href="https://youtu.be/hMH1T1M9wic?si=aGubLEJYJBnTxyVd&t=20"
-						target="_blank"
-						rel="noopener"
-						class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors mb-3"
-					>
-						<span>1. Create Sunpath (Feature 1)</span>
-						<svg
-							class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							><path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+					<h3 class="mb-3">
+						<a
+							href="https://youtu.be/hMH1T1M9wic?si=aGubLEJYJBnTxyVd&t=20"
+							target="_blank"
+							rel="noopener"
+							class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
 						>
-					</a>
+							<span>1. Create Sunpath (Feature 1)</span>
+							<svg
+								class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								><path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+							>
+						</a>
+					</h3>
 					<p
 						class="text-slate-600 dark:text-slate-300 font-medium mb-3"
 					>
@@ -154,33 +184,34 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 					<img
 						src="/images/2026/06/2F.gif"
 						alt="Shadow Analysis"
-						class="w-full h-auto rounded-[8px] object-cover"
-						style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;"
+						class="w-full h-auto rounded-[8px] object-cover shadow-none border-none block"
 						loading="lazy"
 					/>
 				</div>
 				<div
 					class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4"
 				>
-					<a
-						href="https://youtu.be/hMH1T1M9wic?si=DsYa1dOm9t1ofW2e&t=79"
-						target="_blank"
-						rel="noopener"
-						class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors mb-3"
-					>
-						<span>2. Shadow Analysis (Feature 2)</span>
-						<svg
-							class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							><path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+					<h3 class="mb-3">
+						<a
+							href="https://youtu.be/hMH1T1M9wic?si=DsYa1dOm9t1ofW2e&t=79"
+							target="_blank"
+							rel="noopener"
+							class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
 						>
-					</a>
+							<span>2. Shadow Analysis (Feature 2)</span>
+							<svg
+								class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								><path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+							>
+						</a>
+					</h3>
 					<p
 						class="text-slate-600 dark:text-slate-300 font-medium mb-3"
 					>
@@ -236,33 +267,34 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 					<img
 						src="/images/2026/03/20260311-F3.gif"
 						alt="Batch export shadow and Sun position images"
-						class="w-full h-auto rounded-[8px] object-cover"
-						style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;"
+						class="w-full h-auto rounded-[8px] object-cover shadow-none border-none block"
 						loading="lazy"
 					/>
 				</div>
 				<div
 					class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4"
 				>
-					<a
-						href="https://youtu.be/hMH1T1M9wic?si=UYsvk8LnAds2ccUL&t=132"
-						target="_blank"
-						rel="noopener"
-						class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors mb-3"
-					>
-						<span>3. Batch Export Shadows (Feature 3)</span>
-						<svg
-							class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							><path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+					<h3 class="mb-3">
+						<a
+							href="https://youtu.be/hMH1T1M9wic?si=UYsvk8LnAds2ccUL&t=132"
+							target="_blank"
+							rel="noopener"
+							class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
 						>
-					</a>
+							<span>3. Batch Export Shadows (Feature 3)</span>
+							<svg
+								class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								><path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+							>
+						</a>
+					</h3>
 					<p
 						class="text-slate-600 dark:text-slate-300 font-medium mb-3"
 					>
@@ -314,33 +346,34 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 					<img
 						src="/images/2026/06/4F.gif"
 						alt="Diagram Style"
-						class="w-full h-auto rounded-[8px] object-cover"
-						style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;"
+						class="w-full h-auto rounded-[8px] object-cover shadow-none border-none block"
 						loading="lazy"
 					/>
 				</div>
 				<div
 					class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4"
 				>
-					<a
-						href="https://www.youtube.com/shorts/G2O8383bOGk"
-						target="_blank"
-						rel="noopener"
-						class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors mb-3"
-					>
-						<span>4. Diagram Styles (Feature 4)</span>
-						<svg
-							class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							><path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+					<h3 class="mb-3">
+						<a
+							href="https://www.youtube.com/shorts/G2O8383bOGk"
+							target="_blank"
+							rel="noopener"
+							class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
 						>
-					</a>
+							<span>4. Diagram Styles (Feature 4)</span>
+							<svg
+								class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								><path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+							>
+						</a>
+					</h3>
 					<p
 						class="text-slate-600 dark:text-slate-300 font-medium mb-3"
 					>
@@ -456,8 +489,7 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 					<img
 						src="/images/2025/10/SHADOWANALYSIS-DEC.gif"
 						alt="Diagrams Created with Sun Diagram"
-						class="w-full h-auto rounded-[8px] object-cover"
-						style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;"
+						class="w-full h-auto rounded-[8px] object-cover shadow-none border-none block"
 						loading="lazy"
 					/>
 				</div>
@@ -585,16 +617,16 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 							href="https://extensions.sketchup.com/extension/5aa1ab3d-36ff-4510-ae63-84f677a36f3a/sun-diagram"
 							target="_blank"
 							rel="noopener"
-							class="mt-2 block w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 font-bold text-xs shadow-md transition-colors"
+							class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 font-bold text-xs shadow-md transition-colors"
 						>
+							<img src="/images/LOGO/SketchUp-logo.svg" alt="SketchUp" class="w-4 h-4 object-contain" />
 							Download via Extension Warehouse
 						</a>
 					</div>
 					<p
-						class="text-xs text-center text-slate-500 dark:text-slate-400 pt-1"
+						class="text-xs text-center text-slate-500 dark:text-slate-400 pt-2 flex items-center justify-center gap-1.5"
 					>
-						Official Free Release • Compatible with SketchUp
-						2020–2026
+						<span class="text-emerald-500">🔥</span> Trusted by <strong class="text-slate-700 dark:text-slate-200">38,000+</strong> users worldwide
 					</p>
 				</div>
 			</div>
@@ -703,8 +735,9 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 							href="https://extensions.sketchup.com/extension/b2e8e5b3-7dc1-45b9-813c-8c9c553d461b/sun-diagram-studio"
 							target="_blank"
 							rel="noopener"
-							class="mt-2 block w-full py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-md transition-colors"
+							class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-md transition-colors"
 						>
+							<img src="/images/LOGO/SketchUp-logo.svg" alt="SketchUp" class="w-4 h-4 object-contain" />
 							Subscribe via Extension Warehouse
 						</a>
 					</div>
@@ -725,16 +758,17 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 						</div>
 						<a
 							href="https://febhouse.gumroad.com/l/Sundiagram"
-							class="mt-2 block w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 transition-all shadow-md active:scale-[0.98]"
+							class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 transition-all shadow-md active:scale-[0.98]"
 							data-gumroad-single-product="true"
 						>
+							<img src="/images/LOGO/gumroad-icon.svg" alt="Gumroad" class="w-4 h-4 object-contain" />
 							Buy Lifetime via Gumroad
 						</a>
 					</div>
 					<p
 						class="text-xs text-center text-slate-500 dark:text-slate-400 pt-1"
 					>
-						Prefer SketchUcation? <a
+						Prefer <span class="font-bold tracking-tight text-[#23374b] dark:text-white">sketch<span class="text-[#df3531]">U</span>cation</span>? <a
 							href="https://sketchucation.com/plugin/3102-febsundiagrampro"
 							target="_blank"
 							rel="noopener"
@@ -981,38 +1015,48 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 			</p>
 		</div>
 
-		<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-			<div class="rounded-xl overflow-hidden bg-transparent p-1">
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8">
+			<button type="button" onclick="document.getElementById('lightboxImg').src='/images/2026/04/SunDiagram-UserGuide-1.jpg'; document.getElementById('imageLightbox').classList.replace('hidden','flex');" class="block w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all bg-white dark:bg-slate-900 group cursor-zoom-in">
 				<img
 					src="/images/2026/04/SunDiagram-UserGuide-1.jpg"
 					alt="SunDiagram User Guide Page 1"
-					class="w-full h-auto object-contain rounded-lg"
+					class="w-full h-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity"
 					loading="lazy"
 				/>
-			</div>
-			<div class="rounded-xl overflow-hidden bg-transparent p-1">
+			</button>
+			<button type="button" onclick="document.getElementById('lightboxImg').src='/images/2026/04/SunDiagram-UserGuide-2.jpg'; document.getElementById('imageLightbox').classList.replace('hidden','flex');" class="block w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all bg-white dark:bg-slate-900 group cursor-zoom-in">
 				<img
 					src="/images/2026/04/SunDiagram-UserGuide-2.jpg"
 					alt="SunDiagram User Guide Page 2"
-					class="w-full h-auto object-contain rounded-lg"
+					class="w-full h-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity"
 					loading="lazy"
 				/>
-			</div>
-			<div class="rounded-xl overflow-hidden bg-transparent p-1">
+			</button>
+			<button type="button" onclick="document.getElementById('lightboxImg').src='/images/2026/04/SunDiagram-UserGuide-3.jpg'; document.getElementById('imageLightbox').classList.replace('hidden','flex');" class="block w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all bg-white dark:bg-slate-900 group cursor-zoom-in">
 				<img
 					src="/images/2026/04/SunDiagram-UserGuide-3.jpg"
 					alt="SunDiagram User Guide Page 3"
-					class="w-full h-auto object-contain rounded-lg"
+					class="w-full h-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity"
 					loading="lazy"
 				/>
-			</div>
-			<div class="rounded-xl overflow-hidden bg-transparent p-1">
+			</button>
+			<button type="button" onclick="document.getElementById('lightboxImg').src='/images/2026/04/SunDiagram-UserGuide-4.jpg'; document.getElementById('imageLightbox').classList.replace('hidden','flex');" class="block w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all bg-white dark:bg-slate-900 group cursor-zoom-in">
 				<img
 					src="/images/2026/04/SunDiagram-UserGuide-4.jpg"
 					alt="SunDiagram User Guide Page 4"
-					class="w-full h-auto object-contain rounded-lg"
+					class="w-full h-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity"
 					loading="lazy"
 				/>
+			</button>
+		</div>
+
+		<!-- Simple Image Lightbox -->
+		<div id="imageLightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 sm:p-12 cursor-zoom-out opacity-0 transition-opacity duration-300 [&.flex]:opacity-100" onclick="this.classList.replace('flex','hidden')">
+			<div class="relative max-w-5xl w-full h-full max-h-[90vh] flex items-center justify-center">
+				<img id="lightboxImg" src="" alt="Zoomed Guide" class="max-w-full max-h-full object-contain rounded-xl shadow-2xl" />
+				<button type="button" class="absolute -top-12 right-0 sm:-right-12 sm:top-0 bg-slate-900/50 hover:bg-slate-900 rounded-full text-white/90 hover:text-amber-400 z-10 p-2 transition-all backdrop-blur-sm border border-white/10 cursor-pointer" onclick="document.getElementById('imageLightbox').classList.replace('flex','hidden')">
+					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+				</button>
 			</div>
 		</div>
 
@@ -1073,7 +1117,7 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 			</div>
 			<button
 				type="button"
-				onclick="window.openLandingAiChat()"
+				onclick="window.toggleMainAiChat()"
 				class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs font-bold hover:bg-amber-500/20 transition-colors self-start sm:self-auto cursor-pointer"
 			>
 				✨ Ask Sun Diagram AI Bot
@@ -1327,8 +1371,7 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 							<img
 								src="/images/2026/04/check-dst-location.jpg"
 								alt="Check DST Location"
-								class="w-full h-auto rounded-[8px] object-cover"
-								style="width: 100% !important; height: auto !important; border-radius: 8px !important;"
+								class="w-full h-auto rounded-[8px] object-cover block"
 								loading="lazy"
 							/>
 						</div>
@@ -1462,8 +1505,7 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 							<img
 								src="/images/2026/04/HUD.jpg"
 								alt="Sun Diagram HUD Reset"
-								class="w-full h-auto rounded-[8px] object-cover"
-								style="width: 100% !important; height: auto !important; border-radius: 8px !important;"
+								class="w-full h-auto rounded-[8px] object-cover block"
 								loading="lazy"
 							/>
 						</div>

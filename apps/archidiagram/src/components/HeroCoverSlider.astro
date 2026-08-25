@@ -155,32 +155,7 @@ const slides: Slide[] = [
 			))}
 		</div>
 
-		<!-- Sleek Bottom-Right Navigation Arrows (Low down to avoid obscuring text) -->
-		<div class="absolute bottom-5 sm:bottom-8 md:bottom-10 right-4 sm:right-8 md:right-12 lg:right-16 z-30 flex items-center gap-2 sm:gap-3 bg-white/80 dark:bg-slate-950/70 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-md">
-			<button
-				id="slider-prev-btn"
-				type="button"
-				aria-label="Previous Slide"
-				title="Previous Slide"
-				class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/90 dark:bg-slate-900/90 hover:bg-amber-400 dark:hover:bg-amber-400 text-slate-800 dark:text-white hover:text-slate-950 dark:hover:text-slate-950 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
-			>
-				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
-				</svg>
-			</button>
 
-			<button
-				id="slider-next-btn"
-				type="button"
-				aria-label="Next Slide"
-				title="Next Slide"
-				class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/90 dark:bg-slate-900/90 hover:bg-amber-400 dark:hover:bg-amber-400 text-slate-800 dark:text-white hover:text-slate-950 dark:hover:text-slate-950 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
-			>
-				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-				</svg>
-			</button>
-		</div>
 
 	</div>
 </section>
@@ -234,12 +209,10 @@ const slides: Slide[] = [
 	const totalSlides = 4;
 	let currentIndex = 0;
 	let autoPlayTimer: any = null;
-	const slideDuration = 4000; // 4 seconds per slide for comfortable reading
+	const slideDuration = 3000; // 3 seconds per slide for a snappier feel
 
-	const slideItems = document.querySelectorAll('.slide-item');
-	const prevBtn = document.getElementById('slider-prev-btn');
-	const nextBtn = document.getElementById('slider-next-btn');
 	const sliderFrame = document.querySelector('#hero-cover-slider');
+	const slideItems = sliderFrame ? sliderFrame.querySelectorAll('.slide-item') : [];
 
 	function ensureSlideLoaded(index: number) {
 		const targetImg = slideItems[index]?.querySelector('.hero-cover-img');
@@ -288,16 +261,7 @@ const slides: Slide[] = [
 		autoPlayTimer = setInterval(nextSlide, slideDuration);
 	}
 
-	// Button Click Handlers
-	prevBtn?.addEventListener('click', (e) => {
-		e.preventDefault();
-		prevSlide();
-	});
 
-	nextBtn?.addEventListener('click', (e) => {
-		e.preventDefault();
-		nextSlide();
-	});
 
 	// Pause on hover
 	sliderFrame?.addEventListener('mouseenter', () => {

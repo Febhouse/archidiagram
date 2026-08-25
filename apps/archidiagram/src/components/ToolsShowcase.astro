@@ -1,6 +1,8 @@
 ---
 interface ToolLink {
 	text: string;
+	subText?: string;
+	icon?: string;
 	url: string;
 	primary?: boolean;
 }
@@ -31,7 +33,9 @@ const tools: Tool[] = [
 		previewImg: "/images/2026/01/DYNAMICSYMBOLS.gif",
 		links: [
 			{
-				text: "Free Download from Extension Warehouse",
+				text: "Free Download",
+				subText: "from Extension Warehouse",
+				icon: "/images/LOGO/SketchUp-logo.svg",
 				url: "https://extensions.sketchup.com/extension/21085584-a984-474d-8407-33087adec402/dynamic-symbols",
 				primary: true
 			},
@@ -57,7 +61,9 @@ const tools: Tool[] = [
 		previewImg: "/images/2026/01/SHADOWANALYSIS-DEC-CROPlogo.gif",
 		links: [
 			{
-				text: "Free Download from Extension Warehouse",
+				text: "Free Download",
+				subText: "from Extension Warehouse",
+				icon: "/images/LOGO/SketchUp-logo.svg",
 				url: "https://extensions.sketchup.com/extension/5aa1ab3d-36ff-4510-ae63-84f677a36f3a/sun-diagram",
 				primary: true
 			},
@@ -82,7 +88,9 @@ const tools: Tool[] = [
 		previewImg: "/images/2026/06/Feature02.gif",
 		links: [
 			{
-				text: "Free Download from Extension Warehouse",
+				text: "Free Download",
+				subText: "from Extension Warehouse",
+				icon: "/images/LOGO/SketchUp-logo.svg",
 				url: "https://extensions.sketchup.com/extension/e10f7017-931a-45a9-8e5d-d65df0926ddd/shadow-slice",
 				primary: true
 			},
@@ -105,9 +113,18 @@ const tools: Tool[] = [
 			<h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight text-slate-900 dark:text-white mb-4">
 				Essential Workflows & Tools
 			</h2>
-			<p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg font-light leading-relaxed">
+			<p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg font-light leading-relaxed mb-8">
 				Accelerate your environmental analysis, shadow sectioning, and diagram presentation in SketchUp.
 			</p>
+			<a href="https://extensions.sketchup.com/search/?q=febhouse" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all group shadow-sm">
+				<img src="/images/LOGO/SketchUp-logo.svg" alt="SketchUp" class="w-6 h-6 object-contain" />
+				<span class="text-sm font-semibold text-slate-800 dark:text-slate-200">
+					Trusted by <span class="text-amber-600 dark:text-amber-400">45,000+</span> architects on Extension Warehouse
+				</span>
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 group-hover:text-amber-500 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+				</svg>
+			</a>
 		</div>
 
 		<!-- 3 Core Tools Grid with Official Extension Logos -->
@@ -128,9 +145,11 @@ const tools: Tool[] = [
 							<div class="w-12 h-12 shrink-0 flex items-center justify-center">
 								<img src={tool.logoImg} alt={`${tool.name} Official Logo`} class="w-full h-full object-contain" />
 							</div>
-							<a href={tool.nameLink} target="_blank" rel="noopener" class="text-xl lg:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
-								{tool.name}
-							</a>
+							<h3 class="m-0 p-0 leading-none">
+								<a href={tool.nameLink} target="_blank" rel="noopener" class="text-xl lg:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+									{tool.name}
+								</a>
+							</h3>
 						</div>
 
 						<p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
@@ -153,10 +172,14 @@ const tools: Tool[] = [
 					<div class="px-6 pb-6 md:px-8 md:pb-8 pt-2 flex flex-col gap-3">
 						<!-- Button CTAs -->
 						{tool.links.map(link => (
-							<a href={link.url} target="_blank" rel="noopener" class={`w-full py-3.5 px-4 rounded-xl text-[11px] font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] ${link.primary ? 'text-slate-950 bg-amber-400 hover:bg-amber-300 group-hover:shadow-md' : 'text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'}`}>
-								<span>{link.text}</span>
-								{link.primary && (
-									<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<a href={link.url} target="_blank" rel="noopener" class={`w-full py-2.5 px-4 rounded-xl text-[12px] font-bold transition-all flex items-center justify-center gap-2.5 shadow-sm active:scale-[0.98] ${link.primary ? 'text-slate-950 bg-amber-400 hover:bg-amber-300 group-hover:shadow-md' : 'text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'}`}>
+								{link.icon && <img src={link.icon} alt="" class="w-5 h-5 object-contain" />}
+								<div class="flex flex-col items-center sm:items-start text-center sm:text-left leading-tight">
+									<span class="uppercase tracking-wider">{link.text}</span>
+									{link.subText && <span class="text-[10px] font-semibold opacity-75 normal-case tracking-normal">{link.subText}</span>}
+								</div>
+								{link.primary && !link.subText && (
+									<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
 									</svg>
 								)}

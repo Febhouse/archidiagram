@@ -1,4 +1,4 @@
-﻿---
+---
 import LandingLayout from '../layouts/LandingLayout.astro';
 
 const pageTitle = "Shadow Slice: Interior Shadow & Section Tool For SketchUp";
@@ -15,9 +15,38 @@ const heroImg = "/images/2026/01/Shadow_Slice_1024.jpg";
 		<h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-6">
 			Shadow Slice – Interior Shadow & Section Tool For SketchUp
 		</h1>
-		<p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-light leading-relaxed max-w-3xl mx-auto">
+		<p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-light leading-relaxed max-w-3xl mx-auto mb-8">
 			Cut away walls and roofs while keeping their natural shadows. The essential tool for interior sunlight simulation and perspective section diagrams.
 		</p>
+
+		<div class="flex flex-col items-center justify-center gap-8 mt-10">
+			<!-- Trust Badge (Logo + Stars) -->
+			<div class="flex items-center gap-4 bg-white/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-4 pr-6 rounded-2xl shadow-sm backdrop-blur-md">
+				<img src="/images/LOGO/Shadowslice-logo.svg" alt="Shadow Slice Logo" class="w-14 h-14 object-contain drop-shadow-sm" />
+				<div class="flex flex-col items-start border-l border-slate-300 dark:border-slate-700 pl-4">
+					<a href="https://extensions.sketchup.com/search/?q=febhouse" target="_blank" rel="noopener" class="flex items-center gap-1 text-amber-500 text-lg mb-0.5 tracking-tighter hover:scale-105 transition-transform cursor-pointer" aria-label="5 stars">
+						★★★★★
+					</a>
+					<div class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5 leading-snug text-left">
+						Trusted by <strong class="text-slate-900 dark:text-white text-sm">1,700+</strong> users<br/>
+						<a href="https://extensions.sketchup.com/search/?q=febhouse" target="_blank" rel="noopener" class="text-amber-600 dark:text-amber-400 hover:underline inline-flex items-center gap-0.5 mt-0.5">
+							Verify on Extension Warehouse ↗
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main CTA Button -->
+			<a
+				href="#download"
+				class="px-8 py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm sm:text-base shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 transition-all transform hover:-translate-y-1 flex items-center gap-2"
+			>
+				<span>Get Shadow Slice</span>
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 animate-bounce" viewBox="0 0 20 20" fill="currentColor">
+					<path fill-rule="evenodd" d="M10 3a1 1 0 011 1v10.586l3.293-3.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 14.586V4a1 1 0 011-1z" clip-rule="evenodd" />
+				</svg>
+			</a>
+		</div>
 	</header>
 
 	<!-- FEATURES SECTION -->
@@ -33,7 +62,7 @@ const heroImg = "/images/2026/01/Shadow_Slice_1024.jpg";
 			<!-- Feature 1 -->
 			<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col lg:flex-row gap-6 lg:gap-8 items-start transition-all hover:border-amber-500/30">
 				<div class="w-full lg:w-1/2 flex-shrink-0">
-					<img src="/images/2026/06/Feature02.gif" alt="1-Click Interactive Slicing" class="w-full h-auto rounded-[8px] object-cover" style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;" loading="lazy" />
+					<img src="/images/2026/06/Feature02.gif" alt="1-Click Interactive Slicing" class="w-full h-auto rounded-[8px] object-cover" loading="lazy" />
 				</div>
 				<div class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4">
 					<h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3">
@@ -52,7 +81,7 @@ const heroImg = "/images/2026/01/Shadow_Slice_1024.jpg";
 			<!-- Feature 2 -->
 			<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col lg:flex-row gap-6 lg:gap-8 items-start transition-all hover:border-amber-500/30">
 				<div class="w-full lg:w-1/2 flex-shrink-0">
-					<img src="/images/2026/06/Feature1-1.gif" alt="Centralized Dashboard" class="w-full h-auto rounded-[8px] object-cover" style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;" loading="lazy" />
+					<img src="/images/2026/06/Feature1-1.gif" alt="Centralized Dashboard" class="w-full h-auto rounded-[8px] object-cover" loading="lazy" />
 				</div>
 				<div class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4">
 					<h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3">
@@ -71,7 +100,7 @@ const heroImg = "/images/2026/01/Shadow_Slice_1024.jpg";
 			<!-- Feature 3 -->
 			<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col lg:flex-row gap-6 lg:gap-8 items-start transition-all hover:border-amber-500/30">
 				<div class="w-full lg:w-1/2 flex-shrink-0">
-					<img src="/images/2026/06/Feature03.gif" alt="Smart Style Management" class="w-full h-auto rounded-[8px] object-cover" style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;" loading="lazy" />
+					<img src="/images/2026/06/Feature03.gif" alt="Smart Style Management" class="w-full h-auto rounded-[8px] object-cover" loading="lazy" />
 				</div>
 				<div class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4">
 					<h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3">
@@ -103,7 +132,7 @@ const heroImg = "/images/2026/01/Shadow_Slice_1024.jpg";
 			<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col justify-between">
 				<div>
 					<div class="mb-4">
-						<img src="/images/2026/01/QC1-copy.jpg" alt="Interior Natural Light Analysis" class="w-full h-auto rounded-[8px] object-cover" style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;" loading="lazy" />
+						<img src="/images/2026/01/QC1-copy.jpg" alt="Interior Natural Light Analysis" class="w-full h-auto rounded-[8px] object-cover" loading="lazy" />
 					</div>
 					<div class="p-2">
 						<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">1. Interior Natural Light Analysis</h3>
@@ -118,7 +147,7 @@ const heroImg = "/images/2026/01/Shadow_Slice_1024.jpg";
 			<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col justify-between">
 				<div>
 					<div class="mb-4">
-						<img src="/images/2026/01/QC2.jpg" alt="Smart Section Compensation" class="w-full h-auto rounded-[8px] object-cover" style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;" loading="lazy" />
+						<img src="/images/2026/01/QC2.jpg" alt="Smart Section Compensation" class="w-full h-auto rounded-[8px] object-cover" loading="lazy" />
 					</div>
 					<div class="p-2">
 						<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">2. Smart Section Compensation</h3>
@@ -133,7 +162,7 @@ const heroImg = "/images/2026/01/Shadow_Slice_1024.jpg";
 			<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col justify-between">
 				<div>
 					<div class="mb-4">
-						<img src="/images/2026/01/QC3.jpg" alt="Section-Based Shadow Studies" class="w-full h-auto rounded-[8px] object-cover" style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;" loading="lazy" />
+						<img src="/images/2026/01/QC3.jpg" alt="Section-Based Shadow Studies" class="w-full h-auto rounded-[8px] object-cover" loading="lazy" />
 					</div>
 					<div class="p-2">
 						<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">3. Section-Based Shadow Studies</h3>
@@ -148,7 +177,7 @@ const heroImg = "/images/2026/01/Shadow_Slice_1024.jpg";
 			<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col justify-between">
 				<div>
 					<div class="mb-4">
-						<img src="/images/2026/01/QC4.jpg" alt="Perspective Cutaway Visualization" class="w-full h-auto rounded-[8px] object-cover" style="width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important; border: none !important;" loading="lazy" />
+						<img src="/images/2026/01/QC4.jpg" alt="Perspective Cutaway Visualization" class="w-full h-auto rounded-[8px] object-cover" loading="lazy" />
 					</div>
 					<div class="p-2">
 						<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">4. Perspective Cutaway Visualization</h3>
@@ -218,7 +247,8 @@ const heroImg = "/images/2026/01/Shadow_Slice_1024.jpg";
 					<div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-center">
 						<div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Extension Warehouse</div>
 						<div class="text-lg font-black text-slate-900 dark:text-white">$0 USD <span class="text-xs font-normal text-slate-500">/ Free Edition</span></div>
-						<a href="https://extensions.sketchup.com/extension/e10f7017-931a-45a9-8e5d-d65df0926ddd/shadow-slice" target="_blank" rel="noopener" class="mt-2 block w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 font-bold text-xs shadow-md transition-colors">
+						<a href="https://extensions.sketchup.com/extension/e10f7017-931a-45a9-8e5d-d65df0926ddd/shadow-slice" target="_blank" rel="noopener" class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 font-bold text-xs shadow-md transition-colors">
+							<img src="/images/LOGO/SketchUp-logo.svg" alt="SketchUp" class="w-4 h-4 object-contain" />
 							Download via Extension Warehouse
 						</a>
 					</div>
@@ -265,19 +295,21 @@ const heroImg = "/images/2026/01/Shadow_Slice_1024.jpg";
 					<div class="p-3.5 rounded-xl border border-amber-500/30 bg-amber-500/5 text-center">
 						<div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Extension Warehouse (with 14-Day Free Trial)</div>
 						<div class="text-lg font-black text-slate-900 dark:text-white">$20 USD <span class="text-xs font-normal text-slate-500">/ One-time</span></div>
-						<a href="https://extensions.sketchup.com/extension/e10f7017-931a-45a9-8e5d-d65df0926ddd/shadow-slice" target="_blank" rel="noopener" class="mt-2 block w-full py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-md transition-colors">
+						<a href="https://extensions.sketchup.com/extension/e10f7017-931a-45a9-8e5d-d65df0926ddd/shadow-slice" target="_blank" rel="noopener" class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-md transition-colors">
+							<img src="/images/LOGO/SketchUp-logo.svg" alt="SketchUp" class="w-4 h-4 object-contain" />
 							Buy via Extension Warehouse (14-Day Trial)
 						</a>
 					</div>
 					<div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-center">
 						<div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Gumroad (100% Offline Capable + License Key)</div>
 						<div class="text-lg font-black text-slate-900 dark:text-white">$20 USD <span class="text-xs font-normal text-slate-500">/ One-time</span></div>
-						<a href="https://febhouse.gumroad.com/l/shadow-slice" class="mt-2 block w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 transition-all shadow-md active:scale-[0.98]" data-gumroad-single-product="true">
+						<a href="https://febhouse.gumroad.com/l/shadow-slice" class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 transition-all shadow-md active:scale-[0.98]" data-gumroad-single-product="true">
+							<img src="/images/LOGO/gumroad-icon.svg" alt="Gumroad" class="w-4 h-4 object-contain" />
 							Buy Lifetime via Gumroad
 						</a>
 					</div>
 					<p class="text-xs text-center text-slate-500 dark:text-slate-400 pt-1">
-						Prefer SketchUcation? <a href="https://sketchucation.com/plugin/3120-febshadowslicepro" target="_blank" rel="noopener" class="text-amber-500 font-semibold underline">Get it here</a>
+						Prefer <span class="font-bold tracking-tight text-[#23374b] dark:text-white">sketch<span class="text-[#df3531]">U</span>cation</span>? <a href="https://sketchucation.com/plugin/3120-febshadowslicepro" target="_blank" rel="noopener" class="text-amber-500 font-semibold underline">Get it here</a>
 					</p>
 				</div>
 			</div>

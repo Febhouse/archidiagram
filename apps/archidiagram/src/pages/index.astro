@@ -120,8 +120,12 @@ const posts = (await getCollection('blog'))
 				<!-- POSTS GRID (Only published tagged posts) -->
 				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="posts-grid">
 					{posts.map((post) => {
-						const tagValue = (post.data.tags || "").trim().toLowerCase();
-						const softwareValue = ((post.data.software || (post.data as any).Software) || "").trim().toLowerCase();
+						const rawTags = post.data.tags;
+						const tagValue = (Array.isArray(rawTags) ? rawTags.join(',') : (rawTags || "")).trim().toLowerCase();
+						
+						const rawSoftware = post.data.software || post.data.Software;
+						const softwareValue = (Array.isArray(rawSoftware) ? rawSoftware.join(',') : (rawSoftware || "")).trim().toLowerCase();
+						
 						return (
 							<div class="post-card-item" data-post-tag={tagValue} data-post-software={softwareValue} data-post-title={post.data.title.toLowerCase()} data-post-desc={(post.data.description || '').toLowerCase()}>
 								<Card 
