@@ -2,7 +2,7 @@
 title: 'Project example 65'
 description: 'Real-world shadow analysis case study and free SketchUp model.'
 pubDate: '2026-05-24T21:48:56+07:00'
-heroImage: '/images/2026/05/20260521-SECTION-fixed.jpg'
+heroImage: '/images/2026/05/20260521-SECTION-fixed.webp'
 tags: 'sample project'
 software: 'SketchUp, Shadow Slice'  
 ---
@@ -13,7 +13,7 @@ Following up on our deep dive into [Daylight Optimization](/daylight-optimizatio
 
 Whether you're prepping documents for council submissions or showing clients exactly how light hits their future home, clear and accurate shadow data is critical. To help you nail this, I’m sharing the exact SketchUp file used in this case study as a free download.
 
- ![Shadow Diagram](/images/2026/05/20260521-SECTION-fixed.jpg)
+ ![Shadow Diagram](/images/2026/05/20260521-SECTION-fixed.webp)
 
 ## The Minimalist Analytical Workflow
 

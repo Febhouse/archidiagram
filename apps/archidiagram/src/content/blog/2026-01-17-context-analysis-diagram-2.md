@@ -15,7 +15,7 @@ This sample project (Project 41) provides a comprehensive **Context Analysis Dia
 
 Unlike a standard site analysis that only looks inward at your property lines, this context diagram zooms out. It captures the broader **urban fabric**, **traffic flow**, and **environmental forces** that shape your site.
 
- ![Context Analysis Diagram](/images/2026/01/SAMPLE-41-resized.jpg)
+ ![Context Analysis Diagram](/images/2026/01/SAMPLE-41-resized.webp)
 
 ## Watch the Workflow: Creating Architectural Diagrams
 

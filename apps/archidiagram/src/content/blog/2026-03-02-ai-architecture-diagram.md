@@ -2,7 +2,7 @@
 title: 'AI Project 01'
 description: 'Learn how to create a stunning AI Architecture diagram with this free prompt (AI Sample 01). Transform your standard SketchUp exports into glowing, neon-styled urban analysis.'
 pubDate: '2026-03-02T10:06:34+07:00'
-heroImage: '/images/2026/03/20260109-AI-900x900-1.jpg'
+heroImage: '/images/2026/03/20260109-AI-900x900-1.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols, Gemini'
 ---
@@ -15,7 +15,7 @@ If you want to create a stunning **AI Architecture diagram**, this sample (AI Sa
 
 This sample provides the exact AI Prompt needed to transform a standard, daytime SketchUp export into a striking, dark-mode analytical diagram featuring glowing neon lines and a highly stylized urban context.
 
- ![AI Architecture diagram](/images/2026/03/AI-Architecture-diagram.jpg)
+ ![AI Architecture diagram](/images/2026/03/AI-Architecture-diagram.webp)
 
 ## Why Use AI for Architectural Diagrams?
 
@@ -67,7 +67,7 @@ To get the best results when generating an **AI Architecture diagram**, your bas
 > **4. OUTPUT QUALITY:**  
 > Render in 8k resolution, highly detailed textures, sharp focus, professional architectural presentation.
 
- ![AI Architecture diagram 2](/images/2026/03/AI-Architecture-diagram2.jpg)
+ ![AI Architecture diagram 2](/images/2026/03/AI-Architecture-diagram2.webp)
 
 ## Download Sample Project Files
 

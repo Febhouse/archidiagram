@@ -2,7 +2,7 @@
 title: 'Daylight Saving Time (DST): Why Standard 3D Software Fails at Global Solar Analysis'
 description: 'Discover why Daylight Saving Time (DST) causes 1-hour errors in standard 3D solar analysis and how Sun Diagram automates time zone adjustments.'
 pubDate: '2026-03-12T10:42:03+07:00'
-heroImage: '/images/2026/03/SYDNEY-copy.jpg'
+heroImage: '/images/2026/03/SYDNEY-copy.webp'
 tags: 'tutorial'
 software: 'SketchUp, Sun Diagram' 
 ---
@@ -11,7 +11,7 @@ software: 'SketchUp, Sun Diagram'
 
 Most 3D design software shares a major blind spot when it comes to environmental analysis: they don't understand how real-world time actually works.
 
-![3D Sun path - Paris](/images/2026/03/PARIS-copy.jpg)
+![3D Sun path - Paris](/images/2026/03/PARIS-copy.webp)
 
 The root of this issue is **DST (Daylight Saving Time)**. Many countries shift their clocks forward by one hour during the summer. But when architects work on global projects in standard 3D tools, they usually lock in a static time zone (UTC) for the whole year. 
 

@@ -341,10 +341,10 @@ software: 'SketchUp, Sun Diagram'
   <div class="p-6 sm:p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center space-y-6">
     <h3 class="text-xl font-bold text-slate-900 dark:text-white">Official Step-by-Step User Guide (PDF)</h3>
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-      <img src="/images/2026/06/Feature1.jpg" alt="User Guide 1" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
-      <img src="/images/2026/06/Feature2.jpg" alt="User Guide 2" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
-      <img src="/images/2026/06/Feature3.jpg" alt="User Guide 3" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
-      <img src="/images/2026/06/Feature4.jpg" alt="User Guide 4" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
+      <img src="/images/2026/06/Feature1.webp" alt="User Guide 1" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
+      <img src="/images/2026/06/Feature2.webp" alt="User Guide 2" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
+      <img src="/images/2026/06/Feature3.webp" alt="User Guide 3" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
+      <img src="/images/2026/06/Feature4.webp" alt="User Guide 4" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
     </div>
     <div>
       <a href="https://drive.google.com/file/d/14pPiWqBubLlpe_Wz6kL7psZ5z9F3DXWU/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md transition-all">

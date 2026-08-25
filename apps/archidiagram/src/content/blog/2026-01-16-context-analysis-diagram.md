@@ -2,7 +2,7 @@
 title: 'Project example 45'
 description: 'Download this free Context Analysis Diagram for SketchUp. Visualize urban connectivity, traffic flow arrows, and 3D solar envelopes using this professional sample file.'
 pubDate: '2026-01-16T22:48:10+07:00'
-heroImage: '/images/2026/01/SAMPLE-45-1-cover.jpg'
+heroImage: '/images/2026/01/SAMPLE-45-1-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -13,7 +13,7 @@ A great design doesn't exist in a vacuum—it responds to its surroundings. This
 
 Instead of a flat, boring site plan, this 3D diagram brings the neighborhood to life, capturing street networks, surrounding building masses, and environmental factors.
 
- ![Context Analysis Diagram](/images/2026/01/SAMPLE-45-STYLES09-1-copy-1.jpg)
+ ![Context Analysis Diagram](/images/2026/01/SAMPLE-45-STYLES09-1-copy-1.webp)
 
 ## Why Analyze the Urban Context?
 

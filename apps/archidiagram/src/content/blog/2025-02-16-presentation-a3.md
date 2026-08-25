@@ -2,7 +2,7 @@
 title: 'Free A3 Presentation Template for Architects'
 description: 'Download this free A3 architectural presentation template available for InDesign, PowerPoint, and Canva. Perfect for project pitches and student portfolios.'
 pubDate: '2025-02-16T10:52:09+07:00'
-heroImage: '/images/2025/11/Horizontal_Book_Mockup_4.jpg.webp'
+heroImage: '/images/2025/11/Horizontal_Book_Mockup_4.webp'
 tags: 'presentation template'
 software: 'PowerPoint, Canva, InDesign'
 ---
@@ -11,21 +11,21 @@ software: 'PowerPoint, Canva, InDesign'
 
 A great design can easily be misunderstood if it isn't presented well. To help you communicate your ideas clearly and professionally, I’ve put together a highly structured, aesthetic **A3 Presentation Template**.
 
-![Horizontal Book Mockup 1](/images/2025/11/Horizontal_Book_Mockup_1.jpg)
+![Horizontal Book Mockup 1](/images/2025/11/Horizontal_Book_Mockup_1.webp)
 
-![Horizontal Book Mockup 7](/images/2025/11/Horizontal_Book_Mockup_7.jpg)
+![Horizontal Book Mockup 7](/images/2025/11/Horizontal_Book_Mockup_7.webp)
 
 This template is designed specifically for architectural projects. It provides a logical flow, giving you dedicated, well-composed layouts for your project introduction, design goals, space analysis, design alternatives, and technical drawings.
 
 By integrating your 3D renderings and diagrams into this clean layout, you ensure your message is conveyed clearly and impressively during any project pitch or portfolio review.
 
-![Horizontal Book Mockup 5](/images/2025/11/Horizontal_Book_Mockup_5.jpg)
+![Horizontal Book Mockup 5](/images/2025/11/Horizontal_Book_Mockup_5.webp)
 
-![Horizontal Book Mockup 4](/images/2025/11/Horizontal_Book_Mockup_4.jpg)
+![Horizontal Book Mockup 4](/images/2025/11/Horizontal_Book_Mockup_4.webp)
 
-![Horizontal Book Mockup 3](/images/2025/11/Horizontal_Book_Mockup_3-scaled-1.jpg)
+![Horizontal Book Mockup 3](/images/2025/11/Horizontal_Book_Mockup_3-scaled-1.webp)
 
-![Horizontal Book Mockup 2](/images/2025/11/Horizontal_Book_Mockup_2-copy-2.jpg)
+![Horizontal Book Mockup 2](/images/2025/11/Horizontal_Book_Mockup_2-copy-2.webp)
 
 ## Who is This Template For?
 

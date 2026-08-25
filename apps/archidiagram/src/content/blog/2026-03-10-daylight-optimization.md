@@ -2,7 +2,7 @@
 title: 'Project example 63'
 description: 'Download this free Small Townhouse Design sample for SketchUp. Learn how to optimize natural light and improve the living experience in budget-friendly 1-story homes using Shadow Slice and Sun Diagram.'
 pubDate: '2026-03-10T21:47:27+07:00'
-heroImage: '/images/2026/03/Daylight-Optimization-cover.jpg'
+heroImage: '/images/2026/03/Daylight-Optimization-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Shadow Slice'
 ---
@@ -15,7 +15,7 @@ This sample (Project 63) provides the source files for a **Small 1-Story Townhou
 
 When space is limited, optimizing **natural light** and **passive design** is the secret to making a small home feel spacious, healthy, and comfortable.
 
- ![Daylight Optimization](/images/2026/03/DECEMBER21st-9am.jpg)
+ ![Daylight Optimization](/images/2026/03/DECEMBER21st-9am.webp)
 
 ## Why Analyze Small & Budget-Friendly Homes?
 

@@ -85,7 +85,7 @@ software: 'SketchUp, Shadow Slice'
     <!-- Use Case 1 -->
     <div class="border border-slate-200 dark:border-slate-800 rounded-2xl p-6 bg-white dark:bg-slate-900 shadow-sm flex flex-col md:flex-row gap-6 items-center">
       <div class="w-full md:w-1/2 shrink-0">
-        <img src="/images/2026/01/QC1-copy.jpg" alt="Interior Natural Light Analysis" class="rounded-xl border border-slate-200 dark:border-slate-800 shadow w-full object-cover" />
+        <img src="/images/2026/01/QC1-copy.webp" alt="Interior Natural Light Analysis" class="rounded-xl border border-slate-200 dark:border-slate-800 shadow w-full object-cover" />
       </div>
       <div class="w-full md:w-1/2 space-y-3 text-left">
         <h3 class="text-lg font-bold text-slate-900 dark:text-white">1. Interior Natural Light Analysis</h3>
@@ -98,7 +98,7 @@ software: 'SketchUp, Shadow Slice'
     <!-- Use Case 2 -->
     <div class="border border-slate-200 dark:border-slate-800 rounded-2xl p-6 bg-white dark:bg-slate-900 shadow-sm flex flex-col md:flex-row gap-6 items-center">
       <div class="w-full md:w-1/2 shrink-0">
-        <img src="/images/2026/01/QC2.jpg" alt="Smart Section Compensation" class="rounded-xl border border-slate-200 dark:border-slate-800 shadow w-full object-cover" />
+        <img src="/images/2026/01/QC2.webp" alt="Smart Section Compensation" class="rounded-xl border border-slate-200 dark:border-slate-800 shadow w-full object-cover" />
       </div>
       <div class="w-full md:w-1/2 space-y-3 text-left">
         <h3 class="text-lg font-bold text-slate-900 dark:text-white">2. Smart Section Compensation</h3>
@@ -111,7 +111,7 @@ software: 'SketchUp, Shadow Slice'
     <!-- Use Case 3 -->
     <div class="border border-slate-200 dark:border-slate-800 rounded-2xl p-6 bg-white dark:bg-slate-900 shadow-sm flex flex-col md:flex-row gap-6 items-center">
       <div class="w-full md:w-1/2 shrink-0">
-        <img src="/images/2026/01/QC3.jpg" alt="Section-Based Shadow Study" class="rounded-xl border border-slate-200 dark:border-slate-800 shadow w-full object-cover" />
+        <img src="/images/2026/01/QC3.webp" alt="Section-Based Shadow Study" class="rounded-xl border border-slate-200 dark:border-slate-800 shadow w-full object-cover" />
       </div>
       <div class="w-full md:w-1/2 space-y-3 text-left">
         <h3 class="text-lg font-bold text-slate-900 dark:text-white">3. Section-Based Shadow Study</h3>
@@ -124,7 +124,7 @@ software: 'SketchUp, Shadow Slice'
     <!-- Use Case 4 -->
     <div class="border border-slate-200 dark:border-slate-800 rounded-2xl p-6 bg-white dark:bg-slate-900 shadow-sm flex flex-col md:flex-row gap-6 items-center">
       <div class="w-full md:w-1/2 shrink-0">
-        <img src="/images/2026/01/QC4.jpg" alt="Perspective Cutaway Visualization" class="rounded-xl border border-slate-200 dark:border-slate-800 shadow w-full object-cover" />
+        <img src="/images/2026/01/QC4.webp" alt="Perspective Cutaway Visualization" class="rounded-xl border border-slate-200 dark:border-slate-800 shadow w-full object-cover" />
       </div>
       <div class="w-full md:w-1/2 space-y-3 text-left">
         <h3 class="text-lg font-bold text-slate-900 dark:text-white">4. Perspective Cutaway Visualization</h3>

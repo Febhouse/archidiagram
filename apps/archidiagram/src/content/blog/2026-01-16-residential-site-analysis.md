@@ -2,7 +2,7 @@
 title: 'Project example 56'
 description: 'For residential projects, “context” isn’t just about the city—it’s about comfort. This sample project (Project 56) provides the complete source files for a Residential Site Analysis, specifically tailored for townhouses and single-family homes.'
 pubDate: '2026-01-16T15:56:41+07:00'
-heroImage: '/images/2026/01/SAMPLE-56-COVER1000x1000.jpg'
+heroImage: '/images/2026/01/SAMPLE-56-COVER1000x1000.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -15,7 +15,7 @@ This sample project (Project 56) provides the complete **source files** for a **
 
 This SketchUp file demonstrates how to visualize the micro-climate of a living space. It ensures your design maximizes natural ventilation and daylighting while protecting your client's privacy from the neighbors.
 
- ![Residential Site Analysis](/images/2026/01/SAMPLE-56-VIEW02-copy.jpg)
+ ![Residential Site Analysis](/images/2026/01/SAMPLE-56-VIEW02-copy.webp)
 
 ## Why Analyze Residential Sites?
 

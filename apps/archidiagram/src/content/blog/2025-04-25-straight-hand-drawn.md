@@ -2,11 +2,11 @@
 title: 'Straight hand drawn'
 description: 'Straight hand drawn style for sun diagram — a clean, geometric sketch look customized for Sun Path presentations.'
 pubDate: '2025-04-25T00:18:54+07:00'
-heroImage: '/images/2025/04/STYLE-5-COVER-1-1.jpg'
+heroImage: '/images/2025/04/STYLE-5-COVER-1-1.webp'
 tags: 'sample project'
 ---
 
-![Straight hand drawn](/images/2025/04/STYLE-5-COVER-1.jpg)
+![Straight hand drawn](/images/2025/04/STYLE-5-COVER-1.webp)
 
 # Straight hand drawn for Sun Diagram - Style 05 
 
@@ -22,10 +22,10 @@ If you’re using the latest version of **Sun Diagram,** you already have access
 
 You can still preview examples below 👇
 
-![Straight hand drawn 1](/images/2025/04/STYLE-5-1-copy.jpg)
+![Straight hand drawn 1](/images/2025/04/STYLE-5-1-copy.webp)
 
-![Straight hand drawn 2](/images/2025/04/STYLE-5-2-copy.jpg)
+![Straight hand drawn 2](/images/2025/04/STYLE-5-2-copy.webp)
 
-![Straight hand drawn 3](/images/2025/04/STYLE-5-3-copy-scaled-1.jpg)
+![Straight hand drawn 3](/images/2025/04/STYLE-5-3-copy-scaled-1.webp)
 
-![Straight hand drawn 4](/images/2025/04/STYLE-5-4-copy.jpg)
+![Straight hand drawn 4](/images/2025/04/STYLE-5-4-copy.webp)

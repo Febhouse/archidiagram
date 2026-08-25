@@ -2,7 +2,7 @@
 title: 'Guide: How to Determine if Your Project Location Requires Daylight Saving Time (DST)'
 description: 'This guide will help you quickly and accurately determine whether you need to enable DST when setting up your sun data for your site.'
 pubDate: '2026-04-05T17:02:10+07:00'
-heroImage: '/images/2026/04/check-dst-location.jpg'
+heroImage: '/images/2026/04/check-dst-location.webp'
 tags: 'tutorial'
 software: 'SketchUp, Sun Diagram'
 ---
@@ -11,7 +11,7 @@ software: 'SketchUp, Sun Diagram'
 
 When performing shadow and natural light analysis for an architectural project, the accuracy of your time data is essential. One of the most frequently misunderstood settings is **Daylight Saving Time (DST)**.
 
-![check dst location](/images/2026/04/check-dst-location.jpg)
+![check dst location](/images/2026/04/check-dst-location.webp)
 
 This guide will help you quickly and accurately determine whether you need to enable DST when setting up your sun data for your site.
 
@@ -32,7 +32,7 @@ Not every country or region observes DST. Here is a general breakdown:
 
 Because local DST rules can change depending on local laws, the best practice is to verify the location online.
 
-![DST-OFF](/images/2026/04/DST-OFF.jpg)
+![DST-OFF](/images/2026/04/DST-OFF.webp)
 
 ### Step 1: Use TimeAndDate.com
 
@@ -40,7 +40,7 @@ This is the most reliable tool for architects to verify solar and time data.
 - Go to: **[https://www.timeanddate.com/time/dst/](https://www.timeanddate.com/time/dst/)**   
 - Enter the city or country of your project into the search bar.
 
-![DST](/images/2026/04/DST.jpg)
+![DST](/images/2026/04/DST.webp)
 
 ### Step 2: Read the Results
 
@@ -54,7 +54,7 @@ Scroll down to the Time Zone or Daylight Saving Time section on the city's page:
 
 ## 4. Applying it to Your Analysis Plugin (e.g., Sun Diagram)
 
-![dst in sun diagram](/images/2026/04/check-dst-location-copy.jpg)
+![dst in sun diagram](/images/2026/04/check-dst-location-copy.webp)
 
 If you are using the Sun Diagram extension, handling DST is incredibly simple thanks to its built-in smart automation. You don't need to manually toggle the settings back and forth depending on the month.   
   
@@ -66,13 +66,13 @@ Here is the only thing you need to do:
 
 Once you enable DST for a specific location, the plugin does the heavy lifting for you. It automatically checks if your selected analysis date falls within that region's active DST timeframe.
 
-![FRANCE: DST ON](/images/2026/04/FRANCE-DST-ON-1.jpg)
+![FRANCE: DST ON](/images/2026/04/FRANCE-DST-ON-1.webp)
 
 ### Figure 1: With DST set to ON (Smart DST active)
 
 The plugin automatically applies a 1-hour offset to the summer and autumn months (June & September), shifting the sun positions. However, it smartly recognizes that December is in winter and keeps it at the standard UTC base time without any manual adjustments.
 
-![FRANCE: DST OFF](/images/2026/04/FRANCE-DST-OFF-1.jpg)
+![FRANCE: DST OFF](/images/2026/04/FRANCE-DST-OFF-1.webp)
 
 ### Figure 2: With DST set to OFF
 

@@ -2,7 +2,7 @@
 title: 'Project example 22'
 description: 'Climatic Analysis Diagram combining sun path direction, prevailing wind vectors, and thermal comfort zones inside SketchUp.'
 pubDate: '2025-06-16T15:35:46+07:00'
-heroImage: '/images/2025/06/THUNGNAI-1024.jpg'
+heroImage: '/images/2025/06/THUNGNAI-1024.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -19,7 +19,7 @@ Instead of forcing a building to fight against nature, we design to work **with*
 
 In this sample project (Project 22), I’ll show you how I built a 3D **Climatic Analysis Diagram** using the **Sun Diagram** and **Dynamic Symbols** plugins—all entirely inside SketchUp. This method is incredibly fast, highly visual, and perfect for early design stages.
 
- ![Climatic Analysis Diagram](/images/2025/06/THUNGNAI-2-1920-1.jpg)
+ ![Climatic Analysis Diagram](/images/2025/06/THUNGNAI-2-1920-1.webp)
 
 ## The Tools Used
 
@@ -30,7 +30,7 @@ To build the diagram shown in the video, I relied on two specialized SketchUp pl
 
 Both tools are designed to speed up the diagramming process while keeping your presentations clean and professional.
 
- ![Climatic Analysis Diagram-2](/images/2025/06/THUNGNAI-4-1920-1.jpg)
+ ![Climatic Analysis Diagram-2](/images/2025/06/THUNGNAI-4-1920-1.webp)
 
 ## Final Thoughts
 

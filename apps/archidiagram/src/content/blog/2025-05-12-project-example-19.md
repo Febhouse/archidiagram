@@ -2,7 +2,7 @@
 title: 'Project example 19'
 description: 'Download original SketchUp source files for sunlight analysis video demonstrations combining Sun Diagram and Photoshop.'
 pubDate: '2025-05-12T14:23:29+07:00'
-heroImage: '/images/2025/05/Sunlight-Analysis-cover.jpg'
+heroImage: '/images/2025/05/Sunlight-Analysis-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Adobe Photoshop'
 ---

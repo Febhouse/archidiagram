@@ -2,7 +2,7 @@
 title: 'Project example 62'
 description: 'Download this free Interior Shadow Analysis sample for SketchUp. Master the workflow of simulating Natural Light inside your floor plans using Shadow Slice and Sun Diagram.'
 pubDate: '2026-02-02T22:49:48+07:00'
-heroImage: '/images/2026/02/COVER.jpg'
+heroImage: '/images/2026/02/COVER.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Shadow Slice'
 ---
@@ -15,7 +15,7 @@ This sample project (Project 62) demonstrates a specialized **Interior Shadow An
 
 Unlike standard shadow studies that only look at the exterior, this SketchUp model uses a clever "sliced" view technique to reveal the floor plan below.
 
- ![Interior Shadow Analysis](/images/2026/02/Dec11-1920.jpg)
+ ![Interior Shadow Analysis](/images/2026/02/Dec11-1920.webp)
 
 ## Why Analyze Interior Natural Light?
 

@@ -2,7 +2,7 @@
 title: 'Project example 53'
 description: 'Download free source files for a Light & Location Study in SketchUp. Explore the workflow for 3D sun paths, shadow analysis, and diagrammatic symbols.'
 pubDate: '2026-01-16T14:38:47+07:00'
-heroImage: '/images/2026/01/Cover.jpg'
+heroImage: '/images/2026/01/Cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -15,7 +15,7 @@ This sample project (Project 53) provides the complete **source files** for a co
 
 Whether you are designing a residential home or a public plaza, understanding the precise movement of the sun is critical. This downloadable project demonstrates a proven, fast workflow to visualize sunlight and shadows accurately.
 
- ![Study on Light](/images/2026/01/SITEANALYSIS-DECEMBER21ST.jpg)
+ ![Study on Light](/images/2026/01/SITEANALYSIS-DECEMBER21ST.webp)
 
 ## Why Perform a Light Study?
 

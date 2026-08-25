@@ -2,7 +2,7 @@
 title: 'The Power of Shadow Analysis: Ensuring Design Integrity & Comfort'
 description: 'Shadow Analysis project I conducted for a site in NSW, Australia.'
 pubDate: '2026-05-04T22:18:15+07:00'
-heroImage: '/images/2026/05/shadow-analysis.jpg'
+heroImage: '/images/2026/05/shadow-analysis.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram'
 ---
@@ -13,7 +13,7 @@ In architecture and urban planning, natural light and shadows are about more tha
 
 To show you how this works in practice, here is a recent Shadow Analysis project I conducted for a site in **NSW, Australia**.
 
- ![Shadow analysis](/images/2026/05/20260119-SHADOWANALYSIS-DEC_Page_13-1920.jpg)
+ ![Shadow analysis](/images/2026/05/20260119-SHADOWANALYSIS-DEC_Page_13-1920.webp)
 
 ## The Core Objectives of the Analysis
 

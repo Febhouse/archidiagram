@@ -2,7 +2,7 @@
 title: 'Project example 64'
 description: 'Download Sample-64 free SketchUp model and learn how to generate 3D sun paths and wind flows in under one minute.'
 pubDate: '2026-03-13T23:18:50+07:00'
-heroImage: '/images/2026/03/SAMPLE-64-cover.jpg'
+heroImage: '/images/2026/03/SAMPLE-64-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -13,7 +13,7 @@ In architecture, time is everything. This sample project (Project 64) isn't a lo
 
 We are sharing the base SketchUp model so you can experience firsthand how fast you can generate a complex, professional site analysis diagram when you have the right tools in your workflow.
 
- ![Quick Site Analysis](/images/2026/03/SAMPLE-64-copy.jpg)
+ ![Quick Site Analysis](/images/2026/03/SAMPLE-64-copy.webp)
 
 ## Watch the 1-Minute Workflow
 

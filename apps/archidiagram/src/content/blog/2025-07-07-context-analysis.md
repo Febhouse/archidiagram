@@ -2,7 +2,7 @@
 title: 'Context Analysis'
 description: 'Learn how to build a professional Context Analysis diagram using the Sun Diagram plugin and Dynamic Symbols for SketchUp.'
 pubDate: '2025-07-07T12:00:52+07:00'
-heroImage: '/images/2026/03/SAMPLE-25.jpg'
+heroImage: '/images/2026/03/SAMPLE-25.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -17,7 +17,7 @@ In architectural design, **context analysis** is how we understand everything su
 
 Rather than working off assumptions, a clean diagram lets you communicate your constraints and opportunities clearly with clients, consultants, and approval authorities. 
 
-![Context Analysis Diagram](/images/2025/07/20250703-SAMPLE-25-style2.jpg)
+![Context Analysis Diagram](/images/2025/07/20250703-SAMPLE-25-style2.webp)
 
 ## The Tools Used in This Project 
 
@@ -44,7 +44,7 @@ Too often, site analysis diagrams are either too rough to be useful or take way 
 
 Whether you’re in early concept phases, prepping for a client meeting, or applying for permits, this method saves time and elevates your work.
 
-![Context Analysis diagram -1b](/images/2025/07/20250703-SAMPLE-25-style2.jpg)
+![Context Analysis diagram -1b](/images/2025/07/20250703-SAMPLE-25-style2.webp)
 
 ## Download Project Files
 

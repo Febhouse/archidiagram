@@ -235,9 +235,9 @@ software: 'SketchUp, Dynamic Symbols'
   <div class="p-6 sm:p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center space-y-6">
     <h3 class="text-xl font-bold text-slate-900 dark:text-white">Official Step-by-Step User Guide (PDF)</h3>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <img src="/images/2025/10/DynamicSymbols_UserGuide_Page_1_resized1.jpg" alt="User Guide 1" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
-      <img src="/images/2025/10/DynamicSymbols_UserGuide_Page_2_resized.jpg" alt="User Guide 2" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
-      <img src="/images/2025/10/DynamicSymbols_UserGuide_Page_3_resized.jpg" alt="User Guide 3" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
+      <img src="/images/2025/10/DynamicSymbols_UserGuide_Page_1_resized1.webp" alt="User Guide 1" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
+      <img src="/images/2025/10/DynamicSymbols_UserGuide_Page_2_resized.webp" alt="User Guide 2" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
+      <img src="/images/2025/10/DynamicSymbols_UserGuide_Page_3_resized.webp" alt="User Guide 3" class="rounded-lg shadow border border-slate-200 dark:border-slate-800 object-cover" />
     </div>
     <div>
       <a href="https://drive.google.com/file/d/14pPiWqBubLlpe_Wz6kL7psZ5z9F3DXWU/view?usp=drive_link" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md transition-all">
@@ -318,7 +318,7 @@ software: 'SketchUp, Dynamic Symbols'
       </summary>
       <div class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed pt-3 border-t border-slate-200/60 dark:border-slate-800/60 space-y-2">
         <p>Make sure scene transitions are enabled in SketchUp: go to <strong>Window > Model Info > Animation</strong> and verify that <strong>"Enable scene transitions"</strong> is checked.</p>
-        <img src="/images/2026/04/Enable-scene-transitions.jpg" alt="Enable scene transitions" class="rounded-lg max-w-md border border-slate-200 dark:border-slate-700" />
+        <img src="/images/2026/04/Enable-scene-transitions.webp" alt="Enable scene transitions" class="rounded-lg max-w-md border border-slate-200 dark:border-slate-700" />
       </div>
     </details>
 

@@ -2,7 +2,7 @@
 title: 'Project example 57'
 description: 'Download free source files for a Climatic Site Analysis in SketchUp. Master the workflow for solar orientation, topography analysis, and wind patterns on sloped terrain.'
 pubDate: '2026-01-16T11:46:46+07:00'
-heroImage: '/images/2026/01/SAMPLE-57cover.jpg'
+heroImage: '/images/2026/01/SAMPLE-57cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -13,7 +13,7 @@ In this sample project (Project 57), we're sharing the complete SketchUp **sourc
 
 If you're working with complex topography, this model will show you exactly how to analyze the site and find the perfect building rotation to capture winter sun while catching summer breezes.
 
- ![Climatic Site Analysis](/images/2026/01/SAMPLE-57-VIEW03-copy.jpg)
+ ![Climatic Site Analysis](/images/2026/01/SAMPLE-57-VIEW03-copy.webp)
 
 ## Why Focus on Solar Orientation?
 

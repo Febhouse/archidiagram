@@ -2,7 +2,7 @@
 title: 'Project example 26'
 description: 'Free Download – Project Sample for Site Diagram, 3D Sun Path & Symbols.'
 pubDate: '2025-08-11T15:39:37+07:00'
-heroImage: '/images/2025/08/STYLE-06-scaled-1-e1773389554390.jpg'
+heroImage: '/images/2025/08/STYLE-06-scaled-1-e1773389554390.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -19,7 +19,7 @@ This sample project (Project 26) provides a complete, ready-to-use SketchUp setu
 - **3D Sun Path:** Generated using the **Sun Diagram Plugin** to visualize exactly how sunlight and shadows behave across different times of the day.
 - **3D Symbols:** A professional set of diagram symbols made with the **Dynamic Symbols Plugin**, ensuring your drawings are both beautiful and technically accurate.
 
- ![Project Sample for Site Diagram](/images/2025/08/STYLE-06-scaled-1.jpg)
+ ![Project Sample for Site Diagram](/images/2025/08/STYLE-06-scaled-1.webp)
 
 ## The Tools Used in This Project 
 
@@ -34,7 +34,7 @@ Both tools are designed to speed up the diagramming process while keeping your p
 > - [ Free download Sun Diagram ](https://extensions.sketchup.com/extension/5aa1ab3d-36ff-4510-ae63-84f677a36f3a/sun-diagram)
 > - [ Free download Dynamic Symbols plugin ](https://extensions.sketchup.com/extension/21085584-a984-474d-8407-33087adec402/dynamic-symbols)
 
-![](/images/2025/08/STYLE-02-scaled-1.jpg)
+![](/images/2025/08/STYLE-02-scaled-1.webp)
 
 ## Final Thoughts 
 

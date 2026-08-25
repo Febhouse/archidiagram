@@ -2,7 +2,7 @@
 title: 'Project example 66'
 description: 'Download a free 3D SketchUp sample file to experience the power of Shadow Slice 2.0.'
 pubDate: '2026-06-25T16:53:34+07:00'
-heroImage: '/images/2026/06/20260625-1.jpg'
+heroImage: '/images/2026/06/20260625-1.webp'
 tags: 'sample project'
 software: 'SketchUp, Shadow Slice'
 ---
@@ -15,7 +15,7 @@ That’s exactly why we developed **[Shadow Slice](/shadow-slice/)**—to comple
 
 To give you a clear look at what the plugin can do, I’ve put together a quick demonstration. Check out the short video below to see it in action:
 
- ![Shadow Slice SketchUp](/images/2026/06/20260625-1.jpg)
+ ![Shadow Slice SketchUp](/images/2026/06/20260625-1.webp)
 
 ## What Makes Shadow Slice 2.0 Different?
 

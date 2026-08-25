@@ -2,7 +2,7 @@
 title: 'Project example 39'
 description: 'Download this free 3D Environmental Site Analysis Diagram for SketchUp. Master the workflow of visualizing sun paths, wind, and views using Sun Diagram and Dynamic Symbols.'
 pubDate: '2026-01-17T15:45:31+07:00'
-heroImage: '/images/2026/01/SAMPLE-39-VIEW1-cover.jpg'
+heroImage: '/images/2026/01/SAMPLE-39-VIEW1-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -13,7 +13,7 @@ Need to level up your early-concept presentations? An **Environmental Site Analy
 
 This sample project (Project 39) gives you a complete **3D Architectural Diagram** template, moving beyond flat 2D maps by layering everything into a single, cohesive 3D model.
 
- ![Environmental Site Analysis](/images/2026/01/SAMPLE-39-copy.jpg)
+ ![Environmental Site Analysis](/images/2026/01/SAMPLE-39-copy.webp)
 
 ## Why Move to a 3D Architectural Diagram?
 

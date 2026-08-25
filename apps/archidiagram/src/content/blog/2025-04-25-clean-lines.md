@@ -2,13 +2,13 @@
 title: 'Clean lines style for Sun Diagram (Style-01)'
 description: 'Clean line style for Sun Diagram based on 3D sun path vectors — clean lines, ideal for technical and client presentations.'
 pubDate: '2025-04-25T15:26:48+07:00'
-heroImage: '/images/2025/04/STYLE-1-COVER-1-1.jpg'
+heroImage: '/images/2025/04/STYLE-1-COVER-1-1.webp'
 tags: 'sample project'
 ---
 
 # Clean Lines for Sun Diagram (Style 01)
 
-![Clean line -cover](/images/2025/04/STYLE-1-COVER-1-1.jpg)
+![Clean line -cover](/images/2025/04/STYLE-1-COVER-1-1.webp)
 
 The **Clean Line Style** for Sun Diagram is based entirely on 3D sun path vectors. Because it relies on crisp, clean lines rather than heavy graphics, it is perfect for technical documentation and professional client presentations.
 
@@ -20,10 +20,10 @@ If you’re using the latest version of **Sun Diagram,** you already have one-cl
 
 You can preview exactly how this clean, minimalist style looks in the examples below:
 
-![Clean lines 1](/images/2025/04/STYLE-1-1-RESIZED.jpg)
+![Clean lines 1](/images/2025/04/STYLE-1-1-RESIZED.webp)
 
-![Clean lines 2](/images/2025/04/STYLE-1-2-RESIZED.jpg)
+![Clean lines 2](/images/2025/04/STYLE-1-2-RESIZED.webp)
 
-![Clean lines 3](/images/2025/04/STYLE-1-3-RESIZED.jpg)
+![Clean lines 3](/images/2025/04/STYLE-1-3-RESIZED.webp)
 
-![Clean lines 4](/images/2025/04/STYLE-1-4-RESIZED.jpg)
+![Clean lines 4](/images/2025/04/STYLE-1-4-RESIZED.webp)

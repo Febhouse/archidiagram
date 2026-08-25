@@ -2,7 +2,7 @@
 title: 'Project example 23'
 description: 'Site Context Mapping with Dynamic Symbols in SketchUp – Fast & Flexible Diagramming.'
 pubDate: '2025-06-24T20:34:35+07:00'
-heroImage: '/images/2025/06/58-2B-600x600-1.jpg'
+heroImage: '/images/2025/06/58-2B-600x600-1.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -20,7 +20,7 @@ Without a clear context diagram, your design risks feeling isolated or disconnec
 
 In this sample project (Project 23), I’ll walk you through how I built a 3D **Site Context Map** using only **SketchUp**, the **Sun Diagram plugin**, and **Dynamic Symbols**.
 
- ![Site Context Mapping-2](/images/2025/06/58-3-5.jpg) ![Site Context Mapping](/images/2025/06/58-3B-9.jpg)
+ ![Site Context Mapping-2](/images/2025/06/58-3-5.webp) ![Site Context Mapping](/images/2025/06/58-3B-9.webp)
 
 ## The Tools Used in the Diagram
 

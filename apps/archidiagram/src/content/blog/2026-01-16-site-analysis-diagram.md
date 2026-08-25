@@ -2,7 +2,7 @@
 title: 'Project example 54'
 description: 'Download this free Urban Site Analysis Diagram for SketchUp. Master the workflow for high-density contexts, 3D sun paths, and wind flow analysis.'
 pubDate: '2026-01-16T15:24:09+07:00'
-heroImage: '/images/2026/01/20251125-3DFILE-copy.jpg'
+heroImage: '/images/2026/01/20251125-3DFILE-copy.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -13,7 +13,7 @@ Designing in a dense city center is tough. This sample project (Project 54) give
 
 It’s not just a flat map—this is a full 3D study showing how your site interacts with the vertical city around it, from skyscraper shadows to wind corridors.
 
- ![Site Analysis Diagram](/images/2026/01/20260115-SAMPLE54-4-copy.jpg)
+ ![Site Analysis Diagram](/images/2026/01/20260115-SAMPLE54-4-copy.webp)
 
 ## Why Analyze High-Density Sites?
 

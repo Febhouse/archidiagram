@@ -2,7 +2,7 @@
 title: 'Project example 24'
 description: 'Environmental Analysis in Architecture – Sun & Wind Mapping Using SketchUp Tools.'
 pubDate: '2025-06-30T11:52:03+07:00'
-heroImage: '/images/2025/06/SAMPLE-24-STYLE02-resized.jpg'
+heroImage: '/images/2025/06/SAMPLE-24-STYLE02-resized.webp'
 tags: 'sample project'
 ---
 
@@ -18,7 +18,7 @@ If you ignore these factors, you risk designing rooms that overheat, suffer from
 
 In this sample project (Project 24), I’ll show you how I built a robust **Environmental Analysis Diagram** right inside SketchUp.
 
- ![Environmental Analysis -1](/images/2025/06/SAMPLE-24-STYLE02-2-1-scaled-1.jpg) ![Environmental Analysis -2](/images/2025/06/SAMPLE-24-STYLE01-2-scaled-1.jpg)
+ ![Environmental Analysis -1](/images/2025/06/SAMPLE-24-STYLE02-2-1-scaled-1.webp) ![Environmental Analysis -2](/images/2025/06/SAMPLE-24-STYLE01-2-scaled-1.webp)
 
 ## The Tools Used in This Diagram
 

@@ -2,7 +2,7 @@
 title: 'Project example 42'
 description: 'Download this free Surrounding Buildings Diagram for SketchUp. Analyze urban massing, building heights, and solar access with this professional 3D sample file.'
 pubDate: '2026-01-17T14:48:18+07:00'
-heroImage: '/images/2026/01/975-Nostrand-Ave-2-cover.jpg'
+heroImage: '/images/2026/01/975-Nostrand-Ave-2-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -15,7 +15,7 @@ This sample project (Project 42) focuses on the **Surrounding Buildings Diagram*
 
 This downloadable SketchUp file gives you a clean, stylized workflow to visualize **urban massing**, **building heights**, and **solar access** all in a single, professional 3D presentation.
 
- ![Surrounding Buildings Diagram](/images/2026/01/975-Nostrand-Ave-2-1920x1080-1.jpg)
+ ![Surrounding Buildings Diagram](/images/2026/01/975-Nostrand-Ave-2-1920x1080-1.webp)
 
 ## Why Analyze Surrounding Buildings?
 

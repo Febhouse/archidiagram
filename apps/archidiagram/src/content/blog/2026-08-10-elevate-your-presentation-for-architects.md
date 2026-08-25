@@ -2,7 +2,7 @@
 title: 'Project example 68'
 description: 'How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
 pubDate: '2026-08-10T23:12:53+07:00'
-heroImage: '/images/2026/08/elevate-presentation-sun-diagram-sketchup.jpg'
+heroImage: '/images/2026/08/elevate-presentation-sun-diagram-sketchup.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
 ---
@@ -13,7 +13,7 @@ Thorough Site Analysis and sunlight studies are the core of any compelling **Arc
 
 *In the short video below, I demonstrate how to combine two powerful tools to create professional **Architectural Diagrams** in just a few minutes:*
 
- ![Presentation for Architects](/images/2026/08/elevate-presentation-sun-diagram-sketchup.jpg)
+ ![Presentation for Architects](/images/2026/08/elevate-presentation-sun-diagram-sketchup.webp)
 
 ## Why Use Sun Diagram and Shadow Slice?
 
