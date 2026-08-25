@@ -10,6 +10,7 @@ import partytown from '@astrojs/partytown';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://febhouse.com',
+  server: { port: 4322 },
   redirects: {
     '/dynamic-symbols-for-architectural-diagram': '/dynamic-symbols',
     '/3d-symbol': '/dynamic-symbols',
