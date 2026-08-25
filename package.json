@@ -16,5 +16,9 @@
       "@tailwindcss/vite",
       "sharp"
     ]
+  },
+  "dependencies": {
+    "@astrojs/compiler-binding-wasm32-wasi": "0.3.2",
+    "@bruits/satteri-wasm32-wasi": "0.10.5"
   }
 }

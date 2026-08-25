@@ -1,0 +1,121 @@
+---
+// YoutubeModal.astro
+// Intercepts YouTube links and opens them in an iframe modal to prevent pre-roll ads common on youtube.com redirects.
+---
+
+<div id="yt-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/90 backdrop-blur-sm p-4 transition-opacity duration-300 opacity-0">
+  <div class="relative w-full max-w-5xl aspect-video bg-black rounded-xl shadow-2xl overflow-visible scale-95 transition-transform duration-300" id="yt-modal-content">
+    <button id="yt-modal-close" class="absolute -top-12 right-0 bg-slate-900/50 hover:bg-slate-900 rounded-full text-white/90 hover:text-amber-400 z-10 p-2 transition-all backdrop-blur-sm border border-white/10" aria-label="Close modal">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div id="yt-modal-iframe-container" class="w-full h-full rounded-xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.5)]"></div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('yt-modal');
+    const modalContent = document.getElementById('yt-modal-content');
+    const closeBtn = document.getElementById('yt-modal-close');
+    const container = document.getElementById('yt-modal-iframe-container');
+
+    if (!modal || !modalContent || !closeBtn || !container) return;
+
+    const openModal = (videoId, startTime) => {
+      // Handle time format like 1m20s or just seconds
+      let startSeconds = 0;
+      if (startTime) {
+        const timeMatch = startTime.match(/(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?/);
+        if (timeMatch && (timeMatch[1] || timeMatch[2] || timeMatch[3])) {
+          startSeconds = (parseInt(timeMatch[1] || 0) * 3600) + (parseInt(timeMatch[2] || 0) * 60) + parseInt(timeMatch[3] || 0);
+        } else if (!isNaN(parseInt(startTime))) {
+          startSeconds = parseInt(startTime);
+        }
+      }
+
+      // rel=0 ensures related videos are from the same channel, reducing random ad-like videos at the end
+      let src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      if (startSeconds > 0) {
+        src += `&start=${startSeconds}`;
+      }
+
+      container.innerHTML = `<iframe width="100%" height="100%" src="${src}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+      
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      // Small delay to allow CSS transitions to work
+      requestAnimationFrame(() => {
+        modal.classList.remove('opacity-0');
+        modalContent.classList.remove('scale-95');
+        modalContent.classList.add('scale-100');
+      });
+      
+      // Prevent background scrolling
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+      modal.classList.add('opacity-0');
+      modalContent.classList.remove('scale-100');
+      modalContent.classList.add('scale-95');
+      
+      // Restore background scrolling
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        container.innerHTML = '';
+      }, 300);
+    };
+
+    const links = document.querySelectorAll('a[href*="youtube.com"], a[href*="youtu.be"]');
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        let url = link.href;
+        let videoId = '';
+        let startTime = '';
+        
+        try {
+          const parsedUrl = new URL(url);
+          if (parsedUrl.hostname === 'youtu.be') {
+            videoId = parsedUrl.pathname.slice(1); // remove leading slash
+            startTime = parsedUrl.searchParams.get('t') || '';
+          } else if (parsedUrl.hostname.includes('youtube.com')) {
+            if (parsedUrl.pathname.startsWith('/shorts/')) {
+              videoId = parsedUrl.pathname.split('/')[2];
+            } else if (parsedUrl.pathname === '/watch') {
+              videoId = parsedUrl.searchParams.get('v');
+              startTime = parsedUrl.searchParams.get('t') || '';
+            }
+          }
+        } catch (err) {
+          // Invalid URL, ignore
+        }
+
+        if (videoId) {
+          e.preventDefault();
+          openModal(videoId, startTime);
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  });
+</script>
