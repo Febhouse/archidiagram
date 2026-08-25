@@ -32,6 +32,27 @@ const posts = (await getCollection('blog'))
 
 			<!-- 📂 RESOURCES SECTION WITH HORIZONTAL FILTER TABS -->
 			<section id="resources" class="py-20 w-full mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 max-w-[1920px]">
+				
+				<!-- Subtle Community Badge -->
+				<div class="flex flex-wrap items-center gap-3 sm:gap-4 mb-8 bg-slate-100 dark:bg-slate-800/50 p-2 sm:p-3 rounded-2xl border border-slate-200 dark:border-slate-700/50 w-fit">
+					<div class="flex -space-x-2 hidden sm:flex">
+						<img class="w-8 h-8 rounded-full border-2 border-slate-100 dark:border-slate-800" src="https://ui-avatars.com/api/?name=Archi&background=F59E0B&color=fff" alt="Member" />
+						<img class="w-8 h-8 rounded-full border-2 border-slate-100 dark:border-slate-800" src="https://ui-avatars.com/api/?name=Design&background=3B82F6&color=fff" alt="Member" />
+						<img class="w-8 h-8 rounded-full border-2 border-slate-100 dark:border-slate-800" src="https://ui-avatars.com/api/?name=Creator&background=10B981&color=fff" alt="Member" />
+					</div>
+					<div class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium px-2 sm:px-0">
+						Join <span class="font-bold text-slate-900 dark:text-white">60,000+</span> architects on
+					</div>
+					<div class="flex items-center gap-3 border-l border-slate-300 dark:border-slate-600 pl-3 sm:pl-4 pr-1 sm:pr-2">
+						<a href="https://www.instagram.com/febhouse_com/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-pink-600 transition-colors" title="Instagram 38.4K">
+							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+						</a>
+						<a href="https://www.tiktok.com/@febhouse" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-black dark:hover:text-white transition-colors" title="TikTok 29.8K">
+							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.78-1.15 5.54-3.33 7.39-2.2 1.88-5.3 2.66-8.14 2.05-2.73-.56-5.02-2.38-6.05-4.97-1.04-2.58-.72-5.69.81-8.03 1.5-2.3 4.12-3.71 6.84-3.95v4.05c-1.72.15-3.33 1.13-4.14 2.63-.8 1.49-.78 3.32.06 4.79.82 1.46 2.45 2.37 4.13 2.35 1.7-.01 3.28-1.04 4.02-2.54.34-.69.51-1.46.52-2.23.03-4.8.01-9.61.02-14.41z"/></svg>
+						</a>
+					</div>
+				</div>
+
 				<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
 					<div>
 						<span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold tracking-widest uppercase bg-amber-500/10 text-amber-800 dark:text-amber-400 border border-amber-500/20 mb-3">
