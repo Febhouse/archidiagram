@@ -8,6 +8,6 @@
 - **Custom Diagram Service**: Professional solar and site analysis service to help validate design impacts.
 
 ## Resources
-- Main Website: https://febhouse.com
-- Sitemap: https://febhouse.com/sitemap-index.xml
+- Main Website: [febhouse.com](https://febhouse.com)
+- Sitemap: [sitemap-index.xml](https://febhouse.com/sitemap-index.xml)
 - Author: Nam Nguyen

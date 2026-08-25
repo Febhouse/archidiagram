@@ -69,7 +69,7 @@ const imageSrc = typeof image === 'string' ? image : image.src;
 <meta property="twitter:image" content={new URL(imageSrc, Astro.url)} />
 
 <!-- Gumroad Overlay Widget Script -->
-<script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+<script src="https://gumroad.com/js/gumroad.js" is:inline defer></script>
 
 <!-- Google Analytics (via Partytown) -->
 <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-ZHQDL7G1XG"></script>

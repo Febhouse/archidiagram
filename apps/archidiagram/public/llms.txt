@@ -8,6 +8,6 @@
 - **Shadow Slice**: Automated section cut shadows for SketchUp.
 
 ## Resources
-- Main Website: https://archidiagram.com
-- Sitemap: https://archidiagram.com/sitemap-index.xml
+- Main Website: [archidiagram.com](https://archidiagram.com)
+- Sitemap: [sitemap-index.xml](https://archidiagram.com/sitemap-index.xml)
 - Author: Nam Nguyen (Architect & Software Developer, Founder of Febhouse)
