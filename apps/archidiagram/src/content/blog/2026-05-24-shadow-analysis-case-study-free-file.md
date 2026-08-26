@@ -1,5 +1,5 @@
 ---
-title: 'Project example 65'
+title: 'Sample-65'
 description: 'Real-world shadow analysis case study and free SketchUp model.'
 pubDate: '2026-05-24T21:48:56+07:00'
 heroImage: '/images/2026/05/20260521-SECTION-fixed.webp'

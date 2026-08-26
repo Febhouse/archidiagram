@@ -1,5 +1,5 @@
 ---
-title: 'Project example 64'
+title: 'Sample-64'
 description: 'Download Sample-64 free SketchUp model and learn how to generate 3D sun paths and wind flows in under one minute.'
 pubDate: '2026-03-13T23:18:50+07:00'
 heroImage: '/images/2026/03/SAMPLE-64-cover.webp'

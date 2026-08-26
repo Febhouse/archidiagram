@@ -1,5 +1,5 @@
 ---
-title: 'Project example 22'
+title: 'Sample-22'
 description: 'Climatic Analysis Diagram combining sun path direction, prevailing wind vectors, and thermal comfort zones inside SketchUp.'
 pubDate: '2025-06-16T15:35:46+07:00'
 heroImage: '/images/2025/06/THUNGNAI-1024.webp'

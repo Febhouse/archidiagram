@@ -1,5 +1,5 @@
 ---
-title: 'Project example 24'
+title: 'Sample-24'
 description: 'Environmental Analysis in Architecture – Sun & Wind Mapping Using SketchUp Tools.'
 pubDate: '2025-06-30T11:52:03+07:00'
 heroImage: '/images/2025/06/SAMPLE-24-STYLE02-resized.webp'

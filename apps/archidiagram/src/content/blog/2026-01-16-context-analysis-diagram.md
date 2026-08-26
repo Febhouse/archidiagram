@@ -1,5 +1,5 @@
 ---
-title: 'Project example 45'
+title: 'Sample-45'
 description: 'Download this free Context Analysis Diagram for SketchUp. Visualize urban connectivity, traffic flow arrows, and 3D solar envelopes using this professional sample file.'
 pubDate: '2026-01-16T22:48:10+07:00'
 heroImage: '/images/2026/01/SAMPLE-45-1-cover.webp'

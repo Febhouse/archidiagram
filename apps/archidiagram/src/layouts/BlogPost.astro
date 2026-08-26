@@ -9,6 +9,7 @@ import { isPublishablePost } from '../consts';
 
 interface Props {
 	title: string;
+	seoTitle?: string;
 	description?: string;
 	pubDate: Date;
 	updatedDate?: Date;
@@ -18,7 +19,7 @@ interface Props {
 	Software?: string | string[];
 }
 
-const { title, description, pubDate, updatedDate, heroImage, tags, software, Software } = Astro.props;
+const { title, seoTitle, description, pubDate, updatedDate, heroImage, tags, software, Software } = Astro.props;
 
 const softwareRaw = software || Software || '';
 const softwareList = Array.isArray(softwareRaw) 
@@ -90,7 +91,7 @@ relatedPosts = relatedPosts
 const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": title,
+  "headline": seoTitle || title,
   "description": description || title,
   "image": heroImage ? new URL(heroImage, Astro.site).toString() : '',
   "datePublished": pubDate.toISOString(),
@@ -106,7 +107,7 @@ const schema = {
 <!doctype html>
 <html lang="en" class="scroll-smooth">
 	<head>
-		<BaseHead title={`${title} - Archi Diagram`} description={description || title} image={heroImage} />
+		<BaseHead title={`${seoTitle || title} - Archi Diagram`} description={description || title} image={heroImage} />
 		<style is:global>
 			/* Prevent emojis or inline SVGs from expanding to full container width */
 			.article-content img[src*="emoji"],

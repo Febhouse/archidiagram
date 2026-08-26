@@ -1,5 +1,5 @@
 ---
-title: 'Project example 42'
+title: 'Sample-42'
 description: 'Download this free Surrounding Buildings Diagram for SketchUp. Analyze urban massing, building heights, and solar access with this professional 3D sample file.'
 pubDate: '2026-01-17T14:48:18+07:00'
 heroImage: '/images/2026/01/975-Nostrand-Ave-2-cover.webp'

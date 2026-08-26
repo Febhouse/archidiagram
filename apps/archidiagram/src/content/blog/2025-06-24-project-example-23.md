@@ -1,5 +1,5 @@
 ---
-title: 'Project example 23'
+title: 'Sample-23'
 description: 'Site Context Mapping with Dynamic Symbols in SketchUp – Fast & Flexible Diagramming.'
 pubDate: '2025-06-24T20:34:35+07:00'
 heroImage: '/images/2025/06/58-2B-600x600-1.webp'

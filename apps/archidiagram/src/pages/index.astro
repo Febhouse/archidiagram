@@ -148,7 +148,7 @@ const posts = (await getCollection('blog'))
 						const softwareValue = (Array.isArray(rawSoftware) ? rawSoftware.join(',') : (rawSoftware || "")).trim().toLowerCase();
 						
 						return (
-							<div class="post-card-item" data-post-tag={tagValue} data-post-software={softwareValue} data-post-title={post.data.title.toLowerCase()} data-post-desc={(post.data.description || '').toLowerCase()}>
+							<div class="post-card-item" data-post-tag={tagValue} data-post-software={softwareValue} data-post-title={post.data.title.toLowerCase()} data-post-desc={(post.data.description || '').toLowerCase()} data-post-slug={post.id.toLowerCase()}>
 								<Card 
 									id={post.id}
 									title={post.data.title}
@@ -181,6 +181,13 @@ const posts = (await getCollection('blog'))
 			let activeSoftware = 'all';
 			let activeSearchQuery = '';
 
+			function normalizeForSearch(str: string) {
+				let normalized = str.toLowerCase().replace(/[-_.,\/\\:;!?'"()\[\]{}|]/g, ' ');
+				// Alias 'sample' to 'example' so they match interchangeably
+				normalized = normalized.replace(/\bsample\b/g, 'example');
+				return normalized;
+			}
+
 			function applyFilters() {
 				// Update Category Tab UI
 				tabBtns.forEach(b => {
@@ -210,12 +217,15 @@ const posts = (await getCollection('blog'))
 				postItems.forEach(item => {
 					const itemTag = (item.getAttribute('data-post-tag') || '').toLowerCase();
 					const itemSw = (item.getAttribute('data-post-software') || '').toLowerCase();
-					const itemTitle = (item.getAttribute('data-post-title') || '').toLowerCase();
-					const itemDesc = (item.getAttribute('data-post-desc') || '').toLowerCase();
+					const itemTitle = item.getAttribute('data-post-title') || '';
+					const itemDesc = item.getAttribute('data-post-desc') || '';
+					const itemSlug = item.getAttribute('data-post-slug') || '';
 
 					let matchSearch = true;
 					if (activeSearchQuery !== '') {
-						matchSearch = itemTitle.includes(activeSearchQuery) || itemDesc.includes(activeSearchQuery);
+						const searchWords = normalizeForSearch(activeSearchQuery).split(/\s+/).filter(w => w.length > 0);
+						const fullContent = normalizeForSearch(`${itemTitle} ${itemDesc} ${itemSlug}`);
+						matchSearch = searchWords.every(word => fullContent.includes(word));
 					}
 
 					let matchCategory = false;

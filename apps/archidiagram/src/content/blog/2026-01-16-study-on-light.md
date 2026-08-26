@@ -1,5 +1,5 @@
 ---
-title: 'Project example 53'
+title: 'Sample-53'
 description: 'Download free source files for a Light & Location Study in SketchUp. Explore the workflow for 3D sun paths, shadow analysis, and diagrammatic symbols.'
 pubDate: '2026-01-16T14:38:47+07:00'
 heroImage: '/images/2026/01/Cover.webp'

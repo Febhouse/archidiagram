@@ -1,5 +1,5 @@
 ---
-title: 'Project example 66'
+title: 'Sample-66'
 description: 'Download a free 3D SketchUp sample file to experience the power of Shadow Slice 2.0.'
 pubDate: '2026-06-25T16:53:34+07:00'
 heroImage: '/images/2026/06/20260625-1.webp'

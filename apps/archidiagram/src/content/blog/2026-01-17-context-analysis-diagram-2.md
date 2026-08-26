@@ -1,5 +1,5 @@
 ---
-title: 'Project example 41'
+title: 'Sample-41'
 description: 'Download this free Context Analysis Diagram for SketchUp. Learn to visualize urban context, sun paths, and traffic flow using this professional workflow sample. Includes video guide.'
 pubDate: '2026-01-17T15:23:31+07:00'
 heroImage: '/images/2026/08/SAMPLE-41-animation.gif'

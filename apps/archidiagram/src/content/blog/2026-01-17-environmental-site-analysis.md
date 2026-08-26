@@ -1,5 +1,5 @@
 ---
-title: 'Project example 39'
+title: 'Sample-39'
 description: 'Download this free 3D Environmental Site Analysis Diagram for SketchUp. Master the workflow of visualizing sun paths, wind, and views using Sun Diagram and Dynamic Symbols.'
 pubDate: '2026-01-17T15:45:31+07:00'
 heroImage: '/images/2026/01/SAMPLE-39-VIEW1-cover.webp'

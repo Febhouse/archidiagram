@@ -1,5 +1,5 @@
 ---
-title: 'Project example 68'
+title: 'Sample-68'
 description: 'How to Create a Sunlight Analysis Video with Sun Diagram, Photoshop, and CapCut'
 pubDate: '2026-08-10T23:12:53+07:00'
 heroImage: '/images/2026/08/elevate-presentation-sun-diagram-sketchup.webp'
