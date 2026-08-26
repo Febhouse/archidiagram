@@ -410,18 +410,26 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 
 	<!-- COMPLETE 2-COLUMN FAQ SECTION -->
 	<section id="faq" class="mb-16">
-		<div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 mb-8 gap-4">
-			<div>
+		<div class="border-b border-slate-200 dark:border-slate-800 pb-4 mb-6">
+			<div class="text-center">
 				<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ FAQ ]</span>
 				<h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Frequently Asked Questions & Documentation</h2>
 			</div>
-			<button 
-				type="button" 
-				onclick="window.toggleMainAiChat()" 
-				class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs font-bold hover:bg-amber-500/20 transition-colors self-start sm:self-auto cursor-pointer"
-			>
-				✨ Ask Dynamic Symbols AI Bot
-			</button>
+			
+			<!-- Detailed AI Trigger Card -->
+			<div class="max-w-xl mx-auto flex flex-col items-center gap-3 p-4 px-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm mt-6 mb-2 text-center">
+				<p class="text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
+					Need instant answers? Our AI is fully trained on all technical documentation, plugin workflows, and resources. It provides accurate, specific answers to all your questions without guessing.
+				</p>
+				<button 
+					type="button" 
+					onclick="window.toggleMainAiChat()"
+					class="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm uppercase tracking-wider shadow-sm transition-all flex items-center gap-2 cursor-pointer active:scale-95 w-full sm:w-auto justify-center"
+				>
+					<span><img src="/images/2026/05/LOGO_FEBHOUSE1.svg" alt="Febhouse" class="w-5 h-5 object-contain" /></span>
+					<span>Ask Dynamic Symbols AI Bot</span>
+				</button>
+			</div>
 		</div>
 
 		<!-- 2-Column Responsive Layout -->
@@ -631,6 +639,16 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 					</summary>
 					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
 						Updates are released faster on SketchUcation and Gumroad. The official SketchUp Extension Warehouse has a strict review process that takes several weeks, which can cause a temporary version discrepancy while new builds await approval.
+					</div>
+				</details>
+
+				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
+						<span>Can I import my own custom 2D/3D symbols?</span>
+						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+					</summary>
+					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+						Currently, you cannot import your own symbols directly into the plugin. However, you can send your custom designs to us via email! We will consider adding them in future updates, as each symbol needs to be specially integrated and coded with built-in animations by our team.
 					</div>
 				</details>
 			</div>

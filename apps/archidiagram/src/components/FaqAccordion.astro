@@ -7,7 +7,7 @@ interface FaqItem {
 const faqs: FaqItem[] = [
 	{
 		question: "What is ArchiDiagram.com?",
-		answer: "ArchiDiagram.com is an online platform that provides architectural diagram resources, free tutorials, templates, symbols, and workflow tools to help architects present design ideas clearly and more efficiently."
+		answer: "ArchiDiagram.com is an online platform that provides architectural diagram resources, free tutorials, templates, symbols, and workflow tools to help architects present design ideas clearly and more efficiently. You can learn more about our mission on the <a href='/about/' class='text-amber-600 hover:underline'>About Us page</a>."
 	},
 	{
 		question: "Are all resources on ArchiDiagram.com free?",
@@ -15,7 +15,7 @@ const faqs: FaqItem[] = [
 	},
 	{
 		question: "Do I need SketchUp to use the diagram templates?",
-		answer: "Not all templates require SketchUp. ArchiDiagram provides files for various formats, including SketchUp (.skp), Photoshop (.psd), and Canva templates. You can choose the format that fits your workflow."
+		answer: "Not all templates require SketchUp. ArchiDiagram provides files for various formats, including <a href='/?software=sketchup#resources' class='inline-flex items-center hover:text-amber-600 font-medium transition-colors whitespace-nowrap'><img src='/images/LOGO/SketchUp-logo.svg' class='w-4 h-4 mr-1' alt='SketchUp'/>SketchUp (.skp)</a>, <a href='/?software=photoshop#resources' class='inline-flex items-center hover:text-amber-600 font-medium transition-colors whitespace-nowrap'><img src='/images/LOGO/Adobe_Photoshop_CC_icon.svg' class='w-4 h-4 mr-1' alt='Photoshop'/>Photoshop (.psd)</a>, and <a href='/?software=canva#resources' class='inline-flex items-center hover:text-amber-600 font-medium transition-colors whitespace-nowrap'><img src='/images/LOGO/canva-icon.svg' class='w-4 h-4 mr-1' alt='Canva'/>Canva</a> templates. You can find and filter these easily by clicking on the software names in the <a href='/#resources' class='text-amber-600 hover:underline font-bold'>📚 TUTORIALS & RESOURCES</a> section."
 	},
 	{
 		question: "What are Sun Diagram and Dynamic Symbols?",
@@ -31,31 +31,19 @@ const faqs: FaqItem[] = [
 	},
 	{
 		question: "Where can I find examples of architectural diagrams?",
-		answer: "You can explore real examples through Tutorial pages, Free sample files, and Instagram / YouTube tutorials published by Febhouse. These samples show complete workflows from concept to final diagram."
+		answer: "You can explore real examples through <a href='/?category=tutorial#resources' data-category-target='tutorial' class='text-amber-600 hover:underline'>Tutorial pages</a>, <a href='/?category=sample%20project#resources' data-category-target='sample project' class='text-amber-600 hover:underline'>Free sample files</a>, and <a href='https://www.instagram.com/febhouse_com/' target='_blank' rel='noopener noreferrer' class='text-amber-600 hover:underline'>Instagram</a> / <a href='https://www.youtube.com/@febhouse_com' target='_blank' rel='noopener noreferrer' class='text-amber-600 hover:underline'>YouTube</a> tutorials published by Febhouse. These samples show complete workflows from concept to final diagram."
 	},
 	{
 		question: "How do I download the free templates / free sample files?",
 		answer: "For resources hosted on Gumroad with a '$0+' price, you can download them for free by entering 0 in the price box and clicking 'I want this!'. For resources distributed via Instagram, simply comment on the corresponding post, and we will send you a Google Drive download link through DM."
 	},
 	{
-		question: "Who is behind ArchiDiagram.com?",
-		answer: "ArchiDiagram is developed and maintained by Nam Nguyen (Nguyen Ha Nam) — the founder of Febhouse. He is an Architect and Software Developer specializing in SketchUp extensions and architectural visualization tools."
+		question: "Do I need a Canva Pro account to use the templates?",
+		answer: "No, the free version of Canva is completely sufficient. You do not need a Canva Pro account to use any of our Canva templates."
 	},
 	{
 		question: "How can I contact support directly?",
 		answer: "For general support, custom diagram inquiries, or file issues, email info@febhouse.com. Support is available daily."
-	},
-	{
-		question: "How does Sun Diagram calculate solar positions?",
-		answer: "Sun Diagram uses astronomical solar equations based on latitude and longitude coordinates to calculate real-world solar azimuth and altitude angles for any hour, day, and month of the year."
-	},
-	{
-		question: "Can I animate my diagram symbols without video editing software?",
-		answer: "Yes! With Dynamic Symbols, you can click 'Create Animation' to generate sequential SketchUp scenes automatically, and then export high-quality video animations directly via File → Export → Animation."
-	},
-	{
-		question: "Where can I find specific FAQs for the SketchUp plugins?",
-		answer: "Each plugin has its own dedicated FAQ section with detailed technical information:<br/>- <strong><a href='/sun-diagram/#faq' class='text-amber-600 hover:underline'>Sun Diagram FAQ</a></strong><br/>- <strong><a href='/dynamic-symbols/#faq' class='text-amber-600 hover:underline'>Dynamic Symbols FAQ</a></strong><br/>- <strong><a href='/shadow-slice/#faq' class='text-amber-600 hover:underline'>Shadow Slice FAQ</a></strong>"
 	}
 ];
 
@@ -80,18 +68,36 @@ const rightFaqs = faqs.slice(midIndex);
 				Find quick answers to common questions about our extensions, tutorials, and architectural resources.
 			</p>
 
-			<!-- Clean Single AI Trigger Button -->
-			<div class="inline-flex items-center gap-3 p-2 px-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
-				<span class="text-xs text-slate-600 dark:text-slate-300 font-medium">Need instant answers?</span>
+			<!-- Detailed AI Trigger Card -->
+			<div class="max-w-xl mx-auto flex flex-col items-center gap-3 p-4 px-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm mt-6">
+				<p class="text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
+					Need instant answers? Our AI is fully trained on all technical documentation, plugin workflows, and resources. It provides accurate, specific answers to all your questions without guessing.
+				</p>
 				<button 
 					type="button" 
 					onclick="window.toggleMainAiChat()"
-					class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm transition-all flex items-center gap-2 cursor-pointer active:scale-95"
+					class="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm uppercase tracking-wider shadow-sm transition-all flex items-center gap-2 cursor-pointer active:scale-95 w-full sm:w-auto justify-center"
 				>
 					<span><img src="/images/2026/05/LOGO_FEBHOUSE1.svg" alt="Febhouse" class="w-5 h-5 object-contain" /></span>
 					<span>Chat with Febhouse AI</span>
 				</button>
 			</div>
+		</div>
+		
+		<!-- PROMINENT PLUGIN FAQ LINKS -->
+		<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 max-w-4xl mx-auto">
+			<a href="/sun-diagram/#faq" class="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-amber-400 dark:hover:border-amber-500 hover:shadow-md transition-all group">
+				<img src="/images/LOGO/SunDiagram-logo.svg?v=2" alt="Sun Diagram" class="w-8 h-8 object-contain group-hover:scale-110 transition-transform" />
+				<span class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400">Sun Diagram FAQ</span>
+			</a>
+			<a href="/dynamic-symbols/#faq" class="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-amber-400 dark:hover:border-amber-500 hover:shadow-md transition-all group">
+				<img src="/images/LOGO/dynamic-symbols-logo.svg" alt="Dynamic Symbols" class="w-8 h-8 object-contain group-hover:scale-110 transition-transform" />
+				<span class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400">Dynamic Symbols FAQ</span>
+			</a>
+			<a href="/shadow-slice/#faq" class="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-amber-400 dark:hover:border-amber-500 hover:shadow-md transition-all group">
+				<img src="/images/LOGO/Shadowslice-logo.svg" alt="Shadow Slice" class="w-8 h-8 object-contain group-hover:scale-110 transition-transform" />
+				<span class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400">Shadow Slice FAQ</span>
+			</a>
 		</div>
 
 		<!-- 2-COLUMN FULL-WIDTH FAQ ACCORDION -->

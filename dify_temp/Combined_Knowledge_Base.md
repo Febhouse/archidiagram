@@ -1,4 +1,4 @@
-﻿# FEBHOUSE & ARCHIDIAGRAM - UNIFIED KNOWLEDGE BASE
+# FEBHOUSE & ARCHIDIAGRAM - UNIFIED KNOWLEDGE BASE
 
 This document serves as the comprehensive knowledge base for the Febhouse ecosystem, including ArchiDiagram.com and SketchUp extensions (Sun Diagram, Dynamic Symbols, Shadow Slice). Use this information to answer user queries regarding products, tutorials, pricing, installation, and support.
 
@@ -81,8 +81,14 @@ By default, Sun Diagram highlights the 4 most critical, internationally recogniz
 **How does the plugin handle tropical countries with unique sun paths and different time zone rules (like no DST)?**
 Sun Diagram is designed for global accuracy, including tropical regions. The physical sun path is calculated strictly based on your exact geographic coordinates. Time zones (UTC) and Daylight Saving Time (DST) are handled as independent settings. For tropical countries that do not observe DST, simply set the DST option to "No" and input your local standard UTC offset.
 
+**How do I know if my project location requires Daylight Saving Time (DST) to be enabled?**
+To verify if your site uses DST with 100% accuracy, go to **TimeAndDate.com/time/dst/** and enter your project's city. 
+- If the result says "No daylight saving time in [Year]", your location DOES NOT use DST (turn DST OFF in Sun Diagram).
+- If the result says "DST starts on..." and "DST ends on...", your location DOES observe DST (turn DST ON in Sun Diagram). 
+Why this matters: Standard 3D software fails at global solar analysis because locking in a static time zone (UTC) causes a 1-hour shadow error during summer months in DST regions.
+
 **Do I need to manually turn DST on and off in Sun Diagram when analyzing different months?**
-No, if the project location observes DST, turn the Sun Diagram DST toggle ON once. Sun Diagram will automatically apply the offset during the summer period. Leave the Sun Diagram DST toggle OFF for regions that never use DST.
+No, if the project location observes DST, turn the Sun Diagram DST toggle ON once. Sun Diagram's Smart DST Engine will automatically apply the offset during the summer period and keep the standard UTC base time during the winter. Leave the Sun Diagram DST toggle OFF for regions that never use DST.
 
 **What is the difference between Sun Diagram Studio and Sun Diagram Pro versions?**
 Both Sun Diagram Studio and Sun Diagram Pro have identical features. Sun Diagram Studio is best for subscription convenience and auto-updates. Sun Diagram Pro is best for lifetime ownership and offline activation.
@@ -148,8 +154,18 @@ You can toggle its visibility: Select the component, right-click, and choose Hid
 **Once the Sun Path diagram is activated, is it possible to see the shadows but turn off the diagram?**
 Yes. Hiding or turning off the diagram will not affect SketchUpâ€™s native shadow simulation. Your project shadows will remain fully active.
 
+**Can I rotate the Sun Path graphic to a different direction because I don't want to rotate my building model?**
+No, you should **NEVER rotate the Sun Path graphic manually** using the SketchUp Rotate tool. If you do, you only rotate the visual lines, but SketchUp's actual shadow engine remains unchanged, causing the shadows and the diagram to misalign completely.
+**Solution:** To change the sun direction without rotating your building, you must change SketchUp's native North direction. Use the official "Solar North" extension (provided by SketchUp) to rotate the North angle. Once you have set the new North angle using Solar North, simply click **Function 1** of the Sun Diagram plugin to create a new Sun Path. This new Sun Path will then perfectly match the new North direction you just set.
+
 **How do I remove stuck HUD text after using Sun Diagram Batch Export?**
 Activate the SketchUp Select tool, click directly on the overlapping text block, and press Delete. Deleting text blocks is safe and will not affect the 3D model.
+
+**Can I customize the color and style of the Sun Path graphic to match my company's design style?**
+Yes, you can easily change the color and style of the Sun Path diagram to match your presentation style by using **Function 4 (Diagram Styles)** within the plugin.
+
+**If my SketchUp model is very heavy with many trees and details, will running Sun Diagram cause SketchUp to lag or crash?**
+Heavy models naturally affect SketchUp's overall performance because SketchUp itself takes longer to calculate native shadows on complex geometry. However, if your model is running stably in SketchUp, Sun Diagram will not cause it to crash. The extension has been rigorously tested and approved by SketchUp's official Extension Warehouse technical review team.
 
 **Why do the hour texts (6h, 8h, 10h, 12h...) in the sun path lose their colors and appear black?**
 Switch your Graphic Engine back to the classic one. Go to: Window > Preferences > Graphics > Graphics Engine, and select "Use classic graphics engine".
@@ -242,6 +258,9 @@ On SketchUcation, both the annual and lifetime licenses are under the name "Dyna
 **I purchased Dynamic Symbols Pro on SketchUcation, how do I activate my license?**
 Install the SketchUcation Tools plugin. Go to Extensions > Dynamic Symbols Pro > License, click Activate, and select the .scflicense file emailed to you.
 
+**Can I import my own custom 2D or 3D symbols into the Dynamic Symbols library?**
+Currently, you cannot import your own symbols directly into the plugin. However, you can send your custom designs to us via email! We will consider adding them in future updates, as each symbol needs to be specially integrated and coded with built-in animations.
+
 **Why is the version of Dynamic Symbols Pro on SketchUcation and Gumroad higher than the version on the Extension Warehouse?**
 Updates are released faster on SketchUcation and Gumroad due to the strict and time-consuming review process on the official SketchUp Extension Warehouse.
 
@@ -253,6 +272,10 @@ Updates are released faster on SketchUcation and Gumroad due to the strict and t
 - **Pricing:** Free
 - **Overview:** Specialized tool for interior shadow analysis. Enables the creation of transparent 3D sections to visualize light penetration within a building.
 - **Link:** https://archidiagram.com/shadow-slice/
+
+#### Shadow Slice Frequently Asked Questions (FAQ)
+**Does Shadow Slice work with rendering engines like V-Ray or Enscape?**
+No, Shadow Slice is designed specifically to work within SketchUp's native Viewport for diagramming and presentation purposes. It is not compatible with external rendering engines.
 
 ---
 
@@ -274,6 +297,10 @@ Updates are released faster on SketchUcation and Gumroad due to the strict and t
 - **Presentation template:** A3 professional presentation template for InDesign, PowerPoint, Canva. [Link](https://archidiagram.com/presentation-a3/)
 - **Free Heliodon 3D Model Collection:** Global Cities for Architectural Solar Studies. [Link](https://archidiagram.com/heliodon-3d/)
 - **AI Architecture diagram:** Free AI prompt and sample workflow. [Link](https://archidiagram.com/ai-architecture-diagram/)
+
+#### Templates FAQ
+**Do I need a Canva Pro account to use the ArchiDiagram Canva templates?**
+No, the free version of Canva is completely sufficient. You do not need a Canva Pro account to use our templates.
 
 ### 3.3 Project Samples
 *All created using SketchUp + Sun Diagram / Dynamic Symbols / Shadow Slice.*
@@ -337,5 +364,39 @@ Updates are released faster on SketchUcation and Gumroad due to the strict and t
 - **Shadow Slice: Interior Shadow & Section Tool For SketchUp**: Cut away walls and roofs while keeping their natural shadows. The perfect tool for interior sunlight simulation and perspective section diagrams. [Link](https://archidiagram.com/shadow-slice/)
 - **Sun Diagram: 3D Sun Path & Solar Analysis Plugin for SketchUp**: Sun Diagram is an extension for creating 3D sun paths and analyzing sunlight in architectural projects. [Link](https://archidiagram.com/sun-diagram/)
 
+---
 
+## 4. WORKFLOWS & TUTORIALS FAQ
 
+### 4.1 Animated Architectural Diagrams
+**Q: What is the workflow for creating an animated architectural diagram using Sun Diagram and Dynamic Symbols?**
+A: The complete workflow involves 6 steps entirely inside SketchUp and Photoshop:
+1. Import Terrain and Map Data (File > Add Location).
+2. Generate Contour Lines by intersecting the terrain with stacked flat rectangles.
+3. Create a 3D Sun Path using the Sun Diagram Plugin.
+4. Add architectural graphics (wind, views, etc.) using the Dynamic Symbols Plugin.
+5. Create a Shadow Analysis using Sun Diagram and export the image sequence.
+6. Generate the Dynamic Symbols animation and combine the layers in Photoshop or Premiere to export the final animated diagram.
+*Reference:* https://archidiagram.com/create-architectural-diagrams-updated-workflow-aug-2025/
+
+**Q: How do I generate contour lines from imported terrain in SketchUp?**
+A: First, go to File > Add Location to import the 3D terrain. Draw a large flat rectangle below the terrain and duplicate it vertically every 5 or 10 meters. Select all rectangles and the terrain, right-click, and choose "Intersect Faces > With Model". Delete the flat faces to leave just the contour edges.
+
+**Q: How can I create a shadow analysis time-lapse in SketchUp?**
+A: Temporarily turn off dynamic symbols so shadows are clean. Using the Sun Diagram plugin, open the Shadow Analysis tool (the 3rd icon). Pick your time range (e.g., 9 AM to 3 PM) and output resolution, then click Apply. The plugin will automatically save an image sequence of the shadows moving across your site.
+
+### 4.2 Ventilation Analysis Diagrams
+**Q: What is the workflow for creating a ventilation analysis diagram?**
+A: You can create a clean ventilation diagram using SketchUp, RWIND, and Photoshop in 5 steps:
+1. Create a simplified 3D model in SketchUp (essential blockers only) and export as an STL file (in Meters).
+2. Import the STL into RWIND Simulation and shrink the simulation box to cover only your area of interest.
+3. Set up the simulation in RWIND (e.g., 5 m/s inlet wind speed, 20% mesh density) and calculate results.
+4. Visualize airflow using Flow Field Quantities (XY plane, Streamline view) and export a 10-second animation.
+5. Post-process in Photoshop by layering the RWIND video with your 3D models and drawing crisp outlines over the architecture.
+*Reference:* https://archidiagram.com/ventilation-analysis-diagram/
+
+**Q: Why does RWIND Simulation take too long to calculate, and how can I speed it up?**
+A: To speed up calculation time in RWIND without sacrificing too much quality: 1) Shrink the simulation box down to just cover your specific area of interest. 2) Drop the mesh density to around 20%—this gives a great balance between calculation speed and visual accuracy for diagrams.
+
+**Q: How do I export my SketchUp model for wind simulation in RWIND?**
+A: Make sure your SketchUp units are set to Meters (Window > Model Info > Units). Keep the geometry highly simplified (e.g., use a sphere on a cylinder for trees, and only model essential walls). Then go to File > Export > 3D Model and save it as an `.stl` file.
