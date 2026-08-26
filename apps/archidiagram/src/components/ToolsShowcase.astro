@@ -21,7 +21,7 @@ interface Tool {
 const tools: Tool[] = [
 	{
 		id: "dynamic-symbols",
-		name: "1. Dynamic Symbols",
+		name: "Dynamic Symbols",
 		nameLink: "/dynamic-symbols/",
 		description: "Dynamic Symbols is a SketchUp extension (plugin) that allows you to create animated symbols and switch between different states with just one click.",
 		features: [
@@ -48,7 +48,7 @@ const tools: Tool[] = [
 	},
 	{
 		id: "sun-diagram",
-		name: "2. Sun Diagram",
+		name: "Sun Diagram",
 		nameLink: "/sun-diagram/",
 		description: "Sun Diagram is a SketchUp extension (plugin) designed to create 3D Sun paths and analyze sunlight for architectural projects.",
 		features: [
@@ -76,7 +76,7 @@ const tools: Tool[] = [
 	},
 	{
 		id: "shadow-slice",
-		name: "3. Shadow Slice",
+		name: "Shadow Slice",
 		nameLink: "/shadow-slice/",
 		description: "Interior Shadow & Section Tool for SketchUp. Cut away walls and roofs while keeping their natural shadows. The perfect tool for interior sunlight simulation.",
 		features: [
@@ -143,9 +143,9 @@ const tools: Tool[] = [
 						</div>
 					)}
 
-					<div class="p-6 md:p-8 flex flex-col flex-grow">
+					<div class="p-6 md:p-8 flex flex-col flex-grow items-center text-center">
 						<!-- Title & Logo Row -->
-						<div class="flex items-center gap-4 mb-5">
+						<div class="flex flex-col items-center justify-center gap-3 mb-5">
 							<div class="w-12 h-12 shrink-0 flex items-center justify-center">
 								<img src={tool.logoImg} alt={`${tool.name} Official Logo`} class="w-full h-full object-contain" />
 							</div>
@@ -161,7 +161,7 @@ const tools: Tool[] = [
 						</p>
 
 						<!-- Feature List -->
-						<ul class="space-y-2.5 mb-8">
+						<ul class="space-y-2.5 mb-8 inline-block text-left">
 							{tool.features.map(feature => (
 								<li class="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-300 font-medium">
 									<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -178,7 +178,7 @@ const tools: Tool[] = [
 						{tool.links.map(link => (
 							<a href={link.url} target="_blank" rel="noopener" class={`w-full py-2.5 px-4 rounded-xl text-[12px] font-bold transition-all flex items-center justify-center gap-2.5 shadow-sm active:scale-[0.98] ${link.primary ? 'text-slate-950 bg-amber-400 hover:bg-amber-300 group-hover:shadow-md' : 'text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'}`}>
 								{link.icon && <img src={link.icon} alt="" class="w-5 h-5 object-contain" />}
-								<div class="flex flex-col items-center sm:items-start text-center sm:text-left leading-tight">
+								<div class="flex flex-col items-center text-center leading-tight">
 									<span class="uppercase tracking-wider">{link.text}</span>
 									{link.subText && <span class="text-[10px] font-semibold opacity-75 normal-case tracking-normal">{link.subText}</span>}
 								</div>
