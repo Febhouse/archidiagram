@@ -183,8 +183,10 @@ const posts = (await getCollection('blog'))
 
 			function normalizeForSearch(str: string) {
 				let normalized = str.toLowerCase().replace(/[-_.,\/\\:;!?'"()\[\]{}|]/g, ' ');
-				// Alias 'sample' to 'example' so they match interchangeably
+				// Aliases
 				normalized = normalized.replace(/\bsample\b/g, 'example');
+				normalized = normalized.replace(/\bplugin\b/g, 'extension');
+				normalized = normalized.replace(/\bother resources\b/g, 'extension');
 				return normalized;
 			}
 
@@ -224,7 +226,7 @@ const posts = (await getCollection('blog'))
 					let matchSearch = true;
 					if (activeSearchQuery !== '') {
 						const searchWords = normalizeForSearch(activeSearchQuery).split(/\s+/).filter(w => w.length > 0);
-						const fullContent = normalizeForSearch(`${itemTitle} ${itemDesc} ${itemSlug}`);
+						const fullContent = normalizeForSearch(`${itemTitle} ${itemDesc} ${itemSlug} ${itemTag}`);
 						matchSearch = searchWords.every(word => fullContent.includes(word));
 					}
 
