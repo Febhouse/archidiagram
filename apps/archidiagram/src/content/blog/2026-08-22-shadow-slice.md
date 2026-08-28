@@ -207,7 +207,7 @@ badge: 'FREE & PRO'
           </div>
         </div>
         <div class="p-6 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 space-y-3">
-          <a href="https://extensions.sketchup.com/extension/e10f7017-931a-45a9-8e5d-d65df0926ddd/shadow-slice" target="_blank" rel="noopener" class="block w-full py-3 px-6 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm text-center shadow-md transition-all">
+          <a href="https://extensions.sketchup.com/extension/961497ac-df23-458b-a1ca-777e798c7084/shadow-slice-pro" target="_blank" rel="noopener" class="block w-full py-3 px-6 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm text-center shadow-md transition-all">
             Get Pro on Extension Warehouse
           </a>
         </div>
