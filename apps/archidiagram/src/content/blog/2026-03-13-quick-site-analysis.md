@@ -36,10 +36,6 @@ We’ve provided the exact base `.skp` file used in the video. Download it, open
 
 Ready to test the workflow? Download the practice file below!
 
-> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
-
-[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-64.zip)
-
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-64)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  

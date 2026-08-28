@@ -58,6 +58,4 @@ On Gumroad, simply enter **$0** in the "Name a fair price" box to download for f
 If you want to support me, you can enter any amount you wish. Thank you!
 
 
-[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-23.zip)
-
 *(Need a step-by-step tutorial on this workflow? Check out our updated guide: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*

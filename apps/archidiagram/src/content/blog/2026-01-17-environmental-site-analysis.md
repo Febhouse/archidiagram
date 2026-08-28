@@ -62,10 +62,6 @@ To recreate this clean 3D diagram style on your own projects, we highly recommen
 
 Grab the free files below, see how the 3D layers are built, and apply this technique to your next residential project!
 
-> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
-
-[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-39.zip)
-
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-39)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  

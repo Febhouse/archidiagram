@@ -36,10 +36,6 @@ To generate this level of precision effortlessly while maintaining that clean te
 
 Explore the file, dissect the layers, and see exactly how these extensions interact with the 3D context to produce a presentation-ready analytical diagram.
 
-> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
-
-[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-65.zip)
-
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-65)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  

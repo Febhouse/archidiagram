@@ -44,10 +44,6 @@ If you're an architect, designer, or student looking to upgrade your diagramming
 
 Want to dissect the layers and see how it works? Download the free project file below!
 
-> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
-
-[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE%2026.zip)
-
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample26)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  

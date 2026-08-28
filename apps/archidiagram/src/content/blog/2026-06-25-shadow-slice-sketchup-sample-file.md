@@ -39,10 +39,6 @@ Head over to the **[Shadow Slice plugin page](/shadow-slice/)** to get started w
 
 You can download the exact SketchUp file used in the video to test out the section cuts for yourself.
 
-> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
-
-[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-66.zip)
-
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-66)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  

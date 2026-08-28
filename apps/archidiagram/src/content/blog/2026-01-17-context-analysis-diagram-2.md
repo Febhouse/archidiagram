@@ -66,10 +66,6 @@ You can download this file to study the structure. To replicate the speed and st
 
 Adopt this structure to improve your urban analysis for residential or commercial projects!
 
-> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
-
-[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-41.zip)
-
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-41)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  

@@ -42,10 +42,6 @@ Finally, I import the raw video into **CapCut** for the finishing touches—addi
 
 Want to see how it's done up close? Download the project files below to study the exact SketchUp setup.
 
-> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
-
-[ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/PROJECT-20.zip)
-
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/siteanalysis_sundiagram)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
