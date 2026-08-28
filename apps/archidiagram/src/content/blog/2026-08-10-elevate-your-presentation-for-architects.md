@@ -28,7 +28,7 @@ https://www.youtube.com/shorts/JREfPBkYxcE
 
 I’ve prepared a **Sample File** with scenes set up exactly like in the video. Download it below to play around and see just how fast this workflow really is!
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-68)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-68)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

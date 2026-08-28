@@ -49,7 +49,7 @@ Creating an **Environmental Analysis Diagram** doesn’t have to be a complicate
 
 Want to dissect the layers and see how it works? Download the free project file below!
 
-[DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/siteanalysis-24)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/siteanalysis-24)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

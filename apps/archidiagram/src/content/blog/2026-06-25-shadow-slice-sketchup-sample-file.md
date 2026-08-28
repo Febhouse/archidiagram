@@ -39,7 +39,7 @@ Head over to the **[Shadow Slice plugin page](/shadow-slice/)** to get started w
 
 You can download the exact SketchUp file used in the video to test out the section cuts for yourself.
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-66)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-66)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

@@ -73,7 +73,7 @@ To get the best results when generating an **AI Architecture diagram**, your bas
 
 Want to test this workflow yourself? Download the sample package below, which includes the original SketchUp base image, the final AI-generated outputs, and a text file with prompt variations to experiment with.
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/AIProject01)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/AIProject01)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

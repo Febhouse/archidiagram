@@ -62,7 +62,7 @@ To get this professional, diagrammatic look on your own projects, we highly reco
 
 Grab the free files below, see how the layers are organized, and elevate your next architectural presentation!
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Context-Analysis-Diagram)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Context-Analysis-Diagram)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

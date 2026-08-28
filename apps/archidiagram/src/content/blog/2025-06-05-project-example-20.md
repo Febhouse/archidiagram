@@ -42,7 +42,7 @@ Finally, I import the raw video into **CapCut** for the finishing touches—addi
 
 Want to see how it's done up close? Download the project files below to study the exact SketchUp setup.
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/siteanalysis_sundiagram)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/siteanalysis_sundiagram)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

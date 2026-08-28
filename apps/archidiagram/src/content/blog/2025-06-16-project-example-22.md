@@ -42,7 +42,7 @@ This approach is perfect for students, professionals, and firms looking to serio
 
 Want to dissect the layers and see how it works? Download the free project file below!
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sitediagram)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sitediagram)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

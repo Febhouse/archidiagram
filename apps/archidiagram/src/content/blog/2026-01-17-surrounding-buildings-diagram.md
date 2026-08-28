@@ -62,7 +62,7 @@ The strength of this diagram lies in its clarity. To achieve this result in your
 
 Use this sample as a template to dramatically improve your site analysis presentations and master the art of urban massing diagrams!
 
-[DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-42)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-42)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

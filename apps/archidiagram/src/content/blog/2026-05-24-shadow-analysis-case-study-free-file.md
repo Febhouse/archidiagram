@@ -36,7 +36,7 @@ To generate this level of precision effortlessly while maintaining that clean te
 
 Explore the file, dissect the layers, and see exactly how these extensions interact with the 3D context to produce a presentation-ready analytical diagram.
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-65)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-65)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

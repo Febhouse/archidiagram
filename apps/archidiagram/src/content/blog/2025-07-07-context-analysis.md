@@ -53,7 +53,7 @@ Want to see exactly how this was set up? Download the project files below!
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these resources helpful and would like to support my work, you can download them via **Gumroad** or **Ko-fi** (where you can enter $0 or leave a small tip).*
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/projectexamples25)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/projectexamples25)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

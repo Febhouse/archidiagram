@@ -33,14 +33,10 @@ Want to see how it looks before downloading?
 
 ## Download the Canva Template
 
-> *💡 **Note:** This template is available for a small fee. Your support helps keep this site running and allows me to create more tools for the architecture community. Thank you very much!*
+> *💡 **Note:** You can purchase this premium template for **$5**. Your support helps keep this site running and allows me to create more tools for the architecture community. Thank you very much!*
 
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/motionsymbols-for-architecturaldiagram)
 
-On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
-(No bank or card information required.)
-
-If you want to support me, you can enter any amount you wish. Thank you!
 
 [ DOWNLOAD VIA KO-FI ](https://ko-fi.com/s/ed7ac0dc80)
 

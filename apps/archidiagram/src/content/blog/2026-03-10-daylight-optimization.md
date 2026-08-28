@@ -62,7 +62,7 @@ To replicate this highly effective analysis for your own compact housing project
 
 Grab the free files below, see how we set up the lighting, and learn how to deliver maximum value in your compact housing designs!
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-63)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-63)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

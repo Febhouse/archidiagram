@@ -44,14 +44,11 @@ Want to see exactly how the pages flow before downloading?
 
 To make sure it fits perfectly into your existing workflow, this template is available in **3 different formats**: InDesign, PowerPoint, and Canva.
 
-> *💡 **Note:** You can download the file for free via Gumroad or Ko-fi. If you find these resources helpful and would like to support my work, you can enter $0 or leave a small tip during checkout.*
+> *💡 **Note:** You can download the **PowerPoint (.pptx)** version for **free** by entering $0. If you'd like to access the full bundle (including **Canva** and **InDesign** formats), you can purchase it for **$5**.*
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Presentationfile)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Presentationfile)
 
-On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
-(No bank or card information required.)
-
-If you want to support me, you can enter any amount you wish. Thank you!
+On Gumroad, simply enter **$0** to get the free PowerPoint version, or enter **$5** to get the full Canva & InDesign bundle.
 
 [ DOWNLOAD VIA KO-FI ](https://ko-fi.com/s/2816fac41a)
 

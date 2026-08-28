@@ -36,7 +36,7 @@ We’ve provided the exact base `.skp` file used in the video. Download it, open
 
 Ready to test the workflow? Download the practice file below!
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-64)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-64)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

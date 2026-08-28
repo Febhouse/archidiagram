@@ -55,7 +55,7 @@ Stop guessing and start proving your design's integrity. Streamline your entire 
 
 Ready to explore the setup? Download the free files below to test this workflow on your own machine and reuse the assets for your projects.
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-67)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-67)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)

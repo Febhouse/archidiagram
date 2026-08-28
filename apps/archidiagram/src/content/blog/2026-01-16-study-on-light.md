@@ -76,7 +76,7 @@ Ready to explore the setup? Download the free files below to test this workflow 
 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these resources helpful and would like to support my work, you can download them via **Gumroad** (where you can enter $0 or leave a small tip).*
 
-[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/StudyonLight)
+[ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/StudyonLight)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
 (No bank or card information required.)
