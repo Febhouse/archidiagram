@@ -54,8 +54,6 @@ This sample follows a straightforward workflow used for sunlight and shadow visu
 
 Grab the free files below, dissect the layers, and start applying this technique to your own presentations!
 
-> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these resources helpful and would like to support my work, you can download them via **Gumroad** (where you can enter $0 or leave a small tip).*
-
 [ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sunlightanalysis)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  

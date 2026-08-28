@@ -74,8 +74,6 @@ To replicate this detailed residential analysis or use the assets in your own wo
 
 Use this file as a template for your next housing project to impress clients with a crystal-clear analysis of their future home's environment.
 
-> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these resources helpful and would like to support my work, you can download them via **Gumroad** (where you can enter $0 or leave a small tip).*
-
 [ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Residential-Site-Analysis)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  

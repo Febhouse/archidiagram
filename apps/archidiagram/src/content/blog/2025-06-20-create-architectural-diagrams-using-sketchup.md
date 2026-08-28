@@ -40,9 +40,6 @@ https://www.youtube.com/watch?v=4bFSWw3rnGE
 
 Want to follow along? Download the exact project file we use in this video:
 
-> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these tutorials helpful and would like to support my work, you can download them via **Gumroad** (where you can enter $0 or leave a small tip).*
-
-[ DIRECT DOWNLOAD ](https://drive.google.com/file/d/1rlKtbxue3d_PeTu8_TQTOWCiiLCozdO2/view?usp=sharing)
 
 ## Tutorial (step-by-step guide and videos):
 

@@ -49,8 +49,6 @@ Use this method early in your process to unlock deeper design thinking and commu
 
 Want to dissect the layers and see how it works? Download the free project file below!
 
-> *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access. If you find these resources helpful and would like to support my work, you can download them via **Gumroad** or **Ko-fi** (where you can enter $0 or leave a small tip).*
-
 [ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/siteanalysis-23)
 
 On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
