@@ -5,6 +5,7 @@ pubDate: '2026-01-16T11:46:46+07:00'
 heroImage: '/images/2026/01/SAMPLE-57cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # Climatic Site Analysis & Solar Orientation in SketchUp: Free Source Files (Project 57) 

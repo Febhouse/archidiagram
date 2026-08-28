@@ -5,6 +5,7 @@ pubDate: '2026-08-10T23:12:53+07:00'
 heroImage: '/images/2026/08/elevate-presentation-sun-diagram-sketchup.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # Project example 68: Elevate Your Presentation for Architects with Sun Diagram & Shadow Slice ☀️

@@ -5,6 +5,7 @@ pubDate: '2026-06-25T16:53:34+07:00'
 heroImage: '/images/2026/06/20260625-1.webp'
 tags: 'sample project'
 software: 'SketchUp, Shadow Slice'
+badge: 'FREE'
 ---
 
 # Elevate Your Section Perspectives: Experience Shadow Slice 2.0 (Free Sample File Inside)

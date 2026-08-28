@@ -5,6 +5,7 @@ pubDate: '2025-06-24T20:34:35+07:00'
 heroImage: '/images/2025/06/58-2B-600x600-1.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # Site Context Mapping with Dynamic Symbols in SketchUp – Fast & Flexible Diagramming 

@@ -4,6 +4,7 @@ description: 'Clean line style for Sun Diagram based on 3D sun path vectors — 
 pubDate: '2025-04-25T15:26:48+07:00'
 heroImage: '/images/2025/04/STYLE-1-COVER-1-1.webp'
 tags: 'sample project'
+badge: 'FREE'
 ---
 
 # Clean Lines for Sun Diagram (Style 01)

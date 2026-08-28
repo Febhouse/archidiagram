@@ -4,6 +4,7 @@ description: 'Straight hand drawn style for sun diagram — a clean, geometric s
 pubDate: '2025-04-25T00:18:54+07:00'
 heroImage: '/images/2025/04/STYLE-5-COVER-1-1.webp'
 tags: 'sample project'
+badge: 'FREE'
 ---
 
 ![Straight hand drawn](/images/2025/04/STYLE-5-COVER-1.webp)

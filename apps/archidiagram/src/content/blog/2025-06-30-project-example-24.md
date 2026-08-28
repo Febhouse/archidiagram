@@ -4,6 +4,7 @@ description: 'Environmental Analysis in Architecture – Sun & Wind Mapping Usin
 pubDate: '2025-06-30T11:52:03+07:00'
 heroImage: '/images/2025/06/SAMPLE-24-STYLE02-resized.webp'
 tags: 'sample project'
+badge: 'FREE'
 ---
 
 # Environmental Analysis in Architecture – Sun & Wind Mapping Using SketchUp Tools 

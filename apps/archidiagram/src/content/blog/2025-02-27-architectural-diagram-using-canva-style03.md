@@ -5,6 +5,7 @@ pubDate: '2025-02-27T10:44:16+07:00'
 heroImage: '/images/2026/08/0226-1-2.gif'
 tags: 'presentation template'
 software: 'Canva'
+badge: 'FREE'
 ---
 
 # Architectural Diagram with Canva Template (Style 03)

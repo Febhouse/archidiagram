@@ -157,6 +157,7 @@ const posts = (await getCollection('blog'))
 									heroImage={post.data.heroImage}
 									tags={post.data.tags}
 									software={post.data.software || (post.data as any).Software}
+									badge={(post.data as any).badge}
 								/>
 							</div>
 						);

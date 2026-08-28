@@ -5,6 +5,7 @@ pubDate: '2025-08-11T15:39:37+07:00'
 heroImage: '/images/2025/08/STYLE-06-scaled-1-e1773389554390.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # Free Download – Project Sample for Site Diagram, 3D Sun Path & Symbols

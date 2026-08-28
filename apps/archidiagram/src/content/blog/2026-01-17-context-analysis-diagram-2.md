@@ -5,6 +5,7 @@ pubDate: '2026-01-17T15:23:31+07:00'
 heroImage: '/images/2026/08/SAMPLE-41-animation.gif'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # Context Analysis Diagram in SketchUp: Free Sample Project & Workflow

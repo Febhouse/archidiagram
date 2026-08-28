@@ -5,6 +5,7 @@ pubDate: '2026-01-16T15:56:41+07:00'
 heroImage: '/images/2026/01/SAMPLE-56-COVER1000x1000.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # Residential Site Analysis Diagram in SketchUp: Free Sample (Project 56)

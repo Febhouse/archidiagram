@@ -5,6 +5,7 @@ pubDate: '2026-03-10T21:47:27+07:00'
 heroImage: '/images/2026/03/Daylight-Optimization-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Shadow Slice'
+badge: 'FREE'
 ---
 
 # Small 1-Story Townhouse Design: Free Daylight Optimization Sample (Sample - 63)

@@ -5,6 +5,7 @@ pubDate: 2026-06-18
 heroImage: '/images/2026/06/Feature02.gif'
 tags: 'other resources'
 software: 'SketchUp, Shadow Slice'
+badge: 'FREE & PRO'
 ---
 
 <div class="space-y-12">

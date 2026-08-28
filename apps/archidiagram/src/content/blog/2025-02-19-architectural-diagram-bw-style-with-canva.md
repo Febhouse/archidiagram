@@ -5,6 +5,7 @@ pubDate: '2025-02-19T10:38:27+07:00'
 heroImage: '/images/2026/08/ARDIAGRAM-BW-Horizonta-updatedl.gif'
 tags: 'presentation template'
 software: 'Canva'
+badge: 'FREE'
 ---
 
 # Architectural Diagram with Canva Template (Style 02 - B&W Edition)

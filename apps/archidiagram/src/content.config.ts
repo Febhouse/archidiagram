@@ -18,6 +18,7 @@ const blog = defineCollection({
 			tags: z.union([z.string(), z.array(z.string())]).optional(),
 			software: z.union([z.string(), z.array(z.string())]).optional(),
 			Software: z.union([z.string(), z.array(z.string())]).optional(),
+			badge: z.string().optional(),
 		}),
 });
 

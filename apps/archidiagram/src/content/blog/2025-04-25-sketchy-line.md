@@ -4,6 +4,7 @@ description: 'Sketchy line style for the Sun Path — hand-drawn look with soft 
 pubDate: '2025-04-25T16:10:13+07:00'
 heroImage: '/images/2025/04/STYLE-4-COVER-1.webp'
 tags: 'sample project'
+badge: 'FREE'
 ---
 
 ![Sketchy Line COVER](/images/2025/04/STYLE-4-COVER-1.webp)

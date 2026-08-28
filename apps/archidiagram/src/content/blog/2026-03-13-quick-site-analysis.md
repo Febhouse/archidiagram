@@ -5,6 +5,7 @@ pubDate: '2026-03-13T23:18:50+07:00'
 heroImage: '/images/2026/03/SAMPLE-64-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # Quick Site Analysis in SketchUp: Free Sample File (Sample-64)

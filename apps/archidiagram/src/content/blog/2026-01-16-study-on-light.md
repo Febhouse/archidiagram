@@ -5,6 +5,7 @@ pubDate: '2026-01-16T14:38:47+07:00'
 heroImage: '/images/2026/01/Cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # A Study on Light & Location in SketchUp: Free Source Files 

@@ -5,6 +5,7 @@ pubDate: '2026-04-05T17:02:10+07:00'
 heroImage: '/images/2026/04/check-dst-location.webp'
 tags: 'tutorial'
 software: 'SketchUp, Sun Diagram'
+badge: 'FREE'
 ---
 
 # Guide: How to Determine if Your Project Location Requires Daylight Saving Time (DST)

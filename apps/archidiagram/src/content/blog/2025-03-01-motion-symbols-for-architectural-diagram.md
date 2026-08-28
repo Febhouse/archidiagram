@@ -5,6 +5,7 @@ pubDate: '2025-03-01T21:14:56+07:00'
 heroImage: '/images/2025/03/Motion-symbols-for-Architectural-diagram-HORIZONTAL2-768.gif'
 tags: 'presentation template'
 software: 'Canva'
+badge: 'ONLY $5'
 ---
 
 # Motion Symbols for Architectural Diagrams

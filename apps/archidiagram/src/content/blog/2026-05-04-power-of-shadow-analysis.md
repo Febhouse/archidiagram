@@ -5,6 +5,7 @@ pubDate: '2026-05-04T22:18:15+07:00'
 heroImage: '/images/2026/05/shadow-analysis.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram'
+badge: 'FREE'
 ---
 
 # The Power of Shadow Analysis: Ensuring Design Integrity & Comfort 

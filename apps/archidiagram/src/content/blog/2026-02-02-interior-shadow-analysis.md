@@ -5,6 +5,7 @@ pubDate: '2026-02-02T22:49:48+07:00'
 heroImage: '/images/2026/02/COVER.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Shadow Slice'
+badge: 'FREE'
 ---
 
 # Interior Shadow Analysis in SketchUp: Free Natural Light Study Sample (Project 62) 

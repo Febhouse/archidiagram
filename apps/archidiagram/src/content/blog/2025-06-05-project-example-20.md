@@ -5,6 +5,7 @@ pubDate: '2025-06-05T22:40:03+07:00'
 heroImage: '/images/2025/06/June10-1024-e1773389272685.webp'
 tags: 'sample project'
 software: 'Sun Diagram, Dynamic Symbols, Photoshop'
+badge: 'FREE'
 ---
 
 # How to Create a Site Analysis Video with Sun Diagram, Photoshop, and CapCut

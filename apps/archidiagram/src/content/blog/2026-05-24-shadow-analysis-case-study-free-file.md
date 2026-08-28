@@ -5,6 +5,7 @@ pubDate: '2026-05-24T21:48:56+07:00'
 heroImage: '/images/2026/05/20260521-SECTION-fixed.webp'
 tags: 'sample project'
 software: 'SketchUp, Shadow Slice'  
+badge: 'FREE'
 ---
 
 # Real-World Shadow Analysis Case Study: Free SketchUp File (Sample-65)

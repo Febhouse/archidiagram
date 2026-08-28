@@ -5,6 +5,7 @@ pubDate: '2026-01-17T14:48:18+07:00'
 heroImage: '/images/2026/01/975-Nostrand-Ave-2-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # Surrounding Buildings Diagram in SketchUp: Free 3D Massing Sample

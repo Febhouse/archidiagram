@@ -5,6 +5,7 @@ pubDate: '2025-02-16T10:52:09+07:00'
 heroImage: '/images/2025/11/Horizontal_Book_Mockup_4.webp'
 tags: 'presentation template'
 software: 'PowerPoint, Canva, InDesign'
+badge: 'FREE & PRO'
 ---
 
 # Professional Architectural Presentation Template (A3)

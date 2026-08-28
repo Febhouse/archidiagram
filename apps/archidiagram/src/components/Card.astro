@@ -10,9 +10,10 @@ interface Props {
 	tags?: string;
 	category?: string;
 	software?: string | string[];
+	badge?: string;
 }
 
-const { id, title, description, pubDate, heroImage, tags, category, software } = Astro.props;
+const { id, title, description, pubDate, heroImage, tags, category, software, badge } = Astro.props;
 
 // Determine clean display label from frontmatter tags or fallback
 let displayCategory = category || "TUTORIAL & TIPS";
@@ -100,6 +101,16 @@ function getSoftwareBadge(sw: string) {
 			<div class="absolute top-3 left-3 bg-slate-900/85 backdrop-blur-md text-amber-400 text-[10px] font-mono font-bold tracking-wider px-2.5 py-1 rounded-full border border-slate-700/60 uppercase">
 				{displayCategory}
 			</div>
+
+			{badge && (
+				<div class={`absolute top-3 right-3 text-[10px] font-mono font-bold tracking-wider px-2.5 py-1 rounded-full uppercase shadow-lg ${
+					badge.toLowerCase().includes('free') && !badge.toLowerCase().includes('pro') ? 'bg-emerald-500 text-emerald-50 border border-emerald-400/50' : 
+					badge.toLowerCase().includes('pro') ? 'bg-indigo-500 text-indigo-50 border border-indigo-400/50' :
+					'bg-amber-500 text-amber-950 border border-amber-400/50'
+				}`}>
+					{badge}
+				</div>
+			)}
 		</div>
 
 		<div class="p-4 sm:p-5 flex flex-col flex-grow">

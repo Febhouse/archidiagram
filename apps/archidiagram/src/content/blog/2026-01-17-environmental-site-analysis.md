@@ -5,6 +5,7 @@ pubDate: '2026-01-17T15:45:31+07:00'
 heroImage: '/images/2026/01/SAMPLE-39-VIEW1-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # Mastering the Environmental Site Analysis Diagram in SketchUp 

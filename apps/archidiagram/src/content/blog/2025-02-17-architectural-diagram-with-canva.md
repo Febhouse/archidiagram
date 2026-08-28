@@ -5,6 +5,7 @@ pubDate: '2025-02-17T10:30:25+07:00'
 heroImage: '/images/2026/08/Architectural-diagrams-Horizontal-768.gif'
 tags: 'presentation template'
 software: 'Canva'
+badge: 'ONLY $5'
 ---
 
 # Architectural Diagram with Canva Template (Style 01)

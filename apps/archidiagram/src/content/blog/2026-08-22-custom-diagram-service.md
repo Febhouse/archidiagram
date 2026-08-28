@@ -5,6 +5,7 @@ pubDate: 2026-01-20
 heroImage: "/images/2026/08/Services.gif"
 tags: "other resources"
 software: 'SketchUp, Sun Diagram'
+badge: 'SERVICE'
 ---
 
 # Custom Architectural Diagram & Site Analysis Service

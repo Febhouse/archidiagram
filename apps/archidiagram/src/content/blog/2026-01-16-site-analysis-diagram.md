@@ -5,6 +5,7 @@ pubDate: '2026-01-16T15:24:09+07:00'
 heroImage: '/images/2026/01/20251125-3DFILE-copy.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # Site Analysis Diagram in SketchUp: Free Urban Sample (Project 54) 

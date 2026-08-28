@@ -5,6 +5,7 @@ pubDate: '2025-11-04T00:25:43+07:00'
 heroImage: '/images/2026/08/architecturaldiagram.gif'
 tags: 'tutorial'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols, Photoshop'
+badge: 'FREE'
 ---
 
 # Tutorial: Create an Architectural Diagram using SketchUp

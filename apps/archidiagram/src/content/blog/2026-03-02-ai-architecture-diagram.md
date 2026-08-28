@@ -5,6 +5,7 @@ pubDate: '2026-03-02T10:06:34+07:00'
 heroImage: '/images/2026/03/20260109-AI-900x900-1.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols, Gemini'
+badge: 'FREE'
 ---
 
 # AI Architecture Diagram: Free Neon Effect Prompt (AI Sample 01)

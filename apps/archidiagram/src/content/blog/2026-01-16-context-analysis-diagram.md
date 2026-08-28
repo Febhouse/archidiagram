@@ -5,6 +5,7 @@ pubDate: '2026-01-16T22:48:10+07:00'
 heroImage: '/images/2026/01/SAMPLE-45-1-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Sun Diagram, Dynamic Symbols'
+badge: 'FREE'
 ---
 
 # Context Analysis Diagram in SketchUp: Free Urban Site Sample

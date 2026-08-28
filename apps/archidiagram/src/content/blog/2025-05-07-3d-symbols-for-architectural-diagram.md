@@ -4,6 +4,7 @@ description: 'Free 3D symbol library for SketchUp architectural diagrams includi
 pubDate: '2025-05-07T12:14:00+07:00'
 heroImage: '/images/2025/05/3D-SYMBOL-cover.webp'
 tags: 'presentation template'
+badge: 'FREE'
 ---
 
 # 3D symbols for Architectural Diagrams

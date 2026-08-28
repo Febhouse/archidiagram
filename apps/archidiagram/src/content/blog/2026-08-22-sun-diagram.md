@@ -5,6 +5,7 @@ pubDate: 2026-06-19
 heroImage: '/images/2026/01/SHADOWANALYSIS-DEC-CROPlogo.gif'
 tags: 'other resources'
 software: 'SketchUp, Sun Diagram'
+badge: 'FREE & PRO'
 ---
 
 <div class="space-y-12">

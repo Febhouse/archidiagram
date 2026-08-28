@@ -5,6 +5,7 @@ pubDate: '2025-03-25T11:18:34+07:00'
 heroImage: '/images/2026/08/ventilation.gif'
 tags: 'tutorial'
 software: 'SketchUp, Photoshop, Rwind'
+badge: 'FREE'
 ---
 
 # Tutorial on how to create a ventilation analysis diagram

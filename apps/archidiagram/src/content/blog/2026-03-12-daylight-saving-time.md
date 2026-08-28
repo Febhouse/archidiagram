@@ -5,6 +5,7 @@ pubDate: '2026-03-12T10:42:03+07:00'
 heroImage: '/images/2026/03/SYDNEY-copy.webp'
 tags: 'tutorial'
 software: 'SketchUp, Sun Diagram' 
+badge: 'FREE'
 ---
 
 # Daylight Saving Time (DST): Why Standard 3D Software Fails at Global Solar Analysis

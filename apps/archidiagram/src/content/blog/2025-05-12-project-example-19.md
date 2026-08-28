@@ -5,6 +5,7 @@ pubDate: '2025-05-12T14:23:29+07:00'
 heroImage: '/images/2025/05/Sunlight-Analysis-cover.webp'
 tags: 'sample project'
 software: 'SketchUp, Adobe Photoshop'
+badge: 'FREE'
 ---
 
 # Sample Project: Sunlight Analysis Video
