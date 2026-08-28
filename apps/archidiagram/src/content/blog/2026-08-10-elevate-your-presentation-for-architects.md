@@ -31,3 +31,10 @@ I’ve prepared a **Sample File** with scenes set up exactly like in the video. 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
 [ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-68.zip)
+
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-68)
+
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!

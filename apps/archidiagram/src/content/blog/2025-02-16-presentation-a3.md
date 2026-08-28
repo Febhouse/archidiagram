@@ -48,6 +48,11 @@ To make sure it fits perfectly into your existing workflow, this template is ava
 
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Presentationfile)
 
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!
+
 [ DOWNLOAD VIA KO-FI ](https://ko-fi.com/s/2816fac41a)
 
 Thank you for visiting, and good luck with your next presentation!

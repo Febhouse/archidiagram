@@ -77,4 +77,9 @@ Use this file as a template for your next housing project to impress clients wit
 
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Residential-Site-Analysis)
 
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!
+
 [ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-56.zip)

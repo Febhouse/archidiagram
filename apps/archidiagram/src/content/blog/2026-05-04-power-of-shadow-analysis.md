@@ -58,3 +58,10 @@ Ready to explore the setup? Download the free files below to test this workflow 
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
 [ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SUN-SHADOW-ANALYSIS.zip)
+
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-67)
+
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!

@@ -123,6 +123,11 @@ Want to follow along or try it yourself? Download the exact 2D and 3D project fi
 
 [ FREE DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Projectexamples-02)
 
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!
+
 [ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/TUTORIAL-2D%2B3DFILES.zip)
 
 That’s it! 🎉 You now have a complete architectural diagram animation combining Sun Diagram and Dynamic Symbols.

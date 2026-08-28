@@ -48,4 +48,11 @@ Want to dissect the layers and see how it works? Download the free project file 
 
 [ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE%2026.zip)
 
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample26)
+
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!
+
 *(Need a step-by-step tutorial on this workflow? Check out our updated guide: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*

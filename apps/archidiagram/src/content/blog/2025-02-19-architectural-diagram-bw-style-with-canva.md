@@ -44,6 +44,11 @@ As a special gift, I am offering this Canva template completely free!
 
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Architecturaldiagram-BW-canva)
 
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!
+
 [ DOWNLOAD VIA KO-FI ](https://ko-fi.com/s/9ae599ac7e)
 
 Good luck with your project!

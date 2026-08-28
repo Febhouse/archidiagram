@@ -18,7 +18,12 @@ Hope these help you create stunning diagrams! 🙌
 
 📦 **Download them for free right here:**
 
- [ Free download via Gumroad ](https://febhouse.gumroad.com/l/3dsymbols)or
+ [ Free download via Gumroad ](https://febhouse.gumroad.com/l/3dsymbols)
+
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!or
 
  [ Free download via Ko-fi ](https://ko-fi.com/s/d3591a18c0)Good luck with your project!
 

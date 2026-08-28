@@ -65,3 +65,10 @@ Grab the free files below, see how the layers are organized, and elevate your ne
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
 [ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-45.zip)
+
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/Context-Analysis-Diagram)
+
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!

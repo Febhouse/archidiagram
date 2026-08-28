@@ -40,4 +40,11 @@ Ready to test the workflow? Download the practice file below!
 
 [ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-64.zip)
 
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-64)
+
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!
+
 *(Looking for a detailed, step-by-step explanation of this process? Check out our complete, in-depth guide here: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*

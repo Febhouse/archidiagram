@@ -75,4 +75,9 @@ Grab the free files below, explore how it's built, and start applying this analy
 
 [ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/ClimaticSiteAnalysis)
 
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!
+
 [ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-57.zip)

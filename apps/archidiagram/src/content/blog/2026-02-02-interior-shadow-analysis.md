@@ -68,3 +68,10 @@ Grab the free files below to practice your interior lighting analysis and delive
 > *💡 **Note:** You can use the **Direct Download** for instant, hassle-free access.*
 
 [ DIRECT DOWNLOAD ](https://assets.archidiagram.com/Samples/SAMPLE-62.zip)
+
+[ DOWNLOAD VIA GUMROAD ](https://febhouse.gumroad.com/l/sample-62)
+
+On Gumroad, simply enter **$0** in the "Name a fair price" box to download for free.  
+(No bank or card information required.)
+
+If you want to support me, you can enter any amount you wish. Thank you!
