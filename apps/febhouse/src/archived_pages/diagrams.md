@@ -195,4 +195,4 @@ Download free source files for a Climatic Site Analysis in SketchUp. Master the 
   
 **<u> [ Free download ](https://archidiagram.com/climatic-site-analysis/)</u>**
 
- [ How to create this diagram on ArchiDiagram.com ](https://archidiagram.com/create-architectural-diagrams-updated-workflow-aug-2025/)All diagrams are created with [**Sun Diagram**](https://sundiagram.com/sun-diagram/) &amp; [**Dynamic Symbols**](https://sundiagram.com/dynamic-symbols/) by **Febhouse**
+ [ How to create this diagram on ArchiDiagram.com ](https://archidiagram.com/create-architectural-diagrams/)All diagrams are created with [**Sun Diagram**](https://sundiagram.com/sun-diagram/) &amp; [**Dynamic Symbols**](https://sundiagram.com/dynamic-symbols/) by **Febhouse**

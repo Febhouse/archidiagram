@@ -43,7 +43,7 @@ This sample was built using our standard workflow for sunlight and shadow visual
 
 *(Note: This page provides the **source files**, not the step-by-step instructions).*
 
-👉 Need the full tutorial? **[Check out the step-by-step guide here](/create-architectural-diagrams-updated-workflow-aug-2025/)**
+👉 Need the full tutorial? **[Check out the step-by-step guide here](/create-architectural-diagrams/)**
 
 ## What this sample includes
 

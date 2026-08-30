@@ -44,4 +44,4 @@ On Gumroad, simply enter **$0** in the "Name a fair price" box to download for f
 
 If you want to support me, you can enter any amount you wish. Thank you!
 
-*(Looking for a detailed, step-by-step explanation of this process? Check out our complete, in-depth guide here: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**)*
+*(Looking for a detailed, step-by-step explanation of this process? Check out our complete, in-depth guide here: **[/create-architectural-diagrams/](/create-architectural-diagrams/)**)*

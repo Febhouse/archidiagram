@@ -15,7 +15,7 @@ Architectural diagrams should look great while clearly showing your design inten
 > [!WARNING]
 > **Updated August 2025:**
 > This tutorial is an older workflow. We’ve since released **Sun Diagram 3.0** and **Dynamic Symbols 2.0** which automate a lot of these steps. 
-> 👉 Check out the updated, much faster workflow here: **[/create-architectural-diagrams-updated-workflow-aug-2025/](/create-architectural-diagrams-updated-workflow-aug-2025/)**
+> 👉 Check out the updated, much faster workflow here: **[/create-architectural-diagrams/](/create-architectural-diagrams/)**
 
 https://www.youtube.com/watch?v=4bFSWw3rnGE
 

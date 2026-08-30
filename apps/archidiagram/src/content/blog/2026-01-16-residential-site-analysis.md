@@ -57,7 +57,7 @@ This sample follows a straightforward workflow commonly used for sunlight and sh
 
 *(Note: This page focuses on providing the **source files**, not detailed instructions).*
 
-👉 Need the full tutorial? **[Check out the step-by-step guide here](/create-architectural-diagrams-updated-workflow-aug-2025/)**
+👉 Need the full tutorial? **[Check out the step-by-step guide here](/create-architectural-diagrams/)**
 
 https://www.youtube.com/shorts/3Rnyb3TY_Lg
 

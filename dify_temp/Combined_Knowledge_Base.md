@@ -28,6 +28,13 @@ This document serves as the comprehensive knowledge base for the Febhouse ecosys
 - **Privacy Policy:** We collect limited data (name, email, transaction history) for purchases or support. We DO NOT collect or see your SketchUp model data or private design files. Payments are processed by Trimble (Extension Warehouse) or Gumroad.com.
 - **Terms of Use:** Plugins are licensed for personal or professional use. You may not redistribute, resell, or modify the software for commercial purposes without explicit written permission. All software code, diagrams, and tutorials are the exclusive property of Febhouse. All plugins are provided "As Is". Febhouse is not responsible for any data loss or software conflicts.
 
+### 1.4 General FAQ
+
+**Do the extensions/plugins have a pro trial version?**
+Yes, all of our extensions/plugins offer a 14-day free trial. You are not obligated to purchase a license after the trial; it is completely fine if you choose not to buy it. There are two ways to start your trial:
+1. **Via SketchUp Extension Warehouse:** Simply go to the Extension Warehouse and click the "Try" button for the plugin.
+2. **Via SketchUcation:** Download the plugin from the SketchUcation store (only a free membership is required to download). By default, a 14-day free trial is automatically activated right after installation. After the 14-day trial ends, you can purchase a license directly from SketchUcation. Alternatively, if you prefer to buy through Gumroad, you can use this SketchUcation trial method first. Once you are satisfied with the plugin, you can go back to Gumroad to purchase the license and install it.
+
 ---
 
 ## 2. SKETCHUP EXTENSIONS (PRODUCTS)
@@ -56,6 +63,9 @@ This document serves as the comprehensive knowledge base for the Febhouse ecosys
 - **Pro (SketchUcation):** Easiest method is to use SketchUcation ExtensionStore directly in SketchUp, or download `.rbz` and activate with `.scflicense`.
 
 #### Sun Diagram Frequently Asked Questions (FAQ)
+
+**How do I get a free trial for Sun Diagram Pro?**
+You can get a 14-day free trial of Sun Diagram Pro by downloading it from the SketchUcation store (only a free membership is required). A 14-day free trial is automatically activated right after installation. After the trial ends, you can purchase a license directly from SketchUcation. Alternatively, if you prefer to buy through Gumroad, you can use this SketchUcation trial method first. Once you are satisfied, you can go back to Gumroad to purchase the lifetime license. (You can also try the Studio version via the SketchUp Extension Warehouse).
 
 **What is the Sun Diagram plugin used for?**
 Sun Diagram is an advanced SketchUp extension that allows architects to analyze sunlight, simulate seasonal shadow movement, and accurately understand daylight conditions directly inside 3D models.
@@ -202,6 +212,9 @@ Yes. Select the sun path group, open the Entity Info tray, and uncheck the Cast 
 
 #### Dynamic Symbols Frequently Asked Questions (FAQ)
 
+**How do I get a free trial for Dynamic Symbols Pro?**
+You can get a 14-day free trial of Dynamic Symbols Pro by downloading it from the SketchUcation store (only a free membership is required). A 14-day free trial is automatically activated right after installation. After the trial ends, you can purchase a license directly from SketchUcation. Alternatively, if you prefer to buy through Gumroad, you can use this SketchUcation trial method first. Once you are satisfied, you can go back to Gumroad to purchase the lifetime license. (You can also try the Studio version via the SketchUp Extension Warehouse).
+
 **What is the Dynamic Symbols plugin used for?**
 Dynamic Symbols is a SketchUp plugin providing a comprehensive library of graphic diagram symbols for architectural presentations. It allows users to easily drag, scale, and customize symbols directly within the 3D workspace.
 
@@ -274,6 +287,10 @@ Updates are released faster on SketchUcation and Gumroad due to the strict and t
 - **Link:** https://archidiagram.com/shadow-slice/
 
 #### Shadow Slice Frequently Asked Questions (FAQ)
+
+**How do I get a free trial for Shadow Slice Pro?**
+You can get a 14-day free trial of Shadow Slice Pro by downloading it from the SketchUcation store (only a free membership is required). A 14-day free trial is automatically activated right after installation. After the trial ends, you can purchase a license directly from SketchUcation. Alternatively, if you prefer to buy through Gumroad, you can use this SketchUcation trial method first. Once you are satisfied, you can go back to Gumroad to purchase the lifetime license. (You can also try the Pro version via the SketchUp Extension Warehouse).
+
 **Does Shadow Slice work with rendering engines like V-Ray or Enscape?**
 No, Shadow Slice is designed specifically to work within SketchUp's native Viewport for diagramming and presentation purposes. It is not compatible with external rendering engines.
 
@@ -284,7 +301,7 @@ No, Shadow Slice is designed specifically to work within SketchUp's native Viewp
 ### 3.1 Tutorials & Guides
 - **Sample-41 (how to step by step):** Tutorial demonstrating creation of Sample-41 using Sun Diagram & Dynamic Symbols with X-Ray styles. [Link](https://www.youtube.com/watch?v=hqrsweWy1So)
 - **Automated Solar Analysis: How I Save Hours:** Workflow avoiding manual shadow settings. [Link](https://www.youtube.com/watch?v=TvLYSFjiZRg)
-- **Create Architectural Diagram with Sun Diagram & Dynamic Symbols:** Updated workflow for architectural diagram animations. [Link](https://archidiagram.com/create-architectural-diagrams-updated-workflow-aug-2025/)
+- **Create Architectural Diagram with Sun Diagram & Dynamic Symbols:** Updated workflow for architectural diagram animations. [Link](https://archidiagram.com/create-architectural-diagrams/)
 - **How to create Ventilation diagram using Rwind and Photoshop:** Visualizing wind movement and ventilation diagrams. [Link](https://archidiagram.com/ventilation-analysis-diagram/)
 - **Daylight Saving Time (DST): Why Standard 3D Software Fails at Global Solar Analysis:** [Link](https://archidiagram.com/daylight-saving-time/)
 - **Guide: How to Determine if Your Project Location Requires Daylight Saving Time (DST):** [Link](https://archidiagram.com/check-dst-project-location/)
@@ -334,7 +351,7 @@ No, the free version of Canva is completely sufficient. You do not need a Canva 
 - **Project example 24**: Environmental Analysis in Architecture Ã¢â‚¬â€œ Sun & Wind Mapping Using SketchUp Tools. [Link](https://archidiagram.com/project-example-24/)
 - **Context Analysis**: Learn how to build a professional Context Analysis diagram using the Sun Diagram plugin and Dynamic Symbols for SketchUp. [Link](https://archidiagram.com/context-analysis/)
 - **Project example 26**: Free Download Ã¢â‚¬â€œ Project Sample for Site Diagram, 3D Sun Path & Symbols. [Link](https://archidiagram.com/project-example-26/)
-- **Tutorial: Create Architectural Diagram with Sun Diagram & Dynamic Symbols**: In this tutorial, weÃ¢â‚¬â„¢re sharing the updated workflow for creating an architectural diagram animation. [Link](https://archidiagram.com/create-architectural-diagrams-updated-workflow-aug-2025/)
+- **Tutorial: Create Architectural Diagram with Sun Diagram & Dynamic Symbols**: In this tutorial, weÃ¢â‚¬â„¢re sharing the updated workflow for creating an architectural diagram animation. [Link](https://archidiagram.com/create-architectural-diagrams/)
 - **Project example 57**: Download free source files for a Climatic Site Analysis in SketchUp. Master the workflow for solar orientation, topography analysis, and wind patterns on sloped terrain. [Link](https://archidiagram.com/climatic-site-analysis/)
 - **Project example 45**: Download this free Context Analysis Diagram for SketchUp. Visualize urban connectivity, traffic flow arrows, and 3D solar envelopes using this professional sample file. [Link](https://archidiagram.com/context-analysis-diagram/)
 - **Project example 56**: For residential projects, Ã¢â‚¬Å“contextÃ¢â‚¬Â isnÃ¢â‚¬â„¢t just about the cityÃ¢â‚¬â€itÃ¢â‚¬â„¢s about comfort. This sample project (Project 56) provides the complete source files for a Residential Site Analysis, specifically tailored for townhouses and single-family homes. [Link](https://archidiagram.com/residential-site-analysis/)
@@ -372,7 +389,7 @@ A: The complete workflow involves 6 steps entirely inside SketchUp and Photoshop
 4. Add architectural graphics (wind, views, etc.) using the Dynamic Symbols Plugin.
 5. Create a Shadow Analysis using Sun Diagram and export the image sequence.
 6. Generate the Dynamic Symbols animation and combine the layers in Photoshop or Premiere to export the final animated diagram.
-*Reference:* https://archidiagram.com/create-architectural-diagrams-updated-workflow-aug-2025/
+*Reference:* https://archidiagram.com/create-architectural-diagrams/
 
 **Q: How do I generate contour lines from imported terrain in SketchUp?**
 A: First, go to File > Add Location to import the 3D terrain. Draw a large flat rectangle below the terrain and duplicate it vertically every 5 or 10 meters. Select all rectangles and the terrain, right-click, and choose "Intersect Faces > With Model". Delete the flat faces to leave just the contour edges.

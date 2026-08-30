@@ -60,7 +60,7 @@ This sample follows a straightforward 6-step workflow commonly used for sunlight
 
 *(Note: This page focuses on the **source files**, not detailed instructions).*
 
-👉 Need the full tutorial? **[Check out the step-by-step guide here](/create-architectural-diagrams-updated-workflow-aug-2025/)**
+👉 Need the full tutorial? **[Check out the step-by-step guide here](/create-architectural-diagrams/)**
 
 ## Essential Tools for This Workflow
 

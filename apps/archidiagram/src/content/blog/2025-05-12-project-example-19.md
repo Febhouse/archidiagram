@@ -42,7 +42,7 @@ This sample follows a straightforward workflow used for sunlight and shadow visu
 
 *(Note: This page focuses on providing the **source files**, not detailed step-by-step instructions).*
 
-👉 Need the full tutorial? **[Check out the step-by-step guide here](/create-architectural-diagrams-updated-workflow-aug-2025/)**
+👉 Need the full tutorial? **[Check out the step-by-step guide here](/create-architectural-diagrams/)**
 
 ## What this sample includes
 

@@ -19,7 +19,7 @@
 - **Software Used:** SketchUp, Sun Diagram (plugin), Dynamic symbols (plugin)
 - **Pricing:** Free
 - **Summary:** Updated workflow for creating architectural diagram animations. Applicable for site analysis and sun path studies. Includes downloadable resource files.
-- **Link:** https://archidiagram.com/create-architectural-diagrams-updated-workflow-aug-2025/
+- **Link:** https://archidiagram.com/create-architectural-diagrams/
 
 ### 4. How to create Ventilation diagram using Rwind and Photoshop
 - **Category:** Tutorial

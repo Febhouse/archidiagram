@@ -129,7 +129,7 @@ There are two ways to install Dynamic Symbols Pro via SketchUcation. Method 1 is
 ## 6. DYNAMIC SYMBOLS TUTORIALS & RESOURCES
 - ▶️ **[Watch a 2-minute real Dynamic Symbols workflow demo (YouTube)](https://www.youtube.com/watch?v=OOxFHKUIy-Q)**
 - 📖 **[Download the Dynamic Symbols Step-by-step User Guide (PDF)](https://drive.google.com/file/d/14pPiWqBubLlpe_Wz6kL7psZ5z9F3DXWU/view?usp=drive_link)**
-- 🚀 **Advanced Tutorial:** Learn how to analyze a real site using Sun Diagram together with Dynamic Symbols for professional projects at **[ArchiDiagram.com](https://archidiagram.com/create-architectural-diagrams-updated-workflow-aug-2025/)**.
+- 🚀 **Advanced Tutorial:** Learn how to analyze a real site using Sun Diagram together with Dynamic Symbols for professional projects at **[ArchiDiagram.com](https://archidiagram.com/create-architectural-diagrams/)**.
 
 ---
 
