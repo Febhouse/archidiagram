@@ -1,37 +1,77 @@
 ---
-import LandingLayout from '../layouts/LandingLayout.astro';
-import TrustSignals from '../components/TrustSignals.astro';
+import LandingLayout from "../layouts/LandingLayout.astro";
+import TrustSignals from "../components/TrustSignals.astro";
 
-const pageTitle = "Dynamic Symbols – SketchUp Plugin for Instant Symbol Animation";
-const pageDesc = "Bring your architectural diagrams to life with Dynamic Symbols, a lightweight SketchUp plugin that lets you animate and customize 2D symbols instantly.";
+const pageTitle =
+	"Dynamic Symbols – SketchUp Plugin for Instant Symbol Animation";
+const pageDesc =
+	"Bring your architectural diagrams to life with Dynamic Symbols, a lightweight SketchUp plugin that lets you animate and customize 2D symbols instantly.";
 const heroImg = "/images/2025/10/dynamicsymbols.webp";
 const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 ---
 
-<LandingLayout title={pageTitle} description={pageDesc} heroImage={heroImg} difyChatUrl={difyChatUrl} botName="Dynamic Symbols AI">
+<LandingLayout
+	title={pageTitle}
+	description={pageDesc}
+	heroImage={heroImg}
+	difyChatUrl={difyChatUrl}
+	botName="Dynamic Symbols AI"
+>
 	<!-- Hero Section -->
 	<header class="text-center max-w-4xl mx-auto mb-16">
-		<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 mb-5">
+		<div
+			class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 mb-5"
+		>
 			⚡ SKETCHUP EXTENSION
 		</div>
-		<h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-6">
+		<h1
+			class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-6"
+		>
 			Dynamic Symbols – SketchUp Plugin for Instant Symbol Animation
 		</h1>
-		<p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-light leading-relaxed max-w-3xl mx-auto mb-8">
-			Bring your architectural diagrams to life with Dynamic Symbols, a lightweight SketchUp plugin that lets you animate and customize 2D symbols instantly.
+		<p
+			class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-light leading-relaxed max-w-3xl mx-auto mb-8"
+		>
+			Bring your architectural diagrams to life with Dynamic Symbols, a
+			lightweight SketchUp plugin that lets you animate and customize 2D
+			symbols instantly.
 		</p>
 
 		<div class="flex flex-col items-center justify-center gap-8 mt-10">
 			<!-- Trust Badge (Logo + Stars) -->
-			<div class="flex items-center gap-4 bg-white/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-4 pr-6 rounded-2xl shadow-sm backdrop-blur-md">
-				<img src="/images/LOGO/dynamic-symbols-logo.svg" alt="Dynamic Symbols Logo" class="w-14 h-14 object-contain drop-shadow-sm" />
-				<div class="flex flex-col items-start border-l border-slate-300 dark:border-slate-700 pl-4">
-					<a href="https://extensions.sketchup.com/search/?q=febhouse" target="_blank" rel="noopener" class="flex items-center gap-1 text-amber-500 text-lg mb-0.5 tracking-tighter hover:scale-105 transition-transform cursor-pointer" aria-label="5 stars">
+			<div
+				class="flex items-center gap-4 bg-white/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-4 pr-6 rounded-2xl shadow-sm backdrop-blur-md"
+			>
+				<img
+					src="/images/LOGO/dynamic-symbols-logo.svg"
+					alt="Dynamic Symbols Logo"
+					class="w-14 h-14 object-contain drop-shadow-sm"
+				/>
+				<div
+					class="flex flex-col items-start border-l border-slate-300 dark:border-slate-700 pl-4"
+				>
+					<a
+						href="https://extensions.sketchup.com/search/?q=febhouse"
+						target="_blank"
+						rel="noopener"
+						class="flex items-center gap-1 text-amber-500 text-lg mb-0.5 tracking-tighter hover:scale-105 transition-transform cursor-pointer"
+						aria-label="5 stars"
+					>
 						★★★★★
 					</a>
-					<div class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5 leading-snug text-left">
-						Trusted by <strong class="text-slate-900 dark:text-white text-sm">6,000+</strong> users<br/>
-						<a href="https://extensions.sketchup.com/search/?q=febhouse" target="_blank" rel="noopener" class="text-amber-600 dark:text-amber-400 hover:underline inline-flex items-center gap-0.5 mt-0.5">
+					<div
+						class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5 leading-snug text-left"
+					>
+						Trusted by <strong
+							class="text-slate-900 dark:text-white text-sm"
+							>6,000+</strong
+						> users<br />
+						<a
+							href="https://extensions.sketchup.com/search/?q=febhouse"
+							target="_blank"
+							rel="noopener"
+							class="text-amber-600 dark:text-amber-400 hover:underline inline-flex items-center gap-0.5 mt-0.5"
+						>
 							Verified SketchUp Developer ✓
 						</a>
 					</div>
@@ -44,8 +84,16 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 				class="px-8 py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm sm:text-base shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 transition-all transform hover:-translate-y-1 flex items-center gap-2"
 			>
 				<span>Get Dynamic Symbols</span>
-				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 animate-bounce" viewBox="0 0 20 20" fill="currentColor">
-					<path fill-rule="evenodd" d="M10 3a1 1 0 011 1v10.586l3.293-3.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 14.586V4a1 1 0 011-1z" clip-rule="evenodd" />
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-5 w-5 animate-bounce"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M10 3a1 1 0 011 1v10.586l3.293-3.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 14.586V4a1 1 0 011-1z"
+						clip-rule="evenodd"></path>
 				</svg>
 			</a>
 		</div>
@@ -53,34 +101,95 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 
 	<!-- FEATURES SECTION -->
 	<section id="features" class="mb-20">
-		<div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 mb-8">
+		<div
+			class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 mb-8"
+		>
 			<div>
-				<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ FEATURES ]</span>
-				<h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">The Plugin has 03 Core Features.</h2>
+				<span
+					class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase"
+					>[ FEATURES ]</span
+				>
+				<h2
+					class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1"
+				>
+					The Plugin has 03 Core Features.
+				</h2>
 			</div>
 		</div>
 
 		<div class="space-y-8">
 			<!-- Feature 1 -->
-			<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col lg:flex-row gap-6 lg:gap-8 items-start transition-all hover:border-amber-500/30">
+			<div
+				class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col lg:flex-row gap-6 lg:gap-8 items-start transition-all hover:border-amber-500/30"
+			>
 				<div class="w-full lg:w-1/2 flex-shrink-0">
-					<img src="/images/2026/04/Dynamic-symbols-library.gif" width="1024" height="629" alt="One-Click Symbol Change" class="w-full h-auto rounded-[8px] object-cover" loading="lazy" decoding="async" />
+					<img
+						src="/images/2026/04/Dynamic-symbols-library.gif"
+						width="1024"
+						height="629"
+						alt="One-Click Symbol Change"
+						class="w-full h-auto rounded-[8px] object-cover"
+						loading="lazy"
+						decoding="async"
+					/>
 				</div>
-				<div class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4">
-					<a href="https://youtu.be/VOl67HeTK8M?si=pZwO_7sN0jqGlO-N&t=29" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors mb-3">
-						<span>1. One-Click Symbol Change — Keep Position, Size & Rotation</span>
-						<svg class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+				<div
+					class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4"
+				>
+					<a
+						href="https://youtu.be/VOl67HeTK8M?si=pZwO_7sN0jqGlO-N&t=29"
+						target="_blank"
+						rel="noopener"
+						class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors mb-3"
+					>
+						<span
+							>1. One-Click Symbol Change — Keep Position, Size &
+							Rotation</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+						>
 					</a>
-					<p class="text-slate-600 dark:text-slate-300 font-medium mb-3">
-						Dynamic Symbols lets you instantly switch between different symbol shapes with just one click — while preserving the symbol’s exact position, size, and rotation in your 3D model.
+					<p
+						class="text-slate-600 dark:text-slate-300 font-medium mb-3"
+					>
+						Dynamic Symbols lets you instantly switch between
+						different symbol shapes with just one click — while
+						preserving the symbol’s exact position, size, and
+						rotation in your 3D model.
 					</p>
-					<ul class="text-sm sm:text-base text-slate-600 dark:text-slate-300 space-y-2 mb-5 list-disc list-inside">
-						<li><strong>Step 1:</strong> Select any symbol from the Dynamic Symbols toolbar.</li>
-						<li><strong>Step 2:</strong> Click <strong>Yes</strong> when prompted to place the symbol at your cursor.</li>
-						<li><strong>Switch Shapes:</strong> To change the symbol type, select it and click any other symbol icon in the toolbar. The geometry updates instantly!</li>
+					<ul
+						class="text-sm sm:text-base text-slate-600 dark:text-slate-300 space-y-2 mb-5 list-disc list-inside"
+					>
+						<li>
+							<strong>Step 1:</strong> Select any symbol from the Dynamic
+							Symbols toolbar.
+						</li>
+						<li>
+							<strong>Step 2:</strong> Click <strong>Yes</strong> when
+							prompted to place the symbol at your cursor.
+						</li>
+						<li>
+							<strong>Switch Shapes:</strong> To change the symbol type,
+							select it and click any other symbol icon in the toolbar.
+							The geometry updates instantly!
+						</li>
 					</ul>
 					<div>
-						<a href="https://youtu.be/VOl67HeTK8M?si=pZwO_7sN0jqGlO-N&t=29" target="_blank" rel="noopener" class="px-4 py-2 text-xs font-semibold rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold transition-all shadow-sm inline-flex items-center gap-1.5">
+						<a
+							href="https://youtu.be/VOl67HeTK8M?si=pZwO_7sN0jqGlO-N&t=29"
+							target="_blank"
+							rel="noopener"
+							class="px-4 py-2 text-xs font-semibold rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold transition-all shadow-sm inline-flex items-center gap-1.5"
+						>
 							▶️ See How It Works
 						</a>
 					</div>
@@ -88,26 +197,80 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 			</div>
 
 			<!-- Feature 2 -->
-			<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col lg:flex-row gap-6 lg:gap-8 items-start transition-all hover:border-amber-500/30">
+			<div
+				class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col lg:flex-row gap-6 lg:gap-8 items-start transition-all hover:border-amber-500/30"
+			>
 				<div class="w-full lg:w-1/2 flex-shrink-0">
-					<img src="/images/2026/04/Select-color.gif" width="1024" height="631" alt="One-Click Color Change" class="w-full h-auto rounded-[8px] object-cover" loading="lazy" decoding="async" />
+					<img
+						src="/images/2026/04/Select-color.gif"
+						width="1024"
+						height="631"
+						alt="One-Click Color Change"
+						class="w-full h-auto rounded-[8px] object-cover"
+						loading="lazy"
+						decoding="async"
+					/>
 				</div>
-				<div class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4">
-					<a href="https://youtu.be/VOl67HeTK8M?si=Hoxn73WtmgsATYsa&t=72" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors mb-3">
-						<span>2. One-Click Color Change – Keep Position & Orientation</span>
-						<svg class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+				<div
+					class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4"
+				>
+					<a
+						href="https://youtu.be/VOl67HeTK8M?si=Hoxn73WtmgsATYsa&t=72"
+						target="_blank"
+						rel="noopener"
+						class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors mb-3"
+					>
+						<span
+							>2. One-Click Color Change – Keep Position &
+							Orientation</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+						>
 					</a>
-					<p class="text-slate-600 dark:text-slate-300 font-medium mb-3">
-						Change the color of your diagram symbols instantly without editing materials or opening nested components manually.
+					<p
+						class="text-slate-600 dark:text-slate-300 font-medium mb-3"
+					>
+						Change the color of your diagram symbols instantly
+						without editing materials or opening nested components
+						manually.
 					</p>
-					<ul class="text-sm sm:text-base text-slate-600 dark:text-slate-300 space-y-2 mb-5 list-disc list-inside">
-						<li><strong>Step 1:</strong> Select the symbol in your SketchUp viewport.</li>
-						<li><strong>Step 2:</strong> Click the <strong>Color Button</strong> in the Dynamic Symbols palette.</li>
-						<li><strong>Step 3:</strong> Choose your color from the picker — done!</li>
-						<li><em>Tip:</em> The plugin automatically remembers your last 5 colors for fast access.</li>
+					<ul
+						class="text-sm sm:text-base text-slate-600 dark:text-slate-300 space-y-2 mb-5 list-disc list-inside"
+					>
+						<li>
+							<strong>Step 1:</strong> Select the symbol in your SketchUp
+							viewport.
+						</li>
+						<li>
+							<strong>Step 2:</strong> Click the <strong
+								>Color Button</strong
+							> in the Dynamic Symbols palette.
+						</li>
+						<li>
+							<strong>Step 3:</strong> Choose your color from the picker
+							— done!
+						</li>
+						<li>
+							<em>Tip:</em> The plugin automatically remembers your
+							last 5 colors for fast access.
+						</li>
 					</ul>
 					<div>
-						<a href="https://youtu.be/VOl67HeTK8M?si=Hoxn73WtmgsATYsa&t=72" target="_blank" rel="noopener" class="px-4 py-2 text-xs font-semibold rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold transition-all shadow-sm inline-flex items-center gap-1.5">
+						<a
+							href="https://youtu.be/VOl67HeTK8M?si=Hoxn73WtmgsATYsa&t=72"
+							target="_blank"
+							rel="noopener"
+							class="px-4 py-2 text-xs font-semibold rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold transition-all shadow-sm inline-flex items-center gap-1.5"
+						>
 							▶️ See How It Works
 						</a>
 					</div>
@@ -115,25 +278,77 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 			</div>
 
 			<!-- Feature 3 -->
-			<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col lg:flex-row gap-6 lg:gap-8 items-start transition-all hover:border-amber-500/30">
+			<div
+				class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[8px] p-[10px] shadow-sm flex flex-col lg:flex-row gap-6 lg:gap-8 items-start transition-all hover:border-amber-500/30"
+			>
 				<div class="w-full lg:w-1/2 flex-shrink-0">
-					<img src="/images/2026/04/ANIMATION.gif" width="1024" height="614" alt="Create Animated Diagrams" class="w-full h-auto rounded-[8px] object-cover" loading="lazy" decoding="async" />
+					<img
+						src="/images/2026/04/ANIMATION.gif"
+						width="1024"
+						height="614"
+						alt="Create Animated Diagrams"
+						class="w-full h-auto rounded-[8px] object-cover"
+						loading="lazy"
+						decoding="async"
+					/>
 				</div>
-				<div class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4">
-					<a href="https://youtu.be/XDDJ7J3_zsE?si=9gz_TxKyNyvtWsGU&t=36" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors mb-3">
+				<div
+					class="w-full lg:w-1/2 flex flex-col justify-center p-2 sm:p-4"
+				>
+					<a
+						href="https://youtu.be/XDDJ7J3_zsE?si=9gz_TxKyNyvtWsGU&t=36"
+						target="_blank"
+						rel="noopener"
+						class="group inline-flex items-center gap-2 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors mb-3"
+					>
 						<span>3. Create Animated Diagrams</span>
-						<svg class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+						<svg
+							class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+						>
 					</a>
-					<p class="text-slate-600 dark:text-slate-300 font-medium mb-3">
-						Automatically generate animated scenes that bring your circulation and flow symbols to life — ideal for presentation boards, videos, and reels.
+					<p
+						class="text-slate-600 dark:text-slate-300 font-medium mb-3"
+					>
+						Automatically generate animated scenes that bring your
+						circulation and flow symbols to life — ideal for
+						presentation boards, videos, and reels.
 					</p>
-					<ul class="text-sm sm:text-base text-slate-600 dark:text-slate-300 space-y-2 mb-5 list-disc list-inside">
-						<li><strong>Step 1:</strong> Select the Dynamic Symbols you want to animate.</li>
-						<li><strong>Step 2:</strong> Click <strong>Create Animation</strong>. The plugin automatically creates 3 animation scenes: <code>Feb_F1</code>, <code>Feb_F2</code>, <code>Feb_F3</code>.</li>
-						<li><strong>Step 3:</strong> Go to <strong>File → Export → Animation</strong> in SketchUp to render your high-quality video clip.</li>
+					<ul
+						class="text-sm sm:text-base text-slate-600 dark:text-slate-300 space-y-2 mb-5 list-disc list-inside"
+					>
+						<li>
+							<strong>Step 1:</strong> Select the Dynamic Symbols you
+							want to animate.
+						</li>
+						<li>
+							<strong>Step 2:</strong> Click <strong
+								>Create Animation</strong
+							>. The plugin automatically creates 3 animation
+							scenes: <code>Feb_F1</code>, <code>Feb_F2</code>, <code
+								>Feb_F3</code
+							>.
+						</li>
+						<li>
+							<strong>Step 3:</strong> Go to <strong
+								>File → Export → Animation</strong
+							> in SketchUp to render your high-quality video clip.
+						</li>
 					</ul>
 					<div>
-						<a href="https://youtu.be/XDDJ7J3_zsE?si=9gz_TxKyNyvtWsGU&t=36" target="_blank" rel="noopener" class="px-4 py-2 text-xs font-semibold rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold transition-all shadow-sm inline-flex items-center gap-1.5">
+						<a
+							href="https://youtu.be/XDDJ7J3_zsE?si=9gz_TxKyNyvtWsGU&t=36"
+							target="_blank"
+							rel="noopener"
+							class="px-4 py-2 text-xs font-semibold rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold transition-all shadow-sm inline-flex items-center gap-1.5"
+						>
 							▶️ See How It Works
 						</a>
 					</div>
@@ -145,34 +360,95 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 	<!-- WHAT YOU CAN DO & SAMPLE DIAGRAMS SECTION (BALANCED EQUAL-HEIGHT) -->
 	<section class="mb-20 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
 		<!-- Left Card -->
-		<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg flex flex-col justify-between h-full">
+		<div
+			class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg flex flex-col justify-between h-full"
+		>
 			<div>
-				<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ PLUGIN CAN DO ]</span>
-				<h2 class="text-2xl font-bold text-slate-900 dark:text-white mt-1 mb-6">What You Can Do with Dynamic Symbols:</h2>
-				<ol class="space-y-4 text-slate-700 dark:text-slate-300 font-medium text-sm sm:text-base">
-					<li class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center text-xs font-bold font-mono shrink-0">1</span> Circulation & Pedestrian Movement Flows</li>
-					<li class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center text-xs font-bold font-mono shrink-0">2</span> Environmental & Natural Ventilation Streams</li>
-					<li class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center text-xs font-bold font-mono shrink-0">3</span> Functional Space Zoning & Markers</li>
-					<li class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center text-xs font-bold font-mono shrink-0">4</span> 3D Perspective Section Annotations</li>
-					<li class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center text-xs font-bold font-mono shrink-0">5</span> Architectural Video Animations & Reels</li>
+				<span
+					class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase"
+					>[ PLUGIN CAN DO ]</span
+				>
+				<h2
+					class="text-2xl font-bold text-slate-900 dark:text-white mt-1 mb-6"
+				>
+					What You Can Do with Dynamic Symbols:
+				</h2>
+				<ol
+					class="space-y-4 text-slate-700 dark:text-slate-300 font-medium text-sm sm:text-base"
+				>
+					<li class="flex items-center gap-3">
+						<span
+							class="w-6 h-6 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center text-xs font-bold font-mono shrink-0"
+							>1</span
+						> Circulation & Pedestrian Movement Flows
+					</li>
+					<li class="flex items-center gap-3">
+						<span
+							class="w-6 h-6 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center text-xs font-bold font-mono shrink-0"
+							>2</span
+						> Environmental & Natural Ventilation Streams
+					</li>
+					<li class="flex items-center gap-3">
+						<span
+							class="w-6 h-6 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center text-xs font-bold font-mono shrink-0"
+							>3</span
+						> Functional Space Zoning & Markers
+					</li>
+					<li class="flex items-center gap-3">
+						<span
+							class="w-6 h-6 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center text-xs font-bold font-mono shrink-0"
+							>4</span
+						> 3D Perspective Section Annotations
+					</li>
+					<li class="flex items-center gap-3">
+						<span
+							class="w-6 h-6 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center text-xs font-bold font-mono shrink-0"
+							>5</span
+						> Architectural Video Animations & Reels
+					</li>
 				</ol>
 			</div>
-			<div class="pt-6 border-t border-slate-100 dark:border-slate-800 mt-6 text-xs text-slate-500 dark:text-slate-400">
-				Compatible with standard SketchUp scenes and presentation export tools.
+			<div
+				class="pt-6 border-t border-slate-100 dark:border-slate-800 mt-6 text-xs text-slate-500 dark:text-slate-400"
+			>
+				Compatible with standard SketchUp scenes and presentation export
+				tools.
 			</div>
 		</div>
 
 		<!-- Right Card -->
-		<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg text-center flex flex-col justify-between h-full">
+		<div
+			class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg text-center flex flex-col justify-between h-full"
+		>
 			<div>
-				<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ REFERENCE DIAGRAMS ]</span>
-				<h2 class="text-2xl font-bold text-slate-900 dark:text-white mt-1 mb-4">Explore Diagrams Created with Dynamic Symbols</h2>
+				<span
+					class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase"
+					>[ REFERENCE DIAGRAMS ]</span
+				>
+				<h2
+					class="text-2xl font-bold text-slate-900 dark:text-white mt-1 mb-4"
+				>
+					Explore Diagrams Created with Dynamic Symbols
+				</h2>
 				<div class="mb-6">
-					<img src="/images/2025/10/STYLE01-1920-1.gif" width="1920" height="1080" alt="Diagrams Created with Dynamic Symbols" class="w-full h-auto rounded-[8px] object-cover" loading="lazy" decoding="async" />
+					<img
+						src="/images/2025/10/STYLE01-1920-1.gif"
+						width="1920"
+						height="1080"
+						alt="Diagrams Created with Dynamic Symbols"
+						class="w-full h-auto rounded-[8px] object-cover"
+						loading="lazy"
+						decoding="async"
+					/>
 				</div>
 			</div>
 			<div>
-				<a href="/#resources" target="_blank" rel="noopener" class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 transition-colors shadow-md text-sm">
+				<a
+					href="/#resources"
+					target="_blank"
+					rel="noopener"
+					class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 transition-colors shadow-md text-sm"
+				>
 					🗃 Download Sample Projects
 				</a>
 			</div>
@@ -182,170 +458,440 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 	<!-- DOWNLOAD / PRICING SECTION (PERFECTLY BALANCED & SYMMETRICAL) -->
 	<section id="download" class="mb-20">
 		<div class="text-center max-w-2xl mx-auto mb-12">
-			<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ DOWNLOAD ]</span>
-			<h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mt-1">Get Dynamic Symbols</h2>
-			<p class="text-slate-600 dark:text-slate-300 mt-2">Choose the version that fits your workflow</p>
+			<span
+				class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase"
+				>[ DOWNLOAD ]</span
+			>
+			<h2
+				class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mt-1"
+			>
+				Get Dynamic Symbols
+			</h2>
+			<p class="text-slate-600 dark:text-slate-300 mt-2">
+				Choose the version that fits your workflow
+			</p>
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
 			<!-- Standard Card -->
-			<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-xl flex flex-col justify-between h-full">
+			<div
+				class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-xl flex flex-col justify-between h-full"
+			>
 				<div class="flex-1 flex flex-col">
-					<div class="bg-slate-800 text-white p-6 text-center border-b border-slate-700 min-h-[96px] flex flex-col justify-center">
-						<h3 class="text-xl font-black tracking-wide uppercase">Dynamic Symbols Standard</h3>
-						<p class="text-slate-300 text-xs mt-1">Free for all users, commercial work permitted.</p>
+					<div
+						class="bg-slate-800 text-white p-6 text-center border-b border-slate-700 min-h-[96px] flex flex-col justify-center"
+					>
+						<h3 class="text-xl font-black tracking-wide uppercase">
+							Dynamic Symbols Standard
+						</h3>
+						<p class="text-slate-300 text-xs mt-1">
+							Free for all users, commercial work permitted.
+						</p>
 					</div>
-					<div class="p-6 sm:p-8 space-y-4 text-sm text-slate-700 dark:text-slate-300 flex-1">
+					<div
+						class="p-6 sm:p-8 space-y-4 text-sm text-slate-700 dark:text-slate-300 flex-1"
+					>
 						<div class="flex items-start gap-3">
-							<span class="text-emerald-500 font-bold text-base">✔️</span>
-							<div><strong>One-Click Symbol Swap:</strong> Full core library included.</div>
+							<span class="text-emerald-500 font-bold text-base"
+								>✔️</span
+							>
+							<div>
+								<strong>One-Click Symbol Swap:</strong> Full core
+								library included.
+							</div>
 						</div>
 						<div class="flex items-start gap-3">
-							<span class="text-emerald-500 font-bold text-base">✔️</span>
-							<div><strong>One-Click Color Palette:</strong> Instant material styling.</div>
+							<span class="text-emerald-500 font-bold text-base"
+								>✔️</span
+							>
+							<div>
+								<strong>One-Click Color Palette:</strong> Instant
+								material styling.
+							</div>
 						</div>
 						<div class="flex items-start gap-3">
-							<span class="text-amber-500 font-bold text-base">➖</span>
-							<div><strong>Animated Scene Generator:</strong> Max 2 symbols per scene.</div>
+							<span class="text-amber-500 font-bold text-base"
+								>➖</span
+							>
+							<div>
+								<strong>Animated Scene Generator:</strong> Max 2 symbols
+								per scene.
+							</div>
 						</div>
 						<div class="flex items-start gap-3">
-							<span class="text-amber-500 font-bold text-base">➖</span>
-							<div><strong>Symbol Library:</strong> Core standard 2D symbols.</div>
+							<span class="text-amber-500 font-bold text-base"
+								>➖</span
+							>
+							<div>
+								<strong>Symbol Library:</strong> Core standard 2D
+								symbols.
+							</div>
 						</div>
 						<div class="flex items-start gap-3">
-							<span class="text-emerald-500 font-bold text-base">✔️</span>
-							<div><strong>Updates:</strong> Auto via Extension Warehouse.</div>
+							<span class="text-emerald-500 font-bold text-base"
+								>✔️</span
+							>
+							<div>
+								<strong>Updates:</strong> Auto via Extension Warehouse.
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="p-6 sm:p-8 pt-0 flex flex-col justify-end space-y-3">
-					<div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-center">
-						<div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Extension Warehouse</div>
-						<div class="text-lg font-black text-slate-900 dark:text-white">$0 USD <span class="text-xs font-normal text-slate-500">/ Free Forever</span></div>
-						<a href="https://extensions.sketchup.com/extension/21085584-a984-474d-8407-33087adec402/dynamic-symbols" target="_blank" rel="noopener" class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 font-bold text-xs shadow-md transition-colors">
-							<img src="/images/LOGO/SketchUp-logo.svg" alt="SketchUp" class="w-4 h-4 object-contain" />
+				<div
+					class="p-6 sm:p-8 pt-0 flex flex-col justify-end space-y-3"
+				>
+					<div
+						class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-center"
+					>
+						<div
+							class="text-xs text-slate-500 dark:text-slate-400 font-medium"
+						>
+							Extension Warehouse
+						</div>
+						<div
+							class="text-lg font-black text-slate-900 dark:text-white"
+						>
+							$0 USD <span
+								class="text-xs font-normal text-slate-500"
+								>/ Free Forever</span>
+						</div>
+						<a
+							href="https://extensions.sketchup.com/extension/21085584-a984-474d-8407-33087adec402/dynamic-symbols"
+							target="_blank"
+							rel="noopener"
+							class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 font-bold text-xs shadow-md transition-colors"
+						>
+							<img
+								src="/images/LOGO/SketchUp-logo.svg"
+								alt="SketchUp"
+								class="w-4 h-4 object-contain"
+							/>
 							Download via Extension Warehouse
 						</a>
 					</div>
-					<p class="text-xs text-center text-slate-500 dark:text-slate-400 pt-1">
-						Official Free Release • Compatible with SketchUp 2020–2026
+					<p
+						class="text-xs text-center text-slate-500 dark:text-slate-400 pt-1"
+					>
+						Official Free Release • Compatible with SketchUp
+						2020–2026
 					</p>
 				</div>
 			</div>
 
 			<!-- Pro Card -->
-			<div class="bg-white dark:bg-slate-900 border-2 border-amber-500 rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between h-full relative">
-				<div class="absolute top-3 right-3 bg-amber-400 text-slate-950 text-[10px] font-black uppercase px-2.5 py-1 rounded-full tracking-widest shadow-sm">
-					POPULAR
-				</div>
+			<div
+				class="bg-white dark:bg-slate-900 border-2 border-amber-500 rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between h-full relative"
+			>
 				<div class="flex-1 flex flex-col">
-					<div class="bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 p-6 text-center min-h-[96px] flex flex-col justify-center">
-						<h3 class="text-xl font-black tracking-wide uppercase">Dynamic Symbols Pro ⭐</h3>
-						<p class="text-amber-950/80 font-medium text-xs mt-1">Unlock full animation power & complete symbol library.</p>
+					<div
+						class="bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 p-6 text-center min-h-[96px] flex flex-col justify-center"
+					>
+						<h3 class="text-xl font-black tracking-wide uppercase">
+							Dynamic Symbols Pro ⭐
+						</h3>
+						<p class="text-amber-950/80 font-medium text-xs mt-1">
+							Unlock full animation power & complete symbol
+							library.
+						</p>
 					</div>
-					<div class="p-6 sm:p-8 space-y-4 text-sm text-slate-700 dark:text-slate-300 flex-1">
+					<div
+						class="p-6 sm:p-8 space-y-4 text-sm text-slate-700 dark:text-slate-300 flex-1"
+					>
 						<div class="flex items-start gap-3">
-							<span class="text-emerald-500 font-bold text-base">✔️</span>
-							<div><strong>One-Click Symbol Swap:</strong> Complete extended library.</div>
+							<span class="text-emerald-500 font-bold text-base"
+								>✔️</span
+							>
+							<div>
+								<strong>One-Click Symbol Swap:</strong> Complete extended
+								library.
+							</div>
 						</div>
 						<div class="flex items-start gap-3">
-							<span class="text-emerald-500 font-bold text-base">✔️</span>
-							<div><strong>One-Click Color Palette:</strong> Unlimited palette + last 5 memory.</div>
+							<span class="text-emerald-500 font-bold text-base"
+								>✔️</span
+							>
+							<div>
+								<strong>One-Click Color Palette:</strong> Unlimited
+								palette + last 5 memory.
+							</div>
 						</div>
 						<div class="flex items-start gap-3">
-							<span class="text-emerald-500 font-bold text-base">✔️</span>
-							<div><strong>Animated Scene Generator:</strong> <strong>Unlimited</strong> animated symbols simultaneously.</div>
+							<span class="text-emerald-500 font-bold text-base"
+								>✔️</span
+							>
+							<div>
+								<strong>Animated Scene Generator:</strong>
+								<strong>Unlimited</strong> animated symbols simultaneously.
+							</div>
 						</div>
 						<div class="flex items-start gap-3">
-							<span class="text-emerald-500 font-bold text-base">✔️</span>
-							<div><strong>Full Symbol Library:</strong> All current and upcoming symbol collections.</div>
+							<span class="text-emerald-500 font-bold text-base"
+								>✔️</span
+							>
+							<div>
+								<strong>Full Symbol Library:</strong> All current
+								and upcoming symbol collections.
+							</div>
 						</div>
 						<div class="flex items-start gap-3">
-							<span class="text-emerald-500 font-bold text-base">✔️</span>
-							<div><strong>Updates:</strong> Lifetime updates included.</div>
+							<span class="text-emerald-500 font-bold text-base"
+								>✔️</span
+							>
+							<div>
+								<strong>Updates:</strong> Lifetime updates included.
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="p-6 sm:p-8 pt-0 flex flex-col justify-end space-y-3">
-					<div class="p-3.5 rounded-xl border border-amber-500/30 bg-amber-500/5 text-center">
-						<div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Option 1: Annual Subscription</div>
-						<div class="text-lg font-black text-slate-900 dark:text-white">$12 USD <span class="text-xs font-normal text-slate-500">/ year</span></div>
-						<a href="https://extensions.sketchup.com/extension/cfc78108-f167-4855-b0f8-db2ca79c6219/dynamic-symbols-studio" target="_blank" rel="noopener" class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-md transition-colors">
-							<img src="/images/LOGO/SketchUp-logo.svg" alt="SketchUp" class="w-4 h-4 object-contain" />
+				<div
+					class="p-6 sm:p-8 pt-0 flex flex-col justify-end space-y-3"
+				>
+					<div
+						class="p-3.5 rounded-xl border border-amber-500/30 bg-amber-500/5 text-center"
+					>
+						<div
+							class="text-xs text-slate-500 dark:text-slate-400 font-medium"
+						>
+							Option 1: Annual Subscription
+						</div>
+						<div
+							class="text-lg font-black text-slate-900 dark:text-white"
+						>
+							$12 USD <span
+								class="text-xs font-normal text-slate-500"
+								>/ year</span>
+						</div>
+						<a
+							href="https://extensions.sketchup.com/extension/cfc78108-f167-4855-b0f8-db2ca79c6219/dynamic-symbols-studio"
+							target="_blank"
+							rel="noopener"
+							class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-md transition-colors"
+						>
+							<img
+								src="/images/LOGO/SketchUp-logo.svg"
+								alt="SketchUp"
+								class="w-4 h-4 object-contain"
+							/>
 							Subscribe via Extension Warehouse
 						</a>
 					</div>
-					<div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-center">
-						<div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Option 2: Lifetime Ownership</div>
-						<div class="text-lg font-black text-slate-900 dark:text-white">$29 USD <span class="text-xs font-normal text-slate-500">/ One-time</span></div>
-						<a href="https://febhouse.gumroad.com/l/dynamicsymbols" class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 transition-all shadow-md active:scale-[0.98]" data-gumroad-single-product="true">
-							<img src="/images/LOGO/gumroad-icon.svg" alt="Gumroad" class="w-4 h-4 object-contain" />
+					<div
+						class="p-3.5 rounded-xl border border-amber-500/30 bg-amber-50/50 dark:bg-amber-900/10 text-center relative mt-4"
+					>
+						<div class="absolute -top-3 right-4 bg-amber-500 text-slate-950 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full shadow-sm tracking-widest border border-amber-400">
+							BEST VALUE
+						</div>
+						<div
+							class="text-xs text-slate-500 dark:text-slate-400 font-medium"
+						>
+							Option 2: Lifetime Ownership
+						</div>
+						<div
+							class="text-lg font-black text-slate-900 dark:text-white"
+						>
+							$29 USD <span
+								class="text-xs font-normal text-slate-500"
+								>/ One-time</span>
+						</div>
+						<a
+							href="https://febhouse.gumroad.com/l/dynamicsymbols"
+							class="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs hover:bg-amber-500 dark:hover:bg-amber-400 dark:hover:text-slate-950 transition-all shadow-md active:scale-[0.98]"
+							data-gumroad-single-product="true"
+						>
+							<img
+								src="/images/LOGO/gumroad-icon.svg"
+								alt="Gumroad"
+								class="w-4 h-4 object-contain"
+							/>
 							Buy Lifetime via Gumroad
 						</a>
+						<p
+							class="text-[10px] text-slate-500 dark:text-slate-400 mt-1.5 font-medium tracking-wide"
+						>
+							Pay once, use forever.
+						</p>
 					</div>
-					<p class="text-xs text-center text-slate-500 dark:text-slate-400 pt-1">
-						Prefer <span class="font-bold tracking-tight text-[#23374b] dark:text-white">sketch<span class="text-[#df3531]">U</span>cation</span>? <a href="https://sketchucation.com/plugin/3116-febdynamicsymbolspro" target="_blank" rel="noopener" class="text-amber-500 font-semibold underline">Get it here</a>
+					<p
+						class="text-xs text-center text-slate-500 dark:text-slate-400 pt-1"
+					>
+						Prefer <span
+							class="font-bold tracking-tight text-[#23374b] dark:text-white"
+							>sketch<span class="text-[#df3531]">U</span
+							>cation</span
+						>? <a
+							href="https://sketchucation.com/plugin/3116-febdynamicsymbolspro"
+							target="_blank"
+							rel="noopener"
+							class="text-amber-500 font-semibold underline"
+							>Get it here</a
+						>
 					</p>
 				</div>
 			</div>
 		</div>
 
 		<!-- Developer & Support Callout -->
-		<div class="mt-8 p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-center text-sm text-slate-600 dark:text-slate-300 space-y-2 shadow-sm">
+		<div
+			class="mt-8 p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-center text-sm text-slate-600 dark:text-slate-300 space-y-2 shadow-sm"
+		>
 			<p>Dynamic Symbols is developed by <strong>Febhouse</strong>.</p>
-			<p>The <strong>Standard</strong> version is officially available on <strong>SketchUp Extension Warehouse</strong>.</p>
-			<p>The <strong>Pro version</strong> is available via <strong>Gumroad</strong> or <strong>SketchUcation</strong> (Lifetime) and <strong>Extension Warehouse</strong> (Annual).</p>
-			<div class="pt-2 text-amber-600 dark:text-amber-400 font-bold flex items-center justify-center gap-2">
-				<span>📩 Support:</span> <a href="mailto:info@febhouse.com" class="underline hover:text-amber-500">info@febhouse.com</a> (response within 24h)
+			<p>
+				The <strong>Standard</strong> version is officially available on <strong
+					>SketchUp Extension Warehouse</strong
+				>.
+			</p>
+			<p>
+				The <strong>Pro version</strong> is available via <strong
+					>Gumroad</strong
+				> or <strong>SketchUcation</strong> (Lifetime) and <strong
+					>Extension Warehouse</strong
+				> (Annual).
+			</p>
+			<div
+				class="pt-2 text-amber-600 dark:text-amber-400 font-bold flex items-center justify-center gap-2"
+			>
+				<span>📩 Support:</span>
+				<a
+					href="mailto:info@febhouse.com"
+					class="underline hover:text-amber-500">info@febhouse.com</a
+				> (response within 24h)
 			</div>
 		</div>
-		
+
+		<!-- UPSell BUNDLE -->
+		<div class="mt-8 p-2.5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
+			<div class="absolute right-0 top-0 w-32 h-32 bg-amber-500/5 blur-3xl rounded-full pointer-events-none"></div>
+			
+			<div class="flex items-center gap-4 relative z-10 w-full md:w-auto">
+				<div class="relative w-[130px] sm:w-[150px] h-[90px] sm:h-[100px] flex-shrink-0 flex items-center justify-center">
+					<!-- Sun Diagram (Left) -->
+					<div class="absolute left-0 top-1/2 -translate-y-1/2 w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white shadow-md border border-slate-200/60 dark:border-slate-700 flex items-center justify-center transform -rotate-12 hover:-rotate-12 hover:-translate-y-2 hover:-translate-x-1 transition-all duration-300 z-10">
+						<img src="/images/LOGO/SunDiagram-logo.svg" alt="Sun Diagram" class="w-12 h-12 sm:w-14 sm:h-14 object-contain" />
+					</div>
+					<!-- Shadow Slice (Right) -->
+					<div class="absolute right-0 top-1/2 -translate-y-1/2 w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white shadow-md border border-slate-200/60 dark:border-slate-700 flex items-center justify-center transform rotate-12 hover:rotate-12 hover:-translate-y-2 hover:translate-x-1 transition-all duration-300 z-10">
+						<img src="/images/LOGO/Shadowslice-logo.svg" alt="Shadow Slice" class="w-12 h-12 sm:w-14 sm:h-14 object-contain" />
+					</div>
+					<!-- Dynamic Symbols (Center) -->
+					<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-white shadow-lg border border-slate-200/80 dark:border-slate-600 flex items-center justify-center z-20 hover:-translate-y-2 hover:scale-105 transition-all duration-300">
+						<img src="/images/LOGO/dynamic-symbols-logo.svg" alt="Dynamic Symbols" class="w-14 h-14 sm:w-16 sm:h-16 object-contain" />
+					</div>
+				</div>
+				<div class="flex-1 text-left">
+					<div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 mb-1">
+						<span class="bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400 border border-amber-500/20 text-[9px] font-black uppercase px-2 py-0.5 rounded-sm tracking-widest inline-block">Bundle</span>
+						<h3 class="text-base font-bold text-slate-900 dark:text-white">Architectural Diagram Pro Bundle</h3>
+					</div>
+					<p class="text-slate-500 dark:text-slate-400 text-xs">Get all 3 plugins (Sun Diagram + Dynamic Symbols + Shadow Slice). <span class="text-amber-600 dark:text-amber-500 font-bold">Save $25 instantly!</span></p>
+				</div>
+			</div>
+			
+			<div class="flex flex-col items-center sm:items-end relative z-10 w-full md:w-auto mt-2 md:mt-0 gap-1.5">
+				<div class="flex flex-row items-center justify-center sm:justify-end gap-3 w-full">
+					<div class="flex items-baseline gap-1.5">
+						<span class="text-slate-400 line-through text-[10px] font-bold">$94</span>
+						<span class="text-xl font-black text-slate-900 dark:text-white">$69</span>
+					</div>
+					<a
+						href="https://febhouse.gumroad.com/l/architecture-diagram-bundle"
+						class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-sm transition-colors whitespace-nowrap"
+						data-gumroad-single-product="true"
+					>
+						<img src="/images/LOGO/gumroad-icon.svg" alt="Gumroad" class="w-3.5 h-3.5 object-contain opacity-80" />
+						Get the Bundle
+					</a>
+				</div>
+				<p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Pay once, use forever.</p>
+			</div>
+		</div>
+
 		<TrustSignals />
 	</section>
 
 	<!-- CHANGELOG SECTION -->
 	<section class="mb-20">
 		<div class="border-b border-slate-200 dark:border-slate-800 pb-3 mb-6">
-			<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ VERSIONS & CHANGELOG ]</span>
-			<h2 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">Release History</h2>
+			<span
+				class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase"
+				>[ VERSIONS & CHANGELOG ]</span
+			>
+			<h2 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">
+				Release History
+			</h2>
 		</div>
 
 		<!-- Current Version -->
-		<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 mb-4 shadow-sm">
+		<div
+			class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 mb-4 shadow-sm"
+		>
 			<div class="flex items-center justify-between mb-2">
-				<span class="text-base font-bold text-slate-900 dark:text-white">Versions: 2.3.0</span>
-				<span class="text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-bold">2026-05-10</span>
+				<span class="text-base font-bold text-slate-900 dark:text-white"
+					>Versions: 2.3.0</span
+				>
+				<span
+					class="text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-bold"
+					>2026-05-10</span
+				>
 			</div>
 			<p class="text-sm text-slate-600 dark:text-slate-300">
-				<strong>🛠️ Updates & Improvements:</strong> Added 12 new curved flow symbols, optimized memory consumption for heavy models, fixed scene transition delays in SketchUp 2026.
+				<strong>🛠️ Updates & Improvements:</strong> Added 12 new curved flow
+				symbols, optimized memory consumption for heavy models, fixed scene
+				transition delays in SketchUp 2026.
 			</p>
 		</div>
 
 		<!-- Collapsible Legacy Changelog -->
-		<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-			<summary class="flex items-center justify-between p-5 font-bold text-slate-800 dark:text-slate-200 hover:text-amber-500 transition-colors select-none">
+		<details
+			class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+		>
+			<summary
+				class="flex items-center justify-between p-5 font-bold text-slate-800 dark:text-slate-200 hover:text-amber-500 transition-colors select-none"
+			>
 				<span>Legacy Changelog (All previous versions)</span>
-				<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+				<svg
+					class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M19 9l-7 7-7-7"></path>
 				</svg>
 			</summary>
-			<div class="p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 space-y-6 text-sm text-slate-600 dark:text-slate-300">
+			<div
+				class="p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 space-y-6 text-sm text-slate-600 dark:text-slate-300"
+			>
 				<div>
-					<div class="font-bold text-slate-900 dark:text-white mb-1">V 2.2 (2025-10-24)</div>
+					<div class="font-bold text-slate-900 dark:text-white mb-1">
+						V 2.2 (2025-10-24)
+					</div>
 					<ul class="list-disc list-inside space-y-1">
-						<li>✔️ UI Enhancement: Improved Dynamic Symbols Library UI.</li>
-						<li>✔️ Compatibility Fix: Resolved an incompatibility with SketchUp 2025/2026’s new graphic engine.</li>
+						<li>
+							✔️ UI Enhancement: Improved Dynamic Symbols Library
+							UI.
+						</li>
+						<li>
+							✔️ Compatibility Fix: Resolved an incompatibility
+							with SketchUp 2025/2026’s new graphic engine.
+						</li>
 					</ul>
 				</div>
 				<div>
-					<div class="font-bold text-slate-900 dark:text-white mb-1">V 2.1 (2025-06-25)</div>
+					<div class="font-bold text-slate-900 dark:text-white mb-1">
+						V 2.1 (2025-06-25)
+					</div>
 					<ul class="list-disc list-inside space-y-1">
 						<li>Added 1-Click Color Change feature.</li>
 						<li>Added 1-Click Create Animation feature.</li>
 					</ul>
 				</div>
 				<div>
-					<div class="font-bold text-slate-900 dark:text-white mb-1">V 1.0 (2025-05-21)</div>
+					<div class="font-bold text-slate-900 dark:text-white mb-1">
+						V 1.0 (2025-05-21)
+					</div>
 					<p>Initial release on SketchUp Extension Warehouse.</p>
 				</div>
 			</div>
@@ -355,35 +901,106 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 	<!-- USER GUIDE SECTION -->
 	<section class="mb-20">
 		<div class="text-center mb-8">
-			<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ USER GUIDE ]</span>
-			<h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Step-by-Step User Guide (PDF)</h2>
-			<p class="text-slate-600 dark:text-slate-300 text-sm mt-1">Official 3-page quick reference and shortcuts manual</p>
+			<span
+				class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase"
+				>[ USER GUIDE ]</span
+			>
+			<h2
+				class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1"
+			>
+				Step-by-Step User Guide (PDF)
+			</h2>
+			<p class="text-slate-600 dark:text-slate-300 text-sm mt-1">
+				Official 3-page quick reference and shortcuts manual
+			</p>
 		</div>
 
 		<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
 			<div class="rounded-xl overflow-hidden bg-transparent p-1">
-				<img src="/images/2025/10/DynamicSymbols_UserGuide_Page_1_resized1.webp" width="2121" height="3000" alt="DynamicSymbols User Guide Page 1" class="w-full h-auto object-contain rounded-lg cursor-zoom-in hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.4)] hover:-translate-y-2 transition-all duration-300 ring-1 ring-slate-200/50 dark:ring-slate-800/50" loading="lazy" decoding="async" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('imageLightbox').classList.replace('hidden','flex')" />
+				<img
+					src="/images/2025/10/DynamicSymbols_UserGuide_Page_1_resized1.webp"
+					width="2121"
+					height="3000"
+					alt="DynamicSymbols User Guide Page 1"
+					class="w-full h-auto object-contain rounded-lg cursor-zoom-in hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.4)] hover:-translate-y-2 transition-all duration-300 ring-1 ring-slate-200/50 dark:ring-slate-800/50"
+					loading="lazy"
+					decoding="async"
+					onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('imageLightbox').classList.replace('hidden','flex')"
+				/>
 			</div>
 			<div class="rounded-xl overflow-hidden bg-transparent p-1">
-				<img src="/images/2025/10/DynamicSymbols_UserGuide_Page_2_resized.webp" width="2121" height="3000" alt="DynamicSymbols User Guide Page 2" class="w-full h-auto object-contain rounded-lg cursor-zoom-in hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.4)] hover:-translate-y-2 transition-all duration-300 ring-1 ring-slate-200/50 dark:ring-slate-800/50" loading="lazy" decoding="async" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('imageLightbox').classList.replace('hidden','flex')" />
+				<img
+					src="/images/2025/10/DynamicSymbols_UserGuide_Page_2_resized.webp"
+					width="2121"
+					height="3000"
+					alt="DynamicSymbols User Guide Page 2"
+					class="w-full h-auto object-contain rounded-lg cursor-zoom-in hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.4)] hover:-translate-y-2 transition-all duration-300 ring-1 ring-slate-200/50 dark:ring-slate-800/50"
+					loading="lazy"
+					decoding="async"
+					onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('imageLightbox').classList.replace('hidden','flex')"
+				/>
 			</div>
 			<div class="rounded-xl overflow-hidden bg-transparent p-1">
-				<img src="/images/2025/10/DynamicSymbols_UserGuide_Page_3_resized.webp" width="2121" height="2999" alt="DynamicSymbols User Guide Page 3" class="w-full h-auto object-contain rounded-lg cursor-zoom-in hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.4)] hover:-translate-y-2 transition-all duration-300 ring-1 ring-slate-200/50 dark:ring-slate-800/50" loading="lazy" decoding="async" onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('imageLightbox').classList.replace('hidden','flex')" />
+				<img
+					src="/images/2025/10/DynamicSymbols_UserGuide_Page_3_resized.webp"
+					width="2121"
+					height="2999"
+					alt="DynamicSymbols User Guide Page 3"
+					class="w-full h-auto object-contain rounded-lg cursor-zoom-in hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.4)] hover:-translate-y-2 transition-all duration-300 ring-1 ring-slate-200/50 dark:ring-slate-800/50"
+					loading="lazy"
+					decoding="async"
+					onclick="document.getElementById('lightboxImg').src=this.src; document.getElementById('imageLightbox').classList.replace('hidden','flex')"
+				/>
 			</div>
 		</div>
 
 		<!-- Simple Image Lightbox -->
-		<div id="imageLightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 sm:p-12 cursor-zoom-out opacity-0 transition-opacity duration-300 [&.flex]:opacity-100" onclick="this.classList.replace('flex','hidden')">
-			<div class="relative max-w-5xl w-full h-full max-h-[90vh] flex items-center justify-center">
-				<img id="lightboxImg" src="" alt="Zoomed Guide" class="max-w-full max-h-full object-contain rounded-xl shadow-2xl" />
-				<button type="button" class="absolute -top-12 right-0 sm:-right-12 sm:top-0 bg-slate-900/50 hover:bg-slate-900 rounded-full text-white/90 hover:text-amber-400 z-10 p-2 transition-all backdrop-blur-sm border border-white/10 cursor-pointer" onclick="document.getElementById('imageLightbox').classList.replace('flex','hidden')">
-					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+		<div
+			id="imageLightbox"
+			class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 sm:p-12 cursor-zoom-out opacity-0 transition-opacity duration-300 [&.flex]:opacity-100"
+			onclick="this.classList.replace('flex','hidden')"
+		>
+			<div
+				class="relative max-w-5xl w-full h-full max-h-[90vh] flex items-center justify-center"
+			>
+				<img
+					id="lightboxImg"
+					src=""
+					alt="Zoomed Guide"
+					class="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
+				/>
+				<button
+					type="button"
+					class="absolute -top-12 right-0 sm:-right-12 sm:top-0 bg-slate-900/50 hover:bg-slate-900 rounded-full text-white/90 hover:text-amber-400 z-10 p-2 transition-all backdrop-blur-sm border border-white/10 cursor-pointer"
+					onclick="document.getElementById('imageLightbox').classList.replace('flex','hidden')"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="28"
+						height="28"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						><line x1="18" y1="6" x2="6" y2="18"></line><line
+							x1="6"
+							y1="6"
+							x2="18"
+							y2="18"></line></svg
+					>
 				</button>
 			</div>
 		</div>
 
 		<div class="text-center">
-			<a href="https://assets.archidiagram.com/UserGuide/DynamicSymbols_UserGuide.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold hover:bg-amber-500 transition-colors shadow-md text-sm">
+			<a
+				href="https://assets.archidiagram.com/UserGuide/DynamicSymbols_UserGuide.pdf"
+				target="_blank"
+				rel="noopener"
+				class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold hover:bg-amber-500 transition-colors shadow-md text-sm"
+			>
 				📥 Download DynamicSymbols_UserGuide.pdf
 			</a>
 		</div>
@@ -392,19 +1009,27 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 	<!-- VIDEO TUTORIAL SECTION -->
 	<section class="mb-20">
 		<div class="text-center mb-8">
-			<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ VIDEO TUTORIAL ]</span>
-			<h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">2-Minute Quick Start Video</h2>
+			<span
+				class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase"
+				>[ VIDEO TUTORIAL ]</span
+			>
+			<h2
+				class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1"
+			>
+				2-Minute Quick Start Video
+			</h2>
 		</div>
 
-		<div class="rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl bg-black aspect-video">
-			<iframe 
+		<div
+			class="rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl bg-black aspect-video"
+		>
+			<iframe
 				class="w-full h-full"
-				src="https://www.youtube-nocookie.com/embed/wMo6A8lJd0c" 
-				title="Dynamic Symbols Tutorial Video" 
-				frameborder="0" 
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-				allowfullscreen
-			></iframe>
+				src="https://www.youtube-nocookie.com/embed/wMo6A8lJd0c"
+				title="Dynamic Symbols Tutorial Video"
+				frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+				allowfullscreen></iframe>
 		</div>
 	</section>
 
@@ -412,21 +1037,41 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 	<section id="faq" class="mb-16">
 		<div class="border-b border-slate-200 dark:border-slate-800 pb-4 mb-6">
 			<div class="text-center">
-				<span class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase">[ FAQ ]</span>
-				<h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Frequently Asked Questions & Documentation</h2>
+				<span
+					class="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase"
+					>[ FAQ ]</span
+				>
+				<h2
+					class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1"
+				>
+					Frequently Asked Questions & Documentation
+				</h2>
 			</div>
-			
+
 			<!-- Detailed AI Trigger Card -->
-			<div class="max-w-xl mx-auto flex flex-col items-center gap-3 p-4 px-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm mt-6 mb-2 text-center">
-				<p class="text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
-					Need instant answers? Our AI is fully trained on all technical documentation, plugin workflows, and resources. It provides accurate, specific answers to all your questions without guessing.
+			<div
+				class="max-w-xl mx-auto flex flex-col items-center gap-3 p-4 px-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm mt-6 mb-2 text-center"
+			>
+				<p
+					class="text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed"
+				>
+					Need instant answers? Our AI is fully trained on all
+					technical documentation, plugin workflows, and resources. It
+					provides accurate, specific answers to all your questions
+					without guessing.
 				</p>
-				<button 
-					type="button" 
+				<button
+					type="button"
 					onclick="window.toggleMainAiChat()"
 					class="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm uppercase tracking-wider shadow-sm transition-all flex items-center gap-2 cursor-pointer active:scale-95 w-full sm:w-auto justify-center"
 				>
-					<span><img src="/images/2026/05/LOGO_FEBHOUSE1.svg" alt="Febhouse" class="w-5 h-5 object-contain" /></span>
+					<span
+						><img
+							src="/images/2026/05/LOGO_FEBHOUSE1.svg"
+							alt="Febhouse"
+							class="w-5 h-5 object-contain"
+						/></span
+					>
 					<span>Ask Dynamic Symbols AI Bot</span>
 				</button>
 			</div>
@@ -436,224 +1081,675 @@ const difyChatUrl = "https://ai.febhouse.com/chat/WzxqYtwxpWEYecSx";
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
 			<!-- Column 1 -->
 			<div class="space-y-4">
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
 						<span>What is Dynamic Symbols used for?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						Dynamic Symbols is a SketchUp plugin that provides a comprehensive library of animated 2D/3D architectural symbols (wind arrows, pedestrian flows, traffic, sun rays). It enables architects and designers to rapidly swap shapes, customize colors, and generate smooth motion scene transitions for diagram presentations.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						Dynamic Symbols is a SketchUp plugin that provides a
+						comprehensive library of animated 2D/3D architectural
+						symbols (wind arrows, pedestrian flows, traffic, sun
+						rays). It enables architects and designers to rapidly
+						swap shapes, customize colors, and generate smooth
+						motion scene transitions for diagram presentations.
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
 						<span>Which versions of SketchUp are supported?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						The plugin supports SketchUp 2020 and newer versions on both Windows and macOS (including native Apple Silicon M1/M2/M3).
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						The plugin supports SketchUp 2020 and newer versions on
+						both Windows and macOS (including native Apple Silicon
+						M1/M2/M3).
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>Can I use the plugin for commercial projects?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>Can I use the plugin for commercial projects?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						Yes. Both the Free and Pro/Studio versions are fully licensed for commercial work, architectural competitions, and client presentations.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						Yes. Both the Free and Pro/Studio versions are fully
+						licensed for commercial work, architectural
+						competitions, and client presentations.
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>Where can I find sample files using this plugin?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>Where can I find sample files using this plugin?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						You can download free sample files at <a href="/#resources" target="_blank" rel="noopener" class="text-amber-500 underline font-semibold">ArchiDiagram.com</a> or via our Instagram (<a href="https://instagram.com/febhouse_com" target="_blank" rel="noopener" class="text-amber-500 underline">@febhouse_com</a>). These files can be opened directly in SketchUp without needing the plugins installed beforehand.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						You can download free sample files at <a
+							href="/#resources"
+							target="_blank"
+							rel="noopener"
+							class="text-amber-500 underline font-semibold"
+							>ArchiDiagram.com</a
+						> or via our Instagram (<a
+							href="https://instagram.com/febhouse_com"
+							target="_blank"
+							rel="noopener"
+							class="text-amber-500 underline">@febhouse_com</a
+						>). These files can be opened directly in SketchUp
+						without needing the plugins installed beforehand.
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>What are the different versions of Dynamic Symbols?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>What are the different versions of Dynamic Symbols?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
 						We offer three options to suit your needs:
 						<ul class="list-disc list-inside mt-2 space-y-1">
-							<li><strong>Free Version:</strong> Available officially on the SketchUp Extension Warehouse.</li>
-							<li><strong>Studio Version:</strong> Offers subscription-based licensing ($12/year) on the Extension Warehouse with auto-updates.</li>
-							<li><strong>Pro Version:</strong> Offers lifetime ownership ($29) via Gumroad and SketchUcation.</li>
+							<li>
+								<strong>Free Version:</strong> Available officially
+								on the SketchUp Extension Warehouse.
+							</li>
+							<li>
+								<strong>Studio Version:</strong> Offers subscription-based
+								licensing ($12/year) on the Extension Warehouse with
+								auto-updates.
+							</li>
+							<li>
+								<strong>Pro Version:</strong> Offers lifetime ownership
+								($29) via Gumroad and SketchUcation.
+							</li>
 						</ul>
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>What is the difference between the Studio and Pro versions?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>What is the difference between the Studio and Pro
+							versions?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						Both versions offer the exact same features (unlimited animations, one-click color changes, full library). The difference lies in the licensing model:
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						Both versions offer the exact same features (unlimited
+						animations, one-click color changes, full library). The
+						difference lies in the licensing model:
 						<ul class="list-disc list-inside mt-2 space-y-1">
-							<li><strong>Studio:</strong> Annual subscription ($12/year), managed via Extension Warehouse with automatic updates.</li>
-							<li><strong>Pro:</strong> Designed for long-term ownership. One-time payment for lifetime access ($29), includes free lifetime updates, and supports offline activation.</li>
+							<li>
+								<strong>Studio:</strong> Annual subscription ($12/year),
+								managed via Extension Warehouse with automatic updates.
+							</li>
+							<li>
+								<strong>Pro:</strong> Designed for long-term ownership.
+								One-time payment for lifetime access ($29), includes
+								free lifetime updates, and supports offline activation.
+							</li>
 						</ul>
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>Where is my License Key for the Studio version?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>Where is my License Key for the Studio version?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						You do not need a License Key for the Studio version. The license is automatically linked to the email address associated with your SketchUp Trimble account. Simply install the plugin and start working.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						You do not need a License Key for the Studio version.
+						The license is automatically linked to the email address
+						associated with your SketchUp Trimble account. Simply
+						install the plugin and start working.
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
 						<span>Can I use the plugin on multiple computers?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
 						<ul class="list-disc list-inside space-y-1">
-							<li><strong>Studio:</strong> Yes, simply log into your SketchUp account on the new computer and install the extension from the Warehouse.</li>
-							<li><strong>Pro:</strong> The lifetime license is for individual use. You may install it on multiple personal machines (e.g. desktop and laptop), but concurrent use by different people or sharing the key is prohibited.</li>
+							<li>
+								<strong>Studio:</strong> Yes, simply log into your
+								SketchUp account on the new computer and install the
+								extension from the Warehouse.
+							</li>
+							<li>
+								<strong>Pro:</strong> The lifetime license is for
+								individual use. You may install it on multiple personal
+								machines (e.g. desktop and laptop), but concurrent
+								use by different people or sharing the key is prohibited.
+							</li>
 						</ul>
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>I already own the Pro version. Do I need to subscribe to the Studio version?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>I already own the Pro version. Do I need to
+							subscribe to the Studio version?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						No. Your Pro license is valid for a lifetime and already includes free updates. The Studio version is simply an alternative for users who prefer subscription-based billing.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						No. Your Pro license is valid for a lifetime and already
+						includes free updates. The Studio version is simply an
+						alternative for users who prefer subscription-based
+						billing.
 					</div>
 				</details>
 			</div>
 
 			<!-- Column 2 -->
 			<div class="space-y-4">
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>Why does my exported animation flicker, or the arrows just pop up?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>Why does my exported animation flicker, or the
+							arrows just pop up?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						This happens when SketchUp's scene transitions are disabled. To fix this, go to <strong>Window > Model Info > Animation</strong> and make sure the <strong>"Enable scene transitions"</strong> option is checked.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						This happens when SketchUp's scene transitions are
+						disabled. To fix this, go to <strong
+							>Window > Model Info > Animation</strong
+						> and make sure the <strong
+							>"Enable scene transitions"</strong
+						> option is checked.
 						<div class="mt-3">
-							<img src="/images/2026/04/Enable-scene-transitions.webp" width="765" height="710" alt="Enable scene transitions" class="w-full h-auto rounded-[8px] object-cover" style="width: 100% !important; height: auto !important; border-radius: 8px !important;" loading="lazy" decoding="async" />
+							<img
+								src="/images/2026/04/Enable-scene-transitions.webp"
+								width="765"
+								height="710"
+								alt="Enable scene transitions"
+								class="w-full h-auto rounded-[8px] object-cover"
+								style="width: 100% !important; height: auto !important; border-radius: 8px !important;"
+								loading="lazy"
+								decoding="async"
+							/>
 						</div>
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
 						<span>How do I install the plugin?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
 						<ul class="list-disc list-inside space-y-1">
-							<li><strong>Free/Studio:</strong> Open SketchUp > Extension Warehouse > Search for "Dynamic Symbols" (by Febhouse) > Click "Install" or "Try or Purchase".</li>
-							<li><strong>Pro:</strong> After purchasing, download the ZIP/RBZ file. Open SketchUp > Extension Manager > Click "Install Extension" and select the .rbz file.</li>
+							<li>
+								<strong>Free/Studio:</strong> Open SketchUp > Extension
+								Warehouse > Search for "Dynamic Symbols" (by Febhouse)
+								> Click "Install" or "Try or Purchase".
+							</li>
+							<li>
+								<strong>Pro:</strong> After purchasing, download the
+								ZIP/RBZ file. Open SketchUp > Extension Manager >
+								Click "Install Extension" and select the .rbz file.
+							</li>
 						</ul>
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
 						<span>Do you offer refunds?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						Yes, we offer a 7-day money-back guarantee for the Pro version. We highly recommend trying the Free version first to ensure compatibility. If the Pro version does not work on your setup, contact us for troubleshooting or a prompt refund.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						Yes, we offer a 7-day money-back guarantee for the Pro
+						version. We highly recommend trying the Free version
+						first to ensure compatibility. If the Pro version does
+						not work on your setup, contact us for troubleshooting
+						or a prompt refund.
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>I installed the plugin, but the interface isn't showing. What should I do?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>I installed the plugin, but the interface isn't
+							showing. What should I do?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						Ensure you are running SketchUp 2020 or newer, and verify that "Extensions" are enabled in your SketchUp Preferences. If the issue persists, please contact our support team at info@febhouse.com.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						Ensure you are running SketchUp 2020 or newer, and
+						verify that "Extensions" are enabled in your SketchUp
+						Preferences. If the issue persists, please contact our
+						support team at info@febhouse.com.
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>I received an "SSL_connect" activation error. How do I fix this?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>I received an "SSL_connect" activation error. How
+							do I fix this?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						This error indicates that your network or firewall is blocking the connection required to verify your license. To resolve it:
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						This error indicates that your network or firewall is
+						blocking the connection required to verify your license.
+						To resolve it:
 						<ul class="list-disc list-inside mt-2 space-y-1">
-							<li>Ensure your computer's system date and time are accurate.</li>
-							<li>Try connecting to a different network (like a mobile hotspot) for initial one-time activation.</li>
-							<li>Verify that you are using an official version of SketchUp.</li>
+							<li>
+								Ensure your computer's system date and time are
+								accurate.
+							</li>
+							<li>
+								Try connecting to a different network (like a
+								mobile hotspot) for initial one-time activation.
+							</li>
+							<li>
+								Verify that you are using an official version of
+								SketchUp.
+							</li>
 						</ul>
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>Can I use the Dynamic Symbols plugin if I am working offline?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>Can I use the Dynamic Symbols plugin if I am
+							working offline?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						Yes. Dynamic Symbols Pro and Standard can operate entirely offline once installed and activated.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						Yes. Dynamic Symbols Pro and Standard can operate
+						entirely offline once installed and activated.
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>How do I cancel my subscription or free trial for Studio? Will I be charged automatically?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>How do I cancel my subscription or free trial for
+							Studio? Will I be charged automatically?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						If you are using the free trial of the Studio extension on Extension Warehouse, you will not be charged automatically when the trial expires. You only pay if you explicitly choose to subscribe. You can manage or cancel your subscription at any time directly through your Trimble SketchUp account management page.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						If you are using the free trial of the Studio extension
+						on Extension Warehouse, you will not be charged
+						automatically when the trial expires. You only pay if
+						you explicitly choose to subscribe. You can manage or
+						cancel your subscription at any time directly through
+						your Trimble SketchUp account management page.
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>I purchased Dynamic Symbols Pro on SketchUcation, how do I activate my license?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>I purchased Dynamic Symbols Pro on SketchUcation,
+							how do I activate my license?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						First, ensure you have downloaded and installed the SketchUcation Tools extension. To activate your license, open SketchUp > Extensions > SketchUcation > SCFLicense, select Dynamic Symbols Pro, and validate your license key file.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						First, ensure you have downloaded and installed the
+						SketchUcation Tools extension. To activate your license,
+						open SketchUp > Extensions > SketchUcation > SCFLicense,
+						select Dynamic Symbols Pro, and validate your license
+						key file.
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
-						<span>Why is the version on SketchUcation/Gumroad higher than on Extension Warehouse?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
+						<span
+							>Why is the version on SketchUcation/Gumroad higher
+							than on Extension Warehouse?</span
+						>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						Updates are released faster on SketchUcation and Gumroad. The official SketchUp Extension Warehouse has a strict review process that takes several weeks, which can cause a temporary version discrepancy while new builds await approval.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						Updates are released faster on SketchUcation and
+						Gumroad. The official SketchUp Extension Warehouse has a
+						strict review process that takes several weeks, which
+						can cause a temporary version discrepancy while new
+						builds await approval.
 					</div>
 				</details>
 
-				<details class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-					<summary class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none">
+				<details
+					class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm"
+				>
+					<summary
+						class="flex items-center justify-between p-5 font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors select-none"
+					>
 						<span>Can I import my own custom 2D/3D symbols?</span>
-						<svg class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+						<svg
+							class="w-5 h-5 text-slate-400 transition-transform duration-300 accordion-chevron flex-shrink-0 ml-2"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path></svg
+						>
 					</summary>
-					<div class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-						Currently, you cannot import your own symbols directly into the plugin. However, you can send your custom designs to us via email! We will consider adding them in future updates, as each symbol needs to be specially integrated and coded with built-in animations by our team.
+					<div
+						class="p-5 pt-0 text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+					>
+						Currently, you cannot import your own symbols directly
+						into the plugin. However, you can send your custom
+						designs to us via email! We will consider adding them in
+						future updates, as each symbol needs to be specially
+						integrated and coded with built-in animations by our
+						team.
 					</div>
 				</details>
 			</div>
 		</div>
 	</section>
 </LandingLayout>
-
-
