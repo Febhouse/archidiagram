@@ -1,0 +1,1072 @@
+import { useState, useEffect } from 'react'
+import Scene from './Scene'
+import { useEditorStore, getMonthColor } from '../store/useEditorStore'
+import { LIBRARY_MODELS, R2_BASE_URL } from '../config/library'
+import LibraryItem from './LibraryItem'
+import { isDstActive } from './NativeSunpath'
+import { getDayOfYear } from './SunLight'
+
+export default function Studio() {
+  const { 
+    transformMode, setTransformMode, setPlacingUrl, placingUrl, 
+    undo, redo, selectedIds, replaceObjectUrl, updateObjectColor, 
+    updateObjectOpacity, toggleAnimation, updateAnimationSpeed, 
+    objects, recentColors, addRecentColor, hudPosition, contextMenu, setContextMenu,
+    latitude, longitude, activeMonth, monthDates, visibleMonths, timeOfDay, northOffset, shadowsEnabled, setEnvironment, toggleShadow,
+    sunpathSettings, setSunpathSettings, timezoneMode, utcOffset, dstMode, showHUD, uiTheme,
+    legendItems, showSunDiagramLayer, showDynamicSymbolsLayer
+  } = useEditorStore()
+  
+  // H2 Accordion State
+  const [activeH2, setActiveH2] = useState<'sundiagram' | 'symbols' | 'export' | null>('sundiagram')
+  
+  // Tabs State within H2
+  const [sunTab, setSunTab] = useState<'create' | 'shadow' | 'style'>('shadow')
+  const [symbolTab, setSymbolTab] = useState<'library' | 'properties'>('library')
+  
+  // Collapsible sections
+  const [showSunPathComponents, setShowSunPathComponents] = useState(true)
+  const [showObjectColors, setShowObjectColors] = useState(true)
+  const [showMonthColors, setShowMonthColors] = useState(true)
+  
+  const [searchTerm, setSearchTerm] = useState('')
+  const [selectedColor, setSelectedColor] = useState('#ffffff')
+  const [selectedOpacity, setSelectedOpacity] = useState(1)
+
+  // Theme Colors
+  const isLight = uiTheme === 'light'
+  
+  const isSunPathSelected = objects.some(o => selectedIds.includes(o.id) && o.url?.toUpperCase().includes('SUNPATH'))
+  const monthColors = isLight ? useEditorStore.getState().monthColorsLight : useEditorStore.getState().monthColorsDark
+  const setMonthColor = useEditorStore.getState().setMonthColor
+  const bgMain = monthColors[17] || (isLight ? '#ffffff' : '#333333')
+  const bgPanel = isLight ? '#ffffff' : '#252525'
+  const textMain = isLight ? '#111827' : '#eaeaea'
+  const textMuted = isLight ? '#6b7280' : '#888'
+  const borderCol = isLight ? '#e5e7eb' : '#333'
+  const inputBg = isLight ? '#f9fafb' : '#333'
+  const inputBorder = isLight ? '#d1d5db' : '#555'
+
+  useEffect(() => {
+    if (selectedIds.length > 0) {
+      const obj = objects.find(o => o.id === selectedIds[0])
+      if (obj) {
+        if (obj.url?.toUpperCase().includes('SUNPATH')) {
+          setActiveH2('sundiagram')
+          setSunTab('shadow')
+        } else {
+          if (obj.color) setSelectedColor(obj.color)
+          setSelectedOpacity(obj.opacity ?? 1)
+          setSymbolTab('properties') // auto open properties when selected
+          setActiveH2('symbols')
+        }
+      }
+    }
+  }, [selectedIds, objects])
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && placingUrl) setPlacingUrl(null)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'z') e.shiftKey ? redo() : undo()
+      else if ((e.ctrlKey || e.metaKey) && e.key === 'y') redo()
+      else if (e.key === 'Delete' || e.key === 'Backspace') {
+        const store = useEditorStore.getState()
+        if (document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+          if (store.selectedIds.length > 0) store.removeObjects(store.selectedIds)
+        }
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [undo, redo, placingUrl, setPlacingUrl])
+
+  useEffect(() => {
+    const handleClick = () => setContextMenu(null)
+    window.addEventListener('click', handleClick)
+    return () => window.removeEventListener('click', handleClick)
+  }, [setContextMenu])
+
+  const handleAddNewSunpath = () => {
+    const existing = objects.find(o => o.url?.toUpperCase().includes('SUNPATH'))
+    if (existing) {
+      if (!confirm('Do you want to replace the current Sun Path?')) return
+      useEditorStore.getState().removeObjects([existing.id])
+    }
+    useEditorStore.getState().addObject('https://pub-5837f996e3144244a501515264ddf495.r2.dev/SUNPATH/my_model.glb', [0, 0, 0])
+  }
+
+  const getModelUrl = (name: string) => name === 'SUNPATH' ? 'https://pub-5837f996e3144244a501515264ddf495.r2.dev/SUNPATH/my_model.glb' : `${R2_BASE_URL}/${name}.glb`
+  const filteredModels = LIBRARY_MODELS.filter(name => name.toLowerCase().includes(searchTerm.toLowerCase()))
+
+  const H2Header = ({ id, title, icon }: { id: 'sundiagram' | 'symbols' | 'export', title: string, icon: string }) => (
+    <div 
+      onClick={() => setActiveH2(activeH2 === id ? null : id)}
+      style={{ 
+        padding: '12px 15px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        background: activeH2 === id ? (isLight ? '#e5e7eb' : '#333') : bgPanel,
+        borderBottom: `1px solid ${borderCol}`,
+        fontWeight: 'bold', fontSize: '1rem', color: textMain
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <img src={icon} alt={title} style={{ height: '20px', filter: activeH2 === id ? 'none' : 'grayscale(1)' }} />
+        {title}
+      </div>
+      <span>{activeH2 === id ? '▼' : '▶'}</span>
+    </div>
+  )
+
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+  return (
+    <div style={{ display: 'flex', width: '100vw', height: '100vh', overflow: 'hidden', fontFamily: '"Quicksand", sans-serif', background: bgMain, color: textMain }}>
+      
+
+      {/* Left Panel */}
+      <div style={{ width: '25vw', minWidth: '340px', maxWidth: '500px', resize: 'horizontal', background: bgPanel, display: 'flex', flexDirection: 'column', borderRight: `1px solid ${borderCol}`, zIndex: 10, overflow: 'hidden' }}>
+        
+        {/* H1 */}
+        <div style={{ padding: '20px 15px', display: 'flex', alignItems: 'center', gap: '10px', borderBottom: `2px solid ${borderCol}` }}>
+          <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="Logo" style={{ height: '30px' }} />
+          <div>
+            <div style={{ fontWeight: 900, fontSize: '1.2rem', letterSpacing: '1px' }}>ARCHI DIAGRAM</div>
+            <div style={{ fontSize: '0.75rem', color: textMuted }}>BY FEBHOUSE</div>
+          </div>
+        </div>
+
+        {/* Global Toolbar (Moved from Top) */}
+        <div style={{ padding: '15px', display: 'flex', flexDirection: 'column', gap: '15px', borderBottom: `2px solid ${borderCol}` }}>
+          
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+            <div style={{ display: 'flex', gap: '5px' }}>
+              <button
+                onClick={() => {
+                  if (window.confirm("Bạn có chắc chắn muốn tạo mới? Mọi thay đổi chưa lưu sẽ bị mất.")) {
+                    useEditorStore.setState({ objects: [], past: [], future: [], selectedIds: [] })
+                    setActiveH2('sundiagram')
+                    setSunTab('create')
+                    setSymbolTab('library')
+                    setTransformMode('translate')
+                  }
+                }}
+                style={{ fontSize: '0.75rem', padding: '4px 8px', borderRadius: '4px', border: `1px solid ${borderCol}`, background: inputBg, color: textMain, cursor: 'pointer', fontWeight: 'bold' }}
+              >NEW</button>
+              
+              <button
+                onClick={() => {
+                  const state = useEditorStore.getState()
+                  const dataStr = JSON.stringify(state)
+                  const blob = new Blob([dataStr], { type: 'application/json' })
+                  const url = URL.createObjectURL(blob)
+                  const link = document.createElement('a')
+                  link.href = url
+                  link.download = 'project.archi'
+                  link.click()
+                  URL.revokeObjectURL(url)
+                }}
+                style={{ fontSize: '0.75rem', padding: '4px 8px', borderRadius: '4px', border: `1px solid ${borderCol}`, background: inputBg, color: textMain, cursor: 'pointer', fontWeight: 'bold' }}
+              >SAVE</button>
+
+              <button
+                onClick={() => {
+                  const input = document.createElement('input')
+                  input.type = 'file'
+                  input.accept = '.archi,.json'
+                  input.onchange = (e: any) => {
+                    const file = e.target.files[0]
+                    if (!file) return
+                    const reader = new FileReader()
+                    reader.onload = (ev) => {
+                      try {
+                        const data = JSON.parse(ev.target?.result as string)
+                        useEditorStore.setState(data)
+                      } catch (err) {
+                        alert('File không hợp lệ!')
+                      }
+                    }
+                    reader.readAsText(file)
+                  }
+                  input.click()
+                }}
+                style={{ fontSize: '0.75rem', padding: '4px 8px', borderRadius: '4px', border: `1px solid ${borderCol}`, background: inputBg, color: textMain, cursor: 'pointer', fontWeight: 'bold' }}
+              >LOAD</button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {/* Row 1: Light/Dark Mode, Background, Grid, Axes */}
+            <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>Light</span>
+                <label style={{ position: 'relative', display: 'inline-block', width: '34px', height: '18px' }}>
+                  <input type="checkbox" checked={!isLight} onChange={(e) => { setEnvironment({ uiTheme: e.target.checked ? 'dark' : 'light' }); setMonthColor(17, e.target.checked ? '#333333' : '#ffffff'); }} style={{ opacity: 0, width: 0, height: 0 }} />
+                  <span style={{ position: 'absolute', cursor: 'pointer', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: isLight ? '#ccc' : '#2196F3', transition: '.4s', borderRadius: '18px' }}>
+                    <span style={{ position: 'absolute', content: '""', height: '14px', width: '14px', left: '2px', bottom: '2px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', transform: !isLight ? 'translateX(16px)' : 'translateX(0)' }}></span>
+                  </span>
+                </label>
+                <span style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>Dark</span>
+              </div>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ fontSize: '0.75rem' }}>Background Color</span>
+                <input 
+                  type="color" 
+                  value={monthColors[17] || (isLight ? '#ffffff' : '#333333')} 
+                  onChange={(e) => setMonthColor(17, e.target.value)}
+                  style={{ width: '20px', height: '20px', padding: 0, border: 'none', background: 'transparent', cursor: 'pointer' }}
+                />
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
+                <input 
+                  type="checkbox" 
+                  checked={sunpathSettings.showGrid} 
+                  onChange={(e) => setSunpathSettings({ showGrid: e.target.checked })}
+                />
+                <span style={{ fontSize: '0.75rem' }}>GRID</span>
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
+                <input 
+                  type="checkbox" 
+                  checked={sunpathSettings.showAxes} 
+                  onChange={(e) => setSunpathSettings({ showAxes: e.target.checked })}
+                />
+                <span style={{ fontSize: '0.75rem' }}>AXES</span>
+              </label>
+            </div>
+
+            {/* Row 2: Animation, Shadows, Default */}
+            <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexWrap: 'wrap' }}>
+              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                <input 
+                  type="checkbox" 
+                  checked={objects.some(o => o.isAnimated)} 
+                  onChange={(e) => {
+                    const ids = objects.map(o => o.id)
+                    useEditorStore.getState().toggleAnimation(ids, e.target.checked)
+                  }}
+                />
+                <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>ANIMATION</span>
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                <input 
+                  type="checkbox" 
+                  checked={shadowsEnabled} 
+                  onChange={(e) => setEnvironment({ shadowsEnabled: e.target.checked })}
+                />
+                <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>SHADOWS</span>
+              </label>
+              <button 
+                title="Reset all colors and sizes to defaults"
+                onClick={() => {
+                  const defaultMonthColors = {
+                    1: '#cccccc', 2: '#cccccc', 3: '#cccccc', 4: '#cccccc', 5: '#cccccc', 
+                    6: '#ff0000', 7: '#cccccc', 8: '#cccccc', 9: '#00ff00', 10: '#cccccc', 
+                    11: '#cccccc', 12: '#0000ff', 13: '#ff0000', 14: '#233156', 15: '#233156', 
+                    16: '#ffd700', 17: '#ffffff', 18: '#ffcc00'
+                  }
+                  const defaultSunpathSettings = {
+                    showSky: true, showCompass: true, showMonths: true, showAnalemma: false, 
+                    showHourlySun: true, showText: true, sunSize: 1.2, textSize: 2, 
+                    sunpathThickness: 2, compassThickness: 1, sunpathDashSize: 1, showGrid: true, showAxes: true
+                  }
+                  useEditorStore.getState().setEnvironment({ 
+                    visibleMonths: [6, 9, 12], 
+                    monthDates: { ...useEditorStore.getState().monthDates, 6: 21, 9: 21, 12: 21 }, 
+                    activeMonth: 6,
+                    uiTheme: 'light',
+                    monthColorsLight: defaultMonthColors,
+                    monthColorsDark: {
+                      1: '#cccccc', 2: '#cccccc', 3: '#cccccc', 4: '#cccccc', 5: '#cccccc', 
+                      6: '#ff0000', 7: '#cccccc', 8: '#cccccc', 9: '#00ff00', 10: '#cccccc', 
+                      11: '#cccccc', 12: '#0000ff', 13: '#ff0000', 14: '#ffffff', 15: '#999999', 
+                      16: '#ffd700', 17: '#333333', 18: '#ffcc00'
+                    }
+                  })
+                  useEditorStore.getState().setSunpathSettings(defaultSunpathSettings)
+                }} 
+                style={{ fontSize: '0.75rem', padding: '4px 8px', borderRadius: '4px', border: `1px solid ${borderCol}`, background: inputBg, color: textMain, cursor: 'pointer', fontWeight: 'bold', marginLeft: 'auto' }}
+              >
+                Default
+              </button>
+            </div>
+          </div>            </div>
+          </div>
+        </div>
+
+        <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden' }}>
+          
+          {/* H2: Sun Diagram */}
+          <H2Header id="sundiagram" title="Sun Diagram" icon="/SunDiagram-logo.svg" />
+          {activeH2 === 'sundiagram' && (
+            <div style={{ background: isLight ? '#f9fafb' : '#1a1a1a', padding: '10px' }}>
+              
+              {/* Sun Diagram Tabs */}
+              <div style={{ display: 'flex', marginBottom: '15px', borderBottom: `1px solid ${borderCol}` }}>
+                {['create', 'shadow', 'style'].map(tab => (
+                  <div 
+                    key={tab} onClick={() => setSunTab(tab as any)}
+                    style={{ 
+                      flex: 1, textAlign: 'center', padding: '8px 5px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: sunTab === tab ? 'bold' : 'normal',
+                      borderBottom: sunTab === tab ? '2px solid #3b82f6' : 'none', color: sunTab === tab ? '#3b82f6' : textMuted
+                    }}
+                  >
+                    {tab === 'create' ? 'Create' : tab === 'shadow' ? 'Shadow' : 'Style'}
+                  </div>
+                ))}
+              </div>
+
+              {/* CREATE SUN PATH TAB */}
+              {sunTab === 'create' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', padding: '5px' }}>
+                  <button
+                    onClick={handleAddNewSunpath}
+                    style={{ width: '100%', padding: '10px', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}
+                  >
+                    + ADD NEW SUN PATH
+                  </button>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', marginBottom: '10px' }}>
+                    <span style={{ fontSize: '0.9rem' }}>Paste Lat, Lng</span>
+                    <input 
+                      type="text" 
+                      placeholder="e.g. 40.701, -73.948"
+                      onChange={(e) => {
+                        const val = e.target.value
+                        const parts = val.split(',')
+                        if (parts.length === 2) {
+                          const lat = parseFloat(parts[0].trim())
+                          const lng = parseFloat(parts[1].trim())
+                          if (!isNaN(lat) && !isNaN(lng)) {
+                            setEnvironment({ latitude: lat, longitude: lng })
+                          }
+                        }
+                      }}
+                      style={{ width: '100%', padding: '6px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} 
+                    />
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.9rem' }}>Latitude</span>
+                    <input type="number" value={latitude} onChange={(e) => setEnvironment({ latitude: parseFloat(e.target.value) })} style={{ width: '100px', padding: '6px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} />
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.9rem' }}>Longitude</span>
+                    <input type="number" value={longitude} onChange={(e) => setEnvironment({ longitude: parseFloat(e.target.value) })} style={{ width: '100px', padding: '6px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} />
+                  </div>
+                  
+                  <div style={{ padding: '10px', background: bgPanel, borderRadius: '6px', border: `1px solid ${borderCol}`, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.9rem' }}>Time Zone</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                        {timezoneMode === 'auto' && <span style={{ fontSize: '0.8rem', color: textMuted, fontWeight: 'bold' }}>UTC {Math.round(longitude/15) >= 0 ? '+'+Math.round(longitude/15) : Math.round(longitude/15)}</span>}
+                        <select value={timezoneMode} onChange={(e) => setEnvironment({ timezoneMode: e.target.value as 'auto' | 'manual' })} style={{ padding: '4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }}>
+                          <option value="auto">Auto</option>
+                          <option value="manual">Manual</option>
+                        </select>
+                      </div>
+                    </div>
+                    {timezoneMode === 'manual' && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.9rem' }}>UTC Offset</span>
+                        <input type="number" min="-12" max="14" step="1" value={utcOffset} onChange={(e) => setEnvironment({ utcOffset: parseInt(e.target.value) })} style={{ width: '60px', padding: '4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} />
+                      </div>
+                    )}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.9rem' }}>DST (Daylight Saving)</span>
+                      <select value={dstMode} onChange={(e) => setEnvironment({ dstMode: e.target.value as 'auto' | 'on' | 'off' })} style={{ padding: '4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }}>
+                        <option value="auto">Auto</option>
+                        <option value="on">On (manual)</option>
+                        <option value="off">Off (manual)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                      <span style={{ fontSize: '0.9rem' }}>True North</span>
+                      <span style={{ color: textMuted, fontSize: '0.9rem' }}>{northOffset}°</span>
+                    </div>
+                    <input type="range" min="-180" max="180" value={northOffset} onChange={(e) => setEnvironment({ northOffset: parseInt(e.target.value) })} style={{ width: '100%' }} />
+                    <div style={{ fontSize: '0.75rem', color: textMuted, marginTop: '4px', fontStyle: 'italic' }}>
+                      * Rotate the compass to match your project's True North.
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* SHADOW ANALYSIS TAB */}
+              {sunTab === 'shadow' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', padding: '5px' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', background: bgPanel, padding: '10px', borderRadius: '4px', border: `1px solid ${borderCol}` }}>
+                    <input type="checkbox" checked={shadowsEnabled} onChange={(e) => setEnvironment({ shadowsEnabled: e.target.checked })} />
+                    <span style={{ marginLeft: '8px', fontWeight: 'bold' }}>Enable Environment Shadows</span>
+                  </label>
+                  
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: bgPanel, padding: '10px', borderRadius: '4px', border: `1px solid ${borderCol}` }}>
+                    <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                      <input type="checkbox" checked={showHUD} onChange={(e) => setEnvironment({ showHUD: e.target.checked })} />
+                      <span style={{ marginLeft: '8px', fontSize: '0.9rem', color: showHUD ? '#3b82f6' : 'inherit' }}>Show On-Screen Info (HUD)</span>
+                    </label>
+                    {showHUD && (
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px' }}>
+                        {['top-left', 'top-center', 'top-right', 'middle-left', 'middle-center', 'middle-right', 'bottom-left', 'bottom-center', 'bottom-right'].map(pos => (
+                          <div 
+                            key={pos}
+                            onClick={() => setEnvironment({ hudPosition: pos as any })}
+                            style={{ 
+                              width: '12px', height: '10px', 
+                              background: hudPosition === pos ? '#3b82f6' : (isLight ? '#d1d5db' : '#555'),
+                              border: `1px solid ${hudPosition === pos ? '#2563eb' : (isLight ? '#9ca3af' : '#444')}`,
+                              cursor: 'pointer', borderRadius: '2px'
+                            }}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: '400px', overflowY: 'auto', paddingRight: '5px' }}>
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(m => {
+                      const pairedMonth: Record<number, number> = { 1:11, 2:10, 3:9, 4:8, 5:7, 7:5, 8:4, 9:3, 10:2, 11:1 }
+                      const pair = pairedMonth[m]
+                      const isVisible = visibleMonths.includes(m)
+                      
+                      const isActive = activeMonth === m
+                      const dayOfYear = getDayOfYear(m, monthDates[m] || 21)
+                      const isDst = isDstActive(dayOfYear, latitude || 21.0285, dstMode)
+                      const baseUtc = timezoneMode === 'auto' ? (Math.round(longitude/15) >= 0 ? '+'+Math.round(longitude/15) : Math.round(longitude/15)) : (utcOffset >= 0 ? '+'+utcOffset : utcOffset)
+                      
+                      return (
+                        <div key={m} style={{ background: bgPanel, border: `1px solid ${isActive ? '#3b82f6' : borderCol}`, borderRadius: '6px', padding: '10px', opacity: isVisible ? 1 : 0.6 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: isVisible ? '10px' : '0' }}>
+                            <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontWeight: isActive ? 'bold' : 'normal' }}>
+                              <input 
+                                type="checkbox" 
+                                checked={isVisible} 
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    let next = [...visibleMonths]
+                                    if (pair && next.includes(pair)) {
+                                      next = next.filter(x => x !== pair)
+                                    }
+                                    next.push(m)
+                                    setEnvironment({ visibleMonths: next.sort((a,b)=>a-b), activeMonth: m })
+                                  } else {
+                                    const next = visibleMonths.filter(x => x !== m)
+                                    setEnvironment({ visibleMonths: next, activeMonth: next.length > 0 ? next[0] : 6 })
+                                  }
+                                }} 
+                              />
+                              <span style={{ marginLeft: '10px' }}>{monthNames[m-1]} {(!isVisible && pair) && `(Same path as ${monthNames[pair-1].substring(0,3)})`}</span>
+                            </label>
+                            {isVisible && (
+                              <span style={{ fontSize: '0.75rem', color: isDst ? '#3b82f6' : textMuted, fontWeight: isDst ? 'bold' : 'normal' }}>
+                                UTC {baseUtc} {isDst && '(DST)'}
+                              </span>
+                            )}
+                          </div>
+                          
+                          {isVisible && (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                <span style={{ fontSize: '0.8rem', color: textMuted }}>Day:</span>
+                                <input type="number" min="1" max="31" value={monthDates[m] || 21} onChange={(e) => setEnvironment({ monthDates: { ...monthDates, [m]: parseInt(e.target.value) }, activeMonth: m })} style={{ width: '50px', padding: '4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', fontSize: '0.85rem' }} />
+                                {m === 6 && (monthDates[m]===21) && <span style={{ fontSize: '0.7rem', background: '#fef08a', color: '#854d0e', padding: '2px 6px', borderRadius: '4px' }}>Summer Solstice</span>}
+                                {m === 12 && (monthDates[m]===21) && <span style={{ fontSize: '0.7rem', background: '#bae6fd', color: '#0369a1', padding: '2px 6px', borderRadius: '4px' }}>Winter Solstice</span>}
+                                {m === 9 && (monthDates[m]===21) && <span style={{ fontSize: '0.7rem', background: '#ffedd5', color: '#c2410c', padding: '2px 6px', borderRadius: '4px' }}>Autumn Equinox</span>}
+                              </div>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                <span style={{ fontSize: '0.8rem', color: textMuted }}>Time:</span>
+                                <input 
+                                  type="range" min="0" max="24" step="0.5" 
+                                  value={isActive ? timeOfDay : 12} 
+                                  onChange={(e) => setEnvironment({ timeOfDay: parseFloat(e.target.value), activeMonth: m })}
+                                  style={{ flex: 1 }} 
+                                />
+                                <span style={{ fontSize: '0.85rem', width: '40px', textAlign: 'right' }}>
+                                  {isActive ? `${Math.floor(timeOfDay).toString().padStart(2, '0')}:${(timeOfDay % 1 === 0.5 ? '30' : '00')}` : '12:00'}
+                                </span>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* DIAGRAM STYLE TAB */}
+              {sunTab === 'style' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', padding: '5px' }}>
+                  <div style={{ background: bgPanel, borderRadius: '6px', padding: '10px', border: `1px solid ${borderCol}` }}>
+                    <div onClick={() => setShowSunPathComponents(!showSunPathComponents)} style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px', color: '#3b82f6', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ display: 'inline-block', marginRight: '5px' }}>{showSunPathComponents ? '▼' : '▶'}</span> Sun Path Components
+                    </div>
+                    {showSunPathComponents && (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', paddingLeft: '5px' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                          <input type="checkbox" checked={sunpathSettings.showText} onChange={(e) => setSunpathSettings({ showText: e.target.checked })} />
+                          <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Text Labels</span>
+                        </label>
+                        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                          <input type="checkbox" checked={sunpathSettings.showHourlySun} onChange={(e) => setSunpathSettings({ showHourlySun: e.target.checked })} />
+                          <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Hourly Sun Position</span>
+                        </label>
+                        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                          <input type="checkbox" checked={sunpathSettings.showSky} onChange={(e) => setSunpathSettings({ showSky: e.target.checked })} />
+                          <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Sky Dome</span>
+                        </label>
+                        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                          <input type="checkbox" checked={sunpathSettings.showCompass} onChange={(e) => setSunpathSettings({ showCompass: e.target.checked })} />
+                          <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Compass</span>
+                        </label>
+                        
+                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                            <span style={{ fontSize: '0.8rem', color: textMuted }}>Sun Size:</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{sunpathSettings?.sunSize ?? 2}</span>
+                          </div>
+                          <input type="range" min="0.1" max="10" step="0.1" value={sunpathSettings?.sunSize ?? 2} onChange={(e) => setSunpathSettings({ sunSize: parseFloat(e.target.value) })} style={{ width: '100%' }} />
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                            <span style={{ fontSize: '0.8rem', color: textMuted }}>Text Size:</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{sunpathSettings?.textSize ?? 2}</span>
+                          </div>
+                          <input type="range" min="1" max="10" step="0.5" value={sunpathSettings?.textSize ?? 2} onChange={(e) => setSunpathSettings({ textSize: parseFloat(e.target.value) })} style={{ width: '100%' }} />
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                            <span style={{ fontSize: '0.8rem', color: textMuted }}>Sun Path Line Thickness:</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{sunpathSettings?.sunpathThickness ?? 1}</span>
+                          </div>
+                          <input type="range" min="0.1" max="10" step="0.1" value={sunpathSettings?.sunpathThickness ?? 1} onChange={(e) => setSunpathSettings({ sunpathThickness: parseFloat(e.target.value) })} style={{ width: '100%' }} />
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                            <span style={{ fontSize: '0.8rem', color: textMuted }}>Compass Line Thickness:</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{sunpathSettings?.compassThickness ?? 1}</span>
+                          </div>
+                          <input type="range" min="0.1" max="10" step="0.1" value={sunpathSettings?.compassThickness ?? 1} onChange={(e) => setSunpathSettings({ compassThickness: parseFloat(e.target.value) })} style={{ width: '100%' }} />
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                            <span style={{ fontSize: '0.8rem', color: textMuted }}>Sun Path Dash Size:</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{sunpathSettings?.sunpathDashSize ?? 2}</span>
+                          </div>
+                          <input type="range" min="0.1" max="10" step="0.1" value={sunpathSettings?.sunpathDashSize ?? 2} onChange={(e) => setSunpathSettings({ sunpathDashSize: parseFloat(e.target.value) })} style={{ width: '100%' }} />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div style={{ background: bgPanel, borderRadius: '6px', padding: '10px', border: `1px solid ${borderCol}` }}>
+                    <div onClick={() => setShowObjectColors(!showObjectColors)} style={{ fontWeight: 'bold', fontSize: '0.85rem', marginBottom: '10px', color: '#3b82f6', display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                      <span style={{ display: 'inline-block', marginRight: '5px' }}>{showObjectColors ? '▼' : '▶'}</span> Object Colors
+                    </div>
+                    {showObjectColors && (
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <input type="color" value={monthColors[13] || '#ff0000'} onChange={(e) => setMonthColor(13, e.target.value)} style={{ width: '20px', height: '20px', padding: 0, border: 'none' }} />
+                          <span style={{ fontSize: '0.8rem' }}>Sun</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <input type="color" value={monthColors[18] || '#ffcc00'} onChange={(e) => setMonthColor(18, e.target.value)} style={{ width: '20px', height: '20px', padding: 0, border: 'none' }} />
+                          <span style={{ fontSize: '0.8rem' }}>Hourly Sun</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <input type="color" value={monthColors[14] || '#233156'} onChange={(e) => setMonthColor(14, e.target.value)} style={{ width: '20px', height: '20px', padding: 0, border: 'none' }} />
+                          <span style={{ fontSize: '0.8rem' }}>Text</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <input type="color" value={monthColors[15] || '#233156'} onChange={(e) => setMonthColor(15, e.target.value)} style={{ width: '20px', height: '20px', padding: 0, border: 'none' }} />
+                          <span style={{ fontSize: '0.8rem' }}>Compass</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <input type="color" value={monthColors[16] || '#ffd700'} onChange={(e) => setMonthColor(16, e.target.value)} style={{ width: '20px', height: '20px', padding: 0, border: 'none' }} />
+                          <span style={{ fontSize: '0.8rem' }}>Sky Dome</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div style={{ background: bgPanel, padding: '10px', borderRadius: '6px', border: `1px solid ${borderCol}` }}>
+                    <div onClick={() => setShowMonthColors(!showMonthColors)} style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px', color: '#3b82f6', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ display: 'inline-block', marginRight: '5px' }}>{showMonthColors ? '▼' : '▶'}</span> Month Colors
+                    </div>
+                    {showMonthColors && (
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', paddingLeft: '5px' }}>
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter(m => visibleMonths.includes(m)).map(m => (
+                          <div key={m} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <input 
+                              type="color" 
+                              value={getMonthColor(m, latitude, monthColors)} 
+                              onChange={(e) => setMonthColor(m, e.target.value)}
+                              style={{ width: '24px', height: '24px', padding: 0, border: 'none', background: 'transparent', cursor: 'pointer' }}
+                            />
+                            <span style={{ fontSize: '0.85rem' }}>{monthNames[m-1].substring(0, 3)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* H2: Dynamic Symbols */}
+          <H2Header id="symbols" title="Dynamic Symbols" icon="/dynamic-symbols-logo.svg" />
+          {activeH2 === 'symbols' && (
+            <div style={{ background: isLight ? '#f9fafb' : '#1a1a1a', padding: '10px' }}>
+              
+              <div style={{ display: 'flex', marginBottom: '15px', borderBottom: `1px solid ${borderCol}` }}>
+                {['library', 'properties'].map(tab => (
+                  <div 
+                    key={tab} onClick={() => setSymbolTab(tab as any)}
+                    style={{ 
+                      flex: 1, textAlign: 'center', padding: '8px 5px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: symbolTab === tab ? 'bold' : 'normal',
+                      borderBottom: symbolTab === tab ? '2px solid #3b82f6' : 'none', color: symbolTab === tab ? '#3b82f6' : textMuted
+                    }}
+                  >
+                    {tab === 'library' ? 'Symbols Library' : 'Properties'}
+                  </div>
+                ))}
+              </div>
+
+              {symbolTab === 'library' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                  <input 
+                    type="text" 
+                    placeholder="Search symbol name..." 
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    style={{ width: '100%', padding: '8px', borderRadius: '4px', border: `1px solid ${inputBorder}`, background: inputBg, color: textMain, fontSize: '0.85rem' }}
+                  />
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', maxHeight: 'calc(100vh - 400px)', overflowY: 'auto', paddingRight: '5px' }}>
+                    {filteredModels.map((modelName) => (
+                      <LibraryItem 
+                        key={modelName} 
+                        modelName={modelName}
+                        hasSelection={selectedIds.length > 0}
+                        onAdd={(name) => setPlacingUrl(getModelUrl(name))}
+                        onReplace={(name) => {
+                          if (selectedIds.length > 0) replaceObjectUrl(selectedIds, getModelUrl(name))
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {symbolTab === 'properties' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '5px' }}>
+                  {selectedIds.length === 0 ? (
+                    <div style={{ textAlign: 'center', color: textMuted, padding: '20px 0' }}>Select an object to edit properties</div>
+                  ) : isSunPathSelected ? (
+                    <div style={{ textAlign: 'center', color: textMuted, padding: '20px 0' }}>
+                      Sun Path properties are managed in the Sun Diagram tab.
+                    </div>
+                  ) : (
+                    <>
+                      <div>
+                        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px' }}>COLOR PALETTE</div>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                          {recentColors.map(c => (
+                            <div 
+                              key={c} 
+                              onClick={() => { setSelectedColor(c); updateObjectColor(selectedIds, c) }}
+                              style={{ width: '28px', height: '28px', background: c, borderRadius: '50%', cursor: 'pointer', border: selectedColor === c ? '2px solid #3b82f6' : `2px solid ${borderCol}` }}
+                            />
+                          ))}
+                          <input 
+                            type="color" 
+                            value={selectedColor} 
+                            onChange={(e) => { setSelectedColor(e.target.value); updateObjectColor(selectedIds, e.target.value) }}
+                            onBlur={() => addRecentColor(selectedColor)}
+                            style={{ width: '28px', height: '28px', padding: 0, border: 'none', background: 'transparent', cursor: 'pointer' }}
+                          />
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px' }}>OPACITY</div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <input 
+                            type="range" min="0" max="1" step="0.1" 
+                            value={selectedOpacity}
+                            onChange={(e) => { const v = parseFloat(e.target.value); setSelectedOpacity(v); updateObjectOpacity(selectedIds, v) }}
+                            style={{ flex: 1 }}
+                          />
+                          <span style={{ fontSize: '0.85rem', width: '40px' }}>{Math.round(selectedOpacity * 100)}%</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px' }}>ANIMATION (DYNAMIC SYMBOLS)</div>
+                        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', marginBottom: '10px' }}>
+                          <input 
+                            type="checkbox" 
+                            checked={objects.find(o => o.id === selectedIds[0])?.isAnimated ?? false} 
+                            onChange={(e) => toggleAnimation(selectedIds, e.target.checked)}
+                          />
+                          <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Enable Animation</span>
+                        </label>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <span style={{ fontSize: '0.8rem', color: textMuted }}>Speed:</span>
+                          <input 
+                            type="range" min="0.5" max="10" step="0.5" 
+                            value={objects.find(o => o.id === selectedIds[0])?.animationSpeed ?? 2} 
+                            onChange={(e) => updateAnimationSpeed(selectedIds, parseFloat(e.target.value))}
+                            style={{ flex: 1 }}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px' }}>OBJECT SHADOWS</div>
+                        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                          <input 
+                            type="checkbox" 
+                            checked={objects.find(o => o.id === selectedIds[0])?.castShadow ?? false} 
+                            onChange={(e) => toggleShadow(selectedIds, e.target.checked)}
+                          />
+                          <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Cast Shadow</span>
+                        </label>
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* H2: Export */}
+          <H2Header id="export" title="Export" icon="/SunDiagram-logo.svg" />
+          {activeH2 === 'export' && (
+            <div style={{ background: isLight ? '#f9fafb' : '#1a1a1a', padding: '15px' }}>
+              <div style={{ fontWeight: 'bold', fontSize: '1rem', marginBottom: '15px' }}>EXPORT SETTINGS</div>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginBottom: '20px' }}>
+                <div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '5px' }}>Orientation</div>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <button style={{ flex: 1, padding: '6px', fontSize: '0.85rem', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Landscape</button>
+                    <button style={{ flex: 1, padding: '6px', fontSize: '0.85rem', background: bgPanel, color: textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer' }}>Portrait</button>
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '5px' }}>Resolution</div>
+                  <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <input type="number" defaultValue="1920" style={{ flex: 1, padding: '6px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} />
+                    <span>x</span>
+                    <input type="number" defaultValue="1080" style={{ flex: 1, padding: '6px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} />
+                  </div>
+                </div>
+
+                <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                  <input type="checkbox" checked={showHUD} onChange={(e) => setEnvironment({ showHUD: e.target.checked })} />
+                  <span style={{ marginLeft: '8px', fontSize: '0.85rem' }}>Include On-Screen Info (HUD)</span>
+                </label>
+              </div>
+
+              <div style={{ fontWeight: 'bold', fontSize: '1rem', marginBottom: '15px' }}>BATCH EXPORT SHADOWS</div>
+              <p style={{ fontSize: '0.85rem', color: textMuted, marginBottom: '20px' }}>
+                Select months to export shadow study images.
+              </p>
+              
+              {/* Dummy Export UI matching the image */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {visibleMonths.map(m => {
+                  const dayOfYear = getDayOfYear(m, monthDates[m] || 21)
+                  const isDst = isDstActive(dayOfYear, latitude || 21.0285, dstMode)
+                  const baseUtc = timezoneMode === 'auto' ? (Math.round((longitude || 105)/15)) : utcOffset
+                  const actualUtc = baseUtc + (isDst ? 1 : 0)
+                  const utcString = actualUtc >= 0 ? `+${actualUtc}` : `${actualUtc}`
+                  return (
+                    <div key={m} style={{ background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '6px', padding: '10px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', cursor: 'pointer' }}>
+                          <input type="checkbox" defaultChecked />
+                          <span style={{ marginLeft: '8px' }}>{monthNames[m-1]}</span>
+                        </label>
+                        <span style={{ fontSize: '0.8rem', color: '#3b82f6' }}>Day: {monthDates[m] || 21} | UTC {utcString} {isDst && '(DST)'}</span>
+                      </div>
+                      <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.85rem' }}>Start (h): <input type="number" defaultValue="6" style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
+                        <span style={{ fontSize: '0.85rem' }}>End (h): <input type="number" defaultValue="18" style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
+                <button style={{ flex: 1, padding: '10px', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}>
+                  Export Images
+                </button>
+              </div>
+            </div>
+          )}
+
+        </div>
+
+        {/* Footer */}
+        <div style={{ padding: '15px', borderTop: `1px solid ${borderCol}`, fontSize: '0.75rem', color: textMuted, display: 'flex', flexDirection: 'column', gap: '5px', background: bgPanel }}>
+          <div style={{ display: 'flex', gap: '10px', marginBottom: '5px' }}>
+            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fab fa-instagram"></i></a>
+            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fab fa-tiktok"></i></a>
+            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fab fa-youtube"></i></a>
+            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fab fa-linkedin"></i></a>
+            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fab fa-facebook"></i></a>
+            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fas fa-envelope"></i></a>
+          </div>
+          <div>© 2026 Febhouse Studio</div>
+          <div>Contact: <a href="mailto:info@febhouse.com" style={{ color: textMuted, textDecoration: 'none' }}>info@febhouse.com</a></div>
+          <div><a href="https://archidiagram.com" target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>ArchiDiagram — Educational Platform for Architects</a></div>
+          <div>Part of the Febhouse Creative Ecosystem</div>
+          <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Privacy Policy</a> |
+            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Terms of Use</a> |
+            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Refund Policy</a>
+          </div>
+        </div>
+      </div>
+
+      {/* Main 3D Canvas */}
+      <div style={{ flex: 1, position: 'relative', background: bgMain }}>
+        <Scene />
+        
+        {/* HUD Information Overlay */}
+        {showHUD && (() => {
+          const posStyles: any = {}
+          const [vert, horz] = (hudPosition || 'bottom-left').split('-')
+          if (vert === 'top') posStyles.top = '20px'
+          else if (vert === 'bottom') posStyles.bottom = '20px'
+          else { posStyles.top = '50%'; posStyles.transform = 'translateY(-50%)' }
+          
+          if (horz === 'left') posStyles.left = '20px'
+          else if (horz === 'right') posStyles.right = '20px'
+          else {
+            posStyles.left = '50%'; 
+            posStyles.transform = posStyles.transform ? 'translate(-50%, -50%)' : 'translateX(-50%)'
+          }
+
+          return (
+            <div style={{ 
+              position: 'absolute', ...posStyles,
+              background: isLight ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)',
+              color: isLight ? '#000' : '#fff',
+              padding: '10px 15px', borderRadius: '8px', 
+              fontSize: '0.85rem', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '5px' 
+            }}>
+              <div><strong>ARCHI DIAGRAM</strong> by Febhouse</div>
+              <div>Location: {latitude?.toFixed(4)}, {longitude?.toFixed(4)}</div>
+              <div>Day: {monthDates[activeMonth] || 21} {monthNames[activeMonth - 1]}</div>
+              <div>Time: {Math.floor(timeOfDay || 12)}:{((timeOfDay || 12) % 1) >= 0.5 ? '30' : '00'}</div>
+              <div>UTC: {(() => {
+                const baseUtc = timezoneMode === 'auto' ? (Math.round((longitude || 105)/15)) : utcOffset
+                const dayOfYear = getDayOfYear(activeMonth || 6, monthDates[activeMonth] || 21)
+                const isDst = isDstActive(dayOfYear, latitude || 21.0285, dstMode)
+                const actualUtc = baseUtc + (isDst ? 1 : 0)
+                return (actualUtc >= 0 ? `+${actualUtc}` : `${actualUtc}`) + (isDst ? ' (DST)' : '')
+              })()}</div>
+              
+              {/* Legend inside HUD */}
+              <div style={{ marginTop: '5px', paddingTop: '5px', borderTop: `1px solid ${isLight ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)'}`, display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                <div style={{ fontWeight: 'bold', fontSize: '0.75rem', marginBottom: '2px' }}>NOTES</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.75rem' }}>
+                  <div style={{ width: '30px', display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#fbbf24' }}></div>
+                  </div>
+                  Sun hours
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.75rem' }}>
+                  <div style={{ width: '30px', display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ef4444' }}></div>
+                  </div>
+                  Sun
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.75rem' }}>
+                  <div style={{ width: '30px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ position: 'absolute', width: '100%', borderBottom: '2px dashed #f87171' }}></div>
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#fde047', zIndex: 1 }}></div>
+                  </div>
+                  Sun path
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.75rem' }}>
+                  <div style={{ width: '30px', height: '16px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start' }}>
+                    <div style={{ fontSize: '10px', fontWeight: 'bold', color: isLight ? '#1e3a8a' : '#60a5fa', lineHeight: 1 }}>N</div>
+                    <svg width="30" height="8" viewBox="0 0 30 8" style={{ marginTop: '1px' }}>
+                      <path d="M 0 8 Q 15 0 30 8" fill="none" stroke={isLight ? '#1e3a8a' : '#60a5fa'} strokeWidth="1.5" />
+                      <line x1="15" y1="4" x2="15" y2="8" stroke={isLight ? '#1e3a8a' : '#60a5fa'} strokeWidth="1.5" />
+                    </svg>
+                  </div>
+                  Compass
+                </div>
+                
+                {legendItems.map((item) => (
+                  <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.75rem', justifyContent: 'space-between' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div style={{ width: '30px', display: 'flex', justifyContent: 'center' }}>
+                        {item.iconUrl && (() => {
+                          const obj = objects.find(o => o.id === item.targetId)
+                          const pngUrl = item.iconUrl.replace('.glb', '.png')
+                          return (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', justifyContent: 'center', width: '100%' }}>
+                              <img src={pngUrl} style={{ width: '16px', height: '16px', objectFit: 'contain' }} alt="icon" />
+                              <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: obj ? obj.color : '#9ca3af', flexShrink: 0 }} />
+                            </div>
+                          )
+                        })()}
+                      </div>
+                      {item.name}
+                    </div>
+                    <button onClick={(e) => { e.stopPropagation(); useEditorStore.getState().removeLegendItem(item.id) }} style={{ background: 'transparent', border: 'none', color: isLight ? '#999' : '#666', cursor: 'pointer', fontSize: '0.7rem' }}>✕</button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        })()}
+        {/* TOOLBAR Overlay (Centered at top) */}
+        <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 10, display: 'flex', gap: '10px', background: bgPanel, padding: '10px', borderRadius: '8px', border: `1px solid ${borderCol}`, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+          
+          <div style={{ display: 'flex', gap: '5px', borderRight: `1px solid ${borderCol}`, paddingRight: '10px' }}>
+            {['move', 'rotate', 'scale', 'pan', 'orbit'].map((mode) => {
+              const actualMode = mode === 'move' ? 'translate' : mode
+              return (
+                <button
+                  key={mode} onClick={() => setTransformMode(actualMode as any)}
+                  style={{
+                    padding: '6px 12px', fontSize: '0.85rem',
+                    background: transformMode === actualMode ? '#3b82f6' : 'transparent',
+                    color: transformMode === actualMode ? '#fff' : textMain, 
+                    border: `1px solid ${transformMode === actualMode ? '#3b82f6' : borderCol}`, borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold'
+                  }}
+                >
+                  {mode.toUpperCase()}
+                </button>
+              )
+            })}
+          </div>
+
+          <div style={{ display: 'flex', gap: '5px' }}>
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('zoom-camera', { detail: -500 }))}
+              onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+              style={{ padding: '6px 12px', fontSize: '0.85rem', background: 'transparent', color: textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+            >ZOOM +</button>
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('zoom-camera', { detail: 500 }))}
+              onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+              style={{ padding: '6px 12px', fontSize: '0.85rem', background: 'transparent', color: textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+            >ZOOM -</button>
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('zoom-all'))}
+              onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+              style={{ padding: '6px 12px', fontSize: '0.85rem', background: 'transparent', color: textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+            >ZOOM ALL</button>
+          </div>
+        </div>
+
+        {/* Context Menu */}
+        {contextMenu && (
+          <div 
+            style={{
+              position: 'fixed',
+              top: contextMenu.y,
+              left: contextMenu.x,
+              background: bgPanel,
+              border: `1px solid ${borderCol}`,
+              borderRadius: '6px',
+              padding: '5px',
+              zIndex: 100,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              display: 'flex',
+              flexDirection: 'column',
+              minWidth: '160px'
+            }}
+          >
+            {contextMenu.type === 'sundiagram' && (
+              <>
+                <div style={{ fontSize: '0.75rem', fontWeight: 'bold', padding: '4px 10px', color: textMuted, borderBottom: `1px solid ${borderCol}`, marginBottom: '4px' }}>SUN DIAGRAM</div>
+                <button 
+                  onClick={() => { setActiveH2('sundiagram'); setSunTab('create'); setContextMenu(null) }}
+                  style={{ textAlign: 'left', padding: '8px 10px', background: 'transparent', border: 'none', color: textMain, cursor: 'pointer', fontSize: '0.85rem' }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                >Create new Sun path</button>
+                <button 
+                  onClick={() => { setActiveH2('sundiagram'); setSunTab('shadow'); setContextMenu(null) }}
+                  style={{ textAlign: 'left', padding: '8px 10px', background: 'transparent', border: 'none', color: textMain, cursor: 'pointer', fontSize: '0.85rem' }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                >Shadow Analysis</button>
+                <button 
+                  onClick={() => { setActiveH2('sundiagram'); setSunTab('style'); setContextMenu(null) }}
+                  style={{ textAlign: 'left', padding: '8px 10px', background: 'transparent', border: 'none', color: textMain, cursor: 'pointer', fontSize: '0.85rem' }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                >Style</button>
+              </>
+            )}
+            {contextMenu.type === 'symbols' && (
+              <>
+                <div style={{ fontSize: '0.75rem', fontWeight: 'bold', padding: '4px 10px', color: textMuted, borderBottom: `1px solid ${borderCol}`, marginBottom: '4px' }}>DYNAMIC SYMBOLS</div>
+                <button 
+                  onClick={() => { setActiveH2('symbols'); setSymbolTab('properties'); setContextMenu(null) }}
+                  style={{ textAlign: 'left', padding: '8px 10px', background: 'transparent', border: 'none', color: textMain, cursor: 'pointer', fontSize: '0.85rem' }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                >Properties</button>
+                <button 
+                  onClick={() => { setActiveH2('symbols'); setSymbolTab('library'); setContextMenu(null) }}
+                  style={{ textAlign: 'left', padding: '8px 10px', background: 'transparent', border: 'none', color: textMain, cursor: 'pointer', fontSize: '0.85rem' }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                >Symbol Change (keep Position, Size & Rotation)</button>
+                <button 
+                  onClick={() => {
+                    const name = prompt('Note name for this symbol:')
+                    if (name && contextMenu.targetId) {
+                      const obj = useEditorStore.getState().objects.find(o => o.id === contextMenu.targetId)
+                      if (obj) {
+                        useEditorStore.getState().addLegendItem({ id: Date.now().toString(), name, iconUrl: obj.url, targetId: obj.id })
+                      }
+                    }
+                    setContextMenu(null) 
+                  }}
+                  style={{ textAlign: 'left', padding: '8px 10px', background: 'transparent', border: 'none', color: textMain, cursor: 'pointer', fontSize: '0.85rem' }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                >Add to note</button>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* Right Side Panels: Layers and Legend */}
+        <div style={{ position: 'absolute', top: '20px', right: '20px', display: 'flex', flexDirection: 'column', gap: '15px', zIndex: 10 }}>
+          {/* Layers Panel */}
+          <div style={{ background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', overflow: 'hidden', width: '220px' }}>
+            <div style={{ padding: '8px 12px', background: isLight ? '#f3f4f6' : '#374151', fontSize: '0.8rem', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              LAYERS
+            </div>
+            <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontSize: '0.8rem' }}>
+                <input type="checkbox" checked={showSunDiagramLayer} onChange={(e) => useEditorStore.getState().setLayerVisibility('sunDiagram', e.target.checked)} style={{ marginRight: '8px' }} />
+                Sun Diagram
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontSize: '0.8rem' }}>
+                <input type="checkbox" checked={showDynamicSymbolsLayer} onChange={(e) => useEditorStore.getState().setLayerVisibility('dynamicSymbols', e.target.checked)} style={{ marginRight: '8px' }} />
+                Dynamic Symbols
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+}

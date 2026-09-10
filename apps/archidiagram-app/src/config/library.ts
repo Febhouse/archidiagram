@@ -1,0 +1,14 @@
+export const R2_BASE_URL = 'https://pub-5837f996e3144244a501515264ddf495.r2.dev/3DSYMBOLS'
+
+export const LIBRARY_MODELS = [
+  'Feb_ARROW01', 'Feb_ARROW02', 'Feb_ARROW03', 'Feb_ARROW04', 'Feb_ARROW05',
+  'Feb_ARROW06', 'Feb_ARROW07', 'Feb_ARROW08', 'Feb_ARROW09', 'Feb_ARROW10',
+  'Feb_ARROW11', 'Feb_ARROW12', 'Feb_ARROW13',
+  'Feb_CIRCLE01', 'Feb_CIRCLE02',
+  'Feb_COMPASS01', 'Feb_COMPASS02',
+  'Feb_NOISE01', 'Feb_NOISE02', 'Feb_NOISE03',
+  'Feb_SNOW01',
+  'Feb_STORM01', 'Feb_STORM02',
+  'Feb_WATERROUTE',
+  'Feb_WIND01', 'Feb_WIND02', 'Feb_WIND03', 'Feb_WIND04', 'Feb_WIND05'
+]
