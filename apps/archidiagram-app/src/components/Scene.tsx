@@ -1,7 +1,7 @@
 import { useState, Suspense, useRef, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment, TransformControls, Grid } from '@react-three/drei'
-import ModelLoader, { SvgMesh } from './ModelLoader'
+import ModelLoader, { SvgMesh, GltfMesh } from './ModelLoader'
 import { useEditorStore } from '../store/useEditorStore'
 import * as THREE from 'three'
 import { ErrorBoundary } from './ErrorBoundary'
@@ -16,10 +16,19 @@ function PreviewModel({ url, position }: { url: string, position: [number, numbe
   if (url.toUpperCase().includes('SUNPATH')) return null
   
   return (
-    <group position={position}>
+    <group position={position} scale={[2, 2, 2]}>
       <ErrorBoundary fallbackRender={() => null}>
         <Suspense fallback={null}>
-          <SvgMesh url={url} opacity={0.5} id="preview" />
+          {url === 'BOX' ? (
+            <mesh position={[0, 2.5, 0]}>
+              <boxGeometry args={[5, 5, 5]} />
+              <meshStandardMaterial color="#3b82f6" opacity={0.5} transparent />
+            </mesh>
+          ) : (url.startsWith('data:') || url.toLowerCase().endsWith('.glb') || url.toLowerCase().endsWith('.gltf')) ? (
+            <GltfMesh url={url} opacity={0.5} />
+          ) : (
+            <SvgMesh url={url} opacity={0.5} id="preview" />
+          )}
         </Suspense>
       </ErrorBoundary>
     </group>
@@ -203,11 +212,61 @@ function CameraManager() {
       }
       invalidate();
     }
+    const onSaveView = () => {
+      const state = useEditorStore.getState();
+      const target = (controls as any)?.target || new THREE.Vector3(0, 0, 0)
+      const currentFov = (camera as THREE.PerspectiveCamera).fov || 50
+      state.addSavedView({
+        id: Math.random().toString(36).substring(2, 9),
+        name: `View ${state.savedViews.length + 1}`,
+        cameraPosition: [camera.position.x, camera.position.y, camera.position.z],
+        cameraTarget: [target.x, target.y, target.z],
+        latitude: state.latitude,
+        longitude: state.longitude,
+        activeMonth: state.activeMonth,
+        timeOfDay: state.timeOfDay,
+        shadowsEnabled: state.shadowsEnabled,
+        fov: currentFov
+      })
+    }
+    const onLoadView = (e: any) => {
+      const view = e.detail
+      camera.position.set(view.cameraPosition[0], view.cameraPosition[1], view.cameraPosition[2])
+      if (controls) {
+        (controls as any).target.set(view.cameraTarget[0], view.cameraTarget[1], view.cameraTarget[2])
+        ;(controls as any).update()
+      }
+      
+      const updates: any = {}
+      if (view.latitude !== undefined) updates.latitude = view.latitude
+      if (view.longitude !== undefined) updates.longitude = view.longitude
+      if (view.activeMonth !== undefined) updates.activeMonth = view.activeMonth
+      if (view.timeOfDay !== undefined) updates.timeOfDay = view.timeOfDay
+      if (view.shadowsEnabled !== undefined) updates.shadowsEnabled = view.shadowsEnabled
+      
+      if (Object.keys(updates).length > 0) {
+        useEditorStore.getState().setEnvironment(updates)
+      }
+
+      if (view.fov !== undefined && (camera as THREE.PerspectiveCamera).fov) {
+        (camera as THREE.PerspectiveCamera).fov = view.fov;
+        (camera as THREE.PerspectiveCamera).updateProjectionMatrix();
+      } else if ((camera as THREE.PerspectiveCamera).fov) {
+        (camera as THREE.PerspectiveCamera).fov = 50; // Restore default if missing
+        (camera as THREE.PerspectiveCamera).updateProjectionMatrix();
+      }
+      
+      invalidate()
+    }
     window.addEventListener('zoom-camera', onZoom)
     window.addEventListener('zoom-all', onZoomAll)
+    window.addEventListener('save-view', onSaveView)
+    window.addEventListener('load-view', onLoadView)
     return () => {
       window.removeEventListener('zoom-camera', onZoom)
       window.removeEventListener('zoom-all', onZoomAll)
+      window.removeEventListener('save-view', onSaveView)
+      window.removeEventListener('load-view', onLoadView)
     }
   }, [camera, controls])
   

@@ -1,5 +1,5 @@
 import { useRef, useMemo, Suspense, useEffect, useState } from 'react'
-import { TransformControls, useHelper, Html } from '@react-three/drei'
+import { TransformControls, useHelper, Html, useGLTF } from '@react-three/drei'
 import { SVGLoader } from 'three-stdlib'
 import { useFrame } from '@react-three/fiber'
 import { useEditorStore } from '../store/useEditorStore'
@@ -315,6 +315,46 @@ interface ModelLoaderProps {
   castShadow?: boolean
 }
 
+export function GltfMesh({ url, opacity, color }: { url: string, opacity: number, color?: string }) {
+  const { scene } = useGLTF(url)
+  const clone = useMemo(() => {
+    const cloned = scene.clone(true)
+    cloned.traverse((child: any) => {
+      if (child.isMesh) {
+        child.castShadow = true
+        child.receiveShadow = true
+        if (child.material) {
+          // Clone material to avoid shared material opacity issues
+          child.material = child.material.clone()
+          child.material.transparent = opacity < 1
+          child.material.opacity = opacity
+          child.material.depthWrite = opacity === 1
+          if (color) {
+            child.material.color.set(color)
+          }
+        }
+      }
+    })
+    return cloned
+  }, [scene, opacity, color])
+
+  // Center and normalize scale
+  const box = useMemo(() => new THREE.Box3().setFromObject(clone), [clone])
+  const size = box.getSize(new THREE.Vector3())
+  const center = box.getCenter(new THREE.Vector3())
+  const maxDim = Math.max(size.x, size.y, size.z)
+  
+  useEffect(() => {
+    if (maxDim > 0) {
+      const scale = 5 / maxDim
+      clone.scale.setScalar(scale)
+      clone.position.set(-center.x * scale, -center.y * scale + (size.y * scale) / 2, -center.z * scale)
+    }
+  }, [clone, maxDim, center, size])
+
+  return <primitive object={clone} />
+}
+
 let isCtrlPressed = false
 if (typeof window !== 'undefined') {
   window.addEventListener('keydown', e => { if (e.key === 'Control' || e.metaKey) isCtrlPressed = true })
@@ -372,25 +412,6 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
           mode={transformMode as 'translate' | 'rotate' | 'scale'}
           onMouseDown={handleTransformStart}
           onMouseUp={handleTransformEnd}
-          onObjectChange={(e: any) => {
-            const ctrl = e?.target;
-            if (ctrl && ctrl.mode === 'scale' && ctrl.axis && groupRef.current) {
-              const axis = ctrl.axis;
-              if (axis === 'XY' || axis === 'YZ' || axis === 'XZ') {
-                const s = groupRef.current.scale;
-                if (axis === 'XY') {
-                  const maxS = Math.max(Math.abs(s.x), Math.abs(s.y));
-                  s.set(maxS * Math.sign(s.x), maxS * Math.sign(s.y), s.z);
-                } else if (axis === 'YZ') {
-                  const maxS = Math.max(Math.abs(s.y), Math.abs(s.z));
-                  s.set(s.x, maxS * Math.sign(s.y), maxS * Math.sign(s.z));
-                } else if (axis === 'XZ') {
-                  const maxS = Math.max(Math.abs(s.x), Math.abs(s.z));
-                  s.set(maxS * Math.sign(s.x), s.y, maxS * Math.sign(s.z));
-                }
-              }
-            }
-          }}
         />
       )}
       
@@ -429,6 +450,13 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
           <Suspense fallback={<ForceUpdateFallback />}>
             {url.toUpperCase().includes('SUNPATH') ? (
               <NativeSunpath color={color} opacity={objOpacity} />
+            ) : url === 'BOX' ? (
+              <mesh position={[0, 2.5, 0]} castShadow receiveShadow>
+                <boxGeometry args={[5, 5, 5]} />
+                <meshStandardMaterial color={color || '#cccccc'} opacity={objOpacity} transparent={objOpacity < 1} depthWrite={objOpacity === 1} />
+              </mesh>
+            ) : (url.startsWith('data:') || url.toLowerCase().endsWith('.glb') || url.toLowerCase().endsWith('.gltf')) ? (
+              <GltfMesh url={url} color={color} opacity={objOpacity} />
             ) : (
               <SvgMesh url={url} color={color} opacity={objOpacity} id={id} isAnimated={isAnimated} animationSpeed={animationSpeed} />
             )}

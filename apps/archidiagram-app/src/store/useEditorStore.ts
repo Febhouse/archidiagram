@@ -101,6 +101,31 @@ interface EditorState {
   contextMenu: { x: number, y: number, type: 'sundiagram' | 'symbols', targetId?: string } | null
   setContextMenu: (menu: { x: number, y: number, type: 'sundiagram' | 'symbols', targetId?: string } | null) => void
 
+  savedViews: { 
+    id: string, name: string, 
+    cameraPosition: [number, number, number], 
+    cameraTarget: [number, number, number],
+    latitude?: number,
+    longitude?: number,
+    activeMonth?: number,
+    timeOfDay?: number,
+    shadowsEnabled?: boolean,
+    fov?: number
+  }[]
+  addSavedView: (view: { 
+    id: string, name: string, 
+    cameraPosition: [number, number, number], 
+    cameraTarget: [number, number, number],
+    latitude?: number,
+    longitude?: number,
+    activeMonth?: number,
+    timeOfDay?: number,
+    shadowsEnabled?: boolean,
+    fov?: number
+  }) => void
+  removeSavedView: (id: string) => void
+  updateSavedViewName: (id: string, name: string) => void
+
   objects: PlacedModel[]
   past: PlacedModel[][]
   future: PlacedModel[][]
@@ -254,6 +279,14 @@ export const useEditorStore = create<EditorState>()(
   contextMenu: null,
   setContextMenu: (menu) => set({ contextMenu: menu }),
   
+  savedViews: [
+    { id: 'default-top', name: 'Top', cameraPosition: [0, 100, 0.001], cameraTarget: [0, 0, 0] },
+    { id: 'default-front', name: 'Front', cameraPosition: [0, 0, 100], cameraTarget: [0, 0, 0] },
+    { id: 'default-iso', name: 'Isometric', cameraPosition: [200, 200, 200], cameraTarget: [0, 0, 0], fov: 10 }
+  ],
+  addSavedView: (view) => set((state) => ({ savedViews: [...state.savedViews, view] })),
+  removeSavedView: (id) => set((state) => ({ savedViews: state.savedViews.filter(v => v.id !== id) })),
+  updateSavedViewName: (id, name) => set((state) => ({ savedViews: state.savedViews.map(v => v.id === id ? { ...v, name } : v) })),
   objects: [],
   past: [],
   future: [],
@@ -452,7 +485,8 @@ export const useEditorStore = create<EditorState>()(
         northOffset: state.northOffset,
         shadowsEnabled: state.shadowsEnabled,
         sunpathSettings: state.sunpathSettings,
-        hudPosition: state.hudPosition
+        hudPosition: state.hudPosition,
+        savedViews: state.savedViews
       }),
     }
   )

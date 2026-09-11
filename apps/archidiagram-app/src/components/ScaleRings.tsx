@@ -57,7 +57,8 @@ export default function ScaleRings() {
 
         return (
           <group key={radius}>
-            <line geometry={geometry} material={lineMaterial} onUpdate={self => self.computeLineDistances()} />
+            {/* @ts-ignore */}
+            <line geometry={geometry} material={lineMaterial} onUpdate={(self: any) => self.computeLineDistances()} />
             
             {labels.map((lbl, idx) => (
               <group key={idx} position={lbl.pos} rotation={[0, -THREE.MathUtils.degToRad(lbl.angle), 0]}>
@@ -70,7 +71,6 @@ export default function ScaleRings() {
                   anchorX="center"
                   position={[0, 0, -0.2]} // small offset from the line
                   depthOffset={-1}
-                  suspend={false}
                 >
                   {label}
                 </Text>

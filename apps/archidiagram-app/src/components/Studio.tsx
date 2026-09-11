@@ -14,17 +14,31 @@ export default function Studio() {
     objects, recentColors, addRecentColor, hudPosition, contextMenu, setContextMenu,
     latitude, longitude, activeMonth, monthDates, visibleMonths, timeOfDay, northOffset, shadowsEnabled, setEnvironment,
     sunpathSettings, setSunpathSettings, timezoneMode, utcOffset, dstMode, showHUD, uiTheme,
-    legendItems, showSunDiagramLayer, showDynamicSymbolsLayer,
-    showMapBackground, mapZoom, mapboxToken, mapStyle, mapOpacity, mapRadius,
-    showScaleRings, scaleRingStep, scaleRingCount, scaleRingUnit,
-    setShowMapBackground, setMapZoom, setMapboxToken, setMapStyle, setMapOpacity, setMapRadius,
-    setShowScaleRings, setScaleRingStep, setScaleRingCount, setScaleRingUnit,
+    legendItems, showSunDiagramLayer,
+    showMapBackground, mapZoom, mapStyle, mapOpacity, mapRadius,
+    showScaleRings, scaleRingCount, scaleRingUnit,
+    setShowMapBackground, setMapZoom, setMapStyle, setMapOpacity, setMapRadius,
+    setShowScaleRings, setScaleRingCount, setScaleRingUnit,
     exportWidth, exportHeight, setExportResolution, hudScale
   } = useEditorStore()
+  const addSavedView = useEditorStore((state) => state.addSavedView)
 
-  
+  useEffect(() => {
+    // Only run once on mount
+    const state = useEditorStore.getState();
+    const hasTop = state.savedViews.some(v => v.id === 'default-top');
+    const hasFront = state.savedViews.some(v => v.id === 'default-front');
+    const hasIso = state.savedViews.some(v => v.id === 'default-iso');
+    const hasPersp = state.savedViews.some(v => v.id === 'default-persp');
+
+    if (!hasTop) addSavedView({ id: 'default-top', name: 'Top', cameraPosition: [0, 100, 0.001], cameraTarget: [0, 0, 0] })
+    if (!hasFront) addSavedView({ id: 'default-front', name: 'Front', cameraPosition: [0, 0, 100], cameraTarget: [0, 0, 0] })
+    if (!hasIso) addSavedView({ id: 'default-iso', name: 'Isometric', cameraPosition: [200, 200, 200], cameraTarget: [0, 0, 0], fov: 10 })
+    if (!hasPersp) addSavedView({ id: 'default-persp', name: 'Perspective', cameraPosition: [40, 30, 40], cameraTarget: [0, 0, 0], fov: 50 })
+  }, [])
+
   // H2 Accordion State
-  const [activeH2, setActiveH2] = useState<'location' | 'sundiagram' | 'symbols' | 'export' | null>('location')
+  const [activeH2, setActiveH2] = useState<'location' | 'sundiagram' | 'symbols' | 'import' | 'export' | null>('location')
   
   // Tabs State within H2
   const [sunTab, setSunTab] = useState<'create' | 'shadow' | 'style'>('shadow')
@@ -111,7 +125,7 @@ export default function Studio() {
   const getModelUrl = (name: string) => name === 'SUNPATH' ? 'https://pub-5837f996e3144244a501515264ddf495.r2.dev/SUNPATH/my_model.glb' : `/images/dynamicsymbols/${name}.svg`
   const filteredModels = LIBRARY_MODELS.filter(name => name.toLowerCase().includes(searchTerm.toLowerCase()))
 
-  const H2Header = ({ id, title, icon }: { id: 'location' | 'sundiagram' | 'symbols' | 'export', title: string, icon?: string | React.ReactNode }) => (
+  const H2Header = ({ id, title, icon }: { id: 'location' | 'sundiagram' | 'symbols' | 'import' | 'export', title: string, icon?: string | React.ReactNode }) => (
     <div 
       onClick={() => setActiveH2(activeH2 === id ? null : id)}
       style={{ 
@@ -148,7 +162,10 @@ export default function Studio() {
         <div style={{ padding: '20px 15px', display: 'flex', alignItems: 'center', gap: '10px', borderBottom: `2px solid ${borderCol}` }}>
           <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="Logo" style={{ height: '30px' }} />
           <div>
-            <div style={{ fontWeight: 900, fontSize: '1.2rem', letterSpacing: '1px' }}>ARCHI DIAGRAM</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ fontWeight: 900, fontSize: '1.2rem', letterSpacing: '1px' }}>ARCHI DIAGRAM</div>
+              <span style={{ fontSize: '0.65rem', fontWeight: 'bold', background: '#3b82f6', color: 'white', padding: '2px 6px', borderRadius: '4px', letterSpacing: '0.5px' }}>DEMO</span>
+            </div>
             <div style={{ fontSize: '0.75rem', color: textMuted }}>BY FEBHOUSE</div>
           </div>
         </div>
@@ -420,7 +437,7 @@ export default function Studio() {
                         <span style={{ fontSize: '0.85rem' }}>{mapRadius}m</span>
                       </div>
                       <input 
-                        type="range" min="10" max="5000" step="1" 
+                        type="range" min="20" max="5000" step="20" 
                         value={mapRadius} onChange={(e) => setMapRadius(Number(e.target.value))} 
                         style={{ width: '100%' }}
                       />
@@ -458,7 +475,7 @@ export default function Studio() {
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', flex: 1 }}>
                         <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>Number of Rings</span>
                         <input 
-                          type="number" min="1" max="20" step="1" 
+                          type="number" min="2" max="20" step="2" 
                           value={scaleRingCount} onChange={(e) => setScaleRingCount(Number(e.target.value))} 
                           style={{ padding: '6px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', width: '100%' }}
                         />
@@ -853,19 +870,35 @@ export default function Studio() {
                               style={{ width: '28px', height: '28px', background: c, borderRadius: '50%', cursor: 'pointer', border: selectedColor === c ? '2px solid #3b82f6' : `2px solid ${borderCol}` }}
                             />
                           ))}
-                          <input 
-                            type="color" 
-                            value={selectedColor} 
-                            onChange={(e) => {
-                              setSelectedColor(e.target.value)
-                              updateObjectColor(selectedIds, e.target.value, false)
-                            }}
-                            onBlur={() => {
-                              addRecentColor(selectedColor)
-                              updateObjectColor(selectedIds, selectedColor, true)
-                            }}
-                            style={{ width: '28px', height: '28px', padding: 0, border: 'none', background: 'transparent', cursor: 'pointer' }}
-                          />
+                          <div style={{ 
+                            position: 'relative', 
+                            width: '28px', 
+                            height: '28px', 
+                            borderRadius: '50%', 
+                            background: 'conic-gradient(red, yellow, lime, aqua, blue, magenta, red)',
+                            overflow: 'hidden',
+                            cursor: 'pointer'
+                          }}>
+                            <input 
+                              type="color" 
+                              value={selectedColor} 
+                              onChange={(e) => {
+                                setSelectedColor(e.target.value)
+                                updateObjectColor(selectedIds, e.target.value, false)
+                              }}
+                              onBlur={() => {
+                                addRecentColor(selectedColor)
+                                updateObjectColor(selectedIds, selectedColor, true)
+                              }}
+                              style={{ 
+                                position: 'absolute', 
+                                top: '-50%', left: '-50%', 
+                                width: '200%', height: '200%', 
+                                opacity: 0, 
+                                cursor: 'pointer' 
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
                       
@@ -923,7 +956,56 @@ export default function Studio() {
             </div>
           )}
 
+          {/* H2: Import */}
+          <H2Header id="import" title="Import" icon={
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+          } />
+          {activeH2 === 'import' && (
+            <div style={{ background: isLight ? '#f9fafb' : '#1a1a1a', padding: '15px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+              <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>ADD BASIC SHAPES</div>
+              <button
+                onClick={() => setPlacingUrl('BOX')}
+                style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}
+              >
+                + Add 3D Box
+              </button>
 
+              <div style={{ fontWeight: 'bold', fontSize: '1rem', marginTop: '10px' }}>IMPORT CUSTOM 3D</div>
+              <p style={{ fontSize: '0.8rem', color: textMuted }}>
+                Import custom 3D files (.glb, .gltf) up to 5MB. Large files may cause performance issues.
+              </p>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <input 
+                  type="file" 
+                  accept=".glb,.gltf"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    if (file.size > 5 * 1024 * 1024) {
+                      alert("File size exceeds 5MB limit. Please choose a smaller file.");
+                      e.target.value = '';
+                      return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                      const dataUrl = event.target?.result;
+                      if (typeof dataUrl === 'string') {
+                        setPlacingUrl(dataUrl);
+                      }
+                    };
+                    reader.readAsDataURL(file);
+                    e.target.value = '';
+                  }}
+                  style={{ fontSize: '0.8rem', color: textMain }}
+                />
+              </div>
+            </div>
+          )}
 
           {/* H2: Export */}
           <H2Header id="export" title="Export" icon={
@@ -1083,6 +1165,127 @@ export default function Studio() {
               <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
                 <button 
                   onClick={async () => {
+                    const drawHUDOnCanvas = (targetCtx: any) => {
+                      if (!showHUD) return;
+                      const store = useEditorStore.getState();
+                      const scale = (Math.max(exportWidth, exportHeight) / 1080) * (store.hudScale || 1);
+                      const padding = 15 * scale;
+                      const lineH = 22 * scale;
+                      
+                      const numItems = 10 + store.legendItems.length;
+                      const rectW = 260 * scale;
+                      const rectH = (numItems * lineH) + (padding * 2) + (10 * scale);
+                      
+                      let hx = 20 * scale;
+                      let hy = exportHeight - rectH - 20 * scale;
+                      
+                      const [vert, horz] = (store.hudPosition || 'bottom-left').split('-');
+                      if (vert === 'top') hy = 20 * scale;
+                      else if (vert === 'middle') hy = (exportHeight - rectH) / 2;
+                      
+                      if (horz === 'left') hx = 20 * scale;
+                      else if (horz === 'right') hx = exportWidth - rectW - 20 * scale;
+                      else if (horz === 'center') hx = (exportWidth - rectW) / 2;
+
+                      targetCtx.fillStyle = isLight ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)';
+                      targetCtx.beginPath();
+                      if (targetCtx.roundRect) targetCtx.roundRect(hx, hy, rectW, rectH, 8 * scale);
+                      else targetCtx.rect(hx, hy, rectW, rectH);
+                      targetCtx.fill();
+                      
+                      const textColor = isLight ? '#000' : '#fff';
+                      targetCtx.fillStyle = textColor;
+                      targetCtx.textBaseline = 'top';
+                      
+                      let currentY = hy + padding;
+                      let startX = hx + padding;
+                      
+                      targetCtx.font = `bold ${14 * scale}px Quicksand, sans-serif`;
+                      targetCtx.fillText('ARCHI DIAGRAM', startX, currentY);
+                      targetCtx.font = `${14 * scale}px Quicksand, sans-serif`;
+                      targetCtx.fillText(' by Febhouse', startX + targetCtx.measureText('ARCHI DIAGRAM').width, currentY);
+                      currentY += lineH;
+                      
+                      targetCtx.font = `${13 * scale}px Quicksand, sans-serif`;
+                      targetCtx.fillText(`Location: ${store.latitude?.toFixed(4)}, ${store.longitude?.toFixed(4)}`, startX, currentY); currentY += lineH;
+                      targetCtx.fillText(`Day: ${store.monthDates[store.activeMonth] || 21} ${monthNames[store.activeMonth - 1]}`, startX, currentY); currentY += lineH;
+                      targetCtx.fillText(`Time: ${Math.floor(store.timeOfDay || 12)}:${((store.timeOfDay || 12) % 1) >= 0.5 ? '30' : '00'}`, startX, currentY); currentY += lineH;
+                      
+                      const baseUtc = store.timezoneMode === 'auto' ? (Math.round((store.longitude || 105)/15)) : store.utcOffset;
+                      const dayOfYear = getDayOfYear(store.activeMonth || 6, store.monthDates[store.activeMonth] || 21);
+                      const isDst = isDstActive(dayOfYear, store.latitude || 21.0285, store.dstMode);
+                      const actualUtc = baseUtc + (isDst ? 1 : 0);
+                      const utcStr = (actualUtc >= 0 ? `+${actualUtc}` : `${actualUtc}`) + (isDst ? ' (DST)' : '');
+                      targetCtx.fillText(`UTC: ${utcStr}`, startX, currentY); currentY += lineH;
+                      
+                      currentY += 5 * scale;
+                      targetCtx.strokeStyle = isLight ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)';
+                      targetCtx.lineWidth = 1;
+                      targetCtx.beginPath();
+                      targetCtx.moveTo(startX, currentY);
+                      targetCtx.lineTo(hx + rectW - padding, currentY);
+                      targetCtx.stroke();
+                      currentY += 10 * scale;
+                      
+                      targetCtx.font = `bold ${13 * scale}px Quicksand, sans-serif`;
+                      targetCtx.fillText('NOTES', startX, currentY); currentY += lineH;
+                      
+                      targetCtx.font = `${13 * scale}px Quicksand, sans-serif`;
+                      
+                      const drawIconText = (drawIcon: (x: any, y: any, s: any) => void, text: any) => {
+                        drawIcon(startX, currentY, 20 * scale);
+                        targetCtx.fillStyle = textColor;
+                        targetCtx.fillText(text, startX + 30 * scale, currentY + 2 * scale);
+                        currentY += lineH;
+                      };
+                      
+                      drawIconText((x, y, s) => {
+                        targetCtx.fillStyle = '#fbbf24';
+                        targetCtx.beginPath(); targetCtx.arc(x + s/2, y + s/2, 6 * scale, 0, Math.PI * 2); targetCtx.fill();
+                      }, 'Sun hours');
+                      
+                      drawIconText((x, y, s) => {
+                        targetCtx.fillStyle = '#ef4444';
+                        targetCtx.beginPath(); targetCtx.arc(x + s/2, y + s/2, 6 * scale, 0, Math.PI * 2); targetCtx.fill();
+                      }, 'Sun');
+                      
+                      drawIconText((x, y, s) => {
+                        targetCtx.strokeStyle = '#f87171';
+                        targetCtx.lineWidth = 2 * scale;
+                        targetCtx.setLineDash([4 * scale, 4 * scale]);
+                        targetCtx.beginPath(); targetCtx.moveTo(x, y + s/2); targetCtx.lineTo(x + s, y + s/2); targetCtx.stroke();
+                        targetCtx.setLineDash([]);
+                        targetCtx.fillStyle = '#fde047';
+                        targetCtx.beginPath(); targetCtx.arc(x + s/2, y + s/2, 5 * scale, 0, Math.PI * 2); targetCtx.fill();
+                      }, 'Sun path');
+                      
+                      drawIconText((x, y, s) => {
+                        const cy = y + s/2;
+                        const cx = x + s/2;
+                        targetCtx.strokeStyle = isLight ? '#1e3a8a' : '#60a5fa';
+                        targetCtx.fillStyle = isLight ? '#1e3a8a' : '#60a5fa';
+                        targetCtx.lineWidth = 1.5 * scale;
+                        targetCtx.font = `bold ${10 * scale}px Quicksand, sans-serif`;
+                        targetCtx.textAlign = 'center';
+                        targetCtx.fillText('N', cx, cy - 8 * scale);
+                        targetCtx.textAlign = 'left';
+                        targetCtx.beginPath();
+                        targetCtx.moveTo(cx - 10 * scale, cy + 4 * scale);
+                        targetCtx.quadraticCurveTo(cx, cy - 4 * scale, cx + 10 * scale, cy + 4 * scale);
+                        targetCtx.stroke();
+                        targetCtx.beginPath(); targetCtx.moveTo(cx, cy); targetCtx.lineTo(cx, cy + 4 * scale); targetCtx.stroke();
+                      }, 'Compass');
+                      
+                      store.legendItems.forEach(item => {
+                        const obj = store.objects.find(o => o.id === item.targetId);
+                        const color = obj ? obj.color : '#9ca3af';
+                        drawIconText((x, y, s) => {
+                           targetCtx.fillStyle = color;
+                           targetCtx.beginPath(); targetCtx.arc(x + s/2, y + s/2, 6 * scale, 0, Math.PI * 2); targetCtx.fill();
+                        }, item.name);
+                      });
+                    };
+
                     const processExportImage = () => {
                       const canvas = document.querySelector('canvas');
                       if (!canvas) return null;
@@ -1103,31 +1306,7 @@ export default function Studio() {
                         sy = (canvas.height - sh) / 2;
                       }
                       ctx.drawImage(canvas, sx, sy, sw, sh, 0, 0, exportWidth, exportHeight);
-
-                      if (showHUD) {
-                        const store = useEditorStore.getState();
-                        const scale = (Math.max(exportWidth, exportHeight) / 1080) * (store.hudScale || 1);
-                        const rectW = 220 * scale, rectH = 85 * scale;
-                        let hx = 20 * scale, hy = exportHeight - rectH - 20 * scale;
-                        const [vert, horz] = (store.hudPosition || 'bottom-left').split('-');
-                        if (vert === 'top') hy = 20 * scale;
-                        else if (vert === 'middle') hy = (exportHeight - rectH) / 2;
-                        
-                        if (horz === 'left') hx = 20 * scale;
-                        else if (horz === 'right') hx = exportWidth - rectW - 20 * scale;
-                        else if (horz === 'center') hx = (exportWidth - rectW) / 2;
-                        ctx.fillStyle = 'rgba(255,255,255,0.85)';
-                        ctx.beginPath();
-                        if (ctx.roundRect) ctx.roundRect(hx, hy, rectW, rectH, 8 * scale);
-                        else ctx.rect(hx, hy, rectW, rectH);
-                        ctx.fill();
-                        ctx.fillStyle = '#333';
-                        ctx.font = `bold ${16 * scale}px Quicksand, sans-serif`;
-                        ctx.fillText(`${monthNames[store.activeMonth-1]} ${store.monthDates[store.activeMonth] || 21}`, hx + 15 * scale, hy + 30 * scale);
-                        ctx.font = `${14 * scale}px Quicksand, sans-serif`;
-                        ctx.fillText(`Time: ${Math.floor(store.timeOfDay || 12)}:${((store.timeOfDay || 12) % 1) >= 0.5 ? '30' : '00'}`, hx + 15 * scale, hy + 50 * scale);
-                        ctx.fillText(`Lat: ${store.latitude}°, Lng: ${store.longitude}°`, hx + 15 * scale, hy + 70 * scale);
-                      }
+                      drawHUDOnCanvas(ctx);
                       return cropCanvas.toDataURL('image/png', 1.0);
                     };
 
@@ -1215,29 +1394,7 @@ export default function Studio() {
                           vctx.drawImage(canvas, sx, sy, sw, sh, 0, 0, exportWidth, exportHeight);
                           
                           if (showHUD) {
-                            const store = useEditorStore.getState();
-                            const scale = (Math.max(exportWidth, exportHeight) / 1080) * (store.hudScale || 1);
-                            const rectW = 220 * scale, rectH = 85 * scale;
-                            let hx = 20 * scale, hy = exportHeight - rectH - 20 * scale;
-                            const [vert, horz] = (store.hudPosition || 'bottom-left').split('-');
-                            if (vert === 'top') hy = 20 * scale;
-                            else if (vert === 'middle') hy = (exportHeight - rectH) / 2;
-                            
-                            if (horz === 'left') hx = 20 * scale;
-                            else if (horz === 'right') hx = exportWidth - rectW - 20 * scale;
-                            else if (horz === 'center') hx = (exportWidth - rectW) / 2;
-
-                            vctx.fillStyle = 'rgba(255,255,255,0.85)';
-                            vctx.beginPath();
-                            if (vctx.roundRect) vctx.roundRect(hx, hy, rectW, rectH, 8 * scale);
-                            else vctx.rect(hx, hy, rectW, rectH);
-                            vctx.fill();
-                            vctx.fillStyle = '#333';
-                            vctx.font = `bold ${16 * scale}px Quicksand, sans-serif`;
-                            vctx.fillText(`${monthNames[store.activeMonth-1]} ${store.monthDates[store.activeMonth] || 21}`, hx + 15 * scale, hy + 30 * scale);
-                            vctx.font = `${14 * scale}px Quicksand, sans-serif`;
-                            vctx.fillText(`Time: ${Math.floor(store.timeOfDay || 12)}:${((store.timeOfDay || 12) % 1) >= 0.5 ? '30' : '00'}`, hx + 15 * scale, hy + 50 * scale);
-                            vctx.fillText(`Lat: ${store.latitude}°, Lng: ${store.longitude}°`, hx + 15 * scale, hy + 70 * scale);
+                            drawHUDOnCanvas(vctx);
                           }
                         }
                         requestAnimationFrame(drawLoop);
@@ -1471,6 +1628,7 @@ export default function Studio() {
                     {/* WYSIWYG Export HUD */}
                     {showHUD && hudContent && (
                       <foreignObject x="0" y="0" width={exportWidth} height={exportHeight}>
+                        {/* @ts-ignore */}
                         <div xmlns="http://www.w3.org/1999/xhtml" style={{ width: '100%', height: '100%', position: 'relative' }}>
                           {hudContent}
                         </div>
@@ -1632,20 +1790,44 @@ export default function Studio() {
 
         {/* Right Side Panels: Layers and Legend */}
         <div style={{ position: 'absolute', top: '20px', right: '20px', display: 'flex', flexDirection: 'column', gap: '15px', zIndex: 10 }}>
-          {/* Layers Panel */}
+          {/* Views Panel */}
           <div style={{ background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', overflow: 'hidden', width: '220px' }}>
             <div style={{ padding: '8px 12px', background: isLight ? '#f3f4f6' : '#374151', fontSize: '0.8rem', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              LAYERS
+              SCENES / VIEWS
+              <button 
+                onClick={() => window.dispatchEvent(new CustomEvent('save-view'))}
+                style={{ background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '4px', padding: '2px 8px', fontSize: '0.7rem', cursor: 'pointer' }}
+              >+ Save</button>
             </div>
-            <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontSize: '0.8rem' }}>
-                <input type="checkbox" checked={showSunDiagramLayer} onChange={(e) => useEditorStore.getState().setLayerVisibility('sunDiagram', e.target.checked)} style={{ marginRight: '8px' }} />
-                Sun Diagram
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontSize: '0.8rem' }}>
-                <input type="checkbox" checked={showDynamicSymbolsLayer} onChange={(e) => useEditorStore.getState().setLayerVisibility('dynamicSymbols', e.target.checked)} style={{ marginRight: '8px' }} />
-                Dynamic Symbols
-              </label>
+            <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '300px', overflowY: 'auto' }}>
+              {useEditorStore((state) => state.savedViews).length === 0 && (
+                <div style={{ fontSize: '0.75rem', color: textMuted, textAlign: 'center', padding: '10px 0' }}>No saved views</div>
+              )}
+              {useEditorStore((state) => state.savedViews).map((view) => (
+                <div key={view.id} style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'space-between', fontSize: '0.8rem' }}>
+                  <input 
+                    value={view.name}
+                    onChange={(e) => useEditorStore.getState().updateSavedViewName(view.id, e.target.value)}
+                    style={{ background: 'transparent', border: 'none', color: textMain, fontSize: '0.8rem', outline: 'none', flex: 1, minWidth: 0, textOverflow: 'ellipsis' }}
+                  />
+                  <div style={{ display: 'flex', gap: '4px' }}>
+                    <button 
+                      title="Load view"
+                      onClick={() => window.dispatchEvent(new CustomEvent('load-view', { detail: view }))}
+                      style={{ background: isLight ? '#e5e7eb' : '#4b5563', color: textMain, border: 'none', borderRadius: '4px', padding: '2px 6px', cursor: 'pointer', fontSize: '0.7rem' }}
+                    >
+                      <i className="fas fa-eye"></i>
+                    </button>
+                    <button 
+                      title="Delete view"
+                      onClick={() => useEditorStore.getState().removeSavedView(view.id)}
+                      style={{ background: 'transparent', color: '#ef4444', border: 'none', cursor: 'pointer', padding: '2px', fontSize: '0.7rem' }}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
