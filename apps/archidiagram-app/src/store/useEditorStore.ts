@@ -303,9 +303,9 @@ export const useEditorStore = create<EditorState>()(
       url,
       position,
       rotation: [0, 0, 0],
-      scale: isSunpath ? [0.1, 0.1, 0.1] : [2, 2, 2],
-      color: isSunpath ? '#ffffff' : '#233156',
-      opacity: isSunpath ? 1 : 0.7,
+      scale: isSunpath ? [0.1, 0.1, 0.1] : [20, 20, 20],
+      color: isSunpath ? '#ffffff' : '#ef4444',
+      opacity: isSunpath ? 1 : 0.8,
       castShadow: false,
       isAnimated: isAnimatedSymbol,
       animationSpeed: 1

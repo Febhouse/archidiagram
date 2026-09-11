@@ -31,10 +31,10 @@ export default function Studio() {
     const hasIso = state.savedViews.some(v => v.id === 'default-iso');
     const hasPersp = state.savedViews.some(v => v.id === 'default-persp');
 
-    if (!hasTop) addSavedView({ id: 'default-top', name: 'Top', cameraPosition: [0, 100, 0.001], cameraTarget: [0, 0, 0] })
-    if (!hasFront) addSavedView({ id: 'default-front', name: 'Front', cameraPosition: [0, 0, 100], cameraTarget: [0, 0, 0] })
-    if (!hasIso) addSavedView({ id: 'default-iso', name: 'Isometric', cameraPosition: [200, 200, 200], cameraTarget: [0, 0, 0], fov: 10 })
-    if (!hasPersp) addSavedView({ id: 'default-persp', name: 'Perspective', cameraPosition: [40, 30, 40], cameraTarget: [0, 0, 0], fov: 50 })
+    if (!hasTop) addSavedView({ id: 'default-top', name: 'Top', cameraPosition: [0, 400, 0.001], cameraTarget: [0, 0, 0] })
+    if (!hasFront) addSavedView({ id: 'default-front', name: 'Front', cameraPosition: [0, 0, 400], cameraTarget: [0, 0, 0] })
+    if (!hasIso) addSavedView({ id: 'default-iso', name: 'Isometric', cameraPosition: [250, 250, 250], cameraTarget: [0, 0, 0], fov: 10 })
+    if (!hasPersp) addSavedView({ id: 'default-persp', name: 'Perspective', cameraPosition: [200, 150, 200], cameraTarget: [0, 0, 0], fov: 50 })
   }, [])
 
   // H2 Accordion State

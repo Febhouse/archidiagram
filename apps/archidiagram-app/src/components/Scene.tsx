@@ -16,7 +16,7 @@ function PreviewModel({ url, position }: { url: string, position: [number, numbe
   if (url.toUpperCase().includes('SUNPATH')) return null
   
   return (
-    <group position={position} scale={[2, 2, 2]}>
+    <group position={position} scale={[20, 20, 20]}>
       <ErrorBoundary fallbackRender={() => null}>
         <Suspense fallback={null}>
           {url === 'BOX' ? (
@@ -179,7 +179,7 @@ function CameraManager() {
       const newObj = objects[objects.length - 1]
       if (newObj && newObj.url?.toUpperCase().includes('SUNPATH')) {
         setTimeout(() => {
-          camera.position.set(40, 30, 40)
+          camera.position.set(200, 150, 200)
           camera.lookAt(0, 0, 0)
           if (controls) {
             ;(controls as any).target.set(0, 0, 0)
@@ -204,7 +204,7 @@ function CameraManager() {
       invalidate();
     }
     const onZoomAll = () => {
-      camera.position.set(40, 30, 40)
+      camera.position.set(200, 150, 200)
       camera.lookAt(0, 0, 0)
       if (controls) {
         (controls as any).target.set(0, 0, 0)
@@ -290,7 +290,7 @@ export default function Scene() {
     <div style={{ width: '100%', height: '100%' }}>
       <Canvas 
         shadows 
-        camera={{ position: [20, 20, 20], fov: 50 }} 
+        camera={{ position: [200, 150, 200], fov: 50 }} 
         style={{ 
           background: bgColor, 
           cursor: transformMode === 'pan' ? 'grab' : 'default' 
