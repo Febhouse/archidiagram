@@ -44,23 +44,23 @@ function ArcLabel({ points, label, sunSize, textSize, color }: any) {
     yAxis.normalize()
     zAxis.crossVectors(xAxis, yAxis).normalize()
 
-    // Đảm bảo chữ luôn không bị lộn ngược (yAxis luôn hướng lên)
+    // Ensure text is never upside down (yAxis always points up)
     if (yAxis.y < 0) {
       xAxis.negate()
       yAxis.negate()
     }
 
-    // Tính toán véc-tơ vuông góc với đường cong trên mặt phẳng ngang
+    // Calculate vector perpendicular to the curve on the horizontal plane
     const upVector = new THREE.Vector3(0, 1, 0)
     let horizontalPerpendicular = new THREE.Vector3().crossVectors(tangent, upVector)
     
-    // Đảm bảo véc-tơ luôn hướng ra xa tâm thay vì hướng vào trong (vì tuỳ thuộc vào chiều tangent)
+    // Ensure vector always points away from the center (depends on tangent direction)
     if (horizontalPerpendicular.dot(p) < 0) {
       horizontalPerpendicular.negate()
     }
     horizontalPerpendicular.normalize()
     
-    // Đặt khoảng cách sao cho mép của text cách đường sun path 1 đoạn bằng sunSize
+    // Set distance so the text edge is sunSize away from the sun path
     const offsetVector = horizontalPerpendicular.multiplyScalar(sunSize + textSize / 2)
     const pos = p.clone().add(offsetVector)
     
@@ -71,7 +71,8 @@ function ArcLabel({ points, label, sunSize, textSize, color }: any) {
   })
 
   return (
-    <Text ref={textRef} fontSize={textSize} color={color} anchorX="center" anchorY="middle">
+    // @ts-ignore
+    <Text ref={textRef} fontSize={textSize} color={color} anchorX="center" anchorY="middle" suspend={false}>
       {label}
     </Text>
   )
@@ -147,13 +148,13 @@ export function getSunPosition(dayOfYear: number, timeOfDay: number, latitude: n
 import { getDayOfYear } from './SunLight'
 
 export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
-  const { latitude, longitude, activeMonth, monthDates, visibleMonths, monthColorsLight, monthColorsDark, timeOfDay, northOffset, sunpathSettings, timezoneMode, utcOffset, dstMode, shadowsEnabled, uiTheme } = useEditorStore()
+  const { latitude, longitude, activeMonth, monthDates, visibleMonths, monthColorsLight, monthColorsDark, timeOfDay, northOffset, sunpathSettings, timezoneMode, utcOffset, dstMode, shadowsEnabled, uiTheme, globalTextSize } = useEditorStore()
 
   const safeLat = latitude || 21.0285
   const safeLng = longitude || 105.8542
-  const R = 100 // Bán kính vòm trời
+  const R = 100 // Sky dome radius
   const S = sunpathSettings.sunSize ?? 0.5
-  const T = sunpathSettings.textSize ?? 0.5
+  const T = globalTextSize ?? 2
 
   const calculatedUtcOffset = useMemo(() => calculateUtcOffset(safeLng, safeLat, timezoneMode, utcOffset), [safeLng, safeLat, timezoneMode, utcOffset])
 
@@ -307,7 +308,7 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
         const p2 = new THREE.Vector3(outerR * Math.sin(rad), 0, -outerR * Math.cos(rad))
         lines.push([p1, p2])
       
-      const labelPos = new THREE.Vector3((outerR + T * 1.5) * Math.sin(rad), T * 1.5, -(outerR + T * 1.5) * Math.cos(rad))
+      const labelPos = new THREE.Vector3((outerR + T * 1.5) * Math.sin(rad), 0, -(outerR + T * 1.5) * Math.cos(rad))
       labels.push({ pos: labelPos, text: pt.label, angle: pt.angle })
     }
     
@@ -324,7 +325,8 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
           
           {compassGeoData.labels.map((lbl, i) => (
             <group key={`compass-lbl-${i}`} position={lbl.pos} rotation={[0, -THREE.MathUtils.degToRad(lbl.angle), 0]}>
-              <Text fontSize={T * 1.2} color={compassColor} rotation={[-Math.PI / 2, 0, 0]}>
+              {/* @ts-ignore */}
+              <Text fontSize={T * 1.2} color={compassColor} rotation={[-Math.PI / 2, 0, 0]} depthOffset={-1} suspend={false}>
                 {lbl.text}
               </Text>
             </group>
@@ -357,7 +359,8 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
               </mesh>
               {sunpathSettings.showText && (
                 <Billboard position={[0, S * 2.5, 0]}>
-                  <Text fontSize={T * 1.2} color={textColor}>
+                  {/* @ts-ignore */}
+                  <Text fontSize={T * 1.2} color={textColor} suspend={false}>
                     {`${sun.h}h`}
                   </Text>
                 </Billboard>

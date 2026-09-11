@@ -1,5 +1,3 @@
-export const R2_BASE_URL = 'https://pub-5837f996e3144244a501515264ddf495.r2.dev/3DSYMBOLS'
-
 export const LIBRARY_MODELS = [
   'Feb_ARROW01', 'Feb_ARROW02', 'Feb_ARROW03', 'Feb_ARROW04', 'Feb_ARROW05',
   'Feb_ARROW06', 'Feb_ARROW07', 'Feb_ARROW08', 'Feb_ARROW09', 'Feb_ARROW10',

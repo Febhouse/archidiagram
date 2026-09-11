@@ -1,451 +1,306 @@
-import { useRef, useMemo, Suspense, useEffect } from 'react'
-import { useGLTF, TransformControls, useHelper } from '@react-three/drei'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useRef, useMemo, Suspense, useEffect, useState } from 'react'
+import { TransformControls, useHelper, Html } from '@react-three/drei'
+import { SVGLoader } from 'three-stdlib'
+import { useFrame } from '@react-three/fiber'
 import { useEditorStore } from '../store/useEditorStore'
 import * as THREE from 'three'
+
 import { ErrorBoundary } from './ErrorBoundary'
-import NativeSunpath, { getSunPosition, calculateUtcOffset } from './NativeSunpath'
-import { getDayOfYear } from './SunLight'
+import NativeSunpath from './NativeSunpath'
 
-function Animator({ scene1, scene2, isAnimated, animationSpeed = 2, url }: { scene1: THREE.Group, scene2?: THREE.Group, isAnimated?: boolean, animationSpeed?: number, url: string }) {
-  const isCenterExpand = useMemo(() => {
-    const upper = url.toUpperCase()
-    return upper.includes('CIRCLE') || upper.includes('NOISE') || upper.includes('STORM')
-  }, [url])
+const ForceUpdateFallback = () => {
+  return (
+    <Html center>
+      <div style={{ color: 'white', background: 'rgba(0,0,0,0.8)', padding: '5px 10px', borderRadius: '4px', whiteSpace: 'nowrap', fontSize: '14px', pointerEvents: 'none' }}>
+        Loading / Downloading Fonts...
+      </div>
+    </Html>
+  )
+}
 
-  const s = Math.SQRT1_2 // 0.70710678...
-  
-  // Planes cho Phase 1 (Mọc từ tâm - clipIntersection = false) - 8 hướng (Bát giác)
-  const planes1Ref = useRef([
-    new THREE.Plane(new THREE.Vector3(1, 0, 0), 0),
-    new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0),
-    new THREE.Plane(new THREE.Vector3(0, 0, 1), 0),
-    new THREE.Plane(new THREE.Vector3(0, 0, -1), 0),
-    new THREE.Plane(new THREE.Vector3(s, 0, s), 0),
-    new THREE.Plane(new THREE.Vector3(-s, 0, s), 0),
-    new THREE.Plane(new THREE.Vector3(s, 0, -s), 0),
-    new THREE.Plane(new THREE.Vector3(-s, 0, -s), 0)
-  ])
-
-  // Planes cho Phase 2 (Biến mất từ tâm - clipIntersection = true) - 8 hướng ngược lại
-  const planes2Ref = useRef([
-    new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0),
-    new THREE.Plane(new THREE.Vector3(1, 0, 0), 0),
-    new THREE.Plane(new THREE.Vector3(0, 0, -1), 0),
-    new THREE.Plane(new THREE.Vector3(0, 0, 1), 0),
-    new THREE.Plane(new THREE.Vector3(-s, 0, -s), 0),
-    new THREE.Plane(new THREE.Vector3(s, 0, -s), 0),
-    new THREE.Plane(new THREE.Vector3(-s, 0, s), 0),
-    new THREE.Plane(new THREE.Vector3(s, 0, s), 0)
-  ])
-
-  const dirRef = useRef(new THREE.Vector3(0, 0, 1))
-  const coordsRef = useRef({ start: 0, end: 0 })
+function Animator({ scene1, scene2, isAnimated, animationSpeed = 1, isCenterExpand }: { scene1: THREE.Group, scene2?: THREE.Group, isAnimated?: boolean, animationSpeed?: number, isCenterExpand: boolean }) {
   const maxRadiusRef = useRef(0)
-
+  const mats1Ref = useRef<any[]>([])
+  const mats2Ref = useRef<any[]>([])
+  
   useEffect(() => {
-    if (!isAnimated) {
-      scene1.traverse((child: any) => {
-        if (child.isMesh && child.material) {
-          child.material.clippingPlanes = []
-          child.material.clipShadows = false
-          child.material.needsUpdate = true
+    const mats1: any[] = []
+    const mats2: any[] = []
+
+    scene1.traverse((child: any) => {
+      if (child.isMesh && child.material && child.material.userData && child.material.userData.uClipPhase) {
+        mats1.push(child.material)
+      }
+    })
+    if (scene2) {
+      scene2.traverse((child: any) => {
+        if (child.isMesh && child.material && child.material.userData && child.material.userData.uClipPhase) {
+          mats2.push(child.material)
         }
       })
-      if (scene2) scene2.visible = false
+    }
+    mats1Ref.current = mats1
+    mats2Ref.current = mats2
+
+    if (!isAnimated) {
+      mats1.forEach(m => m.userData.uClipPhase.value = 0)
+      mats2.forEach(m => m.userData.uClipPhase.value = -1)
       scene1.visible = true
+      if (scene2) scene2.visible = true
       return
     }
 
+    let maxR = 0
     scene1.traverse((child: any) => {
-      if (child.isMesh && child.material) {
-        child.material.clippingPlanes = isCenterExpand ? planes1Ref.current : [planes1Ref.current[0]]
-        child.material.clipShadows = true
-        child.material.needsUpdate = true
+      if (child.isMesh && child.geometry && child.geometry.attributes.position) {
+        const posAttr = child.geometry.attributes.position
+        for (let i = 0; i < posAttr.count; i++) {
+          const x = posAttr.getX(i)
+          const y = posAttr.getY(i)
+          const r = isCenterExpand ? Math.sqrt(x*x + y*y) : Math.abs(x)
+          if (r > maxR) maxR = r
+        }
       }
     })
+    maxRadiusRef.current = maxR * 1.05 
 
-    if (isCenterExpand && scene2) {
-      scene2.traverse((child: any) => {
-        if (child.isMesh && child.material) {
-          child.material.clippingPlanes = planes2Ref.current
-          child.material.clipShadows = true
-          child.material.needsUpdate = true
-        }
-      })
-    }
-
-    scene1.updateMatrixWorld(true)
-    const sceneInverse = scene1.matrixWorld.clone().invert()
-
-    if (isCenterExpand) {
-      let maxR = 0
-      scene1.traverse((child: any) => {
-        if (child.isMesh && child.geometry && child.geometry.attributes.position) {
-          const posAttr = child.geometry.attributes.position
-          for (let i = 0; i < posAttr.count; i++) {
-            const v = new THREE.Vector3().fromBufferAttribute(posAttr, i)
-            v.applyMatrix4(child.matrixWorld).applyMatrix4(sceneInverse)
-            const r = Math.max(Math.abs(v.x), Math.abs(v.z))
-            if (r > maxR) maxR = r
-          }
-        }
-      })
-      maxRadiusRef.current = maxR * 1.05 
-    } else {
-      let maxDistSq = 0
-      let tailLocal = new THREE.Vector3()
-      const vertices: THREE.Vector3[] = []
-
-      scene1.traverse((child: any) => {
-        if (child.isMesh && child.geometry && child.geometry.attributes.position) {
-          const posAttr = child.geometry.attributes.position
-          for (let i = 0; i < posAttr.count; i++) {
-            const v = new THREE.Vector3().fromBufferAttribute(posAttr, i)
-            v.applyMatrix4(child.matrixWorld).applyMatrix4(sceneInverse)
-            vertices.push(v)
-            
-            const distSq = v.lengthSq()
-            if (distSq > maxDistSq) {
-              maxDistSq = distSq
-              tailLocal.copy(v)
-            }
-          }
-        }
-      })
-
-      const N = tailLocal.clone().normalize()
-      if (N.lengthSq() === 0) N.set(0, 0, 1) 
-      
-      let tip_d = Infinity
-      let tail_d = -Infinity
-      for (const v of vertices) {
-        const d = v.dot(N)
-        if (d < tip_d) tip_d = d
-        if (d > tail_d) tail_d = d
-      }
-
-      const L_total = tail_d - tip_d
-      const margin = L_total * 0.05 
-      coordsRef.current = { start: tail_d + margin, end: tip_d - margin }
-      dirRef.current.copy(N)
-    }
+    // Prevent Three.js auto-hide/show lag
+    scene1.visible = true
+    if (scene2) scene2.visible = true
   }, [scene1, scene2, isAnimated, isCenterExpand])
 
-  useFrame(() => {
-    if (!isAnimated) return
-    const durationMs = animationSpeed * 1000
-    const t = (Date.now() % durationMs) / durationMs
-    let p = 0
-
-    if (isCenterExpand && scene2) {
-      const R = maxRadiusRef.current
-      let d = 0
-      let phase = 1
-
-      if (t < 0.4) {
-        p = t / 0.4
-        d = THREE.MathUtils.lerp(-0.01, R, p)
-        phase = 1
-      } else if (t < 0.5) {
-        d = R
-        phase = 1
-      } else if (t < 0.9) {
-        p = (t - 0.5) / 0.4
-        // Chuyển động biến mất từ tâm ra: lỗ hổng ở giữa to dần từ 0 đến R
-        d = THREE.MathUtils.lerp(-0.01, R, p)
-        phase = 2
-      } else {
-        d = R
-        phase = 2
+  useFrame((state) => {
+    const update = (mats: any[], phase: number, radius: number, linearX: number) => {
+      for (let i = 0; i < mats.length; i++) {
+        mats[i].userData.uClipPhase.value = phase
+        mats[i].userData.uClipRadius.value = radius
+        mats[i].userData.uLinearClipX.value = linearX
       }
+    }
 
-      if (phase === 1) {
-        scene1.visible = true
-        scene2.visible = false
-        
-        const normals1 = [
-          new THREE.Vector3(1, 0, 0), new THREE.Vector3(-1, 0, 0),
-          new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, -1),
-          new THREE.Vector3(s, 0, s), new THREE.Vector3(-s, 0, s),
-          new THREE.Vector3(s, 0, -s), new THREE.Vector3(-s, 0, -s)
-        ]
-        
-        for (let i = 0; i < 8; i++) {
-          const p = new THREE.Plane(normals1[i], d)
-          planes1Ref.current[i].copy(p).applyMatrix4(scene1.matrixWorld)
-        }
+    if (!isAnimated) {
+      update(mats1Ref.current, 0, 0, 0)
+      if (scene2) update(mats2Ref.current, -1, 0, 0)
+      return
+    }
+
+    const t = (state.clock.elapsedTime * animationSpeed) % 1
+    const R = maxRadiusRef.current
+
+    if (isCenterExpand) {
+      if (t < 0.4) {
+        update(mats1Ref.current, 1, (t / 0.4) * R, 0)
+        update(mats2Ref.current, -1, 0, 0)
+      } else if (t < 0.5) {
+        update(mats1Ref.current, 1, R, 0)
+        update(mats2Ref.current, -1, 0, 0)
+      } else if (t < 0.9) {
+        update(mats1Ref.current, -1, 0, 0)
+        update(mats2Ref.current, 2, ((t - 0.5) / 0.4) * R, 0)
       } else {
-        scene1.visible = false
-        scene2.visible = true
-        
-        const normals2 = [
-          new THREE.Vector3(-1, 0, 0), new THREE.Vector3(1, 0, 0),
-          new THREE.Vector3(0, 0, -1), new THREE.Vector3(0, 0, 1),
-          new THREE.Vector3(-s, 0, -s), new THREE.Vector3(s, 0, -s),
-          new THREE.Vector3(-s, 0, s), new THREE.Vector3(s, 0, s)
-        ]
-        
-        for (let i = 0; i < 8; i++) {
-          const p = new THREE.Plane(normals2[i], -d)
-          planes2Ref.current[i].copy(p).applyMatrix4(scene1.matrixWorld)
-        }
+        update(mats1Ref.current, -1, 0, 0)
+        update(mats2Ref.current, -1, 0, 0)
       }
     } else {
-      const { start, end } = coordsRef.current
-      const N = dirRef.current
-      const localPlane = new THREE.Plane()
-      
       if (t < 0.4) {
-        p = t / 0.4
-        localPlane.normal.copy(N).negate()
-        localPlane.constant = THREE.MathUtils.lerp(start, end, p)
+        update(mats1Ref.current, 3, 0, R - (t / 0.4) * (2 * R))
+        update(mats2Ref.current, -1, 0, 0)
       } else if (t < 0.5) {
-        localPlane.normal.copy(N).negate()
-        localPlane.constant = end
+        update(mats1Ref.current, 3, 0, -R)
+        update(mats2Ref.current, -1, 0, 0)
       } else if (t < 0.9) {
-        p = (t - 0.5) / 0.4
-        localPlane.normal.copy(N)
-        localPlane.constant = -THREE.MathUtils.lerp(start, end, p)
+        update(mats1Ref.current, 4, 0, R - ((t - 0.5) / 0.4) * (2 * R))
+        update(mats2Ref.current, -1, 0, 0)
       } else {
-        localPlane.normal.copy(N)
-        localPlane.constant = -end
+        update(mats1Ref.current, -1, 0, 0)
+        update(mats2Ref.current, -1, 0, 0)
       }
-
-      planes1Ref.current[0].copy(localPlane).applyMatrix4(scene1.matrixWorld)
     }
   })
 
   return null
 }
 
-function ModelMesh({ url, color, opacity = 1, id, isAnimated, animationSpeed, castShadow = false }: { url: string, color?: string, opacity?: number, id: string, isAnimated?: boolean, animationSpeed?: number, castShadow?: boolean }) {
-  const { invalidate } = useThree()
-  const gltf = useGLTF(url)
-  const { latitude, longitude, activeMonth, monthDates, timeOfDay, northOffset, timezoneMode, utcOffset, dstMode, sunpathSettings } = useEditorStore()
-  
-  const isDaytime = useMemo(() => {
-    const safeLat = latitude || 21.0285
-    const safeLng = longitude || 105.8542
-    const safeTime = timeOfDay || 12
-    const currentUtc = calculateUtcOffset(safeLng, safeLat, timezoneMode, utcOffset)
-    const day = getDayOfYear(activeMonth || 6, monthDates?.[activeMonth] ?? 21)
-    const sunPos = getSunPosition(day, safeTime, safeLat, safeLng, currentUtc, dstMode, 100)
-    return sunPos.y >= -0.5 // If sun is above horizon
-  }, [latitude, longitude, activeMonth, monthDates, timeOfDay, timezoneMode, utcOffset, dstMode])
+export function SvgMesh({ url, color, opacity = 1, id, isAnimated, animationSpeed = 1 }: { url: string, color?: string, opacity?: number, id: string, isAnimated?: boolean, animationSpeed?: number }) {
+  const uiTheme = useEditorStore(state => state.uiTheme)
+  const isLight = uiTheme === 'light'
+  const [svg, setSvg] = useState<any>(null)
   
   const isCenterExpand = useMemo(() => {
     const upper = url.toUpperCase()
-    return upper.includes('CIRCLE') || upper.includes('NOISE') || upper.includes('STORM')
+    return !(upper.includes('ARROW') || upper.includes('WIND'))
+  }, [url])
+  
+  useEffect(() => {
+    const loader = new SVGLoader()
+    loader.load(url, (data) => setSvg(data), undefined, (err) => {
+      console.error("SVGLoader error:", err)
+    })
   }, [url])
 
-  const isSunpath = useMemo(() => url.toUpperCase().includes('SUNPATH'), [url])
-  const sunpathClipPlane = useMemo(() => new THREE.Plane(new THREE.Vector3(0, 1, 0), 0.1), [])
-
-  const scene1 = useMemo(() => {
-    const cloned = gltf.scene.clone()
-    cloned.traverse((child: any) => {
-      child.userData = { ...child.userData, id }
-      if (child.isMesh || child.isLine || child.isLineSegments) {
-        if (child.isMesh) {
-          child.castShadow = isSunpath ? false : castShadow
-          child.receiveShadow = isSunpath ? false : true
-        }
-        
-        if (child.material) {
-          child.material = child.material.clone()
-          
-          const materials = Array.isArray(child.material) ? child.material : [child.material]
-          
-          const isDefaultWhite = color && color.toLowerCase() === '#ffffff'
-          
-          materials.forEach((mat: any) => {
-            if (color) {
-              if (isSunpath && isDefaultWhite) {
-                // If sunpath and color is default white:
-                // Only color the lines white (because SketchUp lines are black and won't show on dark bg)
-                if (child.isLine || child.isLineSegments) {
-                  if (mat.color) mat.color.set(color)
-                }
-              } else if (!isSunpath && isDefaultWhite && (child.isLine || child.isLineSegments)) {
-                // For normal models in "negative mode" (white):
-                // Change edges to dark blue if daytime, else white
-                if (mat.color) {
-                  if (isDaytime) {
-                    mat.color.setRGB(35/255, 49/255, 86/255)
-                  } else {
-                    mat.color.set(color)
-                  }
-                }
-              } else {
-                // Otherwise apply chosen color to everything
-                if (mat.color) mat.color.set(color)
-              }
-            }
-            
-            if (child.isMesh) {
-              mat.side = THREE.DoubleSide
-              mat.clipIntersection = false
-            }
-            
-            if (opacity < 1) {
-              mat.transparent = true
-              mat.opacity = opacity
-            } else {
-              mat.transparent = false
-              mat.opacity = 1
-            }
-            
-            if (isSunpath) {
-              mat.clippingPlanes = [sunpathClipPlane]
-              mat.clipShadows = false
-              mat.needsUpdate = true
-            }
-          })
-        }
+  const createScene = () => {
+    const group = new THREE.Group()
+    let boundingBox = new THREE.Box3()
+    if (!svg) return group
+    
+    const createMaterial = (colorVal: string) => {
+      const matOpacity = opacity
+      const mat = new THREE.MeshBasicMaterial({
+        color: colorVal,
+        side: THREE.DoubleSide,
+        opacity: matOpacity,
+        transparent: matOpacity < 1,
+        depthWrite: matOpacity === 1,
+      })
+      mat.userData = {
+        uClipPhase: { value: 0 },
+        uClipRadius: { value: 0 },
+        uLinearClipX: { value: 0 },
       }
-    })
-    return cloned
-  }, [gltf, color, opacity, id, castShadow, isSunpath, sunpathClipPlane])
-
-  const scene2 = useMemo(() => {
-    if (!isCenterExpand) return null
-    const cloned = gltf.scene.clone()
-    cloned.traverse((child: any) => {
-      child.userData = { ...child.userData, id }
-      if (child.isMesh) {
-        child.castShadow = castShadow
-        child.receiveShadow = true
+      mat.onBeforeCompile = (shader) => {
+        shader.uniforms.uClipPhase = mat.userData.uClipPhase
+        shader.uniforms.uClipRadius = mat.userData.uClipRadius
+        shader.uniforms.uLinearClipX = mat.userData.uLinearClipX
         
-        if (child.material) {
-          child.material = child.material.clone()
-          if (color) child.material.color.set(color)
-          child.material.side = THREE.DoubleSide 
-          child.material.clipIntersection = true 
-          
-          if (opacity < 1) {
-            child.material.transparent = true
-            child.material.opacity = opacity
-          } else {
-            child.material.transparent = false
-            child.material.opacity = 1
+        shader.vertexShader = `
+          varying vec3 vLocalPosition;
+          ${shader.vertexShader}
+        `.replace(
+          `#include <begin_vertex>`,
+          `#include <begin_vertex>
+          vLocalPosition = position;
+          `
+        )
+        
+        shader.fragmentShader = `
+          uniform int uClipPhase;
+          uniform float uClipRadius;
+          uniform float uLinearClipX;
+          varying vec3 vLocalPosition;
+          ${shader.fragmentShader}
+        `.replace(
+          `#include <clipping_planes_fragment>`,
+          `#include <clipping_planes_fragment>
+          if (uClipPhase == -1) {
+            discard;
+          } else if (uClipPhase == 1) {
+            if (length(vLocalPosition.xy) > uClipRadius) discard;
+          } else if (uClipPhase == 2) {
+            if (length(vLocalPosition.xy) < uClipRadius) discard;
+          } else if (uClipPhase == 3) {
+            if (vLocalPosition.x < uLinearClipX) discard;
+          } else if (uClipPhase == 4) {
+            if (vLocalPosition.x > uLinearClipX) discard;
           }
-        }
+          `
+        )
+      }
+      return mat
+    }
+
+    svg.paths.forEach((path: any) => {
+      const fillColor = path.userData?.style?.fill
+      const isFill = fillColor !== undefined && fillColor !== 'none'
+      const strokeColor = path.userData?.style?.stroke
+      const isStroke = strokeColor !== undefined && strokeColor !== 'none'
+      
+      if (isFill) {
+        const material = createMaterial(color || (isLight ? 'rgb(35, 49, 86)' : fillColor))
+        const shapes = SVGLoader.createShapes(path as any)
+        shapes.forEach((shape: any) => {
+          const geometry = new THREE.ShapeGeometry(shape, 64)
+          geometry.computeBoundingBox()
+          if (geometry.boundingBox) boundingBox.union(geometry.boundingBox)
+          const mesh = new THREE.Mesh(geometry, material)
+          mesh.userData = { id, originalColor: isLight ? 'rgb(35, 49, 86)' : fillColor }
+          group.add(mesh)
+        })
+      }
+      if (isStroke) {
+        const material = createMaterial(color || (isLight ? 'rgb(35, 49, 86)' : strokeColor))
+        path.subPaths.forEach((subPath: any) => {
+          const geometry = SVGLoader.pointsToStroke(subPath.getPoints(64), path.userData?.style)
+          if (geometry) {
+            geometry.computeBoundingBox()
+            if (geometry.boundingBox) boundingBox.union(geometry.boundingBox)
+            const mesh = new THREE.Mesh(geometry, material)
+            mesh.userData = { id, originalColor: isLight ? 'rgb(35, 49, 86)' : strokeColor }
+            group.add(mesh)
+          }
+        })
       }
     })
-    return cloned
-  }, [gltf, color, opacity, id, isCenterExpand, castShadow, isDaytime])
+    
+    const size = new THREE.Vector3()
+    const center = new THREE.Vector3()
+    if (!boundingBox.isEmpty()) {
+      boundingBox.getSize(size)
+      boundingBox.getCenter(center)
+      group.children.forEach(mesh => {
+        (mesh as THREE.Mesh).geometry.translate(-center.x, -center.y, -center.z)
+      })
+      const maxDim = Math.max(size.x, size.y)
+      if (maxDim > 0) {
+        const scale = 5 / maxDim
+        group.scale.set(scale, -scale, scale) // Flip Y to fix upside down SVG
+      }
+    }
+    const wrapper = new THREE.Group()
+    wrapper.add(group)
+    wrapper.rotation.x = -Math.PI / 2
+    return wrapper
+  }
+
+  const scene1 = useMemo(() => createScene(), [svg, id, isCenterExpand, isLight])
+  const scene2 = useMemo(() => isCenterExpand ? createScene() : null, [svg, id, isCenterExpand, isLight])
 
   useEffect(() => {
-    const upperUrl = (url || '').toUpperCase()
-    if (upperUrl.includes('SUNPATH')) {
-      const safeLat = latitude || 21.0285
-      const safeNorth = northOffset || 0
-      const latRad = THREE.MathUtils.degToRad(safeLat)
-      const northRad = THREE.MathUtils.degToRad(safeNorth)
-      
-      scene1.rotation.set(0, northRad, 0)
-      
-      const months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
-      const rotatingNodes = new Set()
-
-      scene1.traverse((child: any) => {
-        if (child === scene1) return
-        
-        // Save original transforms once for pivot math
-        if (!child.userData.originalPosition) {
-           child.userData.originalPosition = child.position.clone()
-           child.userData.originalQuaternion = child.quaternion.clone()
-        }
-
-        const name = (child.name || '').toUpperCase()
-
-        // Apply Toggles from sunpathSettings
-        if (sunpathSettings) {
-          if (name.includes('SKY')) child.visible = sunpathSettings.showSky
-          else if (name.includes('COMPASS')) child.visible = sunpathSettings.showCompass
-          else if (months.some(m => name.includes(m))) child.visible = sunpathSettings.showMonths
-          else if (name.includes('DASHLINE') || name.includes('ANALEMMA')) child.visible = sunpathSettings.showAnalemma
-          else if (name.includes('HOURLY') || name.includes('SUN-POSITION') || name.includes('SUN_POSITION')) child.visible = sunpathSettings.showHourlySun
-          else if (name.includes('TEXT') || name.includes('LABEL')) child.visible = sunpathSettings.showText
-        }
-
-        // Avoid double rotation: if parent is already rotated, child naturally inherits it
-        if (rotatingNodes.has(child.parent)) {
-           rotatingNodes.add(child)
-           return
-        }
-
-        // Identify components that should rotate based on latitude
-        const shouldRotate = name.includes('SKY') || 
-                             months.some(m => name.includes(m)) || 
-                             name.includes('DASHLINE') || 
-                             name.includes('ANALEMMA') || 
-                             name.includes('HOURLY') || 
-                             name.includes('SUN-POSITION') || 
-                             name.includes('SUN_POSITION')
-
-        if (shouldRotate) {
-           rotatingNodes.add(child)
-           
-           // Restore to original before applying new rotation
-           child.position.copy(child.userData.originalPosition)
-           child.quaternion.copy(child.userData.originalQuaternion)
-           
-           // Orbit around parent's origin (0,0,0)
-           child.position.applyAxisAngle(new THREE.Vector3(1, 0, 0), latRad)
-           
-           // Rotate orientation in parent space
-           const q = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), latRad)
-           child.quaternion.premultiply(q)
+    const updateMaterials = (scene: THREE.Group) => {
+      scene.traverse((child: any) => {
+        if (child.isMesh && child.material) {
+          const origColor = child.userData.originalColor
+          if (color) {
+            child.material.color.set(color)
+          } else if (origColor) {
+            child.material.color.set(origColor)
+          }
+          child.material.opacity = opacity
+          child.material.transparent = opacity < 1
+          child.material.depthWrite = opacity === 1
+          child.material.needsUpdate = true
         }
       })
-      
-      invalidate() // Force a re-render to reflect visibility changes
     }
-  }, [scene1, latitude, northOffset, url, sunpathSettings, invalidate])
-
+    if (scene1) updateMaterials(scene1)
+    if (scene2) updateMaterials(scene2)
+  }, [color, opacity, scene1, scene2])
   const boundingBox = useMemo(() => {
-    // Clone scene to calculate correct initial bounding box without scaling issues
-    const tempScene = scene1.clone()
-    const box = new THREE.Box3().setFromObject(tempScene)
+    const box = new THREE.Box3().setFromObject(scene1)
     const size = box.getSize(new THREE.Vector3())
     const center = box.getCenter(new THREE.Vector3())
-    
-    // Make sure we have a minimum size for flat planes or lines
     if (size.x < 0.1) size.x = 2
     if (size.y < 0.1) size.y = 2
     if (size.z < 0.1) size.z = 2
-    
     return { size, center }
   }, [scene1])
 
   useEffect(() => {
-    // Dọn dẹp bộ nhớ (Garbage Collection) cho GPU khi xoá đối tượng
     return () => {
-      scene1.traverse((child: any) => {
-        if (child.isMesh && child.material) child.material.dispose()
-      })
-      if (scene2) {
-        scene2.traverse((child: any) => {
-          if (child.isMesh && child.material) child.material.dispose()
-        })
-      }
+      scene1.traverse((child: any) => { if (child.isMesh) { child.geometry?.dispose(); child.material?.dispose(); } })
+      if (scene2) scene2.traverse((child: any) => { if (child.isMesh) { child.geometry?.dispose(); child.material?.dispose(); } })
     }
   }, [scene1, scene2])
 
   return (
-    <>
+    <group>
+      <Animator scene1={scene1} scene2={scene2 || undefined} isAnimated={isAnimated} animationSpeed={animationSpeed} isCenterExpand={isCenterExpand} />
       <primitive key={`${url}-1`} object={scene1} />
       {scene2 && <primitive key={`${url}-2`} object={scene2} />}
-      <Animator scene1={scene1} scene2={scene2 || undefined} isAnimated={isAnimated} animationSpeed={animationSpeed} url={url} />
-      
-      {/* Hitbox cho việc chọn dễ dàng hơn */}
       <mesh position={boundingBox.center}>
         <boxGeometry args={[boundingBox.size.x * 1.5, boundingBox.size.y * 1.5, boundingBox.size.z * 1.5]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} colorWrite={false} side={THREE.DoubleSide} />
       </mesh>
-    </>
+    </group>
   )
 }
 
@@ -464,11 +319,11 @@ let isCtrlPressed = false
 if (typeof window !== 'undefined') {
   window.addEventListener('keydown', e => { if (e.key === 'Control' || e.metaKey) isCtrlPressed = true })
   window.addEventListener('keyup', e => { if (e.key === 'Control' || e.metaKey) isCtrlPressed = false })
-  // Đảm bảo không bị kẹt phím nếu đổi cửa sổ
+  // Prevent key sticking when switching windows
   window.addEventListener('blur', () => { isCtrlPressed = false })
 }
 
-export default function ModelLoader({ id, url, position, rotation, scale, color, opacity, castShadow }: ModelLoaderProps) {
+export default function ModelLoader({ id, url, position, rotation, scale, color, opacity }: ModelLoaderProps) {
   const transformMode = useEditorStore((state) => state.transformMode)
   const selectedIds = useEditorStore((state) => state.selectedIds)
   const setSelectedIds = useEditorStore((state) => state.setSelectedIds)
@@ -482,7 +337,6 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
   const isAnimated = objData?.isAnimated
   const animationSpeed = objData?.animationSpeed
   const objOpacity = objData?.opacity ?? opacity ?? 1
-  const objCastShadow = objData?.castShadow ?? castShadow ?? false
   
   const groupRef = useRef<THREE.Group>(null)
   
@@ -518,6 +372,25 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
           mode={transformMode as 'translate' | 'rotate' | 'scale'}
           onMouseDown={handleTransformStart}
           onMouseUp={handleTransformEnd}
+          onObjectChange={(e: any) => {
+            const ctrl = e?.target;
+            if (ctrl && ctrl.mode === 'scale' && ctrl.axis && groupRef.current) {
+              const axis = ctrl.axis;
+              if (axis === 'XY' || axis === 'YZ' || axis === 'XZ') {
+                const s = groupRef.current.scale;
+                if (axis === 'XY') {
+                  const maxS = Math.max(Math.abs(s.x), Math.abs(s.y));
+                  s.set(maxS * Math.sign(s.x), maxS * Math.sign(s.y), s.z);
+                } else if (axis === 'YZ') {
+                  const maxS = Math.max(Math.abs(s.y), Math.abs(s.z));
+                  s.set(s.x, maxS * Math.sign(s.y), maxS * Math.sign(s.z));
+                } else if (axis === 'XZ') {
+                  const maxS = Math.max(Math.abs(s.x), Math.abs(s.z));
+                  s.set(maxS * Math.sign(s.x), s.y, maxS * Math.sign(s.z));
+                }
+              }
+            }
+          }}
         />
       )}
       
@@ -540,19 +413,24 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
           }
         }}
       >
-        <ErrorBoundary fallbackRender={() => (
+        <ErrorBoundary fallbackRender={({ error }) => (
           <group>
             <mesh>
-              <boxGeometry args={[10, 10, 10]} />
+              <boxGeometry args={[1, 1, 1]} />
               <meshStandardMaterial color="red" />
             </mesh>
+            <Html center position={[0, 1, 0]}>
+              <div style={{ background: 'white', color: 'red', padding: '5px', borderRadius: '4px', whiteSpace: 'nowrap', fontSize: '12px' }}>
+                {error?.message || String(error)}
+              </div>
+            </Html>
           </group>
         )} onError={(err) => console.error("ModelMesh Crash:", err)}>
-          <Suspense fallback={null}>
+          <Suspense fallback={<ForceUpdateFallback />}>
             {url.toUpperCase().includes('SUNPATH') ? (
               <NativeSunpath color={color} opacity={objOpacity} />
             ) : (
-              <ModelMesh url={url} color={color} opacity={objOpacity} castShadow={objCastShadow} id={id} isAnimated={isAnimated} animationSpeed={animationSpeed} />
+              <SvgMesh url={url} color={color} opacity={objOpacity} id={id} isAnimated={isAnimated} animationSpeed={animationSpeed} />
             )}
           </Suspense>
         </ErrorBoundary>

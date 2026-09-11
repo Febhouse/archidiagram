@@ -18,7 +18,7 @@ export default function SunLight() {
   const calculatedUtcOffset = useMemo(() => calculateUtcOffset(longitude || 105.8542, latitude || 21.0285, timezoneMode, utcOffset), [longitude, latitude, timezoneMode, utcOffset])
 
   const sunPosition = useMemo(() => {
-    // Sử dụng chung 1 thuật toán với NativeSunpath để không bao giờ bị lệch múi giờ!
+    // Use the same algorithm as NativeSunpath to ensure timezone sync!
     const day = getDayOfYear(activeMonth || 6, monthDates?.[activeMonth] ?? 21)
     const pos = getSunPosition(day, timeOfDay, latitude || 21.0285, longitude || 105.8542, calculatedUtcOffset, dstMode, 100)
     
@@ -29,7 +29,7 @@ export default function SunLight() {
     return pos
   }, [latitude, longitude, activeMonth, monthDates, timeOfDay, northOffset, calculatedUtcOffset, dstMode])
   
-  // Dùng Ref để cập nhật vị trí đèn Directional mà không gây re-render component cha liên tục
+  // Use Ref to update Directional light position without causing constant parent component re-renders
   const lightRef = useRef<THREE.DirectionalLight>(null)
   
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function SunLight() {
     }
   }, [sunPosition])
 
-  // Nếu mặt trời lặn (y < 0), ta có thể giảm cường độ sáng hoặc tắt luôn để tránh hắt ngược từ dưới lên
+  // If the sun sets (y < 0), we can reduce intensity or turn it off to avoid bottom-up lighting
   const isNight = sunPosition.y < 0
   const intensity = isNight ? 0 : 1
 
@@ -48,7 +48,7 @@ export default function SunLight() {
         ref={lightRef}
         castShadow={shadowsEnabled}
         intensity={intensity}
-        // Để bóng râm bao phủ được diện tích rộng, ta cần tăng phạm vi của shadow camera
+        // Increase shadow camera range to cover a wider area
         shadow-camera-left={-50}
         shadow-camera-right={50}
         shadow-camera-top={50}

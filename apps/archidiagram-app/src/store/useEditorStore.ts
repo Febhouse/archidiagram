@@ -22,7 +22,7 @@ export interface SunpathSettings {
   showHourlySun: boolean
   showText: boolean
   sunSize: number
-  textSize: number
+  sunpathScale: number
   sunpathThickness: number
   compassThickness: number
   sunpathDashSize: number
@@ -51,9 +51,36 @@ interface EditorState {
   dstMode: 'auto' | 'off' | 'on'
   showHUD: boolean
   hudPosition: 'top-left' | 'top-center' | 'top-right' | 'middle-left' | 'middle-center' | 'middle-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'
+  hudScale: number
   uiTheme: 'light' | 'dark'
-  setEnvironment: (env: Partial<Pick<EditorState, 'latitude' | 'longitude' | 'activeMonth' | 'monthDates' | 'visibleMonths' | 'monthColorsLight' | 'monthColorsDark' | 'timeOfDay' | 'northOffset' | 'shadowsEnabled' | 'timezoneMode' | 'utcOffset' | 'dstMode' | 'showHUD' | 'hudPosition' | 'uiTheme'>>) => void
+  globalTextSize: number
+  setEnvironment: (env: Partial<Pick<EditorState, 'latitude' | 'longitude' | 'activeMonth' | 'monthDates' | 'visibleMonths' | 'monthColorsLight' | 'monthColorsDark' | 'timeOfDay' | 'northOffset' | 'shadowsEnabled' | 'timezoneMode' | 'utcOffset' | 'dstMode' | 'showHUD' | 'hudPosition' | 'hudScale' | 'uiTheme' | 'globalTextSize'>>) => void
   toggleShadow: (ids: string[], castShadow: boolean) => void
+
+  // Mapbox Settings
+  showMapBackground: boolean
+  mapZoom: number
+  mapboxToken: string
+  mapStyle: string
+  mapOpacity: number
+  mapRadius: number
+  showScaleRings: boolean
+  scaleRingStep: number
+  scaleRingCount: number
+  scaleRingUnit: string
+  exportWidth: number
+  exportHeight: number
+  setShowMapBackground: (show: boolean) => void
+  setMapZoom: (zoom: number) => void
+  setMapboxToken: (token: string) => void
+  setMapStyle: (style: string) => void
+  setMapOpacity: (opacity: number) => void
+  setMapRadius: (radius: number) => void
+  setShowScaleRings: (show: boolean) => void
+  setScaleRingStep: (step: number) => void
+  setScaleRingCount: (count: number) => void
+  setScaleRingUnit: (unit: string) => void
+  setExportResolution: (width: number, height: number) => void
 
   // Sunpath Settings
   sunpathSettings: SunpathSettings
@@ -65,6 +92,7 @@ interface EditorState {
   legendItems: { id: string, name: string, iconUrl?: string, targetId?: string }[]
   addLegendItem: (item: { id: string, name: string, iconUrl?: string, targetId?: string }) => void
   removeLegendItem: (id: string) => void
+  updateLegendItemName: (id: string, name: string) => void
 
   showSunDiagramLayer: boolean
   showDynamicSymbolsLayer: boolean
@@ -84,8 +112,8 @@ interface EditorState {
   updateObjectTransform: (id: string, position: [number, number, number], rotation: [number, number, number], scale: [number, number, number]) => void
   updateObjectTransforms: (updates: { id: string, position: [number, number, number], rotation: [number, number, number], scale: [number, number, number] }[], commitHistory?: boolean) => void
   replaceObjectUrl: (ids: string[], newUrl: string) => void
-  updateObjectColor: (ids: string[], color: string) => void
-  updateObjectOpacity: (ids: string[], opacity: number) => void
+  updateObjectColor: (ids: string[], color: string, commitHistory?: boolean) => void
+  updateObjectOpacity: (ids: string[], opacity: number, commitHistory?: boolean) => void
   toggleAnimation: (ids: string[], isAnimated: boolean) => void
   updateAnimationSpeed: (ids: string[], speed: number) => void
   
@@ -121,17 +149,45 @@ export const useEditorStore = create<EditorState>()(
     1: '#cccccc', 2: '#cccccc', 3: '#cccccc', 4: '#cccccc', 5: '#cccccc', 
     6: '#ff0000', 7: '#cccccc', 8: '#cccccc', 9: '#00ff00', 10: '#cccccc', 
     11: '#cccccc', 12: '#0000ff', 13: '#ff0000', 14: '#ffffff', 15: '#999999', 
-    16: '#ffd700', 17: '#333333', 18: '#ffcc00'
+    16: '#ffd700', 17: '#000000', 18: '#ffcc00'
   },
   timeOfDay: 12, // 12:00 PM
   northOffset: 0,
   shadowsEnabled: false,
   timezoneMode: 'auto',
   utcOffset: 7,
-  dstMode: 'auto',
+  dstMode: 'off',
   showHUD: true,
   hudPosition: 'bottom-left',
+  hudScale: 1,
   uiTheme: 'light',
+  globalTextSize: 2,
+
+  // Mapbox Settings
+  showMapBackground: false,
+  mapZoom: 18,
+  mapboxToken: import.meta.env.VITE_MAPBOX_TOKEN || '',
+  mapStyle: 'light-v11',
+  mapOpacity: 0.3,
+  mapRadius: 250,
+  showScaleRings: true,
+  scaleRingStep: 10,
+  scaleRingCount: 5,
+  scaleRingUnit: 'm',
+
+  exportWidth: 1920,
+  exportHeight: 1080,
+  setShowMapBackground: (show) => set({ showMapBackground: show }),
+  setMapZoom: (zoom) => set({ mapZoom: zoom }),
+  setMapboxToken: (token) => set({ mapboxToken: token }),
+  setMapStyle: (style) => set({ mapStyle: style }),
+  setMapOpacity: (opacity) => set({ mapOpacity: opacity }),
+  setMapRadius: (radius) => set({ mapRadius: radius }),
+  setShowScaleRings: (show) => set({ showScaleRings: show }),
+  setScaleRingStep: (step) => set({ scaleRingStep: step }),
+  setScaleRingCount: (count) => set({ scaleRingCount: count }),
+  setScaleRingUnit: (unit) => set({ scaleRingUnit: unit }),
+  setExportResolution: (width, height) => set({ exportWidth: width, exportHeight: height }),
 
   // Sunpath default
   sunpathSettings: {
@@ -142,7 +198,7 @@ export const useEditorStore = create<EditorState>()(
     showHourlySun: true,
     showText: true,
     sunSize: 1.2,
-    textSize: 2,
+    sunpathScale: 1.0,
     sunpathThickness: 2,
     compassThickness: 1,
     sunpathDashSize: 1,
@@ -153,7 +209,22 @@ export const useEditorStore = create<EditorState>()(
     sunpathSettings: { ...state.sunpathSettings, ...settings }
   })),
 
-  setEnvironment: (env) => set((state) => ({ ...state, ...env })),
+  setEnvironment: (env) => set((state) => {
+    const nextState = { ...state, ...env }
+    
+    // Auto-sync map settings if uiTheme is being changed
+    if (env.uiTheme !== undefined && env.uiTheme !== state.uiTheme) {
+      if (env.uiTheme === 'dark') {
+        nextState.mapStyle = 'dark-v11'
+        nextState.mapOpacity = 1.0
+      } else {
+        nextState.mapStyle = 'light-v11'
+        nextState.mapOpacity = 0.3
+      }
+    }
+    
+    return nextState
+  }),
   setMonthColor: (month, color) => set((state) => {
     if (state.uiTheme === 'light') {
       return { monthColorsLight: { ...state.monthColorsLight, [month]: color } }
@@ -170,6 +241,7 @@ export const useEditorStore = create<EditorState>()(
   legendItems: [],
   addLegendItem: (item) => set((state) => ({ legendItems: [...state.legendItems, item] })),
   removeLegendItem: (id) => set((state) => ({ legendItems: state.legendItems.filter(i => i.id !== id) })),
+  updateLegendItemName: (id, name) => set((state) => ({ legendItems: state.legendItems.map(i => i.id === id ? { ...i, name } : i) })),
 
   showSunDiagramLayer: true,
   showDynamicSymbolsLayer: true,
@@ -190,17 +262,20 @@ export const useEditorStore = create<EditorState>()(
   setPlacingUrl: (url) => set({ placingUrl: url, selectedIds: [] }),
   
   addObject: (url, position = [0, 0, 0]) => set((state) => {
-    const isSunpath = url.toUpperCase().includes('SUNPATH')
+    const upperUrl = url.toUpperCase()
+    const isSunpath = upperUrl.includes('SUNPATH')
+    const isAnimatedSymbol = !isSunpath && (upperUrl.includes('ARROW') || upperUrl.includes('WIND') || upperUrl.includes('CIRCLE') || upperUrl.includes('NOISE') || upperUrl.includes('STORM'))
     const newObject: PlacedModel = {
       id: Math.random().toString(36).substring(2, 9),
       url,
       position,
       rotation: [0, 0, 0],
-      scale: isSunpath ? [0.1, 0.1, 0.1] : [1, 1, 1],
+      scale: isSunpath ? [0.1, 0.1, 0.1] : [2, 2, 2],
       color: isSunpath ? '#ffffff' : '#233156',
       opacity: isSunpath ? 1 : 0.7,
       castShadow: false,
-      isAnimated: !isSunpath // Mặc định bật Enable Animation cho Dynamic Symbols
+      isAnimated: isAnimatedSymbol,
+      animationSpeed: 1
     }
     return {
       past: [...state.past, state.objects],
@@ -249,10 +324,11 @@ export const useEditorStore = create<EditorState>()(
     }
   }),
 
-  updateObjectColor: (ids, color) => set((state) => {
+  updateObjectColor: (ids, color, commitHistory = true) => set((state) => {
     const newObjects = state.objects.map(obj => 
       ids.includes(obj.id) ? { ...obj, color } : obj
     )
+    if (!commitHistory) return { objects: newObjects }
     return {
       past: [...state.past, state.objects],
       future: [],
@@ -260,10 +336,11 @@ export const useEditorStore = create<EditorState>()(
     }
   }),
 
-  updateObjectOpacity: (ids, opacity) => set((state) => {
+  updateObjectOpacity: (ids, opacity, commitHistory = true) => set((state) => {
     const newObjects = state.objects.map(obj => 
       ids.includes(obj.id) ? { ...obj, opacity } : obj
     )
+    if (!commitHistory) return { objects: newObjects }
     return {
       past: [...state.past, state.objects],
       future: [],
@@ -357,8 +434,8 @@ export const useEditorStore = create<EditorState>()(
       past: [...state.past, state.objects],
       future: [],
       objects: [...state.objects, ...newObjects],
-      // Vẫn giữ nguyên selectedIds để người dùng tiếp tục kéo object cũ (bản gốc),
-      // bản sao sẽ nằm lại ở vị trí ban đầu.
+      // Keep selectedIds intact so the user continues to drag the original object,
+      // the duplicate will remain at the original position.
     }
   })
 }),

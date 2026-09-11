@@ -1,45 +1,36 @@
-import { useState, useMemo, Suspense, useRef, useEffect } from 'react'
+import { useState, Suspense, useRef, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Environment, useGLTF, TransformControls } from '@react-three/drei'
-import ModelLoader from './ModelLoader'
+import { OrbitControls, Environment, TransformControls, Grid } from '@react-three/drei'
+import ModelLoader, { SvgMesh } from './ModelLoader'
 import { useEditorStore } from '../store/useEditorStore'
 import * as THREE from 'three'
 import { ErrorBoundary } from './ErrorBoundary'
 
 import NativeSunpath from './NativeSunpath'
+import MapBackground from './MapBackground'
+import ScaleRings from './ScaleRings'
 
-function GLTFPreview({ url, position }: { url: string, position: [number, number, number] }) {
-  const gltf = useGLTF(url)
-  const scene = useMemo(() => {
-    const cloned = gltf.scene.clone()
-    cloned.traverse((c: any) => {
-      if (c.isMesh && c.material) {
-        c.material = c.material.clone()
-        c.material.transparent = true
-        c.material.opacity = 0.5
-      }
-    })
-    return cloned
-  }, [gltf])
-  return <primitive object={scene} position={position} />
-}
+
 
 function PreviewModel({ url, position }: { url: string, position: [number, number, number] }) {
-  if (url.toUpperCase().includes('SUNPATH')) {
-    return (
-      <group position={position}>
-        <NativeSunpath opacity={0.5} />
-      </group>
-    )
-  }
-  return <GLTFPreview url={url} position={position} />
+  if (url.toUpperCase().includes('SUNPATH')) return null
+  
+  return (
+    <group position={position}>
+      <ErrorBoundary fallbackRender={() => null}>
+        <Suspense fallback={null}>
+          <SvgMesh url={url} opacity={0.5} id="preview" />
+        </Suspense>
+      </ErrorBoundary>
+    </group>
+  )
 }
 
 function PlacementManager() {
   const placingUrl = useEditorStore((state) => state.placingUrl)
   const setPlacingUrl = useEditorStore((state) => state.setPlacingUrl)
   const addObject = useEditorStore((state) => state.addObject)
-  const [pos, setPos] = useState<[number, number, number]>([0, 0, 0])
+  const [pos, setPos] = useState<[number, number, number] | null>(null)
 
   if (!placingUrl) return null
 
@@ -52,6 +43,7 @@ function PlacementManager() {
           e.stopPropagation()
           setPos([e.point.x, 0, e.point.z])
         }}
+        onPointerOut={() => setPos(null)}
         onClick={(e) => {
           e.stopPropagation()
           addObject(placingUrl, [e.point.x, 0, e.point.z])
@@ -62,21 +54,23 @@ function PlacementManager() {
         <meshBasicMaterial visible={false} />
       </mesh>
       
-      <ErrorBoundary 
-        fallbackRender={() => (
-          <mesh position={pos}>
-            <boxGeometry args={[2, 2, 2]} />
-            <meshStandardMaterial color="red" wireframe />
-          </mesh>
-        )}
-        onError={(err) => {
-          console.error("PreviewModel Crash:", err)
-        }}
-      >
-        <Suspense fallback={null}>
-          <PreviewModel url={placingUrl} position={pos} />
-        </Suspense>
-      </ErrorBoundary>
+      {pos && (
+        <ErrorBoundary 
+          fallbackRender={() => (
+            <mesh position={pos}>
+              <boxGeometry args={[2, 2, 2]} />
+              <meshStandardMaterial color="red" wireframe />
+            </mesh>
+          )}
+          onError={(err) => {
+            console.error("PreviewModel Crash:", err)
+          }}
+        >
+          <Suspense fallback={null}>
+            <PreviewModel url={placingUrl} position={pos} />
+          </Suspense>
+        </ErrorBoundary>
+      )}
     </>
   )
 }
@@ -91,7 +85,7 @@ function MultiTransformManager() {
   const initialPositions = useRef<{[id: string]: THREE.Vector3}>({})
   const isDragging = useRef(false)
 
-  // Cập nhật vị trí trọng tâm khi số lượng chọn thay đổi
+  // Update center of mass when selection count changes
   useEffect(() => {
     if (selectedIds.length > 1 && groupRef.current) {
       const center = new THREE.Vector3()
@@ -112,7 +106,7 @@ function MultiTransformManager() {
 
   if (selectedIds.length <= 1) return null
 
-  // Chức năng di chuyển nhiều đối tượng (hiện tại hỗ trợ Move)
+  // Multi-object move functionality
   return (
     <>
       <group ref={groupRef} />
@@ -130,7 +124,7 @@ function MultiTransformManager() {
         }}
         onChange={() => {
           if (isDragging.current && groupRef.current) {
-            // Đang kéo chuột -> cập nhật UI (không lưu lịch sử)
+            // Dragging -> update UI (do not save history)
             const delta = groupRef.current.position.clone().sub(initialGroupPos.current)
             const updates = selectedIds.map(id => {
               const obj = objects.find(o => o.id === id)
@@ -145,7 +139,7 @@ function MultiTransformManager() {
         onMouseUp={() => {
           if (!isDragging.current || !groupRef.current) return
           isDragging.current = false
-          // Nhả chuột -> Lưu lịch sử Undo/Redo
+          // Mouse released -> Save to Undo/Redo history
           const delta = groupRef.current.position.clone().sub(initialGroupPos.current)
           const updates = selectedIds.map(id => {
             const obj = objects.find(o => o.id === id)
@@ -162,7 +156,7 @@ function MultiTransformManager() {
 }
 
 import SunLight from './SunLight'
-import { useThree } from '@react-three/fiber'
+import { useThree, invalidate } from '@react-three/fiber'
 
 function CameraManager() {
   const { camera, controls } = useThree()
@@ -173,20 +167,21 @@ function CameraManager() {
   
   useEffect(() => {
     if (objects.length > prevLen.current) {
-      // Something was added. Check if it's sunpath
       const newObj = objects[objects.length - 1]
       if (newObj && newObj.url?.toUpperCase().includes('SUNPATH')) {
-        // Zoom all for sunpath (radius is ~25)
-        camera.position.set(40, 30, 40)
-        camera.lookAt(0, 0, 0)
-        if (controls) {
-          (controls as any).target.set(0, 0, 0)
-          ;(controls as any).update()
-        }
+        setTimeout(() => {
+          camera.position.set(40, 30, 40)
+          camera.lookAt(0, 0, 0)
+          if (controls) {
+            ;(controls as any).target.set(0, 0, 0)
+            ;(controls as any).update()
+          }
+          invalidate()
+        }, 100)
       }
+      prevLen.current = objects.length
     }
-    prevLen.current = objects.length
-  }, [objects.length, camera, controls])
+  }, [objects.length, camera, controls, invalidate])
 
   useEffect(() => {
     const onZoom = (e: any) => {
@@ -197,6 +192,7 @@ function CameraManager() {
       const dir = camera.position.clone().sub(target).normalize();
       camera.position.copy(target).add(dir.multiplyScalar(newDist));
       if (controls) (controls as any).update();
+      invalidate();
     }
     const onZoomAll = () => {
       camera.position.set(40, 30, 40)
@@ -205,6 +201,7 @@ function CameraManager() {
         (controls as any).target.set(0, 0, 0)
         ;(controls as any).update()
       }
+      invalidate();
     }
     window.addEventListener('zoom-camera', onZoom)
     window.addEventListener('zoom-all', onZoomAll)
@@ -224,10 +221,11 @@ export default function Scene() {
   const monthColorsLight = useEditorStore(state => state.monthColorsLight)
   const monthColorsDark = useEditorStore(state => state.monthColorsDark)
   const monthColors = uiTheme === 'light' ? monthColorsLight : monthColorsDark
-  const bgColor = monthColors[17] || (uiTheme === 'light' ? '#ffffff' : '#333333')
+  const bgColor = monthColors[17] || (uiTheme === 'light' ? '#ffffff' : '#000000')
   const sunpathSettings = useEditorStore(state => state.sunpathSettings)
   const showSunDiagramLayer = useEditorStore(state => state.showSunDiagramLayer)
   const showDynamicSymbolsLayer = useEditorStore(state => state.showDynamicSymbolsLayer)
+  const mapRadius = useEditorStore(state => state.mapRadius)
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
@@ -238,7 +236,7 @@ export default function Scene() {
           background: bgColor, 
           cursor: transformMode === 'pan' ? 'grab' : 'default' 
         }}
-        gl={{ localClippingEnabled: true }}
+        gl={{ localClippingEnabled: true, preserveDrawingBuffer: true }}
         onCreated={({ gl }) => {
           gl.localClippingEnabled = true
         }}
@@ -262,11 +260,26 @@ export default function Scene() {
         
         
         {/* Grid and Axes */}
-        {sunpathSettings.showGrid && <gridHelper args={[200, 200, uiTheme === 'light' ? '#cccccc' : '#555555', uiTheme === 'light' ? '#eeeeee' : '#333333']} position={[0, -0.05, 0]} />}
-        {sunpathSettings.showAxes && <axesHelper args={[50]} position={[0, -0.04, 0]} />}
+        {sunpathSettings.showGrid && (
+          <Grid 
+            args={[mapRadius * 2, mapRadius * 2]} 
+            position={[0, -0.005, 0]} 
+            cellColor={uiTheme === 'light' ? '#cccccc' : '#555555'} 
+            sectionColor={uiTheme === 'light' ? '#aaaaaa' : '#777777'} 
+            cellSize={1} 
+            sectionSize={10} 
+            fadeDistance={mapRadius}
+            fadeStrength={1.5}
+            infiniteGrid={true}
+          />
+        )}
+        {sunpathSettings.showAxes && <axesHelper args={[50]} position={[0, -0.005, 0]} />}
 
-        {/* Mặt phẳng tàng hình chỉ để hứng bóng đổ */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.1, 0]} receiveShadow>
+        <MapBackground />
+        <ScaleRings />
+
+        {/* Invisible plane only to catch shadows */}
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
           <planeGeometry args={[1000, 1000]} />
           <shadowMaterial opacity={0.4} />
         </mesh>
@@ -274,17 +287,21 @@ export default function Scene() {
         <PlacementManager />
         <MultiTransformManager />
 
-        {objects.filter(obj => {
-          const isSunPath = obj.url.toUpperCase().includes('SUNPATH')
-          if (isSunPath) return showSunDiagramLayer
-          return showDynamicSymbolsLayer
-        }).map((obj) => (
+        {/* Global Sunpath Layer */}
+        {showSunDiagramLayer && (
+          <group scale={useEditorStore.getState().sunpathSettings?.sunpathScale ?? 1.0}>
+            <NativeSunpath opacity={1} />
+          </group>
+        )}
+
+        {/* Dynamic Symbols Layer */}
+        {showDynamicSymbolsLayer && objects.filter(obj => !obj.url.toUpperCase().includes('SUNPATH')).map((obj) => (
           <Suspense key={obj.id} fallback={null}>
-            <group onContextMenu={(e) => { e.stopPropagation(); useEditorStore.getState().setContextMenu({ x: e.clientX, y: e.clientY, type: obj.url.toUpperCase().includes('SUNPATH') ? 'sundiagram' : 'symbols', targetId: obj.id }) }}>
+            <group onContextMenu={(e) => { e.stopPropagation(); useEditorStore.getState().setContextMenu({ x: e.clientX, y: e.clientY, type: 'symbols', targetId: obj.id }) }}>
               <ModelLoader 
                 id={obj.id} 
                 url={obj.url} 
-                position={obj.position}
+                position={[obj.position[0], obj.position[1] + 0.1, obj.position[2]]}
                 rotation={obj.rotation}
                 scale={obj.scale}
                 color={obj.color}
