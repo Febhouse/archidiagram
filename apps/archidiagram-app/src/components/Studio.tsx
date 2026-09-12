@@ -1819,8 +1819,8 @@ export default function Studio() {
                             return <div style={{ fontSize: '0.8em', color: isLight ? '#9ca3af' : '#6b7280', textAlign: 'center', padding: '10px 0' }}>No new symbols to add.</div>
                           }
                           return availableObjects.map(obj => {
-                            const libraryModel = LIBRARY_MODELS.find(m => m.url === obj.url)
-                            const displayName = libraryModel ? libraryModel.name : 'Symbol'
+                            const libraryModelName = LIBRARY_MODELS.find(name => obj.url.includes(name))
+                            const displayName = libraryModelName || 'Symbol'
                             const isSvg = obj.url.toLowerCase().endsWith('.svg')
                             return (
                               <div 
