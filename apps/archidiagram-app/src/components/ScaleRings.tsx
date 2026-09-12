@@ -1,6 +1,6 @@
 import * as THREE from 'three'
-import { useMemo } from 'react'
-import { Text } from '@react-three/drei'
+import { useMemo, useState } from 'react'
+import { Text, useCursor } from '@react-three/drei'
 import { useEditorStore } from '../store/useEditorStore'
 
 export default function ScaleRings() {
@@ -9,6 +9,10 @@ export default function ScaleRings() {
   const scaleRingCount = useEditorStore(state => state.scaleRingCount)
   const scaleRingUnit = useEditorStore(state => state.scaleRingUnit)
   const uiTheme = useEditorStore(state => state.uiTheme)
+  const mapCenter = useEditorStore(state => state.mapCenter)
+
+  const [hovered, setHovered] = useState(false)
+  useCursor(hovered, 'pointer', 'auto')
 
   const lineMaterial = useMemo(() => {
     return new THREE.LineDashedMaterial({ 
@@ -42,7 +46,20 @@ export default function ScaleRings() {
   const textColor = uiTheme === 'light' ? '#111827' : '#f9fafb'
 
   return (
-    <group position={[0, 0.5, 0]}>
+    <group 
+      position={[0, 0.5, 0]}
+      onClick={(e: any) => {
+        e.stopPropagation();
+        window.dispatchEvent(new CustomEvent('focus-location'));
+      }}
+      onPointerOver={(e: any) => {
+        e.stopPropagation();
+        setHovered(true);
+      }}
+      onPointerOut={(e: any) => {
+        setHovered(false);
+      }}
+    >
       {ringGeometries.map(({ radius, geometry }) => {
 
         const label = `${radius}${scaleRingUnit}`

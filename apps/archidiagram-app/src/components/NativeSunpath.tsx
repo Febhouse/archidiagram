@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import * as THREE from 'three'
-import { Text, Billboard, Line } from '@react-three/drei'
+import { Text, Billboard, Line, useCursor } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { getMonthColor } from '../store/useEditorStore'
 
@@ -149,6 +149,9 @@ import { getDayOfYear } from './SunLight'
 
 export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
   const { latitude, longitude, activeMonth, monthDates, visibleMonths, monthColorsLight, monthColorsDark, timeOfDay, northOffset, sunpathSettings, timezoneMode, utcOffset, dstMode, shadowsEnabled, uiTheme, globalTextSize } = useEditorStore()
+
+  const [hovered, setHovered] = useState(false)
+  useCursor(hovered, 'pointer', 'auto')
 
   const safeLat = latitude || 21.0285
   const safeLng = longitude || 105.8542
@@ -316,7 +319,20 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
   }, [R, T])
 
   return (
-    <group rotation={[0, THREE.MathUtils.degToRad(northOffset || 0), 0]}>
+    <group 
+      rotation={[0, THREE.MathUtils.degToRad(northOffset || 0), 0]}
+      onClick={(e: any) => {
+        e.stopPropagation();
+        window.dispatchEvent(new CustomEvent('focus-sunpath'));
+      }}
+      onPointerOver={(e: any) => {
+        e.stopPropagation();
+        setHovered(true);
+      }}
+      onPointerOut={(e: any) => {
+        setHovered(false);
+      }}
+    >
       {sunpathSettings.showCompass && (
         <group>
           {compassGeoData.lines.map((pts, i) => (

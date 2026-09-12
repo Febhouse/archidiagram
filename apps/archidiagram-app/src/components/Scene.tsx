@@ -293,7 +293,7 @@ export default function Scene() {
         camera={{ position: [200, 150, 200], fov: 50 }} 
         style={{ 
           background: bgColor, 
-          cursor: transformMode === 'pan' ? 'grab' : 'default' 
+          cursor: transformMode === 'pan' ? 'grab' : 'auto' 
         }}
         gl={{ localClippingEnabled: true, preserveDrawingBuffer: true }}
         onCreated={({ gl }) => {

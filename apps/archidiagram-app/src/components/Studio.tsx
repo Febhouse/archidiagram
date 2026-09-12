@@ -93,17 +93,48 @@ export default function Studio() {
       const obj = objects.find(o => o.id === selectedIds[0])
       if (obj) {
         if (obj.url?.toUpperCase().includes('SUNPATH')) {
-          setActiveH2('sundiagram')
-          setSunTab('shadow')
+          if (showMobileMenu || !isMobile) {
+            setActiveH2('sundiagram')
+            setSunTab('shadow')
+          }
         } else {
           if (obj.color) setSelectedColor(obj.color)
           setSelectedOpacity(obj.opacity ?? 1)
-          setSymbolTab('properties') // auto open properties when selected
-          setActiveH2('symbols')
+          if (showMobileMenu || !isMobile) {
+            setSymbolTab('properties')
+            setActiveH2('symbols')
+          }
         }
       }
     }
-  }, [selectedIds, objects])
+  }, [selectedIds, objects, showMobileMenu, isMobile])
+
+  useEffect(() => {
+    const handleReFocus = (e: any) => {
+      const obj = objects.find(o => o.id === e.detail)
+      if (obj) {
+        if (obj.url?.toUpperCase().includes('SUNPATH')) {
+          if (showMobileMenu || !isMobile) { setActiveH2('sundiagram'); setSunTab('shadow'); }
+        } else {
+          if (showMobileMenu || !isMobile) { setActiveH2('symbols'); setSymbolTab('properties'); }
+        }
+      }
+    };
+    const handleSunpathFocus = () => {
+      if (showMobileMenu || !isMobile) { setActiveH2('sundiagram'); setSunTab('shadow'); }
+    };
+    const handleLocationFocus = () => {
+      if (showMobileMenu || !isMobile) { setActiveH2('location'); }
+    };
+    window.addEventListener('re-focus-object', handleReFocus);
+    window.addEventListener('focus-sunpath', handleSunpathFocus);
+    window.addEventListener('focus-location', handleLocationFocus);
+    return () => {
+      window.removeEventListener('re-focus-object', handleReFocus);
+      window.removeEventListener('focus-sunpath', handleSunpathFocus);
+      window.removeEventListener('focus-location', handleLocationFocus);
+    }
+  }, [objects, showMobileMenu, isMobile]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -142,9 +173,12 @@ export default function Studio() {
   const getModelUrl = (name: string) => name === 'SUNPATH' ? 'https://pub-5837f996e3144244a501515264ddf495.r2.dev/SUNPATH/my_model.glb' : `/images/dynamicsymbols/${name}.svg`
   const filteredModels = LIBRARY_MODELS.filter(name => name.toLowerCase().includes(searchTerm.toLowerCase()))
 
-  const H2Header = ({ id, title, icon }: { id: 'location' | 'sundiagram' | 'symbols' | 'import' | 'export', title: string, icon?: string | React.ReactNode }) => (
+  const H2Header = ({ id, title, icon, onToggle }: { id: 'location' | 'sundiagram' | 'symbols' | 'import' | 'export', title: string, icon?: string | React.ReactNode, onToggle?: () => void }) => (
     <div 
-      onClick={() => setActiveH2(activeH2 === id ? null : id)}
+      onClick={() => {
+        setActiveH2(activeH2 === id ? null : id);
+        if (onToggle) onToggle();
+      }}
       style={{ 
         padding: '12px 15px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         background: activeH2 === id ? (isLight ? '#e5e7eb' : '#333') : bgPanel,
@@ -169,7 +203,7 @@ export default function Studio() {
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
   return (
-    <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', width: '100vw', height: '100vh', overflow: 'hidden', fontFamily: '"Quicksand", sans-serif', background: bgMain, color: textMain }}>
+    <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', width: '100vw', height: '100dvh', overflow: 'hidden', fontFamily: '"Quicksand", sans-serif', background: bgMain, color: textMain }}>
       
 
       {/* Left Panel */}
@@ -859,7 +893,7 @@ export default function Studio() {
           )}
 
           {/* H2: Dynamic Symbols */}
-          <H2Header id="symbols" title="Dynamic Symbols" icon="/dynamic-symbols-logo.svg" />
+          <H2Header id="symbols" title="Dynamic Symbols" icon="/dynamic-symbols-logo.svg" onToggle={() => setSymbolTab('library')} />
           {activeH2 === 'symbols' && (
             <div style={{ background: isLight ? '#f9fafb' : '#1a1a1a', padding: '10px' }}>
               
@@ -886,7 +920,7 @@ export default function Studio() {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     style={{ width: '100%', padding: '8px', borderRadius: '4px', border: `1px solid ${inputBorder}`, background: inputBg, color: textMain, fontSize: '0.85rem' }}
                   />
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', maxHeight: 'calc(100vh - 400px)', overflowY: 'auto', paddingRight: '5px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '10px', maxHeight: 'calc(100dvh - 350px)', overflowY: 'auto', paddingRight: '5px' }}>
                     {filteredModels.map((modelName) => (
                       <LibraryItem 
                         key={modelName} 
@@ -919,6 +953,9 @@ export default function Studio() {
                     </div>
                   ) : (
                     <>
+                      <div style={{ fontSize: '0.75rem', color: textMuted, marginBottom: '5px', padding: '8px', background: isLight ? '#e5e7eb' : '#374151', borderRadius: '4px' }}>
+                        Tip: Switch to the <b>Library</b> tab and click <b>Replace</b> to change the object.
+                      </div>
                       <div>
                         <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px' }}>COLOR PALETTE</div>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -1700,7 +1737,7 @@ export default function Studio() {
         {/* Removed floating mobile menu toggle */}
 
         {/* TOOLBAR Overlay (Centered at top) */}
-        <div style={{ position: 'absolute', top: isMobile ? '10px' : '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 10, display: isMobile && showMobileMenu ? 'none' : 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px', background: bgPanel, padding: '8px', borderRadius: '8px', border: `1px solid ${borderCol}`, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', width: isMobile ? '90%' : 'auto' }}>
+        <div style={{ position: 'absolute', top: isMobile ? '10px' : '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 10, display: isMobile && (showMobileMenu || showGlobalMenu) ? 'none' : 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px', background: bgPanel, padding: '8px', borderRadius: '8px', border: `1px solid ${borderCol}`, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', width: isMobile ? '90%' : 'auto' }}>
           
           <div style={{ display: 'flex', gap: '5px', borderRight: `1px solid ${borderCol}`, paddingRight: '10px' }}>
             {['move', 'rotate', 'scale', 'pan', 'orbit'].map((mode) => {

@@ -1,5 +1,5 @@
 import { useRef, useMemo, Suspense, useEffect, useState } from 'react'
-import { TransformControls, useHelper, Html, useGLTF } from '@react-three/drei'
+import { TransformControls, useHelper, Html, useGLTF, useCursor } from '@react-three/drei'
 import { SVGLoader } from 'three-stdlib'
 import { useFrame } from '@react-three/fiber'
 import { useEditorStore } from '../store/useEditorStore'
@@ -380,6 +380,9 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
   
   const groupRef = useRef<THREE.Group>(null)
   
+  const [hovered, setHovered] = useState(false)
+  useCursor(hovered, 'pointer', 'auto')
+
   useHelper(isSelected ? (groupRef as any) : null, THREE.BoxHelper, '#3b82f6')
 
   const handleTransformStart = () => {
@@ -420,12 +423,20 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
         position={position}
         rotation={rotation}
         scale={scale}
+        onPointerOver={(e: any) => {
+          e.stopPropagation()
+          setHovered(true)
+        }}
+        onPointerOut={(e: any) => {
+          setHovered(false)
+        }}
         onClick={(e: any) => {
           e.stopPropagation()
           if (e.shiftKey) {
             setSelectedIds(selectedIds.includes(id) ? selectedIds.filter(s => s !== id) : [...selectedIds, id])
           } else {
             setSelectedIds([id])
+            window.dispatchEvent(new CustomEvent('re-focus-object', { detail: id }));
           }
         }}
         onPointerMissed={(e: any) => {
