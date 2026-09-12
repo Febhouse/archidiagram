@@ -6,6 +6,43 @@ import LibraryItem from './LibraryItem'
 import { isDstActive } from './NativeSunpath'
 import { getDayOfYear } from './SunLight'
 
+const TIMEZONES = [
+  { offset: -12, label: '(UTC-12:00) International Date Line West' },
+  { offset: -11, label: '(UTC-11:00) Coordinated Universal Time-11' },
+  { offset: -10, label: '(UTC-10:00) Hawaii' },
+  { offset: -9, label: '(UTC-09:00) Alaska' },
+  { offset: -8, label: '(UTC-08:00) Pacific Time (US & Canada)' },
+  { offset: -7, label: '(UTC-07:00) Mountain Time (US & Canada)' },
+  { offset: -6, label: '(UTC-06:00) Central Time (US & Canada)' },
+  { offset: -5, label: '(UTC-05:00) Eastern Time (US & Canada)' },
+  { offset: -4, label: '(UTC-04:00) Atlantic Time (Canada)' },
+  { offset: -3.5, label: '(UTC-03:30) Newfoundland' },
+  { offset: -3, label: '(UTC-03:00) Buenos Aires, Georgetown' },
+  { offset: -2, label: '(UTC-02:00) Coordinated Universal Time-02' },
+  { offset: -1, label: '(UTC-01:00) Azores' },
+  { offset: 0, label: '(UTC+00:00) London, Dublin, Lisbon' },
+  { offset: 1, label: '(UTC+01:00) Paris, Berlin, Rome, Madrid' },
+  { offset: 2, label: '(UTC+02:00) Cairo, Athens, Bucharest' },
+  { offset: 3, label: '(UTC+03:00) Moscow, Istanbul, Riyadh' },
+  { offset: 3.5, label: '(UTC+03:30) Tehran' },
+  { offset: 4, label: '(UTC+04:00) Dubai, Baku' },
+  { offset: 4.5, label: '(UTC+04:30) Kabul' },
+  { offset: 5, label: '(UTC+05:00) Islamabad, Karachi' },
+  { offset: 5.5, label: '(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi' },
+  { offset: 5.75, label: '(UTC+05:45) Kathmandu' },
+  { offset: 6, label: '(UTC+06:00) Dhaka, Almaty' },
+  { offset: 6.5, label: '(UTC+06:30) Yangon (Rangoon)' },
+  { offset: 7, label: '(UTC+07:00) Bangkok, Hanoi, Jakarta' },
+  { offset: 8, label: '(UTC+08:00) Beijing, Singapore, Hong Kong' },
+  { offset: 9, label: '(UTC+09:00) Tokyo, Seoul' },
+  { offset: 9.5, label: '(UTC+09:30) Adelaide, Darwin' },
+  { offset: 10, label: '(UTC+10:00) Sydney, Melbourne, Brisbane' },
+  { offset: 11, label: '(UTC+11:00) Solomon Is., New Caledonia' },
+  { offset: 12, label: '(UTC+12:00) Auckland, Wellington, Fiji' },
+  { offset: 13, label: '(UTC+13:00) Nuku\'alofa' },
+  { offset: 14, label: '(UTC+14:00) Kiritimati Island' },
+]
+
 export default function Studio() {
   const { 
     transformMode, setTransformMode, setPlacingUrl, placingUrl, 
@@ -62,13 +99,17 @@ export default function Studio() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const [showMobileMenu, setShowMobileMenu] = useState(true)
   const [isViewsExpanded, setIsViewsExpanded] = useState(window.innerWidth > 768)
+  const [isNotesExpanded, setIsNotesExpanded] = useState(window.innerWidth > 768)
   const [showGlobalMenu, setShowGlobalMenu] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth <= 768
       setIsMobile(mobile)
-      if (!mobile) setIsViewsExpanded(true)
+      if (!mobile) {
+        setIsViewsExpanded(true)
+        setIsNotesExpanded(true)
+      }
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
@@ -241,7 +282,7 @@ export default function Studio() {
               onClick={() => { setShowMobileMenu(!showMobileMenu); if (!showMobileMenu) setShowGlobalMenu(false); }}
               style={{ background: showMobileMenu ? '#3b82f6' : 'transparent', color: showMobileMenu ? '#fff' : textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s', display: isMobile ? 'block' : 'none' }}
             >
-              SETTINGS
+              TOOLS
             </button>
             <button 
               onClick={() => { setShowGlobalMenu(!showGlobalMenu); if (isMobile && !showGlobalMenu) setShowMobileMenu(false); }}
@@ -264,7 +305,7 @@ export default function Studio() {
                     useEditorStore.setState({ 
                       objects: [], past: [], future: [], selectedIds: [],
                       latitude: 21.0285, longitude: 105.8542,
-                      timezoneMode: 'auto', utcOffset: 8, dstMode: 'off'
+                      timezoneMode: 'auto', utcOffset: 8, dstMode: 'auto'
                     })
                     setActiveH2('sundiagram')
                     setSunTab('create')
@@ -432,7 +473,7 @@ export default function Studio() {
     </div>
   )}
 
-        <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', display: (!isMobile || showMobileMenu) ? 'block' : 'none' }}>
+        <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', display: (!isMobile || showMobileMenu) ? 'block' : 'none', paddingBottom: isMobile ? '100px' : '20px' }}>
           
           {/* H2: Location & Context */}
           <H2Header id="location" title="Location & Context" icon={
@@ -648,9 +689,17 @@ export default function Studio() {
                       </div>
                     </div>
                     {timezoneMode === 'manual' && (
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontSize: '0.9rem' }}>UTC Offset</span>
-                        <input type="number" min="-12" max="14" step="1" value={utcOffset} onChange={(e) => setEnvironment({ utcOffset: parseInt(e.target.value) })} style={{ width: '60px', padding: '4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} />
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                        <span style={{ fontSize: '0.9rem' }}>Time zone</span>
+                        <select 
+                          value={utcOffset} 
+                          onChange={(e) => setEnvironment({ utcOffset: parseFloat(e.target.value) })} 
+                          style={{ width: '100%', padding: '6px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', fontSize: '0.8rem' }}
+                        >
+                          {TIMEZONES.map(tz => (
+                            <option key={tz.offset} value={tz.offset}>{tz.label}</option>
+                          ))}
+                        </select>
                       </div>
                     )}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -678,7 +727,7 @@ export default function Studio() {
 
               {/* SHADOW ANALYSIS TAB */}
               {sunTab === 'shadow' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', padding: '5px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', padding: '5px', maxHeight: '400px', overflowY: 'auto' }}>
                   <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', background: bgPanel, padding: '10px', borderRadius: '4px', border: `1px solid ${borderCol}` }}>
                     <input type="checkbox" checked={shadowsEnabled} onChange={(e) => setEnvironment({ shadowsEnabled: e.target.checked })} />
                     <span style={{ marginLeft: '8px', fontWeight: 'bold' }}>Enable Environment Shadows</span>
@@ -707,7 +756,9 @@ export default function Studio() {
                     )}
                   </div>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: '400px', overflowY: 'auto', paddingRight: '5px' }}>
+                  <hr style={{ border: 'none', borderTop: `1px solid ${borderCol}`, margin: '0 5px' }} />
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingRight: '5px' }}>
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(m => {
                       const pairedMonth: Record<number, number> = { 1:11, 2:10, 3:9, 4:8, 5:7, 7:5, 8:4, 9:3, 10:2, 11:1 }
                       const pair = pairedMonth[m]
@@ -1297,22 +1348,24 @@ export default function Studio() {
                       let startX = hx + padding;
                       
                       targetCtx.font = `bold ${14 * scale}px Quicksand, sans-serif`;
-                      targetCtx.fillText('ARCHI DIAGRAM', startX, currentY);
-                      targetCtx.font = `${14 * scale}px Quicksand, sans-serif`;
-                      targetCtx.fillText(' by Febhouse', startX + targetCtx.measureText('ARCHI DIAGRAM').width, currentY);
+                      targetCtx.fillText('ARCHIDIAGRAM.COM', startX, currentY);
                       currentY += lineH;
                       
                       targetCtx.font = `${13 * scale}px Quicksand, sans-serif`;
                       targetCtx.fillText(`Location: ${store.latitude?.toFixed(4)}, ${store.longitude?.toFixed(4)}`, startX, currentY); currentY += lineH;
                       targetCtx.fillText(`Day: ${store.monthDates[store.activeMonth] || 21} ${monthNames[store.activeMonth - 1]}`, startX, currentY); currentY += lineH;
-                      targetCtx.fillText(`Time: ${Math.floor(store.timeOfDay || 12)}:${((store.timeOfDay || 12) % 1) >= 0.5 ? '30' : '00'}`, startX, currentY); currentY += lineH;
                       
                       const baseUtc = store.timezoneMode === 'auto' ? (Math.round((store.longitude || 105)/15)) : store.utcOffset;
                       const dayOfYear = getDayOfYear(store.activeMonth || 6, store.monthDates[store.activeMonth] || 21);
                       const isDst = isDstActive(dayOfYear, store.latitude || 21.0285, store.dstMode);
                       const actualUtc = baseUtc + (isDst ? 1 : 0);
-                      const utcStr = (actualUtc >= 0 ? `+${actualUtc}` : `${actualUtc}`) + (isDst ? ' (DST)' : '');
-                      targetCtx.fillText(`UTC: ${utcStr}`, startX, currentY); currentY += lineH;
+                      const utcVal = actualUtc >= 0 ? `+${actualUtc}` : `${actualUtc}`;
+                      const tzModeStr = store.timezoneMode === 'auto' ? 'Auto' : 'Manual';
+                      const dstModeStr = store.dstMode === 'auto' ? 'Auto' : 'Manual';
+                      const timeStr = `${Math.floor(store.timeOfDay || 12)}:${((store.timeOfDay || 12) % 1) >= 0.5 ? '30' : '00'}`;
+                      
+                      targetCtx.fillText(`Time: ${timeStr} (UTC${utcVal}) (${tzModeStr})`, startX, currentY); currentY += lineH;
+                      targetCtx.fillText(`DST: ${isDst ? 'On' : 'Off'} (${dstModeStr})`, startX, currentY); currentY += lineH;
                       
                       currentY += 5 * scale;
                       targetCtx.strokeStyle = isLight ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)';
@@ -1545,7 +1598,7 @@ export default function Studio() {
         <Scene />
         
         {/* Footer (Centered in Scene) */}
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '10px 15px', borderTop: `1px solid ${borderCol}`, fontSize: '0.75rem', color: textMuted, display: 'flex', flexWrap: 'wrap', gap: '10px', background: bgPanel, alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: isMobile ? '10px 15px 30px' : '10px 15px', borderTop: `1px solid ${borderCol}`, fontSize: '0.75rem', color: textMuted, display: 'flex', flexWrap: 'wrap', gap: '10px', background: bgPanel, alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
           <div>© 2026 Febhouse Studio</div>
           <div>|</div>
           <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Privacy Policy</a>
@@ -1562,7 +1615,7 @@ export default function Studio() {
             const posStyles: any = {}
             const [vert, horz] = (hudPosition || 'bottom-left').split('-')
             if (vert === 'top') posStyles.top = '20px'
-            else if (vert === 'bottom') posStyles.bottom = '60px'
+            else if (vert === 'bottom') posStyles.bottom = isMobile ? '90px' : '60px'
             else if (vert === 'middle') { posStyles.top = '50%'; posStyles.transform = 'translateY(-50%)' }
 
             if (horz === 'left') posStyles.left = '20px'
@@ -1597,25 +1650,43 @@ export default function Studio() {
                 position: 'absolute', ...posStyles, pointerEvents: 'auto',
                 background: isLight ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)',
                 color: isLight ? '#000' : '#fff',
-                padding: '10px 15px', borderRadius: '8px', 
-                fontSize: '0.85rem', 
-                zIndex: 10, display: 'flex', flexDirection: 'column', gap: '5px' 
+                borderRadius: '8px', overflow: 'hidden',
+                zIndex: 10, display: 'flex', flexDirection: 'column'
               }}>
-                <div><strong>ARCHI DIAGRAM</strong> by Febhouse</div>
-                <div>Location: {latitude?.toFixed(4)}, {longitude?.toFixed(4)}</div>
-                <div>Day: {monthDates[activeMonth] || 21} {monthNames[activeMonth - 1]}</div>
-                <div>Time: {Math.floor(timeOfDay || 12)}:{((timeOfDay || 12) % 1) >= 0.5 ? '30' : '00'}</div>
-                <div>UTC: {(() => {
-                  const baseUtc = timezoneMode === 'auto' ? (Math.round((longitude || 105)/15)) : utcOffset
-                  const dayOfYear = getDayOfYear(activeMonth || 6, monthDates[activeMonth] || 21)
-                  const isDst = isDstActive(dayOfYear, latitude || 21.0285, dstMode)
-                  const actualUtc = baseUtc + (isDst ? 1 : 0)
-                  return (actualUtc >= 0 ? `+${actualUtc}` : `${actualUtc}`) + (isDst ? ' (DST)' : '')
-                })()}</div>
+                <div 
+                  style={{ padding: '6px 15px', background: isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.1)', fontSize: '0.75rem', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', borderBottom: isNotesExpanded ? `1px solid ${isLight ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)'}` : 'none' }}
+                  onClick={() => setIsNotesExpanded(!isNotesExpanded)}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <span style={{ fontSize: '0.65rem' }}>{isNotesExpanded ? '▼' : '▶'}</span>
+                    NOTES
+                  </div>
+                </div>
                 
-                {/* Legend inside HUD */}
-                <div style={{ marginTop: '5px', paddingTop: '5px', borderTop: `1px solid ${isLight ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)'}`, display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                  <div style={{ fontWeight: 'bold', fontSize: '0.9em', marginBottom: '2px' }}>NOTES</div>
+                {isNotesExpanded && (
+                  <div style={{ padding: '10px 15px', fontSize: '0.85rem', display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                    <div><strong>ARCHIDIAGRAM.COM</strong></div>
+                    <div>Location: {latitude?.toFixed(4)}, {longitude?.toFixed(4)}</div>
+                    <div>Day: {monthDates[activeMonth] || 21} {monthNames[activeMonth - 1]}</div>
+                    {(() => {
+                      const baseUtc = timezoneMode === 'auto' ? (Math.round((longitude || 105)/15)) : utcOffset
+                      const dayOfYear = getDayOfYear(activeMonth || 6, monthDates[activeMonth] || 21)
+                      const isDst = isDstActive(dayOfYear, latitude || 21.0285, dstMode)
+                      const actualUtc = baseUtc + (isDst ? 1 : 0)
+                      const utcVal = actualUtc >= 0 ? `+${actualUtc}` : `${actualUtc}`
+                      const tzModeStr = timezoneMode === 'auto' ? 'Auto' : 'Manual'
+                      const dstModeStr = dstMode === 'auto' ? 'Auto' : 'Manual'
+                      const timeStr = `${Math.floor(timeOfDay || 12)}:${((timeOfDay || 12) % 1) >= 0.5 ? '30' : '00'}`
+                      return (
+                        <>
+                          <div>Time: {timeStr} (UTC{utcVal}) ({tzModeStr})</div>
+                          <div>DST: {isDst ? 'On' : 'Off'} ({dstModeStr})</div>
+                        </>
+                      )
+                    })()}
+                    
+                    {/* Legend inside HUD */}
+                    <div style={{ marginTop: '5px', paddingTop: '5px', borderTop: `1px solid ${isLight ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)'}`, display: 'flex', flexDirection: 'column', gap: '5px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9em' }}>
                     <div style={{ width: '30px', display: 'flex', justifyContent: 'center' }}>
                       <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#fbbf24' }}></div>
@@ -1696,7 +1767,9 @@ export default function Studio() {
                   ))}
                 </div>
               </div>
-            )
+            )}
+          </div>
+        )
           }
 
           return (
@@ -1760,17 +1833,46 @@ export default function Studio() {
 
           <div style={{ display: 'flex', gap: '5px' }}>
             <button
-              onClick={() => window.dispatchEvent(new CustomEvent('zoom-camera', { detail: -500 }))}
+              onClick={() => {
+                const state = useEditorStore.getState();
+                if (state.selectedIds.length > 0) {
+                  state.removeObjects(state.selectedIds);
+                }
+              }}
               onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
               onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-              style={{ padding: '6px 12px', fontSize: '0.85rem', background: 'transparent', color: textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
-            >ZOOM +</button>
+              style={{ padding: '6px 12px', background: 'transparent', border: `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer', color: '#ef4444', opacity: selectedIds.length > 0 ? 1 : 0.5 }}
+              title="Delete Selected"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
             <button
-              onClick={() => window.dispatchEvent(new CustomEvent('zoom-camera', { detail: 500 }))}
+              onClick={() => undo()}
               onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
               onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-              style={{ padding: '6px 12px', fontSize: '0.85rem', background: 'transparent', color: textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
-            >ZOOM -</button>
+              style={{ padding: '6px 12px', background: 'transparent', border: `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer', color: textMain }}
+              title="Undo"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 14 4 9 9 4"></polyline>
+                <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+              </svg>
+            </button>
+            <button
+              onClick={() => redo()}
+              onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+              style={{ padding: '6px 12px', background: 'transparent', border: `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer', color: textMain }}
+              title="Redo"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 14 20 9 15 4"></polyline>
+                <path d="M4 20v-7a4 4 0 0 1 4-4h12"></path>
+              </svg>
+            </button>
             <button
               onClick={() => window.dispatchEvent(new CustomEvent('zoom-all'))}
               onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
@@ -1878,7 +1980,7 @@ export default function Studio() {
         )}
 
         {/* Right Side Panels: Layers and Legend */}
-        <div style={{ position: 'absolute', bottom: isMobile ? '70px' : '60px', right: '10px', display: 'flex', flexDirection: 'column-reverse', gap: '15px', zIndex: 10 }}>
+        <div style={{ position: 'absolute', bottom: isMobile ? '100px' : '60px', right: '10px', display: 'flex', flexDirection: 'column-reverse', gap: '15px', zIndex: 10 }}>
           {/* Views Panel */}
           <div style={{ background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', overflow: 'hidden', width: isMobile ? '180px' : '220px' }}>
             <div 

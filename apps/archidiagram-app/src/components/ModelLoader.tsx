@@ -427,7 +427,7 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
           e.stopPropagation()
           setHovered(true)
         }}
-        onPointerOut={(e: any) => {
+        onPointerOut={() => {
           setHovered(false)
         }}
         onClick={(e: any) => {

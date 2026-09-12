@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import * as THREE from 'three'
-import { Text, Billboard, Line, useCursor } from '@react-three/drei'
+import { Text, Billboard, Line } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { getMonthColor } from '../store/useEditorStore'
 
@@ -98,8 +98,16 @@ export function calculateUtcOffset(longitude: number, latitude: number, mode: 'a
 export function isDstActive(dayOfYear: number, latitude: number, dstMode: 'auto' | 'on' | 'off') {
   if (dstMode === 'on') return true
   if (dstMode === 'off') return false
+  
+  // 'auto' mode logic
+  // Areas near the equator generally do not observe DST (e.g. Vietnam, India, most of Africa, Central America).
+  // We use 30 degrees latitude as a rough threshold for a simple heuristic.
+  if (Math.abs(latitude) < 30) {
+    return false;
+  }
+
   const month = new Date(new Date().getFullYear(), 0, dayOfYear).getMonth() + 1 // 1-12
-  if (latitude >= 0) {
+  if (latitude >= 30) {
     return month >= 4 && month <= 10
   } else {
     return month >= 10 || month <= 3
@@ -149,10 +157,6 @@ import { getDayOfYear } from './SunLight'
 
 export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
   const { latitude, longitude, activeMonth, monthDates, visibleMonths, monthColorsLight, monthColorsDark, timeOfDay, northOffset, sunpathSettings, timezoneMode, utcOffset, dstMode, shadowsEnabled, uiTheme, globalTextSize } = useEditorStore()
-
-  const [hovered, setHovered] = useState(false)
-  useCursor(hovered, 'pointer', 'auto')
-
   const safeLat = latitude || 21.0285
   const safeLng = longitude || 105.8542
   const R = 100 // Sky dome radius
@@ -252,7 +256,7 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
           month: m,
           points: points,
           suns: suns,
-          label: `${monthNamesFull[m - 1]} ${getDayStr(monthDates[m] || 21)} (UTC${utcString})`,
+          label: `${monthNamesFull[m - 1]} ${getDayStr(monthDates[m] || 21)} (UTC${utcString}${isDst ? ' DST' : ''})`,
           color: getMonthColor(m, safeLat, monthColors)
         })
       }
@@ -321,16 +325,10 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
   return (
     <group 
       rotation={[0, THREE.MathUtils.degToRad(northOffset || 0), 0]}
+      position={[0, 0.05, 0]}
       onClick={(e: any) => {
         e.stopPropagation();
         window.dispatchEvent(new CustomEvent('focus-sunpath'));
-      }}
-      onPointerOver={(e: any) => {
-        e.stopPropagation();
-        setHovered(true);
-      }}
-      onPointerOut={(e: any) => {
-        setHovered(false);
       }}
     >
       {sunpathSettings.showCompass && (
@@ -377,7 +375,7 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
                 <Billboard position={[0, S * 2.5, 0]}>
                   {/* @ts-ignore */}
                   <Text fontSize={T * 1.2} color={textColor} suspend={false}>
-                    {`${sun.h}h`}
+                    {sun.h}
                   </Text>
                 </Billboard>
               )}

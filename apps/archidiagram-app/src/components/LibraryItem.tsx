@@ -103,29 +103,22 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection 
         
         {/* Button container (fixed height) */}
         <div style={{ display: 'flex', gap: '5px', marginTop: '6px', height: '24px' }}>
-          {isHovered ? (
-            <>
-              <button 
-                onClick={(e) => { e.stopPropagation(); onAdd(modelName); }}
-                style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
-              >
-                + ADD
-              </button>
-              {hasSelection && (
-                <button 
-                  onClick={(e) => { e.stopPropagation(); onReplace(modelName); }}
-                  style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: isLight ? '#e5e7eb' : '#444', color: isLight ? '#111827' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-                >
-                  REPLACE
-                </button>
-              )}
-            </>
-          ) : (
-            <div style={{ width: '100%', height: '100%' }}></div> // Placeholder to maintain height
+          <button 
+            onClick={(e) => { e.stopPropagation(); onAdd(modelName); }}
+            style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            + ADD
+          </button>
+          {hasSelection && (
+            <button 
+              onClick={(e) => { e.stopPropagation(); onReplace(modelName); }}
+              style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: isLight ? '#e5e7eb' : '#444', color: isLight ? '#111827' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            >
+              REPLACE
+            </button>
           )}
         </div>
       </div>
     </div>
   )
 }
-

@@ -322,23 +322,20 @@ export default function Scene() {
         {sunpathSettings.showGrid && (
           <Grid 
             args={[mapRadius * 2, mapRadius * 2]} 
-            position={[0, -0.005, 0]} 
+            position={[0, -0.02, 0]} 
             cellColor={uiTheme === 'light' ? '#cccccc' : '#555555'} 
             sectionColor={uiTheme === 'light' ? '#aaaaaa' : '#777777'} 
             cellSize={1} 
-            sectionSize={10} 
-            fadeDistance={mapRadius}
-            fadeStrength={1.5}
             infiniteGrid={true}
           />
         )}
-        {sunpathSettings.showAxes && <axesHelper args={[50]} position={[0, -0.005, 0]} />}
+        {sunpathSettings.showAxes && <axesHelper args={[50]} position={[0, -0.02, 0]} />}
 
         <MapBackground />
         <ScaleRings />
 
         {/* Invisible plane only to catch shadows */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
           <planeGeometry args={[1000, 1000]} />
           <shadowMaterial opacity={0.4} />
         </mesh>
@@ -354,13 +351,13 @@ export default function Scene() {
         )}
 
         {/* Dynamic Symbols Layer */}
-        {showDynamicSymbolsLayer && objects.filter(obj => !obj.url.toUpperCase().includes('SUNPATH')).map((obj) => (
+        {showDynamicSymbolsLayer && objects.filter(obj => !obj.url.toUpperCase().includes('SUNPATH')).map((obj, index) => (
           <Suspense key={obj.id} fallback={null}>
             <group onContextMenu={(e) => { e.stopPropagation(); useEditorStore.getState().setContextMenu({ x: e.clientX, y: e.clientY, type: 'symbols', targetId: obj.id }) }}>
               <ModelLoader 
                 id={obj.id} 
                 url={obj.url} 
-                position={[obj.position[0], obj.position[1] + 0.1, obj.position[2]]}
+                position={[obj.position[0], obj.position[1] + 0.1 + (index * 0.001), obj.position[2]]}
                 rotation={obj.rotation}
                 scale={obj.scale}
                 color={obj.color}
