@@ -76,7 +76,7 @@ export default function Studio() {
   }, [])
 
   // H2 Accordion State
-  const [activeH2, setActiveH2] = useState<'location' | 'sundiagram' | 'symbols' | 'import' | 'export' | null>('location')
+  const [activeH2, setActiveH2] = useState<'location' | 'sundiagram' | 'symbols' | 'import' | 'export' | 'info' | null>('location')
   
   // Tabs State within H2
   const [sunTab, setSunTab] = useState<'create' | 'shadow' | 'style'>('shadow')
@@ -100,6 +100,7 @@ export default function Studio() {
   const [showMobileMenu, setShowMobileMenu] = useState(true)
   const [isViewsExpanded, setIsViewsExpanded] = useState(window.innerWidth > 768)
   const [isNotesExpanded, setIsNotesExpanded] = useState(window.innerWidth > 768)
+  const [showAddSymbolMenu, setShowAddSymbolMenu] = useState(false)
   const [showGlobalMenu, setShowGlobalMenu] = useState(false)
 
   useEffect(() => {
@@ -214,7 +215,7 @@ export default function Studio() {
   const getModelUrl = (name: string) => name === 'SUNPATH' ? 'https://pub-5837f996e3144244a501515264ddf495.r2.dev/SUNPATH/my_model.glb' : `/images/dynamicsymbols/${name}.svg`
   const filteredModels = LIBRARY_MODELS.filter(name => name.toLowerCase().includes(searchTerm.toLowerCase()))
 
-  const H2Header = ({ id, title, icon, onToggle }: { id: 'location' | 'sundiagram' | 'symbols' | 'import' | 'export', title: string, icon?: string | React.ReactNode, onToggle?: () => void }) => (
+  const H2Header = ({ id, title, icon, onToggle }: { id: 'location' | 'sundiagram' | 'symbols' | 'import' | 'export' | 'info', title: string, icon?: string | React.ReactNode, onToggle?: () => void }) => (
     <div 
       onClick={() => {
         setActiveH2(activeH2 === id ? null : id);
@@ -1589,6 +1590,40 @@ export default function Studio() {
             </div>
           )}
 
+          {/* Info & Credits Accordion */}
+          <H2Header id="info" title="About & Credits" icon={
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          } />
+          {activeH2 === 'info' && (
+            <div style={{ padding: '15px', borderBottom: `1px solid ${borderCol}`, fontSize: '0.85rem', color: textMuted }}>
+              <p style={{ marginBottom: '10px', color: textMain }}><strong>ARCHIDIAGRAM.COM</strong><br/>Built with passion by Febhouse.</p>
+              
+              <p style={{ marginBottom: '5px', fontWeight: 'bold', color: textMain }}>Open Source Credits:</p>
+              <ul style={{ paddingLeft: '15px', display: 'flex', flexDirection: 'column', gap: '8px', margin: 0 }}>
+                <li>
+                  <strong style={{ color: textMain }}>React</strong> (MIT)<br/>
+                  <a href="https://react.dev/" target="_blank" style={{ color: '#3b82f6', textDecoration: 'none' }}>react.dev</a>
+                </li>
+                <li>
+                  <strong style={{ color: textMain }}>Three.js</strong> (MIT)<br/>
+                  <a href="https://threejs.org/" target="_blank" style={{ color: '#3b82f6', textDecoration: 'none' }}>threejs.org</a>
+                </li>
+                <li>
+                  <strong style={{ color: textMain }}>React Three Fiber / Drei</strong> (MIT)<br/>
+                  <a href="https://github.com/pmndrs" target="_blank" style={{ color: '#3b82f6', textDecoration: 'none' }}>github.com/pmndrs</a>
+                </li>
+                <li>
+                  <strong style={{ color: textMain }}>Zustand</strong> (MIT)<br/>
+                  <a href="https://github.com/pmndrs/zustand" target="_blank" style={{ color: '#3b82f6', textDecoration: 'none' }}>github.com/pmndrs/zustand</a>
+                </li>
+                <li>
+                  <strong style={{ color: textMain }}>jsPDF</strong> (MIT)<br/>
+                  <a href="https://github.com/parallax/jsPDF" target="_blank" style={{ color: '#3b82f6', textDecoration: 'none' }}>github.com/parallax/jsPDF</a>
+                </li>
+              </ul>
+            </div>
+          )}
+
         </div>
 
       </div>
@@ -1765,6 +1800,66 @@ export default function Studio() {
                       <button onClick={(e) => { e.stopPropagation(); useEditorStore.getState().removeLegendItem(item.id) }} style={{ background: 'transparent', border: 'none', color: isLight ? '#999' : '#666', cursor: 'pointer', fontSize: '0.7rem' }}>✕</button>
                     </div>
                   ))}
+
+                  {/* Add Symbol Button */}
+                  <div style={{ marginTop: '5px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                    <div 
+                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4px', cursor: 'pointer', borderRadius: '4px', background: isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.1)', color: isLight ? '#666' : '#aaa' }}
+                      onClick={() => setShowAddSymbolMenu(!showAddSymbolMenu)}
+                      title="Add Symbol to Notes"
+                    >
+                      <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>+</span>
+                    </div>
+                    
+                    {showAddSymbolMenu && (
+                      <div style={{ padding: '8px', background: isLight ? '#f9fafb' : '#1f2937', borderRadius: '4px', border: `1px solid ${isLight ? '#e5e7eb' : '#374151'}`, display: 'flex', flexDirection: 'column', gap: '5px', maxHeight: '150px', overflowY: 'auto' }}>
+                        {(() => {
+                          const availableObjects = objects.filter(obj => !legendItems.some(item => item.targetId === obj.id))
+                          if (availableObjects.length === 0) {
+                            return <div style={{ fontSize: '0.8em', color: isLight ? '#9ca3af' : '#6b7280', textAlign: 'center', padding: '10px 0' }}>No new symbols to add.</div>
+                          }
+                          return availableObjects.map(obj => {
+                            const libraryModel = LIBRARY_MODELS.find(m => m.url === obj.url)
+                            const displayName = libraryModel ? libraryModel.name : 'Symbol'
+                            const isSvg = obj.url.toLowerCase().endsWith('.svg')
+                            return (
+                              <div 
+                                key={obj.id}
+                                style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', padding: '4px', borderRadius: '4px' }}
+                                onClick={() => {
+                                  useEditorStore.getState().addLegendItem({
+                                    id: Date.now().toString(),
+                                    name: displayName,
+                                    iconUrl: obj.url,
+                                    targetId: obj.id
+                                  })
+                                  setShowAddSymbolMenu(false)
+                                }}
+                                onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#e5e7eb' : '#374151'}
+                                onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                              >
+                                <div style={{ width: '20px', display: 'flex', justifyContent: 'center' }}>
+                                  {isSvg ? (
+                                    <div style={{
+                                      width: '16px', height: '16px',
+                                      WebkitMaskImage: `url(${obj.url})`,
+                                      WebkitMaskSize: 'contain',
+                                      WebkitMaskRepeat: 'no-repeat',
+                                      WebkitMaskPosition: 'center',
+                                      backgroundColor: obj.color || '#9ca3af',
+                                    }} />
+                                  ) : (
+                                    <img src={obj.url.replace('.glb', '.png')} style={{ width: '16px', height: '16px', objectFit: 'contain' }} alt="icon" />
+                                  )}
+                                </div>
+                                <span style={{ fontSize: '0.85em' }}>{displayName}</span>
+                              </div>
+                            )
+                          })
+                        })()}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             )}
