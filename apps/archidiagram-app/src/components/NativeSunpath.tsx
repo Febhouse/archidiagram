@@ -180,7 +180,7 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
     const grid = []
     for (const day of representativeDays) {
       const row = []
-      for (let h = 4; h <= 20; h += 0.2) {
+      for (let h = 0; h <= 24; h += 0.2) {
         const p = getSunPosition(day, h, safeLat, safeLng, calculatedUtcOffset, dstMode, R)
         row.push(p)
       }
@@ -236,13 +236,13 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
       const day = getDayOfYear(m, monthDates[m] || 21)
       const points = []
       const suns = []
-      for (let h = 4; h <= 20; h += 0.1) {
+      for (let h = 0; h <= 24; h += 0.1) {
         const p = getSunPosition(day, h, safeLat, safeLng, calculatedUtcOffset, dstMode, R)
         if (p.y >= -0.5) {
           points.push(p)
         }
       }
-      for (let h = 5; h <= 19; h++) {
+      for (let h = 0; h <= 24; h++) {
         const p = getSunPosition(day, h, safeLat, safeLng, calculatedUtcOffset, dstMode, R)
         if (p.y >= -0.5) {
           suns.push({ p, h })
@@ -269,7 +269,7 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
     if (visibleMonths.includes(activeMonth)) return []
     const points = []
     const day = getDayOfYear(activeMonth, monthDates[activeMonth] || 21)
-    for (let h = 4; h <= 20; h += 0.1) {
+    for (let h = 0; h <= 24; h += 0.1) {
       const p = getSunPosition(day, h, safeLat, safeLng, calculatedUtcOffset, dstMode, R)
       if (p.y >= -0.5) points.push(p)
     }
