@@ -22,6 +22,7 @@ export default function Studio() {
     exportWidth, exportHeight, setExportResolution, hudScale
   } = useEditorStore()
   const addSavedView = useEditorStore((state) => state.addSavedView)
+  const savedViews = useEditorStore((state) => state.savedViews)
 
   useEffect(() => {
     // Only run once on mount
@@ -56,6 +57,22 @@ export default function Studio() {
   const [selectedColor, setSelectedColor] = useState('#ffffff')
   const [selectedOpacity, setSelectedOpacity] = useState(1)
   const [isAspectRatioLocked, setIsAspectRatioLocked] = useState(false)
+
+  // Mobile Responsive State
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+  const [showMobileMenu, setShowMobileMenu] = useState(true)
+  const [isViewsExpanded, setIsViewsExpanded] = useState(window.innerWidth > 768)
+  const [showGlobalMenu, setShowGlobalMenu] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 768
+      setIsMobile(mobile)
+      if (!mobile) setIsViewsExpanded(true)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   // Theme Colors
   const isLight = uiTheme === 'light'
@@ -152,26 +169,58 @@ export default function Studio() {
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
   return (
-    <div style={{ display: 'flex', width: '100vw', height: '100vh', overflow: 'hidden', fontFamily: '"Quicksand", sans-serif', background: bgMain, color: textMain }}>
+    <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', width: '100vw', height: '100vh', overflow: 'hidden', fontFamily: '"Quicksand", sans-serif', background: bgMain, color: textMain }}>
       
 
       {/* Left Panel */}
-      <div style={{ width: '25vw', minWidth: '340px', maxWidth: '500px', resize: 'horizontal', background: bgPanel, display: 'flex', flexDirection: 'column', borderRight: `1px solid ${borderCol}`, zIndex: 10, overflow: 'hidden' }}>
+      <div style={{ 
+        width: isMobile ? '100vw' : '25vw', 
+        minWidth: isMobile ? '100vw' : '340px', 
+        maxWidth: isMobile ? '100vw' : '500px', 
+        resize: isMobile ? (showMobileMenu ? 'vertical' : 'none') : 'horizontal', 
+        background: bgPanel, 
+        display: 'flex', 
+        position: 'relative',
+        height: isMobile ? (showMobileMenu ? '50vh' : 'auto') : '100%',
+        order: 1,
+        flexDirection: 'column', 
+        borderRight: isMobile ? 'none' : `1px solid ${borderCol}`, 
+        borderBottom: isMobile ? `1px solid ${borderCol}` : 'none',
+        zIndex: 100, 
+        overflow: 'hidden' 
+      }}>
+        {/* Replaced floating close button */}
         
-        {/* H1 */}
-        <div style={{ padding: '20px 15px', display: 'flex', alignItems: 'center', gap: '10px', borderBottom: `2px solid ${borderCol}` }}>
-          <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="Logo" style={{ height: '30px' }} />
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div style={{ fontWeight: 900, fontSize: '1.2rem', letterSpacing: '1px' }}>ARCHI DIAGRAM</div>
-              <span style={{ fontSize: '0.65rem', fontWeight: 'bold', background: '#3b82f6', color: 'white', padding: '2px 6px', borderRadius: '4px', letterSpacing: '0.5px' }}>DEMO</span>
+        {/* H1 & Global Toggle */}
+        <div style={{ padding: '15px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: `2px solid ${borderCol}` }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="Logo" style={{ height: '24px' }} />
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '1px' }}>ARCHI DIAGRAM</div>
+                <span style={{ fontSize: '0.6rem', fontWeight: 'bold', background: '#3b82f6', color: 'white', padding: '2px 6px', borderRadius: '4px' }}>DEMO</span>
+              </div>
             </div>
-            <div style={{ fontSize: '0.75rem', color: textMuted }}>BY FEBHOUSE</div>
+          </div>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button 
+              onClick={() => { setShowMobileMenu(!showMobileMenu); if (!showMobileMenu) setShowGlobalMenu(false); }}
+              style={{ background: showMobileMenu ? '#3b82f6' : 'transparent', color: showMobileMenu ? '#fff' : textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s', display: isMobile ? 'block' : 'none' }}
+            >
+              SETTINGS
+            </button>
+            <button 
+              onClick={() => { setShowGlobalMenu(!showGlobalMenu); if (isMobile && !showGlobalMenu) setShowMobileMenu(false); }}
+              style={{ background: showGlobalMenu ? '#3b82f6' : 'transparent', color: showGlobalMenu ? '#fff' : textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s' }}
+            >
+              GLOBAL
+            </button>
           </div>
         </div>
 
-        {/* Global Toolbar (Moved from Top) */}
-        <div style={{ padding: '15px', display: 'flex', flexDirection: 'column', gap: '15px', borderBottom: `2px solid ${borderCol}` }}>
+        {/* Global Toolbar (Dropdown) */}
+        {showGlobalMenu && (
+        <div style={{ padding: '15px', display: 'flex', flexDirection: 'column', gap: '15px', borderBottom: `2px solid ${borderCol}`, background: isLight ? '#f9fafb' : '#1a1a1a' }}>
           
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
             <div style={{ display: 'flex', gap: '5px' }}>
@@ -291,6 +340,14 @@ export default function Studio() {
                 />
                 <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>SHADOWS</span>
               </label>
+              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                <input 
+                  type="checkbox" 
+                  checked={showHUD} 
+                  onChange={(e) => setEnvironment({ showHUD: e.target.checked })}
+                />
+                <span style={{ marginLeft: '4px', fontSize: '0.75rem', color: showHUD ? '#3b82f6' : 'inherit' }}>NOTES</span>
+              </label>
               <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <span style={{ fontSize: '0.75rem' }}>GLOBAL TEXT SIZE</span>
                 <input 
@@ -335,11 +392,13 @@ export default function Studio() {
                 Default
               </button>
             </div>
-          </div>            </div>
           </div>
         </div>
+      </div>
+    </div>
+  )}
 
-        <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden' }}>
+        <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', display: (!isMobile || showMobileMenu) ? 'block' : 'none' }}>
           
           {/* H2: Location & Context */}
           <H2Header id="location" title="Location & Context" icon={
@@ -594,7 +653,7 @@ export default function Studio() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: bgPanel, padding: '10px', borderRadius: '4px', border: `1px solid ${borderCol}` }}>
                     <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                       <input type="checkbox" checked={showHUD} onChange={(e) => setEnvironment({ showHUD: e.target.checked })} />
-                      <span style={{ marginLeft: '8px', fontSize: '0.9rem', color: showHUD ? '#3b82f6' : 'inherit' }}>Show On-Screen Info (HUD)</span>
+                      <span style={{ marginLeft: '8px', fontSize: '0.9rem', color: showHUD ? '#3b82f6' : 'inherit' }}>Show On-Screen Info (Notes)</span>
                     </label>
                     {showHUD && (
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px' }}>
@@ -827,7 +886,7 @@ export default function Studio() {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     style={{ width: '100%', padding: '8px', borderRadius: '4px', border: `1px solid ${inputBorder}`, background: inputBg, color: textMain, fontSize: '0.85rem' }}
                   />
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', maxHeight: 'calc(100vh - 400px)', overflowY: 'auto', paddingRight: '5px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', maxHeight: 'calc(100vh - 400px)', overflowY: 'auto', paddingRight: '5px' }}>
                     {filteredModels.map((modelName) => (
                       <LibraryItem 
                         key={modelName} 
@@ -1080,7 +1139,7 @@ export default function Studio() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                       <input type="checkbox" checked={showHUD} onChange={(e) => setEnvironment({ showHUD: e.target.checked })} />
-                      <span style={{ marginLeft: '8px', fontSize: '0.85rem', color: showHUD ? '#3b82f6' : 'inherit' }}>Include On-Screen Info (HUD)</span>
+                      <span style={{ marginLeft: '8px', fontSize: '0.85rem', color: showHUD ? '#3b82f6' : 'inherit' }}>Include On-Screen Info (Notes)</span>
                     </label>
                     {showHUD && (
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px' }}>
@@ -1442,31 +1501,22 @@ export default function Studio() {
 
         </div>
 
-        {/* Footer */}
-        <div style={{ padding: '15px', borderTop: `1px solid ${borderCol}`, fontSize: '0.75rem', color: textMuted, display: 'flex', flexDirection: 'column', gap: '5px', background: bgPanel }}>
-          <div style={{ display: 'flex', gap: '10px', marginBottom: '5px' }}>
-            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fab fa-instagram"></i></a>
-            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fab fa-tiktok"></i></a>
-            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fab fa-youtube"></i></a>
-            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fab fa-linkedin"></i></a>
-            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fab fa-facebook"></i></a>
-            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}><i className="fas fa-envelope"></i></a>
-          </div>
-          <div>© 2026 Febhouse Studio</div>
-          <div>Contact: <a href="mailto:info@febhouse.com" style={{ color: textMuted, textDecoration: 'none' }}>info@febhouse.com</a></div>
-          <div><a href="https://archidiagram.com" target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>ArchiDiagram — Educational Platform for Architects</a></div>
-          <div>Part of the Febhouse Creative Ecosystem</div>
-          <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Privacy Policy</a> |
-            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Terms of Use</a> |
-            <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Refund Policy</a>
-          </div>
-        </div>
       </div>
 
       {/* Main 3D Canvas */}
-      <div style={{ flex: 1, position: 'relative', background: bgMain, overflow: 'hidden' }}>
+      <div style={{ flex: 1, position: 'relative', background: bgMain, overflow: 'hidden', order: isMobile ? 1 : 2 }}>
         <Scene />
+        
+        {/* Footer (Centered in Scene) */}
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '10px 15px', borderTop: `1px solid ${borderCol}`, fontSize: '0.75rem', color: textMuted, display: 'flex', flexWrap: 'wrap', gap: '10px', background: bgPanel, alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
+          <div>© 2026 Febhouse Studio</div>
+          <div>|</div>
+          <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Privacy Policy</a>
+          <div>|</div>
+          <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Terms of Use</a>
+          <div>|</div>
+          <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Refund Policy</a>
+        </div>
         
         {/* Crop Overlay and HUD Logic */}
         {(() => {
@@ -1475,7 +1525,7 @@ export default function Studio() {
             const posStyles: any = {}
             const [vert, horz] = (hudPosition || 'bottom-left').split('-')
             if (vert === 'top') posStyles.top = '20px'
-            else if (vert === 'bottom') posStyles.bottom = '20px'
+            else if (vert === 'bottom') posStyles.bottom = '60px'
             else if (vert === 'middle') { posStyles.top = '50%'; posStyles.transform = 'translateY(-50%)' }
 
             if (horz === 'left') posStyles.left = '20px'
@@ -1647,8 +1697,10 @@ export default function Studio() {
             </>
           )
         })()}
+        {/* Removed floating mobile menu toggle */}
+
         {/* TOOLBAR Overlay (Centered at top) */}
-        <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 10, display: 'flex', gap: '10px', background: bgPanel, padding: '10px', borderRadius: '8px', border: `1px solid ${borderCol}`, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+        <div style={{ position: 'absolute', top: isMobile ? '10px' : '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 10, display: isMobile && showMobileMenu ? 'none' : 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px', background: bgPanel, padding: '8px', borderRadius: '8px', border: `1px solid ${borderCol}`, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', width: isMobile ? '90%' : 'auto' }}>
           
           <div style={{ display: 'flex', gap: '5px', borderRight: `1px solid ${borderCol}`, paddingRight: '10px' }}>
             {['move', 'rotate', 'scale', 'pan', 'orbit'].map((mode) => {
@@ -1789,39 +1841,51 @@ export default function Studio() {
         )}
 
         {/* Right Side Panels: Layers and Legend */}
-        <div style={{ position: 'absolute', top: '20px', right: '20px', display: 'flex', flexDirection: 'column', gap: '15px', zIndex: 10 }}>
+        <div style={{ position: 'absolute', bottom: isMobile ? '70px' : '60px', right: '10px', display: 'flex', flexDirection: 'column-reverse', gap: '15px', zIndex: 10 }}>
           {/* Views Panel */}
-          <div style={{ background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', overflow: 'hidden', width: '220px' }}>
-            <div style={{ padding: '8px 12px', background: isLight ? '#f3f4f6' : '#374151', fontSize: '0.8rem', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              SCENES / VIEWS
+          <div style={{ background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', overflow: 'hidden', width: isMobile ? '180px' : '220px' }}>
+            <div 
+              style={{ padding: '8px 12px', background: isLight ? '#f3f4f6' : '#374151', fontSize: '0.8rem', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+              onClick={() => setIsViewsExpanded(!isViewsExpanded)}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ fontSize: '0.7rem' }}>{isViewsExpanded ? '▼' : '▶'}</span>
+                VIEWS
+              </div>
               <button 
-                onClick={() => window.dispatchEvent(new CustomEvent('save-view'))}
+                onClick={(e) => { e.stopPropagation(); window.dispatchEvent(new CustomEvent('save-view')) }}
                 style={{ background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '4px', padding: '2px 8px', fontSize: '0.7rem', cursor: 'pointer' }}
               >+ Save</button>
             </div>
+            {isViewsExpanded && (
             <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '300px', overflowY: 'auto' }}>
-              {useEditorStore((state) => state.savedViews).length === 0 && (
+              {savedViews.length === 0 && (
                 <div style={{ fontSize: '0.75rem', color: textMuted, textAlign: 'center', padding: '10px 0' }}>No saved views</div>
               )}
-              {useEditorStore((state) => state.savedViews).map((view) => (
+              {savedViews.map((view) => (
                 <div key={view.id} style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'space-between', fontSize: '0.8rem' }}>
-                  <input 
-                    value={view.name}
-                    onChange={(e) => useEditorStore.getState().updateSavedViewName(view.id, e.target.value)}
-                    style={{ background: 'transparent', border: 'none', color: textMain, fontSize: '0.8rem', outline: 'none', flex: 1, minWidth: 0, textOverflow: 'ellipsis' }}
-                  />
+                  <div 
+                    title="Click to load this view"
+                    onClick={() => window.dispatchEvent(new CustomEvent('load-view', { detail: view }))}
+                    style={{ cursor: 'pointer', flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                  >
+                    {view.name}
+                  </div>
                   <div style={{ display: 'flex', gap: '4px' }}>
                     <button 
-                      title="Load view"
-                      onClick={() => window.dispatchEvent(new CustomEvent('load-view', { detail: view }))}
-                      style={{ background: isLight ? '#e5e7eb' : '#4b5563', color: textMain, border: 'none', borderRadius: '4px', padding: '2px 6px', cursor: 'pointer', fontSize: '0.7rem' }}
+                      title="Rename view"
+                      onClick={() => {
+                        const newName = window.prompt("Enter new name for view:", view.name);
+                        if (newName) useEditorStore.getState().updateSavedViewName(view.id, newName);
+                      }}
+                      style={{ background: 'transparent', color: textMain, border: 'none', cursor: 'pointer', padding: '2px 4px', fontSize: '0.7rem' }}
                     >
-                      <i className="fas fa-eye"></i>
+                      ✏️
                     </button>
                     <button 
                       title="Delete view"
                       onClick={() => useEditorStore.getState().removeSavedView(view.id)}
-                      style={{ background: 'transparent', color: '#ef4444', border: 'none', cursor: 'pointer', padding: '2px', fontSize: '0.7rem' }}
+                      style={{ background: 'transparent', color: '#ef4444', border: 'none', cursor: 'pointer', padding: '2px 4px', fontSize: '0.7rem' }}
                     >
                       ✕
                     </button>
@@ -1829,6 +1893,7 @@ export default function Studio() {
                 </div>
               ))}
             </div>
+            )}
           </div>
         </div>
 
