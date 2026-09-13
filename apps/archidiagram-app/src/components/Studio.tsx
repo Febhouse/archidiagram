@@ -379,49 +379,45 @@ export default function Studio() {
         {/* Replaced floating close button */}
         
         {/* H1 & Global Toggle */}
-        <div style={{ padding: '15px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: `2px solid ${borderCol}` }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="Logo" style={{ height: '24px' }} />
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '1px' }}>ARCHI DIAGRAM</div>
-                <span style={{ fontSize: '0.55rem', fontWeight: 'bold', background: '#3b82f6', color: 'white', padding: '2px 6px', borderRadius: '4px' }}>BETA</span>
-                {isPro && <span style={{ fontSize: '0.6rem', fontWeight: 'bold', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 6px', borderRadius: '4px' }}>PRO</span>}
-              </div>
+        <div style={{ padding: '10px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: `2px solid ${borderCol}`, minWidth: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+            <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="Logo" style={{ height: '32px', flexShrink: 0 }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
+              <div style={{ display: isMobile ? 'none' : 'block', fontWeight: 900, fontSize: '0.85rem', letterSpacing: '1px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>ARCHI DIAGRAM</div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '32px', fontSize: '0.65rem', fontWeight: 'bold', background: 'transparent', color: '#3b82f6', padding: '0', flexShrink: 0, boxSizing: 'border-box', letterSpacing: '1px' }}>BETA</div>
+              {isPro && <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '32px', fontSize: '0.65rem', fontWeight: 'bold', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '0 10px', borderRadius: '6px', flexShrink: 0, boxSizing: 'border-box' }}>PRO</div>}
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexShrink: 0 }}>
             {user ? (
               <div 
                 onClick={() => setIsProfileModalOpen(true)}
-                style={{ display: 'flex', alignItems: 'center', gap: '10px', background: isLight ? '#f3f4f6' : '#374151', padding: '4px 10px', borderRadius: '6px', border: `1px solid ${borderCol}`, cursor: 'pointer' }}
+                style={{ display: 'flex', alignItems: 'center', gap: '6px', background: isLight ? '#f3f4f6' : '#374151', padding: '0 8px', height: '32px', borderRadius: '6px', border: `1px solid ${borderCol}`, cursor: 'pointer', boxSizing: 'border-box', flexShrink: 0, whiteSpace: 'nowrap' }}
                 onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
                 onMouseLeave={(e) => e.currentTarget.style.borderColor = borderCol}
               >
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>{user.email?.split('@')[0]}</span>
-                </div>
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.9rem', fontWeight: 'bold' }}>
+                <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{user.email?.split('@')[0]}</span>
+                <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.75rem', fontWeight: 'bold', flexShrink: 0 }}>
                   {user.email?.charAt(0).toUpperCase()}
                 </div>
               </div>
             ) : (
               <button 
                 onClick={() => setIsAuthModalOpen(true)}
-                style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#fff', border: 'none', borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '32px', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#fff', border: 'none', borderRadius: '6px', padding: '0 10px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem', transition: '0.2s', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', boxSizing: 'border-box', flexShrink: 0, whiteSpace: 'nowrap' }}
               >
                 Sign In
               </button>
             )}
             <button 
               onClick={() => { setShowMobileMenu(!showMobileMenu); if (!showMobileMenu) setShowGlobalMenu(false); }}
-              style={{ background: showMobileMenu ? '#3b82f6' : 'transparent', color: showMobileMenu ? '#fff' : textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s', display: isMobile ? 'block' : 'none' }}
+              style={{ display: isMobile ? 'flex' : 'none', alignItems: 'center', justifyContent: 'center', height: '32px', background: showMobileMenu ? '#3b82f6' : 'transparent', color: showMobileMenu ? '#fff' : textMain, border: `1px solid ${borderCol}`, borderRadius: '6px', padding: '0 10px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem', transition: '0.2s', boxSizing: 'border-box', flexShrink: 0, whiteSpace: 'nowrap' }}
             >
               TOOLS
             </button>
             <button 
               onClick={() => { setShowGlobalMenu(!showGlobalMenu); if (isMobile && !showGlobalMenu) setShowMobileMenu(false); }}
-              style={{ background: showGlobalMenu ? '#3b82f6' : 'transparent', color: showGlobalMenu ? '#fff' : textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s' }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '32px', background: showGlobalMenu ? '#3b82f6' : 'transparent', color: showGlobalMenu ? '#fff' : textMain, border: `1px solid ${borderCol}`, borderRadius: '6px', padding: '0 10px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem', transition: '0.2s', boxSizing: 'border-box', flexShrink: 0, whiteSpace: 'nowrap' }}
             >
               GLOBAL
             </button>

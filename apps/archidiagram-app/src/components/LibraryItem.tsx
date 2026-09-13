@@ -37,11 +37,9 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
         borderRadius: '8px',
         border: isHovered ? ((isProItem && !isUserPro) ? '1px solid #f59e0b' : '1px solid #3b82f6') : (isLight ? '1px solid #e5e7eb' : '1px solid #444'),
         transition: 'all 0.2s',
-        display: 'flex',
-        flexDirection: 'column',
-        height: 'auto', // Ensure height depends on content
+        display: 'block',
         boxSizing: 'border-box',
-        overflow: 'hidden' // Re-enable overflow hidden for rounded corners
+        overflow: 'hidden'
       }}
     >
       <div style={{ 
