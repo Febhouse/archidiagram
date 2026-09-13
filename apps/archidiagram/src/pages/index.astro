@@ -23,6 +23,13 @@ const posts = (await getCollection('blog'))
 	<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-amber-500/20 selection:text-amber-700 transition-colors duration-300">
 		<Header />
 
+		<!-- BETA BANNER -->
+		<div class="w-full bg-amber-500/10 border-b border-amber-500/20 text-amber-800 dark:text-amber-200 px-4 py-3 flex items-center justify-center text-sm font-medium">
+			<span class="mr-2">🚀</span>
+			<span><strong>ArchiDiagram Web App (Beta)</strong> is now live for early access! We are testing our cloud-based architecture diagramming tools. Official launch coming soon. </span>
+			<a href="https://app.archidiagram.com" target="_blank" class="ml-3 px-3 py-1 bg-amber-500 text-white rounded-md text-xs font-bold hover:bg-amber-600 transition-colors">TRY BETA NOW</a>
+		</div>
+
 		<main class="w-full">
 			<!-- 🚀 HERO VIDEO COVER SLIDER SECTION (3 Major Categories: Tutorials, Free Downloads, Toolkits) -->
 			<HeroCoverSlider />
