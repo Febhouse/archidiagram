@@ -46,71 +46,79 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
     >
       <div style={{ 
         width: '100%', 
-        aspectRatio: '1 / 1', 
+        paddingTop: '100%', 
         background: 'transparent', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        padding: '2px',
-        boxSizing: 'border-box',
         flexShrink: 0,
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {isProItem && (
-          <div style={{ position: 'absolute', top: '4px', right: '4px', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', fontSize: '0.5rem', fontWeight: 'bold', padding: '2px 4px', borderRadius: '4px', zIndex: 10 }}>
-            PRO
-          </div>
-        )}
-        <style>{`
-          @keyframes previewArrowAnim {
-            0% { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); }
-            40% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-            50% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-            90% { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
-            100% { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
-          }
-          @keyframes previewCircleAnim {
-            0% { clip-path: circle(0% at 50% 50%); opacity: 1; }
-            40% { clip-path: circle(100% at 50% 50%); opacity: 1; }
-            50% { clip-path: circle(100% at 50% 50%); opacity: 1; }
-            90% { clip-path: circle(100% at 50% 50%); opacity: 1; }
-            100% { clip-path: circle(100% at 50% 50%); opacity: 1; }
-          }
-          @keyframes previewInnerHoleAnim {
-            0% { width: 0; height: 0; opacity: 0; }
-            49.99% { width: 0; height: 0; opacity: 0; }
-            50% { width: 0; height: 0; opacity: 1; }
-            90% { width: 150%; height: 150%; opacity: 1; }
-            100% { width: 150%; height: 150%; opacity: 1; }
-          }
-        `}</style>
-        <div 
-          style={{ 
-            width: '100%', 
-            height: '100%', 
-            WebkitMaskImage: `url(${svgUrl})`,
-            WebkitMaskSize: 'contain',
-            WebkitMaskRepeat: 'no-repeat',
-            WebkitMaskPosition: 'center',
-            backgroundColor: (isProItem && !isUserPro) ? (isLight ? '#d97706' : '#fbbf24') : (isLight ? 'rgb(35, 49, 86)' : '#ffffff'),
-            transform: isArrow ? 'rotate(45deg)' : 'none',
-            animation: isHovered ? (isArrow ? 'previewArrowAnim 1s infinite linear' : isCircle ? 'previewCircleAnim 1s infinite linear' : 'none') : 'none'
-          }}
-        />
-        {isCircle && (
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          padding: '2px',
+          boxSizing: 'border-box'
+        }}>
+          {isProItem && (
+            <div style={{ position: 'absolute', top: '4px', right: '4px', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', fontSize: '0.5rem', fontWeight: 'bold', padding: '2px 4px', borderRadius: '4px', zIndex: 10 }}>
+              PRO
+            </div>
+          )}
+          <style>{`
+            @keyframes previewArrowAnim {
+              0% { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); }
+              40% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+              50% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+              90% { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+              100% { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+            }
+            @keyframes previewCircleAnim {
+              0% { clip-path: circle(0% at 50% 50%); opacity: 1; }
+              40% { clip-path: circle(100% at 50% 50%); opacity: 1; }
+              50% { clip-path: circle(100% at 50% 50%); opacity: 1; }
+              90% { clip-path: circle(100% at 50% 50%); opacity: 1; }
+              100% { clip-path: circle(100% at 50% 50%); opacity: 1; }
+            }
+            @keyframes previewInnerHoleAnim {
+              0% { width: 0; height: 0; opacity: 0; }
+              49.99% { width: 0; height: 0; opacity: 0; }
+              50% { width: 0; height: 0; opacity: 1; }
+              90% { width: 150%; height: 150%; opacity: 1; }
+              100% { width: 150%; height: 150%; opacity: 1; }
+            }
+          `}</style>
           <div 
-            style={{
-              position: 'absolute',
-              background: isLight ? '#ffffff' : '#2a2a2a',
-              borderRadius: '50%',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              animation: isHovered ? 'previewInnerHoleAnim 1s infinite linear' : 'none'
+            style={{ 
+              width: '100%', 
+              height: '100%', 
+              WebkitMaskImage: `url(${svgUrl})`,
+              WebkitMaskSize: 'contain',
+              WebkitMaskRepeat: 'no-repeat',
+              WebkitMaskPosition: 'center',
+              backgroundColor: (isProItem && !isUserPro) ? (isLight ? '#d97706' : '#fbbf24') : (isLight ? 'rgb(35, 49, 86)' : '#ffffff'),
+              transform: isArrow ? 'rotate(45deg)' : 'none',
+              animation: isHovered ? (isArrow ? 'previewArrowAnim 1s infinite linear' : isCircle ? 'previewCircleAnim 1s infinite linear' : 'none') : 'none'
             }}
           />
-        )}
+          {isCircle && (
+            <div 
+              style={{
+                position: 'absolute',
+                background: isLight ? '#ffffff' : '#2a2a2a',
+                borderRadius: '50%',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                animation: isHovered ? 'previewInnerHoleAnim 1s infinite linear' : 'none'
+              }}
+            />
+          )}
+        </div>
       </div>
       <div style={{ padding: '8px' }}>
         <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: isLight ? '#111827' : '#fff', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
