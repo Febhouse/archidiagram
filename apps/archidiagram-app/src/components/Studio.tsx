@@ -385,6 +385,7 @@ export default function Studio() {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '1px' }}>ARCHI DIAGRAM</div>
+                <span style={{ fontSize: '0.55rem', fontWeight: 'bold', background: '#3b82f6', color: 'white', padding: '2px 6px', borderRadius: '4px' }}>BETA</span>
                 {isPro && <span style={{ fontSize: '0.6rem', fontWeight: 'bold', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 6px', borderRadius: '4px' }}>PRO</span>}
               </div>
             </div>
