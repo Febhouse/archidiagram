@@ -7,6 +7,7 @@ import { isDstActive } from './NativeSunpath'
 import { getDayOfYear } from './SunLight'
 import AuthModal from './AuthModal'
 import { supabase } from '../lib/supabase'
+import AIChatbot from './AIChatbot'
 
 const TIMEZONES = [
   { offset: -12, label: '(UTC-12:00) International Date Line West' },
@@ -2397,6 +2398,8 @@ export default function Studio() {
 
       </div>
     </div>
+    
+    <AIChatbot />
     </>
   )
 }
