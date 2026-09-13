@@ -342,6 +342,16 @@ export default function Studio() {
                 Sign Out
               </button>
             </div>
+
+            <div style={{ marginTop: '25px', textAlign: 'center', fontSize: '0.75rem', color: textMuted, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '8px' }}>
+              <a href="https://febhouse.com/privacy-policy/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'underline' }}>Privacy Policy</a>
+              <span>•</span>
+              <a href="https://febhouse.com/terms-of-use/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'underline' }}>Terms of Use</a>
+              <span>•</span>
+              <a href="https://febhouse.com/refund-policy/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'underline' }}>Refund Policy</a>
+              <span>•</span>
+              <a href="https://febhouse.com/legal-notice/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'underline' }}>Legal Notice</a>
+            </div>
           </div>
         </div>
       )}
@@ -1891,11 +1901,13 @@ export default function Studio() {
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: isMobile ? '10px 15px 30px' : '10px 15px', borderTop: `1px solid ${borderCol}`, fontSize: '0.75rem', color: textMuted, display: 'flex', flexWrap: 'wrap', gap: '10px', background: bgPanel, alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
           <div>© 2026 Febhouse Studio</div>
           <div>|</div>
-          <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Privacy Policy</a>
+          <a href="https://febhouse.com/privacy-policy/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Privacy Policy</a>
           <div>|</div>
-          <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Terms of Use</a>
+          <a href="https://febhouse.com/terms-of-use/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Terms of Use</a>
           <div>|</div>
-          <a href="#" style={{ color: textMuted, textDecoration: 'none' }}>Refund Policy</a>
+          <a href="https://febhouse.com/refund-policy/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Refund Policy</a>
+          <div>|</div>
+          <a href="https://febhouse.com/legal-notice/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Legal Notice</a>
         </div>
         
         {/* Crop Overlay and HUD Logic */}

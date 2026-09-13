@@ -209,6 +209,16 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             {isLogin ? 'Sign up' : 'Log in'}
           </span>
         </div>
+
+        <div style={{ marginTop: '25px', textAlign: 'center', fontSize: '0.75rem', color: textMuted, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '8px' }}>
+          <a href="https://febhouse.com/privacy-policy/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'underline' }}>Privacy Policy</a>
+          <span>•</span>
+          <a href="https://febhouse.com/terms-of-use/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'underline' }}>Terms of Use</a>
+          <span>•</span>
+          <a href="https://febhouse.com/refund-policy/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'underline' }}>Refund Policy</a>
+          <span>•</span>
+          <a href="https://febhouse.com/legal-notice/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'underline' }}>Legal Notice</a>
+        </div>
       </div>
     </div>
   )
