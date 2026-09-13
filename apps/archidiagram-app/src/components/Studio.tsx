@@ -1215,7 +1215,7 @@ export default function Studio() {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     style={{ width: '100%', padding: '8px', borderRadius: '4px', border: `1px solid ${inputBorder}`, background: inputBg, color: textMain, fontSize: '0.85rem' }}
                   />
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '10px', maxHeight: 'calc(100dvh - 350px)', overflowY: 'auto', paddingRight: '5px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gridAutoRows: 'max-content', gap: '10px', paddingRight: '5px' }}>
                     {filteredModels.map((modelName) => (
                       <LibraryItem 
                         key={modelName} 
