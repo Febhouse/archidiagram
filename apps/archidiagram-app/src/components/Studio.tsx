@@ -5,6 +5,8 @@ import { LIBRARY_MODELS } from '../config/library'
 import LibraryItem from './LibraryItem'
 import { isDstActive } from './NativeSunpath'
 import { getDayOfYear } from './SunLight'
+import AuthModal from './AuthModal'
+import { supabase } from '../lib/supabase'
 
 const TIMEZONES = [
   { offset: -12, label: '(UTC-12:00) International Date Line West' },
@@ -55,7 +57,8 @@ export default function Studio() {
     showScaleRings, scaleRingCount, scaleRingUnit,
     setShowMapBackground, setMapZoom, setMapStyle, setMapOpacity, setMapRadius,
     setShowScaleRings, setScaleRingCount, setScaleRingUnit,
-    exportWidth, exportHeight, setExportResolution, hudScale
+    exportWidth, exportHeight, setExportResolution, hudScale,
+    user, isPro, setUser
   } = useEditorStore()
   const addSavedView = useEditorStore((state) => state.addSavedView)
   const savedViews = useEditorStore((state) => state.savedViews)
@@ -101,6 +104,7 @@ export default function Studio() {
   const [isNotesExpanded, setIsNotesExpanded] = useState(window.innerWidth > 768)
   const [showAddSymbolMenu, setShowAddSymbolMenu] = useState(false)
   const [showGlobalMenu, setShowGlobalMenu] = useState(false)
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -244,7 +248,9 @@ export default function Studio() {
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
   return (
-    <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', width: '100vw', height: '100dvh', overflow: 'hidden', fontFamily: '"Quicksand", sans-serif', background: bgMain, color: textMain }}>
+    <>
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', width: '100vw', height: '100dvh', overflow: 'hidden', fontFamily: '"Quicksand", sans-serif', background: bgMain, color: textMain }}>
       
 
       {/* Left Panel */}
@@ -278,12 +284,24 @@ export default function Studio() {
             </div>
           </div>
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            <button 
-              onClick={() => alert('Login functionality coming soon!')}
-              style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#fff', border: 'none', borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}
-            >
-              Sign In
-            </button>
+            {user ? (
+              <button 
+                onClick={async () => {
+                  await supabase.auth.signOut()
+                  setUser(null)
+                }}
+                style={{ background: 'transparent', color: textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s' }}
+              >
+                Sign Out ({user.email?.split('@')[0]})
+              </button>
+            ) : (
+              <button 
+                onClick={() => setIsAuthModalOpen(true)}
+                style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#fff', border: 'none', borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}
+              >
+                Sign In
+              </button>
+            )}
             <button 
               onClick={() => { setShowMobileMenu(!showMobileMenu); if (!showMobileMenu) setShowGlobalMenu(false); }}
               style={{ background: showMobileMenu ? '#3b82f6' : 'transparent', color: showMobileMenu ? '#fff' : textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s', display: isMobile ? 'block' : 'none' }}
@@ -681,7 +699,7 @@ export default function Studio() {
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '10px' }}>
                 <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>IMPORT CUSTOM 3D</div>
-                <span style={{ fontSize: '0.6rem', fontWeight: 'bold', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 6px', borderRadius: '4px', cursor: 'pointer' }} onClick={() => alert('Upgrade to Pro to unlock this feature!')}>PRO</span>
+                <span style={{ fontSize: '0.6rem', fontWeight: 'bold', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 6px', borderRadius: '4px', cursor: 'pointer' }} onClick={() => setIsAuthModalOpen(true)}>PRO</span>
               </div>
               <p style={{ fontSize: '0.8rem', color: textMuted }}>
                 Import custom 3D files (.glb, .gltf) up to 5MB. Large files may cause performance issues.
@@ -693,7 +711,7 @@ export default function Studio() {
                   accept=".glb,.gltf"
                   onClick={(e) => {
                     e.preventDefault();
-                    alert('Importing custom 3D models is a Pro feature! Login and subscription functionality coming soon.');
+                    setIsAuthModalOpen(true);
                   }}
                   onChange={(e) => {
                     const file = e.target.files?.[0];
@@ -911,7 +929,7 @@ export default function Studio() {
                                   </div>
                                 </>
                               ) : (
-                                <div onClick={() => alert('Customizing Date and Time for this month is a Pro feature! Login and subscription coming soon.')} style={{ background: isLight ? 'linear-gradient(135deg, #fffbeb, #fef3c7)' : 'linear-gradient(135deg, #422006, #78350f)', border: `1px solid ${isLight ? '#fde68a' : '#92400e'}`, borderRadius: '4px', padding: '8px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div onClick={() => setIsAuthModalOpen(true)} style={{ background: isLight ? 'linear-gradient(135deg, #fffbeb, #fef3c7)' : 'linear-gradient(135deg, #422006, #78350f)', border: `1px solid ${isLight ? '#fde68a' : '#92400e'}`, borderRadius: '4px', padding: '8px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                   <span style={{ fontSize: '0.75rem', color: isLight ? '#d97706' : '#fbbf24', fontWeight: 'bold' }}>Custom Date & Time</span>
                                   <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px', fontWeight: 'bold' }}>PRO</span>
                                 </div>
@@ -985,14 +1003,14 @@ export default function Studio() {
                   </div>
 
                   <div style={{ background: bgPanel, borderRadius: '6px', padding: '10px', border: `1px solid ${borderCol}` }}>
-                    <div onClick={() => alert('Customizing Object Colors is a Pro feature! Login and subscription coming soon.')} style={{ fontWeight: 'bold', fontSize: '0.85rem', marginBottom: '10px', color: '#3b82f6', display: 'flex', alignItems: 'center', cursor: 'pointer', justifyContent: 'space-between' }}>
+                    <div onClick={() => setIsAuthModalOpen(true)} style={{ fontWeight: 'bold', fontSize: '0.85rem', marginBottom: '10px', color: '#3b82f6', display: 'flex', alignItems: 'center', cursor: 'pointer', justifyContent: 'space-between' }}>
                       <div><span style={{ display: 'inline-block', marginRight: '5px' }}>▶</span> Object Colors</div>
                       <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>
                     </div>
                   </div>
 
                   <div style={{ background: bgPanel, padding: '10px', borderRadius: '6px', border: `1px solid ${borderCol}` }}>
-                    <div onClick={() => alert('Customizing Month Colors is a Pro feature! Login and subscription coming soon.')} style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px', color: '#3b82f6', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div onClick={() => setIsAuthModalOpen(true)} style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px', color: '#3b82f6', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                       <div><span style={{ display: 'inline-block', marginRight: '5px' }}>▶</span> Month Colors</div>
                       <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>
                     </div>
@@ -1047,6 +1065,7 @@ export default function Studio() {
                         onReplace={(name) => {
                           if (selectedIds.length > 0) replaceObjectUrl(selectedIds, getModelUrl(name))
                         }}
+                        onProClick={() => setIsAuthModalOpen(true)}
                       />
                     ))}
                   </div>
@@ -1277,7 +1296,7 @@ export default function Studio() {
                         key={fmt}
                         onClick={() => {
                           if (fmt === 'VIDEO') {
-                            alert('Video export is a Pro feature! Login and subscription functionality coming soon.');
+                            setIsAuthModalOpen(true);
                             return;
                           }
                           setExportFormat(fmt);
@@ -2166,5 +2185,6 @@ export default function Studio() {
 
       </div>
     </div>
+    </>
   )
 }

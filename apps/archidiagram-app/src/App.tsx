@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { supabase } from './lib/supabase'
+import { useEditorStore } from './store/useEditorStore'
 import Studio from './components/Studio'
 
 function Dashboard() {
@@ -19,6 +22,42 @@ function Dashboard() {
 }
 
 export default function App() {
+  const setUser = useEditorStore(state => state.setUser)
+  const setIsPro = useEditorStore(state => state.setIsPro)
+
+  useEffect(() => {
+    const checkProStatus = async (userId: string) => {
+      try {
+        const { data, error } = await supabase.from('profiles').select('is_pro').eq('id', userId).single()
+        if (data) {
+          setIsPro(!!data.is_pro)
+        }
+      } catch (err) {
+        console.error('Error fetching pro status:', err)
+      }
+    }
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null)
+      if (session?.user) {
+        checkProStatus(session.user.id)
+      } else {
+        setIsPro(false)
+      }
+    })
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+      if (session?.user) {
+        checkProStatus(session.user.id)
+      } else {
+        setIsPro(false)
+      }
+    })
+
+    return () => subscription.unsubscribe()
+  }, [setUser, setIsPro])
+
   return (
     <Router>
       <Routes>

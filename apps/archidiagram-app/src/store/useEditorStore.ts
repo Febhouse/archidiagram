@@ -31,6 +31,12 @@ export interface SunpathSettings {
 }
 
 interface EditorState {
+  // Auth
+  user: any | null
+  isPro: boolean
+  setUser: (user: any | null) => void
+  setIsPro: (isPro: boolean) => void
+
   transformMode: 'translate' | 'rotate' | 'scale' | 'pan' | 'orbit'
   setTransformMode: (mode: 'translate' | 'rotate' | 'scale' | 'pan' | 'orbit') => void
   
@@ -151,7 +157,13 @@ interface EditorState {
 export const useEditorStore = create<EditorState>()(
   persist(
     (set) => ({
-  transformMode: 'translate',
+      // Auth
+      user: null,
+      isPro: false,
+      setUser: (user) => set({ user }),
+      setIsPro: (isPro) => set({ isPro }),
+
+      transformMode: 'translate',
   setTransformMode: (mode) => set({ transformMode: mode }),
   
   // Environment & Shadows default

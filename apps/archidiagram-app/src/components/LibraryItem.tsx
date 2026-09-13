@@ -6,11 +6,13 @@ interface LibraryItemProps {
   onAdd: (modelName: string) => void
   onReplace: (modelName: string) => void
   hasSelection: boolean
+  onProClick?: () => void
 }
 
-export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection }: LibraryItemProps) {
+export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection, onProClick }: LibraryItemProps) {
   const [isHovered, setIsHovered] = useState(false)
   const uiTheme = useEditorStore(state => state.uiTheme)
+  const isUserPro = useEditorStore(state => state.isPro)
   const isLight = uiTheme === 'light'
 
   const svgUrl = `/images/dynamicsymbols/${modelName}.svg`
@@ -120,7 +122,7 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection 
           <button 
             onClick={(e) => { 
               e.stopPropagation(); 
-              if (isPro) { alert('This symbol is available in the Pro version. Login and subscription coming soon.'); return; }
+              if (isPro && !isUserPro) { onProClick?.(); return; }
               onAdd(modelName); 
             }}
             style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: isPro ? (isLight ? '#f59e0b' : '#fbbf24') : '#3b82f6', color: isPro && !isLight ? '#000' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
@@ -131,7 +133,7 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection 
             <button 
               onClick={(e) => { 
                 e.stopPropagation(); 
-                if (isPro) { alert('This symbol is available in the Pro version. Login and subscription coming soon.'); return; }
+                if (isPro && !isUserPro) { onProClick?.(); return; }
                 onReplace(modelName); 
               }}
               style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: isLight ? '#e5e7eb' : '#444', color: isLight ? '#111827' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
