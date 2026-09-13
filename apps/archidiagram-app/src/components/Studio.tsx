@@ -277,7 +277,13 @@ export default function Studio() {
               </div>
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <button 
+              onClick={() => alert('Login functionality coming soon!')}
+              style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#fff', border: 'none', borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}
+            >
+              Sign In
+            </button>
             <button 
               onClick={() => { setShowMobileMenu(!showMobileMenu); if (!showMobileMenu) setShowGlobalMenu(false); }}
               style={{ background: showMobileMenu ? '#3b82f6' : 'transparent', color: showMobileMenu ? '#fff' : textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s', display: isMobile ? 'block' : 'none' }}
@@ -673,7 +679,10 @@ export default function Studio() {
                 + Add 3D Box
               </button>
 
-              <div style={{ fontWeight: 'bold', fontSize: '1rem', marginTop: '10px' }}>IMPORT CUSTOM 3D</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '10px' }}>
+                <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>IMPORT CUSTOM 3D</div>
+                <span style={{ fontSize: '0.6rem', fontWeight: 'bold', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 6px', borderRadius: '4px', cursor: 'pointer' }} onClick={() => alert('Upgrade to Pro to unlock this feature!')}>PRO</span>
+              </div>
               <p style={{ fontSize: '0.8rem', color: textMuted }}>
                 Import custom 3D files (.glb, .gltf) up to 5MB. Large files may cause performance issues.
               </p>
@@ -682,6 +691,10 @@ export default function Studio() {
                 <input 
                   type="file" 
                   accept=".glb,.gltf"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    alert('Importing custom 3D models is a Pro feature! Login and subscription functionality coming soon.');
+                  }}
                   onChange={(e) => {
                     const file = e.target.files?.[0];
                     if (!file) return;
@@ -875,25 +888,34 @@ export default function Studio() {
                           
                           {isVisible && (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <span style={{ fontSize: '0.8rem', color: textMuted }}>Day:</span>
-                                <input type="number" min="1" max="31" value={monthDates[m] || 21} onChange={(e) => setEnvironment({ monthDates: { ...monthDates, [m]: parseInt(e.target.value) }, activeMonth: m })} style={{ width: '50px', padding: '4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', fontSize: '0.85rem' }} />
-                                {m === 6 && (monthDates[m]===21) && <span style={{ fontSize: '0.7rem', background: '#fef08a', color: '#854d0e', padding: '2px 6px', borderRadius: '4px' }}>Summer Solstice</span>}
-                                {m === 12 && (monthDates[m]===21) && <span style={{ fontSize: '0.7rem', background: '#bae6fd', color: '#0369a1', padding: '2px 6px', borderRadius: '4px' }}>Winter Solstice</span>}
-                                {m === 9 && (monthDates[m]===21) && <span style={{ fontSize: '0.7rem', background: '#ffedd5', color: '#c2410c', padding: '2px 6px', borderRadius: '4px' }}>Autumn Equinox</span>}
-                              </div>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <span style={{ fontSize: '0.8rem', color: textMuted }}>Time:</span>
-                                <input 
-                                  type="range" min="0" max="24" step="0.5" 
-                                  value={isActive ? timeOfDay : 12} 
-                                  onChange={(e) => setEnvironment({ timeOfDay: parseFloat(e.target.value), activeMonth: m })}
-                                  style={{ flex: 1 }} 
-                                />
-                                <span style={{ fontSize: '0.85rem', width: '40px', textAlign: 'right' }}>
-                                  {isActive ? `${Math.floor(timeOfDay).toString().padStart(2, '0')}:${(timeOfDay % 1 === 0.5 ? '30' : '00')}` : '12:00'}
-                                </span>
-                              </div>
+                              {[6, 9, 12].includes(m) ? (
+                                <>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <span style={{ fontSize: '0.8rem', color: textMuted }}>Day:</span>
+                                    <input type="number" min="1" max="31" value={monthDates[m] || 21} onChange={(e) => setEnvironment({ monthDates: { ...monthDates, [m]: parseInt(e.target.value) }, activeMonth: m })} style={{ width: '50px', padding: '4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', fontSize: '0.85rem' }} />
+                                    {m === 6 && (monthDates[m]===21) && <span style={{ fontSize: '0.7rem', background: '#fef08a', color: '#854d0e', padding: '2px 6px', borderRadius: '4px' }}>Summer Solstice</span>}
+                                    {m === 12 && (monthDates[m]===21) && <span style={{ fontSize: '0.7rem', background: '#bae6fd', color: '#0369a1', padding: '2px 6px', borderRadius: '4px' }}>Winter Solstice</span>}
+                                    {m === 9 && (monthDates[m]===21) && <span style={{ fontSize: '0.7rem', background: '#ffedd5', color: '#c2410c', padding: '2px 6px', borderRadius: '4px' }}>Autumn Equinox</span>}
+                                  </div>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <span style={{ fontSize: '0.8rem', color: textMuted }}>Time:</span>
+                                    <input 
+                                      type="range" min="0" max="24" step="0.5" 
+                                      value={isActive ? timeOfDay : 12} 
+                                      onChange={(e) => setEnvironment({ timeOfDay: parseFloat(e.target.value), activeMonth: m })}
+                                      style={{ flex: 1 }} 
+                                    />
+                                    <span style={{ fontSize: '0.85rem', width: '40px', textAlign: 'right' }}>
+                                      {isActive ? `${Math.floor(timeOfDay).toString().padStart(2, '0')}:${(timeOfDay % 1 === 0.5 ? '30' : '00')}` : '12:00'}
+                                    </span>
+                                  </div>
+                                </>
+                              ) : (
+                                <div onClick={() => alert('Customizing Date and Time for this month is a Pro feature! Login and subscription coming soon.')} style={{ background: isLight ? 'linear-gradient(135deg, #fffbeb, #fef3c7)' : 'linear-gradient(135deg, #422006, #78350f)', border: `1px solid ${isLight ? '#fde68a' : '#92400e'}`, borderRadius: '4px', padding: '8px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                  <span style={{ fontSize: '0.75rem', color: isLight ? '#d97706' : '#fbbf24', fontWeight: 'bold' }}>Custom Date & Time</span>
+                                  <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px', fontWeight: 'bold' }}>PRO</span>
+                                </div>
+                              )}
                             </div>
                           )}
                         </div>
@@ -963,54 +985,17 @@ export default function Studio() {
                   </div>
 
                   <div style={{ background: bgPanel, borderRadius: '6px', padding: '10px', border: `1px solid ${borderCol}` }}>
-                    <div onClick={() => setShowObjectColors(!showObjectColors)} style={{ fontWeight: 'bold', fontSize: '0.85rem', marginBottom: '10px', color: '#3b82f6', display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                      <span style={{ display: 'inline-block', marginRight: '5px' }}>{showObjectColors ? '▼' : '▶'}</span> Object Colors
+                    <div onClick={() => alert('Customizing Object Colors is a Pro feature! Login and subscription coming soon.')} style={{ fontWeight: 'bold', fontSize: '0.85rem', marginBottom: '10px', color: '#3b82f6', display: 'flex', alignItems: 'center', cursor: 'pointer', justifyContent: 'space-between' }}>
+                      <div><span style={{ display: 'inline-block', marginRight: '5px' }}>▶</span> Object Colors</div>
+                      <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>
                     </div>
-                    {showObjectColors && (
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                          <input type="color" value={monthColors[13] || '#ff0000'} onChange={(e) => setMonthColor(13, e.target.value)} style={{ width: '20px', height: '20px', padding: 0, border: 'none' }} />
-                          <span style={{ fontSize: '0.8rem' }}>Sun</span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                          <input type="color" value={monthColors[18] || '#ffcc00'} onChange={(e) => setMonthColor(18, e.target.value)} style={{ width: '20px', height: '20px', padding: 0, border: 'none' }} />
-                          <span style={{ fontSize: '0.8rem' }}>Hourly Sun</span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                          <input type="color" value={monthColors[14] || '#233156'} onChange={(e) => setMonthColor(14, e.target.value)} style={{ width: '20px', height: '20px', padding: 0, border: 'none' }} />
-                          <span style={{ fontSize: '0.8rem' }}>Text</span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                          <input type="color" value={monthColors[15] || '#233156'} onChange={(e) => setMonthColor(15, e.target.value)} style={{ width: '20px', height: '20px', padding: 0, border: 'none' }} />
-                          <span style={{ fontSize: '0.8rem' }}>Compass</span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                          <input type="color" value={monthColors[16] || '#ffd700'} onChange={(e) => setMonthColor(16, e.target.value)} style={{ width: '20px', height: '20px', padding: 0, border: 'none' }} />
-                          <span style={{ fontSize: '0.8rem' }}>Sky Dome</span>
-                        </div>
-                      </div>
-                    )}
                   </div>
 
                   <div style={{ background: bgPanel, padding: '10px', borderRadius: '6px', border: `1px solid ${borderCol}` }}>
-                    <div onClick={() => setShowMonthColors(!showMonthColors)} style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px', color: '#3b82f6', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ display: 'inline-block', marginRight: '5px' }}>{showMonthColors ? '▼' : '▶'}</span> Month Colors
+                    <div onClick={() => alert('Customizing Month Colors is a Pro feature! Login and subscription coming soon.')} style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px', color: '#3b82f6', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <div><span style={{ display: 'inline-block', marginRight: '5px' }}>▶</span> Month Colors</div>
+                      <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>
                     </div>
-                    {showMonthColors && (
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', paddingLeft: '5px' }}>
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter(m => visibleMonths.includes(m)).map(m => (
-                          <div key={m} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                            <input 
-                              type="color" 
-                              value={getMonthColor(m, latitude, monthColors)} 
-                              onChange={(e) => setMonthColor(m, e.target.value)}
-                              style={{ width: '24px', height: '24px', padding: 0, border: 'none', background: 'transparent', cursor: 'pointer' }}
-                            />
-                            <span style={{ fontSize: '0.85rem' }}>{monthNames[m-1].substring(0, 3)}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 </div>
               )}
@@ -1290,10 +1275,17 @@ export default function Studio() {
                     {(['PNG', 'PDF', 'VIDEO'] as const).map(fmt => (
                       <button 
                         key={fmt}
-                        onClick={() => setExportFormat(fmt)}
-                        style={{ flex: 1, padding: '6px', fontSize: '0.85rem', background: exportFormat === fmt ? '#3b82f6' : bgPanel, color: exportFormat === fmt ? '#fff' : textMain, border: exportFormat === fmt ? 'none' : `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer' }}
+                        onClick={() => {
+                          if (fmt === 'VIDEO') {
+                            alert('Video export is a Pro feature! Login and subscription functionality coming soon.');
+                            return;
+                          }
+                          setExportFormat(fmt);
+                        }}
+                        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '4px', flex: 1, padding: '6px', fontSize: '0.85rem', background: exportFormat === fmt ? '#3b82f6' : bgPanel, color: exportFormat === fmt ? '#fff' : textMain, border: exportFormat === fmt ? 'none' : `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer' }}
                       >
                         {fmt}
+                        {fmt === 'VIDEO' && <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>}
                       </button>
                     ))}
                   </div>

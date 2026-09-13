@@ -293,6 +293,15 @@ export const useEditorStore = create<EditorState>()(
   addObject: (url, position = [0, 0, 0]) => set((state) => {
     const upperUrl = url.toUpperCase()
     const isSunpath = upperUrl.includes('SUNPATH')
+    
+    // LIMIT CHECK FOR FREE VERSION
+    if (!isSunpath) {
+      const currentSymbolCount = state.objects.filter(o => !o.url.toUpperCase().includes('SUNPATH')).length
+      if (currentSymbolCount >= 5) {
+        alert('Bạn đã đạt giới hạn 5 Symbols của gói Free. Hãy đăng nhập và nâng cấp Pro để đặt không giới hạn!')
+        return state
+      }
+    }
     const isAnimatedSymbol = !isSunpath && (upperUrl.includes('ARROW') || upperUrl.includes('WIND') || upperUrl.includes('CIRCLE') || upperUrl.includes('NOISE') || upperUrl.includes('STORM'))
     const newObject: PlacedModel = {
       id: Math.random().toString(36).substring(2, 9),
@@ -417,6 +426,14 @@ export const useEditorStore = create<EditorState>()(
   duplicateObjects: (ids) => set((state) => {
     const objectsToDuplicate = state.objects.filter(obj => ids.includes(obj.id))
     if (objectsToDuplicate.length === 0) return state
+
+    // LIMIT CHECK FOR FREE VERSION
+    const currentSymbolCount = state.objects.filter(o => !o.url.toUpperCase().includes('SUNPATH')).length
+    const nonSunpathDuplicates = objectsToDuplicate.filter(o => !o.url.toUpperCase().includes('SUNPATH')).length
+    if (currentSymbolCount + nonSunpathDuplicates > 5) {
+      alert('Bạn đã đạt giới hạn 5 Symbols của gói Free. Hãy đăng nhập và nâng cấp Pro để đặt không giới hạn!')
+      return state
+    }
 
     const newObjects = objectsToDuplicate.map(obj => ({
       ...obj,

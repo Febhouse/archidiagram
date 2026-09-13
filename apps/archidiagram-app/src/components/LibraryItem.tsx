@@ -17,6 +17,15 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection 
   const isArrow = modelName.toUpperCase().includes('ARROW') || modelName.toUpperCase().includes('WIND')
   const isCircle = modelName.toUpperCase().includes('CIRCLE') || modelName.toUpperCase().includes('NOISE') || modelName.toUpperCase().includes('STORM')
 
+  const proModels = [
+    'FEB_ARROW11', 'FEB_ARROW12', 'FEB_ARROW13', 
+    'FEB_NOISE01', 'FEB_NOISE02', 'FEB_NOISE03', 
+    'FEB_STORM01', 'FEB_STORM02', 
+    'FEB_WIND01', 'FEB_WIND03', 
+    'FEB_CIRCLE02'
+  ]
+  const isPro = proModels.includes(modelName.toUpperCase())
+
   return (
     <div 
       onMouseEnter={() => setIsHovered(true)}
@@ -24,7 +33,7 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection 
       style={{
         background: isLight ? '#ffffff' : '#2a2a2a',
         borderRadius: '8px',
-        border: isHovered ? '1px solid #3b82f6' : (isLight ? '1px solid #e5e7eb' : '1px solid #444'),
+        border: isHovered ? (isPro ? '1px solid #f59e0b' : '1px solid #3b82f6') : (isLight ? '1px solid #e5e7eb' : '1px solid #444'),
         transition: 'all 0.2s',
         display: 'flex',
         flexDirection: 'column',
@@ -46,6 +55,11 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection 
         position: 'relative',
         overflow: 'hidden'
       }}>
+        {isPro && (
+          <div style={{ position: 'absolute', top: '4px', right: '4px', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', fontSize: '0.5rem', fontWeight: 'bold', padding: '2px 4px', borderRadius: '4px', zIndex: 10 }}>
+            PRO
+          </div>
+        )}
         <style>{`
           @keyframes previewArrowAnim {
             0% { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); }
@@ -77,7 +91,7 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection 
             WebkitMaskSize: 'contain',
             WebkitMaskRepeat: 'no-repeat',
             WebkitMaskPosition: 'center',
-            backgroundColor: isLight ? 'rgb(35, 49, 86)' : '#ffffff',
+            backgroundColor: isPro ? (isLight ? '#d97706' : '#fbbf24') : (isLight ? 'rgb(35, 49, 86)' : '#ffffff'),
             transform: isArrow ? 'rotate(45deg)' : 'none',
             animation: isHovered ? (isArrow ? 'previewArrowAnim 1s infinite linear' : isCircle ? 'previewCircleAnim 1s infinite linear' : 'none') : 'none'
           }}
@@ -104,14 +118,22 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection 
         {/* Button container (fixed height) */}
         <div style={{ display: 'flex', gap: '5px', marginTop: '6px', height: '24px' }}>
           <button 
-            onClick={(e) => { e.stopPropagation(); onAdd(modelName); }}
-            style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+            onClick={(e) => { 
+              e.stopPropagation(); 
+              if (isPro) { alert('This symbol is available in the Pro version. Login and subscription coming soon.'); return; }
+              onAdd(modelName); 
+            }}
+            style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: isPro ? (isLight ? '#f59e0b' : '#fbbf24') : '#3b82f6', color: isPro && !isLight ? '#000' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
           >
-            + ADD
+            {isPro ? 'PRO' : '+ ADD'}
           </button>
           {hasSelection && (
             <button 
-              onClick={(e) => { e.stopPropagation(); onReplace(modelName); }}
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                if (isPro) { alert('This symbol is available in the Pro version. Login and subscription coming soon.'); return; }
+                onReplace(modelName); 
+              }}
               style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: isLight ? '#e5e7eb' : '#444', color: isLight ? '#111827' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
             >
               REPLACE
