@@ -85,13 +85,20 @@ Since our plugins are available through different platforms, the refund process 
 
 *💡 **Note:** We strongly recommend trying the **Free version** of our plugins first — if it runs smoothly, the paid versions will work the same way in almost all cases.*
 
-### **II. Canva Templates &amp; Other Instant Digital Downloads**
+### **II. Web Applications & Subscriptions (e.g., ArchiDiagram Web App at app.archidiagram.com)**
+
+- **Purchases via Lemon Squeezy:** Web application subscriptions are processed via Lemon Squeezy.
+    - **Subscription Management:** You can cancel your subscription at any time using the "Manage Billing" link provided in the application or in your receipt email. If you cancel, you will continue to have access to Pro features until the end of your current billing cycle.
+    - **Refunds for Subscriptions:** Due to the ongoing nature of web services, we generally do not offer refunds for partial subscription periods. If you forget to cancel before a renewal, please contact us within 3 days of the renewal charge, and we will issue a refund for that specific cycle.
+
+### **III. Canva Templates &amp; Other Instant Digital Downloads**
 
 - Due to the instant delivery nature of Canva templates, graphics packs, and similar digital files (you receive editable links or downloadable files immediately after purchase), **we do not offer refunds or exchanges** on these products once the purchase is completed.
 - We encourage you to carefully review the product previews, descriptions, and included files before purchasing.
 
-### **III. How To Get Help Or Request A Refund**
+### **IV. How To Get Help Or Request A Refund**
 
+- **For Lemon Squeezy Subscriptions:** Use the "Manage Billing" link to cancel. For refund requests within the 3-day grace period, email us.
 - **For Gumroad Purchases:** Simply reply to your Gumroad purchase receipt email, or contact us directly at **Info@Febhouse.com**.
 - **For Extension Warehouse Purchases:** For billing or refund inquiries, please use the Trimble Account management portal. For technical support with the plugin itself, contact us at **Info@Febhouse.com**.
 

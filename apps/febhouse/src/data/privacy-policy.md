@@ -65,7 +65,7 @@ image: /wp-content/uploads/2025/10/cover.jpg
 
 # Privacy Policy — Febhouse
 
-At **Febhouse**, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our websites—including **Febhouse.com, Sundiagram.com, Dynamicsymbols.com, and Archidiagram.com**—or use our SketchUp extensions.
+At **Febhouse**, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our websites—including **Febhouse.com and Archidiagram.com**—or use our SketchUp extensions and web applications.
 
 ### **1. Information We Collect**
 
@@ -89,6 +89,7 @@ We rely on industry-standard platforms to process transactions and distribute ou
 
 - **SketchUp Extension Warehouse:** Purchases made within the Extension Warehouse are processed by **Trimble**. They handle all financial transactions and licensing fulfillment securely.
 - **Gumroad:** Payments for certain Pro versions or direct website purchases are processed via **Gumroad.com**.
+- **Lemon Squeezy:** Subscriptions and payments for our web applications (like the ArchiDiagram Web App at **app.archidiagram.com**) are processed securely via **Lemon Squeezy**. We do not store or process your credit card information directly.
 - **Data Handling:** These third-party services have their own privacy policies. We only receive the necessary information (like your email and purchase date) to provide you with support and updates.
 
 ### **4. Data Security**

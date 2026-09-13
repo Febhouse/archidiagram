@@ -69,12 +69,12 @@ Welcome to **Febhouse.com**. By accessing our websites or using our software, yo
 
 ### **1. General**
 
-"Febhouse" refers to **Febhouse Studio**, including its products, plugins, and related websites: **Febhouse.com, Sundiagram.com, Dynamicsymbols.com, and Archidiagram.com**.
+"Febhouse" refers to **Febhouse Studio**, including its products, plugins, and related websites: **Febhouse.com and Archidiagram.com**.
 
 ### **2. License &amp; Distribution**
 
-- **Usage:** Our plugins (Free, Pro, and Studio versions) are licensed for personal or professional use within architectural and design workflows.
-- **Purchases:** Licenses can be acquired through **Gumroad** or directly via the **SketchUp Extension Warehouse**.
+- **Usage:** Our plugins (Free, Pro, and Studio versions) and Web Applications (like ArchiDiagram Web App at **app.archidiagram.com**) are licensed for personal or professional use within architectural and design workflows.
+- **Purchases & Subscriptions:** Licenses and subscriptions can be acquired through **Gumroad**, **Lemon Squeezy** (for web apps), or directly via the **SketchUp Extension Warehouse**.
 - **Restrictions:** You may not redistribute, resell, or modify the software for commercial purposes without explicit written permission from Febhouse.
 
 ### **3. Intellectual Property**

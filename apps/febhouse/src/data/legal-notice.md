@@ -72,10 +72,8 @@ image: /wp-content/uploads/2025/10/cover.jpg
 **Email:** <a data-end="813" data-start="796" rel="noopener">info@febhouse.com</a>  
 **Websites:**
 
-- <a data-end="854" data-start="834" href="" rel="noopener" target="_new"></a>
-- [https://archidiagram.com](https://archidiagram.com?utm_source=chatgpt.com)
-- [https://sundiagram.com](https://sundiagram.com?utm_source=chatgpt.com)
-- [https://dynamicsymbols.com](https://dynamicsymbols.febhouse.com)
+- [https://febhouse.com](https://febhouse.com)
+- [https://archidiagram.com](https://archidiagram.com)
 
 All content, software, and materials are © 2026 **Febhouse Studio**.  
 Unauthorized reproduction, resale, or redistribution is prohibited.
