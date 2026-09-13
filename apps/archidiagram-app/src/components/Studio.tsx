@@ -941,7 +941,7 @@ export default function Studio() {
 
               {/* SHADOW ANALYSIS TAB */}
               {sunTab === 'shadow' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', padding: '5px', maxHeight: '400px', overflowY: 'auto' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', padding: '5px' }}>
                   <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', background: bgPanel, padding: '10px', borderRadius: '4px', border: `1px solid ${borderCol}` }}>
                     <input type="checkbox" checked={shadowsEnabled} onChange={(e) => setEnvironment({ shadowsEnabled: e.target.checked })} />
                     <span style={{ marginLeft: '8px', fontWeight: 'bold' }}>Enable Environment Shadows</span>
