@@ -58,7 +58,7 @@ export default function Studio() {
     setShowMapBackground, setMapZoom, setMapStyle, setMapOpacity, setMapRadius,
     setShowScaleRings, setScaleRingCount, setScaleRingUnit,
     exportWidth, exportHeight, setExportResolution, hudScale,
-    user, isPro, setUser
+    user, setUser
   } = useEditorStore()
   const addSavedView = useEditorStore((state) => state.addSavedView)
   const savedViews = useEditorStore((state) => state.savedViews)
@@ -89,8 +89,6 @@ export default function Studio() {
   
   // Collapsible sections
   const [showSunPathComponents, setShowSunPathComponents] = useState(true)
-  const [showObjectColors, setShowObjectColors] = useState(true)
-  const [showMonthColors, setShowMonthColors] = useState(true)
   
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedColor, setSelectedColor] = useState('#ffffff')
