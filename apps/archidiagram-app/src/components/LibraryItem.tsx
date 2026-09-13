@@ -86,7 +86,7 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection 
           <div 
             style={{
               position: 'absolute',
-              background: isLight ? '#f3f4f6' : '#333333',
+              background: isLight ? '#ffffff' : '#2a2a2a',
               borderRadius: '50%',
               top: '50%',
               left: '50%',

@@ -51,7 +51,8 @@ export default function ScaleRings() {
     >
       {ringGeometries.map(({ radius, geometry }) => {
 
-        const label = `${radius}${scaleRingUnit}`
+        const displayRadius = scaleRingUnit === 'ft' ? Math.round(radius * 3.28084) : Math.round(radius)
+        const label = `${displayRadius}${scaleRingUnit}`
         const fontSize = Math.max(0.5, radius * 0.05) // Keep font readable but scalable
         
         const labels = [

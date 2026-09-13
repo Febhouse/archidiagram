@@ -46,8 +46,7 @@ const TIMEZONES = [
 export default function Studio() {
   const { 
     transformMode, setTransformMode, setPlacingUrl, placingUrl, 
-    undo, redo, selectedIds, replaceObjectUrl, updateObjectColor, 
-    updateObjectOpacity, toggleAnimation, updateAnimationSpeed, 
+    undo, redo, selectedIds, replaceObjectUrl, updateObjectProperties, 
     objects, recentColors, addRecentColor, hudPosition, contextMenu, setContextMenu,
     latitude, longitude, activeMonth, monthDates, visibleMonths, timeOfDay, northOffset, shadowsEnabled, setEnvironment,
     sunpathSettings, setSunpathSettings, timezoneMode, utcOffset, dstMode, showHUD, uiTheme,
@@ -403,7 +402,7 @@ export default function Studio() {
                   checked={objects.some(o => o.isAnimated)} 
                   onChange={(e) => {
                     const ids = objects.map(o => o.id)
-                    useEditorStore.getState().toggleAnimation(ids, e.target.checked)
+                    useEditorStore.getState().updateObjectProperties(ids, { isAnimated: e.target.checked })
                   }}
                 />
                 <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>ANIMATION</span>
@@ -432,6 +431,30 @@ export default function Studio() {
                   onChange={(e) => setEnvironment({ globalTextSize: parseFloat(e.target.value) })}
                   style={{ width: '80px' }}
                 />
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ fontSize: '0.75rem' }}>GLOBAL UNIT</span>
+                <select 
+                  value={scaleRingUnit} 
+                  onChange={(e) => {
+                    const newUnit = e.target.value;
+                    setScaleRingUnit(newUnit);
+                    const store = useEditorStore.getState();
+                    if (newUnit === 'ft') {
+                      const ftValue = store.mapRadius * 3.28084;
+                      const snappedFt = Math.round(ftValue / 10) * 10;
+                      setMapRadius(snappedFt / 3.28084);
+                    } else {
+                      const mValue = store.mapRadius;
+                      const snappedM = Math.round(mValue / 10) * 10;
+                      setMapRadius(snappedM);
+                    }
+                  }}
+                  style={{ fontSize: '0.75rem', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }}
+                >
+                  <option value="m">M (m)</option>
+                  <option value="ft">FT (ft)</option>
+                </select>
               </label>
               <button 
                 title="Reset all colors and sizes to defaults"
@@ -528,13 +551,32 @@ export default function Studio() {
               </div>
 
               <div style={{ borderTop: `1px solid ${borderCol}`, paddingTop: '20px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>Diagram Radius ({scaleRingUnit})</span>
+                    <span style={{ fontSize: '0.85rem' }}>{scaleRingUnit === 'ft' ? Math.round(mapRadius * 3.28084) : mapRadius}{scaleRingUnit}</span>
+                  </div>
+                  <input 
+                    type="range" 
+                    min={scaleRingUnit === 'ft' ? Math.round(20 * 3.28084) : 20} 
+                    max={scaleRingUnit === 'ft' ? Math.round(5000 * 3.28084) : 5000} 
+                    step={scaleRingUnit === 'ft' ? 50 : 20} 
+                    value={scaleRingUnit === 'ft' ? Math.round(mapRadius * 3.28084) : mapRadius} 
+                    onChange={(e) => {
+                      const v = Number(e.target.value);
+                      setMapRadius(scaleRingUnit === 'ft' ? Math.round(v / 3.28084) : v);
+                    }} 
+                    style={{ width: '100%' }}
+                  />
+                </div>
+
                 <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontWeight: 'bold' }}>
                   <input 
                     type="checkbox" 
                     checked={showMapBackground} 
                     onChange={(e) => setShowMapBackground(e.target.checked)}
                   />
-                  <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Enable Mapbox Satellite</span>
+                  <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Enable Context Map</span>
                 </label>
                 
                 {showMapBackground && (
@@ -568,18 +610,6 @@ export default function Studio() {
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>Radius (m)</span>
-                        <span style={{ fontSize: '0.85rem' }}>{mapRadius}m</span>
-                      </div>
-                      <input 
-                        type="range" min="20" max="5000" step="20" 
-                        value={mapRadius} onChange={(e) => setMapRadius(Number(e.target.value))} 
-                        style={{ width: '100%' }}
-                      />
-                    </div>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>Zoom Level</span>
                         <span style={{ fontSize: '0.85rem' }}>{mapZoom}</span>
                       </div>
@@ -593,7 +623,7 @@ export default function Studio() {
                 )}
               </div>
 
-              {/* Scale Rings Section */}
+              {/* Distance Rings Section */}
               <div style={{ borderTop: `1px solid ${borderCol}`, paddingTop: '20px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
                 <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontWeight: 'bold' }}>
                   <input 
@@ -601,34 +631,77 @@ export default function Studio() {
                     checked={showScaleRings} 
                     onChange={(e) => setShowScaleRings(e.target.checked)}
                   />
-                  <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Enable Scale Rings</span>
+                  <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Enable Distance Rings</span>
                 </label>
                 
                 {showScaleRings && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', flex: 1 }}>
-                        <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>Number of Rings</span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>Number of Rings</span>
+                          <span style={{ fontSize: '0.85rem' }}>{scaleRingCount}</span>
+                        </div>
                         <input 
-                          type="number" min="2" max="20" step="2" 
+                          type="range" min="2" max="20" step="2" 
                           value={scaleRingCount} onChange={(e) => setScaleRingCount(Number(e.target.value))} 
-                          style={{ padding: '6px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', width: '100%' }}
+                          style={{ width: '100%' }}
                         />
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', flex: 1 }}>
-                        <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>Unit</span>
-                        <select 
-                          value={scaleRingUnit} 
-                          onChange={(e) => setScaleRingUnit(e.target.value)}
-                          style={{ padding: '6px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', width: '100%' }}
-                        >
-                          <option value="m">Meters (m)</option>
-                          <option value="ft">Feet (ft)</option>
-                        </select>
                       </div>
                     </div>
                   </div>
                 )}
+              </div>
+            </div>
+          )}
+
+          {/* H2: Import */}
+          <H2Header id="import" title="Import" icon={
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+          } />
+          {activeH2 === 'import' && (
+            <div style={{ background: isLight ? '#f9fafb' : '#1a1a1a', padding: '15px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+              <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>ADD BASIC SHAPES</div>
+              <button
+                onClick={() => setPlacingUrl('BOX')}
+                style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}
+              >
+                + Add 3D Box
+              </button>
+
+              <div style={{ fontWeight: 'bold', fontSize: '1rem', marginTop: '10px' }}>IMPORT CUSTOM 3D</div>
+              <p style={{ fontSize: '0.8rem', color: textMuted }}>
+                Import custom 3D files (.glb, .gltf) up to 5MB. Large files may cause performance issues.
+              </p>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <input 
+                  type="file" 
+                  accept=".glb,.gltf"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    if (file.size > 5 * 1024 * 1024) {
+                      alert("File size exceeds 5MB limit. Please choose a smaller file.");
+                      e.target.value = '';
+                      return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                      const dataUrl = event.target?.result;
+                      if (typeof dataUrl === 'string') {
+                        setPlacingUrl(dataUrl);
+                      }
+                    };
+                    reader.readAsDataURL(file);
+                    e.target.value = '';
+                  }}
+                  style={{ fontSize: '0.8rem', color: textMain }}
+                />
               </div>
             </div>
           )}
@@ -715,7 +788,7 @@ export default function Studio() {
 
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
-                      <span style={{ fontSize: '0.9rem' }}>True North</span>
+                      <span style={{ fontSize: '0.9rem' }}>True North (Offset North)</span>
                       <span style={{ color: textMuted, fontSize: '0.9rem' }}>{northOffset}°</span>
                     </div>
                     <input type="range" min="-180" max="180" value={northOffset} onChange={(e) => setEnvironment({ northOffset: parseInt(e.target.value) })} style={{ width: '100%' }} />
@@ -1014,7 +1087,7 @@ export default function Studio() {
                           {recentColors.map(c => (
                             <div 
                               key={c} 
-                              onClick={() => { setSelectedColor(c); updateObjectColor(selectedIds, c) }}
+                              onClick={() => { setSelectedColor(c); updateObjectProperties(selectedIds, { color: c }) }}
                               style={{ width: '28px', height: '28px', background: c, borderRadius: '50%', cursor: 'pointer', border: selectedColor === c ? '2px solid #3b82f6' : `2px solid ${borderCol}` }}
                             />
                           ))}
@@ -1032,11 +1105,11 @@ export default function Studio() {
                               value={selectedColor} 
                               onChange={(e) => {
                                 setSelectedColor(e.target.value)
-                                updateObjectColor(selectedIds, e.target.value, false)
+                                updateObjectProperties(selectedIds, { color: e.target.value }, false)
                               }}
                               onBlur={() => {
                                 addRecentColor(selectedColor)
-                                updateObjectColor(selectedIds, selectedColor, true)
+                                updateObjectProperties(selectedIds, { color: selectedColor }, true)
                               }}
                               style={{ 
                                 position: 'absolute', 
@@ -1056,8 +1129,8 @@ export default function Studio() {
                           <input 
                             type="range" min="0" max="1" step="0.1" 
                             value={selectedOpacity}
-                            onChange={(e) => { const v = parseFloat(e.target.value); setSelectedOpacity(v); updateObjectOpacity(selectedIds, v, false) }}
-                            onMouseUp={(e) => { const v = parseFloat((e.target as any).value); useEditorStore.getState().updateObjectOpacity(selectedIds, v, true) }}
+                            onChange={(e) => { const v = parseFloat(e.target.value); setSelectedOpacity(v); updateObjectProperties(selectedIds, { opacity: v }, false) }}
+                            onMouseUp={(e) => { const v = parseFloat((e.target as any).value); useEditorStore.getState().updateObjectProperties(selectedIds, { opacity: v }, true) }}
                             style={{ flex: 1 }}
                           />
                           <span style={{ fontSize: '0.85rem', width: '40px' }}>{Math.round(selectedOpacity * 100)}%</span>
@@ -1070,7 +1143,7 @@ export default function Studio() {
                           <input 
                             type="checkbox" 
                             checked={objects.find(o => o.id === selectedIds[0])?.isAnimated ?? false} 
-                            onChange={(e) => toggleAnimation(selectedIds, e.target.checked)}
+                            onChange={(e) => updateObjectProperties(selectedIds, { isAnimated: e.target.checked })}
                           />
                           <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Enable Animation</span>
                         </label>
@@ -1087,7 +1160,7 @@ export default function Studio() {
                                 <input 
                                   type="range" min="0" max="4" step="1" 
                                   value={speedIndex} 
-                                  onChange={(e) => updateAnimationSpeed(selectedIds, speedMap[parseInt(e.target.value)])}
+                                  onChange={(e) => updateObjectProperties(selectedIds, { animationSpeed: speedMap[parseInt(e.target.value)] })}
                                   style={{ flex: 1 }}
                                 />
                                 <span style={{ fontSize: '0.85rem', width: '36px' }}>{currentSpeed}x</span>
@@ -1101,57 +1174,6 @@ export default function Studio() {
                   )}
                 </div>
               )}
-            </div>
-          )}
-
-          {/* H2: Import */}
-          <H2Header id="import" title="Import" icon={
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="17 8 12 3 7 8"></polyline>
-              <line x1="12" y1="3" x2="12" y2="15"></line>
-            </svg>
-          } />
-          {activeH2 === 'import' && (
-            <div style={{ background: isLight ? '#f9fafb' : '#1a1a1a', padding: '15px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
-              <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>ADD BASIC SHAPES</div>
-              <button
-                onClick={() => setPlacingUrl('BOX')}
-                style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}
-              >
-                + Add 3D Box
-              </button>
-
-              <div style={{ fontWeight: 'bold', fontSize: '1rem', marginTop: '10px' }}>IMPORT CUSTOM 3D</div>
-              <p style={{ fontSize: '0.8rem', color: textMuted }}>
-                Import custom 3D files (.glb, .gltf) up to 5MB. Large files may cause performance issues.
-              </p>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <input 
-                  type="file" 
-                  accept=".glb,.gltf"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (!file) return;
-                    if (file.size > 5 * 1024 * 1024) {
-                      alert("File size exceeds 5MB limit. Please choose a smaller file.");
-                      e.target.value = '';
-                      return;
-                    }
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                      const dataUrl = event.target?.result;
-                      if (typeof dataUrl === 'string') {
-                        setPlacingUrl(dataUrl);
-                      }
-                    };
-                    reader.readAsDataURL(file);
-                    e.target.value = '';
-                  }}
-                  style={{ fontSize: '0.8rem', color: textMain }}
-                />
-              </div>
             </div>
           )}
 
@@ -1278,12 +1300,14 @@ export default function Studio() {
                 </div>
               </div>
 
-              <div style={{ fontWeight: 'bold', fontSize: '1rem', marginBottom: '15px' }}>BATCH EXPORT SHADOWS</div>
-              <p style={{ fontSize: '0.85rem', color: textMuted, marginBottom: '20px' }}>
-                Select months to export shadow study images/videos.
-              </p>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {exportFormat === 'VIDEO' && (
+                <>
+                  <div style={{ fontWeight: 'bold', fontSize: '1rem', marginBottom: '15px' }}>BATCH EXPORT SHADOWS</div>
+                  <p style={{ fontSize: '0.85rem', color: textMuted, marginBottom: '20px' }}>
+                    Select months to export shadow study images/videos.
+                  </p>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {visibleMonths.map(m => {
                   const dayOfYear = getDayOfYear(m, monthDates[m] || 21)
                   const isDst = isDstActive(dayOfYear, latitude || 21.0285, dstMode)
@@ -1308,7 +1332,9 @@ export default function Studio() {
                     </div>
                   )
                 })}
-              </div>
+                  </div>
+                </>
+              )}
 
               <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
                 <button 
@@ -1595,8 +1621,23 @@ export default function Studio() {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
           } />
           {activeH2 === 'info' && (
-            <div style={{ padding: '15px', borderBottom: `1px solid ${borderCol}`, fontSize: '0.85rem', color: textMuted }}>
-              <p style={{ marginBottom: '10px', color: textMain }}><strong>ARCHIDIAGRAM.COM</strong><br/>Built with passion by Febhouse.</p>
+            <div style={{ padding: '15px', borderBottom: `1px solid ${borderCol}`, fontSize: '0.85rem', color: textMuted, lineHeight: '1.5' }}>
+              <div style={{ marginBottom: '15px', color: textMain }}>
+                <strong style={{ fontSize: '1rem' }}>ARCHIDIAGRAM.COM</strong><br/>
+                <span style={{ fontSize: '0.8rem' }}>Built with passion by Nam Nguyen (Febhouse)</span>
+              </div>
+              
+              <div style={{ marginBottom: '20px', padding: '10px', background: isLight ? '#f3f4f6' : '#262626', borderRadius: '6px' }}>
+                <p style={{ marginBottom: '8px' }}>
+                  Hi, I'm Nam Nguyen—an architect and Verified SketchUp Developer. Many users have asked for <strong>Sun Diagram</strong> and <strong>Dynamic Symbols</strong> outside of SketchUp.
+                </p>
+                <p style={{ marginBottom: '8px' }}>
+                  To make these tools accessible to everyone, we at Febhouse realized that building a Web App is the fastest and most optimal solution. Without the limitations of traditional plugins, our web version delivers more automated features and lightning-fast updates.
+                </p>
+                <p style={{ fontStyle: 'italic', fontWeight: 'bold', color: textMain, margin: 0 }}>
+                  Rest assured, the original SketchUp plugins will never be abandoned. Thank you for supporting our journey!
+                </p>
+              </div>
               
               <p style={{ marginBottom: '5px', fontWeight: 'bold', color: textMain }}>Open Source Credits:</p>
               <ul style={{ paddingLeft: '15px', display: 'flex', flexDirection: 'column', gap: '8px', margin: 0 }}>

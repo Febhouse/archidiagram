@@ -332,7 +332,7 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
       }}
     >
       {sunpathSettings.showCompass && (
-        <group>
+        <group position={[0, 0.02, 0]}>
           {compassGeoData.lines.map((pts, i) => (
             <Line key={`compass-line-${i}`} points={pts} color={compassColor} transparent opacity={opacity} lineWidth={sunpathSettings.compassThickness ?? 1} />
           ))}
@@ -340,7 +340,7 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
           {compassGeoData.labels.map((lbl, i) => (
             <group key={`compass-lbl-${i}`} position={lbl.pos} rotation={[0, -THREE.MathUtils.degToRad(lbl.angle), 0]}>
               {/* @ts-ignore */}
-              <Text fontSize={T * 1.2} color={compassColor} rotation={[-Math.PI / 2, 0, 0]} depthOffset={-1} suspend={false}>
+              <Text fontSize={T * 1.2} color={compassColor} rotation={[-Math.PI / 2, 0, 0]} suspend={false}>
                 {lbl.text}
               </Text>
             </group>

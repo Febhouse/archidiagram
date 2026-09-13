@@ -322,10 +322,12 @@ export default function Scene() {
         {sunpathSettings.showGrid && (
           <Grid 
             args={[mapRadius * 2, mapRadius * 2]} 
-            position={[0, -0.02, 0]} 
+            position={[0, -0.5, 0]} 
             cellColor={uiTheme === 'light' ? '#cccccc' : '#555555'} 
             sectionColor={uiTheme === 'light' ? '#aaaaaa' : '#777777'} 
-            cellSize={1} 
+            cellSize={10} 
+            sectionSize={100}
+            fadeDistance={500}
             infiniteGrid={true}
           />
         )}

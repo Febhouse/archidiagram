@@ -55,7 +55,6 @@ interface EditorState {
   uiTheme: 'light' | 'dark'
   globalTextSize: number
   setEnvironment: (env: Partial<Pick<EditorState, 'latitude' | 'longitude' | 'activeMonth' | 'monthDates' | 'visibleMonths' | 'monthColorsLight' | 'monthColorsDark' | 'timeOfDay' | 'northOffset' | 'shadowsEnabled' | 'timezoneMode' | 'utcOffset' | 'dstMode' | 'showHUD' | 'hudPosition' | 'hudScale' | 'uiTheme' | 'globalTextSize'>>) => void
-  toggleShadow: (ids: string[], castShadow: boolean) => void
 
   // Mapbox Settings
   showMapBackground: boolean
@@ -137,10 +136,7 @@ interface EditorState {
   updateObjectTransform: (id: string, position: [number, number, number], rotation: [number, number, number], scale: [number, number, number]) => void
   updateObjectTransforms: (updates: { id: string, position: [number, number, number], rotation: [number, number, number], scale: [number, number, number] }[], commitHistory?: boolean) => void
   replaceObjectUrl: (ids: string[], newUrl: string) => void
-  updateObjectColor: (ids: string[], color: string, commitHistory?: boolean) => void
-  updateObjectOpacity: (ids: string[], opacity: number, commitHistory?: boolean) => void
-  toggleAnimation: (ids: string[], isAnimated: boolean) => void
-  updateAnimationSpeed: (ids: string[], speed: number) => void
+  updateObjectProperties: (ids: string[], properties: Partial<PlacedModel>, commitHistory?: boolean) => void
   
   undo: () => void
   redo: () => void
@@ -197,7 +193,7 @@ export const useEditorStore = create<EditorState>()(
   mapRadius: 250,
   showScaleRings: true,
   scaleRingStep: 10,
-  scaleRingCount: 5,
+  scaleRingCount: 4,
   scaleRingUnit: 'm',
 
   exportWidth: 1920,
@@ -227,7 +223,7 @@ export const useEditorStore = create<EditorState>()(
     sunpathThickness: 2,
     compassThickness: 1,
     sunpathDashSize: 1,
-    showGrid: true,
+    showGrid: false,
     showAxes: true
   },
   setSunpathSettings: (settings) => set((state) => ({
@@ -357,56 +353,20 @@ export const useEditorStore = create<EditorState>()(
     }
   }),
 
-  updateObjectColor: (ids, color, commitHistory = true) => set((state) => {
-    const newObjects = state.objects.map(obj => 
-      ids.includes(obj.id) ? { ...obj, color } : obj
-    )
-    if (!commitHistory) return { objects: newObjects }
-    return {
-      past: [...state.past, state.objects],
-      future: [],
-      objects: newObjects
-    }
-  }),
-
-  updateObjectOpacity: (ids, opacity, commitHistory = true) => set((state) => {
-    const newObjects = state.objects.map(obj => 
-      ids.includes(obj.id) ? { ...obj, opacity } : obj
-    )
-    if (!commitHistory) return { objects: newObjects }
-    return {
-      past: [...state.past, state.objects],
-      future: [],
-      objects: newObjects
-    }
-  }),
-
-  toggleAnimation: (ids, isAnimated) => set((state) => {
-    const newObjects = state.objects.map(obj => 
-      ids.includes(obj.id) ? { ...obj, isAnimated, animationSpeed: obj.animationSpeed || 2 } : obj
-    )
-    return {
-      past: [...state.past, state.objects],
-      future: [],
-      objects: newObjects
-    }
-  }),
-
-  updateAnimationSpeed: (ids, speed) => set((state) => {
-    const newObjects = state.objects.map(obj => 
-      ids.includes(obj.id) ? { ...obj, animationSpeed: speed } : obj
-    )
-    return {
-      past: [...state.past, state.objects],
-      future: [],
-      objects: newObjects
-    }
-  }),
-
-  toggleShadow: (ids, castShadow) => set((state) => {
-    const newObjects = state.objects.map(obj => 
-      ids.includes(obj.id) ? { ...obj, castShadow } : obj
-    )
+  updateObjectProperties: (ids, properties, commitHistory = true) => set((state) => {
+    const newObjects = state.objects.map(obj => {
+      if (!ids.includes(obj.id)) return obj;
+      
+      // Special logic for animation toggle to preserve speed
+      let newProps = { ...properties };
+      if (properties.isAnimated !== undefined && properties.isAnimated === true && !obj.animationSpeed) {
+        newProps.animationSpeed = 2;
+      }
+      
+      return { ...obj, ...newProps };
+    });
+    
+    if (!commitHistory) return { objects: newObjects };
     return {
       past: [...state.past, state.objects],
       future: [],
