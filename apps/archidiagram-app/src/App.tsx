@@ -11,7 +11,7 @@ function Dashboard() {
       <p>Welcome to the project management center.</p>
       
       <div style={{ marginTop: '2rem', padding: '1.5rem', border: '1px solid #ddd', borderRadius: '8px' }}>
-        <h2>PoC (Proof of Concept) Demo</h2>
+        <h2>PoC (Proof of Concept)</h2>
         <p>Click the button below to open the 3D Studio workspace.</p>
         <Link to="/studio" style={{ display: 'inline-block', marginTop: '1rem', padding: '10px 20px', background: '#3b82f6', color: 'white', textDecoration: 'none', borderRadius: '5px', fontWeight: 'bold' }}>
           Open 3D Studio
@@ -28,9 +28,19 @@ export default function App() {
   useEffect(() => {
     const checkProStatus = async (userId: string) => {
       try {
-        const { data } = await supabase.from('profiles').select('is_pro').eq('id', userId).single()
-        if (data) {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('is_pro, customer_portal_url, renews_at')
+          .eq('id', userId)
+          .single()
+
+        if (error) {
+          console.error('Error fetching profile:', error)
+          setIsPro(false)
+          useEditorStore.getState().setSubscriptionInfo(null, null)
+        } else if (data) {
           setIsPro(!!data.is_pro)
+          useEditorStore.getState().setSubscriptionInfo(data.customer_portal_url || null, data.renews_at || null)
         }
       } catch (err) {
         console.error('Error fetching pro status:', err)

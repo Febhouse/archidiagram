@@ -26,7 +26,7 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
     'FEB_WIND01', 'FEB_WIND03', 
     'FEB_CIRCLE02'
   ]
-  const isPro = proModels.includes(modelName.toUpperCase())
+  const isProItem = proModels.includes(modelName.toUpperCase())
 
   return (
     <div 
@@ -35,7 +35,7 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
       style={{
         background: isLight ? '#ffffff' : '#2a2a2a',
         borderRadius: '8px',
-        border: isHovered ? (isPro ? '1px solid #f59e0b' : '1px solid #3b82f6') : (isLight ? '1px solid #e5e7eb' : '1px solid #444'),
+        border: isHovered ? ((isProItem && !isUserPro) ? '1px solid #f59e0b' : '1px solid #3b82f6') : (isLight ? '1px solid #e5e7eb' : '1px solid #444'),
         transition: 'all 0.2s',
         display: 'flex',
         flexDirection: 'column',
@@ -57,7 +57,7 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {isPro && (
+        {isProItem && (
           <div style={{ position: 'absolute', top: '4px', right: '4px', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', fontSize: '0.5rem', fontWeight: 'bold', padding: '2px 4px', borderRadius: '4px', zIndex: 10 }}>
             PRO
           </div>
@@ -93,7 +93,7 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
             WebkitMaskSize: 'contain',
             WebkitMaskRepeat: 'no-repeat',
             WebkitMaskPosition: 'center',
-            backgroundColor: isPro ? (isLight ? '#d97706' : '#fbbf24') : (isLight ? 'rgb(35, 49, 86)' : '#ffffff'),
+            backgroundColor: (isProItem && !isUserPro) ? (isLight ? '#d97706' : '#fbbf24') : (isLight ? 'rgb(35, 49, 86)' : '#ffffff'),
             transform: isArrow ? 'rotate(45deg)' : 'none',
             animation: isHovered ? (isArrow ? 'previewArrowAnim 1s infinite linear' : isCircle ? 'previewCircleAnim 1s infinite linear' : 'none') : 'none'
           }}
@@ -122,18 +122,18 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
           <button 
             onClick={(e) => { 
               e.stopPropagation(); 
-              if (isPro && !isUserPro) { onProClick?.(); return; }
+              if (isProItem && !isUserPro) { onProClick?.(); return; }
               onAdd(modelName); 
             }}
-            style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: isPro ? (isLight ? '#f59e0b' : '#fbbf24') : '#3b82f6', color: isPro && !isLight ? '#000' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+            style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: (isProItem && !isUserPro) ? (isLight ? '#f59e0b' : '#fbbf24') : '#3b82f6', color: (isProItem && !isUserPro) && !isLight ? '#000' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
           >
-            {isPro ? 'PRO' : '+ ADD'}
+            {(isProItem && !isUserPro) ? 'PRO' : '+ ADD'}
           </button>
           {hasSelection && (
             <button 
               onClick={(e) => { 
                 e.stopPropagation(); 
-                if (isPro && !isUserPro) { onProClick?.(); return; }
+                if (isProItem && !isUserPro) { onProClick?.(); return; }
                 onReplace(modelName); 
               }}
               style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: isLight ? '#e5e7eb' : '#444', color: isLight ? '#111827' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}

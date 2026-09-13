@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import { useEditorStore } from '../store/useEditorStore'
 
@@ -24,6 +24,41 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const user = useEditorStore(state => state.user)
   const isPro = useEditorStore(state => state.isPro)
 
+  useEffect(() => {
+    // @ts-ignore
+    if (window.createLemonSqueezy) {
+      // @ts-ignore
+      window.createLemonSqueezy()
+      // @ts-ignore
+      if (window.LemonSqueezy) {
+        // @ts-ignore
+        window.LemonSqueezy.Setup({
+          eventHandler: (event: any) => {
+            if (event.event === 'Checkout.Success') {
+              // Optimistic local update
+              useEditorStore.getState().setIsPro(true);
+              
+              // Close Lemon Squeezy overlay if possible
+              // @ts-ignore
+              if (window.LemonSqueezy.Url && window.LemonSqueezy.Url.Close) {
+                // @ts-ignore
+                window.LemonSqueezy.Url.Close();
+              }
+              
+              onClose();
+              setTimeout(() => {
+                useEditorStore.getState().setCustomAlert({
+                  title: 'Upgrade Successful! 🎉',
+                  message: 'Payment successful! You are now a Pro user and have unlocked all premium features.'
+                });
+              }, 500);
+            }
+          }
+        });
+      }
+    }
+  }, [onClose])
+
   if (!isOpen) return null
 
   if (user && !isPro) {
@@ -41,8 +76,34 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           </p>
 
           <button 
-            onClick={() => window.open('https://febhouse.lemonsqueezy.com/checkout', '_blank')}
-            style={{ width: '100%', padding: '12px', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '1rem', boxShadow: '0 4px 6px rgba(245, 158, 11, 0.25)' }}>
+            onClick={(e) => {
+              e.preventDefault();
+              const btn = e.currentTarget;
+              btn.innerText = 'Opening Checkout...';
+              
+              // Removed locale=en-US to fix 422 error
+              const checkoutUrl = `https://febhouse.lemonsqueezy.com/checkout/buy/24cf4911-d493-4471-bffb-d059eb2b7197?embed=1&checkout[custom][user_id]=${user.id}&checkout[email]=${encodeURIComponent(user.email || '')}`;
+              
+              try {
+                // @ts-ignore
+                if (window.LemonSqueezy && window.LemonSqueezy.Url) {
+                  // @ts-ignore
+                  window.createLemonSqueezy();
+                  // @ts-ignore
+                  window.LemonSqueezy.Url.Open(checkoutUrl);
+                } else {
+                  window.open(checkoutUrl, '_blank');
+                }
+              } catch (err) {
+                console.error("LemonSqueezy overlay error:", err);
+                window.open(checkoutUrl, '_blank');
+              }
+              
+              setTimeout(() => {
+                if (btn) btn.innerText = 'Upgrade Now';
+              }, 3000);
+            }}
+            style={{ display: 'block', boxSizing: 'border-box', width: '100%', padding: '12px', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '1rem', boxShadow: '0 4px 6px rgba(245, 158, 11, 0.25)', textDecoration: 'none', transition: 'background 0.3s' }}>
             Upgrade Now
           </button>
         </div>
@@ -74,7 +135,12 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
   const handleGoogleLogin = async () => {
     try {
-      const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' })
+      const { error } = await supabase.auth.signInWithOAuth({ 
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/`
+        }
+      })
       if (error) throw error
     } catch (err: any) {
       setError(err.message)

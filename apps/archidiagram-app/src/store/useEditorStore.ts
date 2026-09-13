@@ -34,8 +34,13 @@ interface EditorState {
   // Auth
   user: any | null
   isPro: boolean
+  customerPortalUrl: string | null
+  renewsAt: string | null
   setUser: (user: any | null) => void
   setIsPro: (isPro: boolean) => void
+  setSubscriptionInfo: (url: string | null, renewsAt: string | null) => void
+  customAlert: { title: string, message: string } | null
+  setCustomAlert: (alert: { title: string, message: string } | null) => void
 
   transformMode: 'translate' | 'rotate' | 'scale' | 'pan' | 'orbit'
   setTransformMode: (mode: 'translate' | 'rotate' | 'scale' | 'pan' | 'orbit') => void
@@ -160,8 +165,13 @@ export const useEditorStore = create<EditorState>()(
       // Auth
       user: null,
       isPro: false,
+      customerPortalUrl: null,
+      renewsAt: null,
       setUser: (user) => set({ user }),
       setIsPro: (isPro) => set({ isPro }),
+      setSubscriptionInfo: (customerPortalUrl, renewsAt) => set({ customerPortalUrl, renewsAt }),
+      customAlert: null,
+      setCustomAlert: (customAlert) => set({ customAlert }),
 
       transformMode: 'translate',
   setTransformMode: (mode) => set({ transformMode: mode }),

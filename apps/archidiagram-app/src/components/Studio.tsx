@@ -58,7 +58,7 @@ export default function Studio() {
     setShowMapBackground, setMapZoom, setMapStyle, setMapOpacity, setMapRadius,
     setShowScaleRings, setScaleRingCount, setScaleRingUnit,
     exportWidth, exportHeight, setExportResolution, hudScale,
-    user, setUser
+    user, setUser, isPro
   } = useEditorStore()
   const addSavedView = useEditorStore((state) => state.addSavedView)
   const savedViews = useEditorStore((state) => state.savedViews)
@@ -89,6 +89,8 @@ export default function Studio() {
   
   // Collapsible sections
   const [showSunPathComponents, setShowSunPathComponents] = useState(true)
+  const [showObjectColors, setShowObjectColors] = useState(false)
+  const [showMonthColors, setShowMonthColors] = useState(false)
   
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedColor, setSelectedColor] = useState('#ffffff')
@@ -103,6 +105,10 @@ export default function Studio() {
   const [showAddSymbolMenu, setShowAddSymbolMenu] = useState(false)
   const [showGlobalMenu, setShowGlobalMenu] = useState(false)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false)
+
+  const customAlert = useEditorStore(state => state.customAlert)
+  const setCustomAlert = useEditorStore(state => state.setCustomAlert)
 
   useEffect(() => {
     const handleResize = () => {
@@ -121,8 +127,10 @@ export default function Studio() {
   const isLight = uiTheme === 'light'
   
   const isSunPathSelected = objects.some(o => selectedIds.includes(o.id) && o.url?.toUpperCase().includes('SUNPATH'))
-  const monthColors = isLight ? useEditorStore.getState().monthColorsLight : useEditorStore.getState().monthColorsDark
-  const setMonthColor = useEditorStore.getState().setMonthColor
+  const monthColorsLight = useEditorStore((state) => state.monthColorsLight)
+  const monthColorsDark = useEditorStore((state) => state.monthColorsDark)
+  const monthColors = isLight ? monthColorsLight : monthColorsDark
+  const setMonthColor = useEditorStore((state) => state.setMonthColor)
   const bgMain = monthColors[17] || (isLight ? '#ffffff' : '#333333')
   const bgPanel = isLight ? '#ffffff' : '#252525'
   const textMain = isLight ? '#111827' : '#eaeaea'
@@ -248,6 +256,96 @@ export default function Studio() {
   return (
     <>
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      
+      {customAlert && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999999 }}>
+          <div style={{ background: bgPanel, color: textMain, padding: '30px', borderRadius: '12px', width: '90%', maxWidth: '400px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', position: 'relative', textAlign: 'center' }}>
+            <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="ArchiDiagram" style={{ height: '32px', marginBottom: '15px' }} />
+            <h2 style={{ margin: '0 0 10px 0', fontSize: '1.2rem', fontWeight: 'bold' }}>{customAlert.title}</h2>
+            <p style={{ margin: '0 0 20px 0', color: textMuted, fontSize: '0.9rem', lineHeight: '1.5' }}>
+              {customAlert.message}
+            </p>
+            <button 
+              onClick={() => setCustomAlert(null)}
+              style={{ padding: '8px 24px', background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isProfileModalOpen && user && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 99999 }}>
+          <div style={{ background: bgPanel, color: textMain, padding: '30px', borderRadius: '12px', width: '90%', maxWidth: '400px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', position: 'relative' }}>
+            <button onClick={() => setIsProfileModalOpen(false)} style={{ position: 'absolute', top: '15px', right: '15px', background: 'transparent', border: 'none', color: textMuted, cursor: 'pointer', fontSize: '1.2rem' }}>×</button>
+            
+            <h2 style={{ margin: '0 0 20px 0', fontSize: '1.5rem', fontWeight: 'bold' }}>My Account</h2>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '25px' }}>
+              <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '1.5rem', fontWeight: 'bold' }}>
+                {user.email?.charAt(0).toUpperCase()}
+              </div>
+              <div>
+                <div style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{user.email}</div>
+                <div style={{ fontSize: '0.85rem', color: textMuted }}>Joined {new Date(user.created_at).toLocaleDateString()}</div>
+              </div>
+            </div>
+
+            <div style={{ background: isLight ? '#f3f4f6' : '#374151', padding: '15px', borderRadius: '8px', marginBottom: '25px' }}>
+              <div style={{ fontSize: '0.85rem', color: textMuted, marginBottom: '5px' }}>Current Plan</div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: isPro ? '#f59e0b' : textMain }}>
+                    {isPro ? '🚀 PRO Plan' : '🌱 FREE Plan'}
+                  </span>
+                  {isPro && useEditorStore.getState().renewsAt && (
+                    <div style={{ fontSize: '0.75rem', color: textMuted, marginTop: '4px' }}>
+                      Renews at {new Date(useEditorStore.getState().renewsAt!).toLocaleDateString()}
+                    </div>
+                  )}
+                </div>
+                {!isPro && (
+                  <button onClick={() => { setIsProfileModalOpen(false); setIsAuthModalOpen(true); }} style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 'bold' }}>Upgrade</button>
+                )}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <button 
+                onClick={() => {
+                  const url = useEditorStore.getState().customerPortalUrl;
+                  if (url) {
+                    window.open(url, '_blank');
+                  } else {
+                    setCustomAlert({
+                      title: 'Manage Subscription',
+                      message: 'To manage your billing or cancel your subscription, please use the secure Customer Portal link sent to your email by Lemon Squeezy when you upgraded.'
+                    });
+                  }
+                }}
+                style={{ width: '100%', padding: '10px', background: 'transparent', border: `1px solid ${borderCol}`, color: textMain, borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', transition: '0.2s' }}
+                onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+              >
+                Manage Billing
+              </button>
+              <button 
+                onClick={async () => {
+                  await supabase.auth.signOut()
+                  setUser(null)
+                  useEditorStore.getState().setIsPro(false)
+                  setIsProfileModalOpen(false)
+                }}
+                style={{ width: '100%', padding: '10px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', width: '100vw', height: '100dvh', overflow: 'hidden', fontFamily: '"Quicksand", sans-serif', background: bgMain, color: textMain }}>
       
 
@@ -277,21 +375,25 @@ export default function Studio() {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '1px' }}>ARCHI DIAGRAM</div>
-                <span style={{ fontSize: '0.6rem', fontWeight: 'bold', background: '#3b82f6', color: 'white', padding: '2px 6px', borderRadius: '4px' }}>DEMO</span>
+                {isPro && <span style={{ fontSize: '0.6rem', fontWeight: 'bold', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 6px', borderRadius: '4px' }}>PRO</span>}
               </div>
             </div>
           </div>
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
             {user ? (
-              <button 
-                onClick={async () => {
-                  await supabase.auth.signOut()
-                  setUser(null)
-                }}
-                style={{ background: 'transparent', color: textMain, border: `1px solid ${borderCol}`, borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem', transition: '0.2s' }}
+              <div 
+                onClick={() => setIsProfileModalOpen(true)}
+                style={{ display: 'flex', alignItems: 'center', gap: '10px', background: isLight ? '#f3f4f6' : '#374151', padding: '4px 10px', borderRadius: '6px', border: `1px solid ${borderCol}`, cursor: 'pointer' }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = borderCol}
               >
-                Sign Out ({user.email?.split('@')[0]})
-              </button>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>{user.email?.split('@')[0]}</span>
+                </div>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.9rem', fontWeight: 'bold' }}>
+                  {user.email?.charAt(0).toUpperCase()}
+                </div>
+              </div>
             ) : (
               <button 
                 onClick={() => setIsAuthModalOpen(true)}
@@ -708,8 +810,10 @@ export default function Studio() {
                   type="file" 
                   accept=".glb,.gltf"
                   onClick={(e) => {
-                    e.preventDefault();
-                    setIsAuthModalOpen(true);
+                    if (!isPro) {
+                      e.preventDefault();
+                      setIsAuthModalOpen(true);
+                    }
                   }}
                   onChange={(e) => {
                     const file = e.target.files?.[0];
@@ -904,7 +1008,7 @@ export default function Studio() {
                           
                           {isVisible && (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                              {[6, 9, 12].includes(m) ? (
+                              {([6, 9, 12].includes(m) || isPro) ? (
                                 <>
                                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                                     <span style={{ fontSize: '0.8rem', color: textMuted }}>Day:</span>
@@ -1001,17 +1105,75 @@ export default function Studio() {
                   </div>
 
                   <div style={{ background: bgPanel, borderRadius: '6px', padding: '10px', border: `1px solid ${borderCol}` }}>
-                    <div onClick={() => setIsAuthModalOpen(true)} style={{ fontWeight: 'bold', fontSize: '0.85rem', marginBottom: '10px', color: '#3b82f6', display: 'flex', alignItems: 'center', cursor: 'pointer', justifyContent: 'space-between' }}>
-                      <div><span style={{ display: 'inline-block', marginRight: '5px' }}>▶</span> Object Colors</div>
-                      <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>
+                    <div 
+                      onClick={() => setShowObjectColors(!showObjectColors)}
+                      style={{ fontWeight: 'bold', fontSize: '0.85rem', marginBottom: showObjectColors ? '10px' : '0', color: '#3b82f6', display: 'flex', alignItems: 'center', cursor: 'pointer', justifyContent: 'space-between' }}
+                    >
+                      <div>
+                        <span style={{ display: 'inline-block', marginRight: '5px', transform: showObjectColors ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s' }}>▶</span> 
+                        Sun Path Colors
+                      </div>
+                      {!isPro && <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>}
                     </div>
+                    {showObjectColors && (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', paddingLeft: '15px', position: 'relative' }}>
+                        {!isPro && (
+                           <div onClick={(e) => { e.stopPropagation(); setIsAuthModalOpen(true); }} style={{ position: 'absolute', inset: 0, zIndex: 10, cursor: 'pointer', background: 'rgba(0,0,0,0.01)' }} />
+                        )}
+                        {[
+                          { id: 13, label: 'Sun Color' },
+                          { id: 14, label: 'Text Color' },
+                          { id: 15, label: 'Compass Color' },
+                          { id: 16, label: 'Sky Dome Color' },
+                          { id: 18, label: 'Hourly Sun Color' }
+                        ].map(obj => (
+                          <div key={obj.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', opacity: isPro ? 1 : 0.5 }}>
+                            <span style={{ fontSize: '0.8rem', color: textMain }}>{obj.label}</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                              <input 
+                                type="color" 
+                                value={monthColors[obj.id] || '#ffffff'}
+                                onChange={(e) => setMonthColor(obj.id, e.target.value)}
+                                disabled={!isPro}
+                                style={{ width: '24px', height: '24px', padding: '0', border: 'none', borderRadius: '4px', cursor: isPro ? 'pointer' : 'default' }}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div style={{ background: bgPanel, padding: '10px', borderRadius: '6px', border: `1px solid ${borderCol}` }}>
-                    <div onClick={() => setIsAuthModalOpen(true)} style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '10px', color: '#3b82f6', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <div><span style={{ display: 'inline-block', marginRight: '5px' }}>▶</span> Month Colors</div>
-                      <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>
+                    <div 
+                      onClick={() => setShowMonthColors(!showMonthColors)}
+                      style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: showMonthColors ? '10px' : '0', color: '#3b82f6', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+                    >
+                      <div>
+                        <span style={{ display: 'inline-block', marginRight: '5px', transform: showMonthColors ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s' }}>▶</span> 
+                        Month Colors
+                      </div>
+                      {!isPro && <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>}
                     </div>
+                    {showMonthColors && (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', paddingLeft: '15px', position: 'relative' }}>
+                        {!isPro && (
+                           <div onClick={(e) => { e.stopPropagation(); setIsAuthModalOpen(true); }} style={{ position: 'absolute', inset: 0, zIndex: 10, cursor: 'pointer', background: 'rgba(0,0,0,0.01)' }} />
+                        )}
+                        {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((m, i) => (
+                          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', opacity: isPro ? 1 : 0.5 }}>
+                            <span style={{ fontSize: '0.8rem', color: textMain }}>{m}</span>
+                            <input 
+                              type="color" 
+                              value={monthColors[i + 1] || '#ffffff'}
+                              onChange={(e) => setMonthColor(i + 1, e.target.value)}
+                              disabled={!isPro}
+                              style={{ width: '24px', height: '24px', padding: '0', border: 'none', borderRadius: '4px', cursor: isPro ? 'pointer' : 'default' }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -1193,11 +1355,20 @@ export default function Studio() {
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginBottom: '20px' }}>
                 <div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '5px' }}>Aspect Ratio</div>
+                  <div style={{ display: 'flex', gap: '5px', marginBottom: '15px' }}>
+                    <button onClick={() => setExportResolution(exportWidth, exportWidth)} style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>1:1</button>
+                    <button onClick={() => setExportResolution(exportWidth, Math.round(exportWidth * 9 / 16))} style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>16:9</button>
+                    <button onClick={() => setExportResolution(exportWidth, Math.round(exportWidth * 16 / 9))} style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>9:16</button>
+                  </div>
+
                   <div style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '5px' }}>Resolution</div>
                   <div style={{ display: 'flex', gap: '5px', marginBottom: '10px' }}>
-                    <button onClick={() => setExportResolution(1080, 1080)} style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>1:1</button>
-                    <button onClick={() => setExportResolution(1920, 1080)} style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>16:9</button>
-                    <button onClick={() => setExportResolution(1080, 1920)} style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>9:16</button>
+                    <button onClick={() => setExportResolution(1920, 1080)} style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>FHD</button>
+                    <button onClick={() => setExportResolution(2560, 1440)} style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>2K</button>
+                    <button onClick={() => setExportResolution(3200, 1800)} style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>3K</button>
+                    <button onClick={() => setExportResolution(3840, 2160)} style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>4K</button>
+                    <button onClick={() => setExportResolution(5120, 2880)} style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>5K</button>
                   </div>
                   <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                     <input 
@@ -1293,16 +1464,12 @@ export default function Studio() {
                       <button 
                         key={fmt}
                         onClick={() => {
-                          if (fmt === 'VIDEO') {
-                            setIsAuthModalOpen(true);
-                            return;
-                          }
                           setExportFormat(fmt);
                         }}
                         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '4px', flex: 1, padding: '6px', fontSize: '0.85rem', background: exportFormat === fmt ? '#3b82f6' : bgPanel, color: exportFormat === fmt ? '#fff' : textMain, border: exportFormat === fmt ? 'none' : `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer' }}
                       >
                         {fmt}
-                        {fmt === 'VIDEO' && <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>}
+                        {fmt === 'VIDEO' && !isPro && <span style={{ fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>}
                       </button>
                     ))}
                   </div>
@@ -1310,44 +1477,53 @@ export default function Studio() {
               </div>
 
               {exportFormat === 'VIDEO' && (
-                <>
-                  <div style={{ fontWeight: 'bold', fontSize: '1rem', marginBottom: '15px' }}>BATCH EXPORT SHADOWS</div>
-                  <p style={{ fontSize: '0.85rem', color: textMuted, marginBottom: '20px' }}>
-                    Select months to export shadow study images/videos.
-                  </p>
-                  
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {visibleMonths.map(m => {
-                  const dayOfYear = getDayOfYear(m, monthDates[m] || 21)
-                  const isDst = isDstActive(dayOfYear, latitude || 21.0285, dstMode)
-                  const baseUtc = timezoneMode === 'auto' ? (Math.round((longitude || 105)/15)) : utcOffset
-                  const actualUtc = baseUtc + (isDst ? 1 : 0)
-                  const utcString = actualUtc >= 0 ? `+${actualUtc}` : `${actualUtc}`
-                  const settings = exportSettings[m] || { checked: true, start: 6, end: 18 }
+                <div style={{ position: 'relative' }}>
+                  {!isPro && (
+                     <div onClick={(e) => { e.stopPropagation(); setIsAuthModalOpen(true); }} style={{ position: 'absolute', inset: -5, zIndex: 10, cursor: 'pointer', background: 'rgba(0,0,0,0.01)' }} />
+                  )}
+                  <div style={{ opacity: isPro ? 1 : 0.5 }}>
+                    <div style={{ fontWeight: 'bold', fontSize: '1rem', marginBottom: '15px' }}>BATCH EXPORT SHADOWS</div>
+                    <p style={{ fontSize: '0.85rem', color: textMuted, marginBottom: '20px' }}>
+                      Select months to export shadow study images/videos.
+                    </p>
+                    
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {visibleMonths.map(m => {
+                    const dayOfYear = getDayOfYear(m, monthDates[m] || 21)
+                    const isDst = isDstActive(dayOfYear, latitude || 21.0285, dstMode)
+                    const baseUtc = timezoneMode === 'auto' ? (Math.round((longitude || 105)/15)) : utcOffset
+                    const actualUtc = baseUtc + (isDst ? 1 : 0)
+                    const utcString = actualUtc >= 0 ? `+${actualUtc}` : `${actualUtc}`
+                    const settings = exportSettings[m] || { checked: true, start: 6, end: 18 }
 
-                  return (
-                    <div key={m} style={{ background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '6px', padding: '10px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-                        <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', cursor: 'pointer' }}>
-                          <input type="checkbox" checked={settings.checked} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, checked: e.target.checked } }))} />
-                          <span style={{ marginLeft: '8px' }}>{monthNames[m-1]}</span>
-                        </label>
-                        <span style={{ fontSize: '0.8rem', color: '#3b82f6' }}>Day: {monthDates[m] || 21} | UTC {utcString} {isDst && '(DST)'}</span>
+                    return (
+                      <div key={m} style={{ background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '6px', padding: '10px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                          <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', cursor: 'pointer' }}>
+                            <input type="checkbox" checked={settings.checked} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, checked: e.target.checked } }))} disabled={!isPro} />
+                            <span style={{ marginLeft: '8px' }}>{monthNames[m-1]}</span>
+                          </label>
+                          <span style={{ fontSize: '0.8rem', color: '#3b82f6' }}>Day: {monthDates[m] || 21} | UTC {utcString} {isDst && '(DST)'}</span>
+                        </div>
+                        <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                          <span style={{ fontSize: '0.85rem' }}>Start (h): <input type="number" value={settings.start} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, start: parseInt(e.target.value) || 6 } }))} disabled={!isPro} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
+                          <span style={{ fontSize: '0.85rem' }}>End (h): <input type="number" value={settings.end} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, end: parseInt(e.target.value) || 18 } }))} disabled={!isPro} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
+                        </div>
                       </div>
-                      <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-                        <span style={{ fontSize: '0.85rem' }}>Start (h): <input type="number" value={settings.start} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, start: parseInt(e.target.value) || 6 } }))} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
-                        <span style={{ fontSize: '0.85rem' }}>End (h): <input type="number" value={settings.end} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, end: parseInt(e.target.value) || 18 } }))} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
-                      </div>
+                    )
+                  })}
                     </div>
-                  )
-                })}
                   </div>
-                </>
+                </div>
               )}
 
               <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
                 <button 
                   onClick={async () => {
+                    if (exportFormat === 'VIDEO' && !isPro) {
+                      setIsAuthModalOpen(true);
+                      return;
+                    }
                     const drawHUDOnCanvas = (targetCtx: any) => {
                       if (!showHUD) return;
                       const store = useEditorStore.getState();
@@ -1516,6 +1692,7 @@ export default function Studio() {
                       const canvas = document.querySelector('canvas');
                       if (!canvas) return;
                       
+                      let isCancelled = false;
                       const overlay = document.createElement('div');
                       overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);display:flex;flex-direction:column;justify-content:center;align-items:center;color:white;font-family:sans-serif;backdrop-filter:blur(5px);';
                       overlay.innerHTML = `
@@ -1523,9 +1700,20 @@ export default function Studio() {
                         <div style="width:300px;height:10px;background:#333;border-radius:5px;overflow:hidden;">
                           <div id="export-progress-bar" style="width:0%;height:100%;background:#3b82f6;transition:width 0.2s;"></div>
                         </div>
-                        <div id="export-progress-text" style="margin-top:10px;font-size:1.2rem;font-weight:bold;">0%</div>
+                        <div id="export-progress-text" style="margin-top:10px;font-size:1.2rem;font-weight:bold;margin-bottom:20px;">0%</div>
+                        <button id="cancel-export-btn" style="padding: 8px 24px; background: #ef4444; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; transition: background 0.2s;">Cancel Export</button>
                       `;
                       document.body.appendChild(overlay);
+
+                      const cancelBtn = document.getElementById('cancel-export-btn');
+                      if (cancelBtn) {
+                        cancelBtn.onclick = () => {
+                          isCancelled = true;
+                          cancelBtn.innerText = 'Cancelling...';
+                          cancelBtn.style.background = '#6b7280';
+                          cancelBtn.style.cursor = 'wait';
+                        };
+                      }
                       
                       const updateProgress = (pct: number) => {
                         const bar = document.getElementById('export-progress-bar');
@@ -1537,27 +1725,35 @@ export default function Studio() {
                       const vidCanvas = document.createElement('canvas');
                       vidCanvas.width = exportWidth;
                       vidCanvas.height = exportHeight;
-                      const vctx = vidCanvas.getContext('2d');
+                      const vctx = vidCanvas.getContext('2d', { alpha: false });
                       
                       if (vctx) {
+                        vctx.imageSmoothingEnabled = true;
+                        vctx.imageSmoothingQuality = 'high';
                         vctx.fillStyle = '#000';
                         vctx.fillRect(0, 0, exportWidth, exportHeight);
                       }
                       
-                      const stream = vidCanvas.captureStream(24);
-                      let mimeType = 'video/webm';
+                      const stream = vidCanvas.captureStream(30);
+                      let mimeType = 'video/webm;codecs=vp9';
+                      if (!MediaRecorder.isTypeSupported(mimeType)) mimeType = 'video/webm'; 
                       if (!MediaRecorder.isTypeSupported(mimeType)) mimeType = 'video/mp4'; 
                       
-                      const recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 8000000 });
+                      // Increase bitrate to 35 Mbps for crisp quality
+                      const recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 35000000 });
                       const chunks: Blob[] = [];
                       recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
                       recorder.onstop = () => {
-                        const blob = new Blob(chunks, { type: mimeType });
-                        const a = document.createElement('a');
-                        a.href = URL.createObjectURL(blob);
-                        a.download = `archidiagram_shadows_${Date.now()}.${mimeType === 'video/mp4' ? 'mp4' : 'webm'}`;
-                        a.click();
-                        document.body.removeChild(overlay);
+                        if (!isCancelled) {
+                          const blob = new Blob(chunks, { type: mimeType });
+                          const a = document.createElement('a');
+                          a.href = URL.createObjectURL(blob);
+                          a.download = `archidiagram_shadows_${Date.now()}.${mimeType === 'video/mp4' ? 'mp4' : 'webm'}`;
+                          a.click();
+                        }
+                        if (document.body.contains(overlay)) {
+                          document.body.removeChild(overlay);
+                        }
                       };
                       
                       recorder.start();
@@ -1598,6 +1794,7 @@ export default function Studio() {
                       let currentFrame = 0;
 
                       for (const m of visibleMonths) {
+                        if (isCancelled) break;
                         const settings = exportSettings[m];
                         if (!settings || !settings.checked) continue;
                         
@@ -1605,6 +1802,7 @@ export default function Studio() {
                         await new Promise(r => setTimeout(r, 200)); 
                         
                         for (let h = settings.start; h <= settings.end; h += 1) {
+                          if (isCancelled) break;
                           setEnvironment({ timeOfDay: h });
                           await new Promise(r => setTimeout(r, 500)); 
                           currentFrame++;
@@ -1619,7 +1817,14 @@ export default function Studio() {
                   }}
                   style={{ flex: 1, padding: '10px', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}
                 >
-                  Export {exportFormat}
+                  {exportFormat === 'VIDEO' && !isPro ? (
+                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                      Export {exportFormat}
+                      <span style={{ fontSize: '0.6rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', padding: '2px 6px', borderRadius: '4px' }}>PRO</span>
+                    </span>
+                  ) : (
+                    `Export ${exportFormat}`
+                  )}
                 </button>
               </div>
             </div>
