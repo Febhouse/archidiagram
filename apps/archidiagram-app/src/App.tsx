@@ -28,7 +28,7 @@ export default function App() {
   useEffect(() => {
     const checkProStatus = async (userId: string) => {
       try {
-        const { data, error } = await supabase.from('profiles').select('is_pro').eq('id', userId).single()
+        const { data } = await supabase.from('profiles').select('is_pro').eq('id', userId).single()
         if (data) {
           setIsPro(!!data.is_pro)
         }
