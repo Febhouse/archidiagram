@@ -806,7 +806,6 @@ export default function Studio() {
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '10px' }}>
                 <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>IMPORT CUSTOM 3D</div>
-                <span style={{ fontSize: '0.6rem', fontWeight: 'bold', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 6px', borderRadius: '4px', cursor: 'pointer' }} onClick={() => setIsAuthModalOpen(true)}>PRO</span>
               </div>
               <p style={{ fontSize: '0.8rem', color: textMuted }}>
                 Import custom 3D files (.glb, .gltf) up to 5MB. Large files may cause performance issues.
@@ -816,12 +815,6 @@ export default function Studio() {
                 <input 
                   type="file" 
                   accept=".glb,.gltf"
-                  onClick={(e) => {
-                    if (!isPro) {
-                      e.preventDefault();
-                      setIsAuthModalOpen(true);
-                    }
-                  }}
                   onChange={(e) => {
                     const file = e.target.files?.[0];
                     if (!file) return;

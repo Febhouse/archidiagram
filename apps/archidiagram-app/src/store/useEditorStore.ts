@@ -325,12 +325,13 @@ export const useEditorStore = create<EditorState>()(
       }
     }
     const isAnimatedSymbol = !isSunpath && (upperUrl.includes('ARROW') || upperUrl.includes('WIND') || upperUrl.includes('CIRCLE') || upperUrl.includes('NOISE') || upperUrl.includes('STORM'))
+    const isCustomModel = url.startsWith('data:') || url.startsWith('blob:') || url === 'BOX'
     const newObject: PlacedModel = {
       id: Math.random().toString(36).substring(2, 9),
       url,
       position,
       rotation: [0, 0, 0],
-      scale: isSunpath ? [0.1, 0.1, 0.1] : [20, 20, 20],
+      scale: isSunpath ? [0.1, 0.1, 0.1] : (isCustomModel ? [1, 1, 1] : [20, 20, 20]),
       color: isSunpath ? '#ffffff' : '#ef4444',
       opacity: isSunpath ? 1 : 0.8,
       castShadow: false,
