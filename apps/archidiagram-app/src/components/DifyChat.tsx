@@ -42,7 +42,7 @@ export default function DifyChat() {
         <div className="dify-chat-iframe-container">
           <iframe
             id="main-ai-iframe"
-            src={hasOpened ? "https://ai.febhouse.com/chatbot/dB1gGLjY8H80t943" : "about:blank"}
+            src={hasOpened ? "https://ai.febhouse.com/chat/dB1gGLjY8H80t943" : "about:blank"}
             allow="microphone; clipboard-write"
             title="Archi AI Chat"
           ></iframe>
