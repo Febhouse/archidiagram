@@ -379,6 +379,19 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
   const objOpacity = objData?.opacity ?? opacity ?? 1
   
   const groupRef = useRef<THREE.Group>(null)
+  const transformControlRef = useRef<any>(null)
+  
+  useEffect(() => {
+    if (transformControlRef.current && transformMode === 'scale') {
+      transformControlRef.current.traverse((child: any) => {
+        if (child.isMesh && child.material && child.material.color) {
+          if (child.material.color.getHex() === 0xffffff) {
+            child.material.color.setHex(0xf59e0b)
+          }
+        }
+      })
+    }
+  }, [transformMode, isSingleSelection])
   
   const [hovered, setHovered] = useState(false)
   useCursor(hovered, 'pointer', 'auto')
@@ -411,6 +424,7 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
     <>
       {isSingleSelection && ['translate', 'rotate', 'scale'].includes(transformMode) && (
         <TransformControls 
+          ref={transformControlRef}
           object={groupRef as any} 
           mode={transformMode as 'translate' | 'rotate' | 'scale'}
           onMouseDown={handleTransformStart}
