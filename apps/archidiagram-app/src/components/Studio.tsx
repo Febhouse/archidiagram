@@ -679,7 +679,7 @@ export default function Studio() {
               
               <button
                 onClick={() => {
-                  const { user, isPro, customerPortalUrl, renewsAt, mapboxToken, ...safeState } = useEditorStore.getState()
+                  const { user, isPro, customerPortalUrl, renewsAt, mapboxToken, past, future, ...safeState } = useEditorStore.getState()
                   const dataStr = JSON.stringify(safeState)
                   const blob = new Blob([dataStr], { type: 'application/json' })
                   const url = URL.createObjectURL(blob)
