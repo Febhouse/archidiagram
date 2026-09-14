@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useEditorStore } from '../store/useEditorStore'
+import { useEditorStore, PRO_MODELS } from '../store/useEditorStore'
 
 interface LibraryItemProps {
   modelName: string
@@ -19,17 +19,10 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
   const isArrow = modelName.toUpperCase().includes('ARROW') || modelName.toUpperCase().includes('WIND')
   const isCircle = modelName.toUpperCase().includes('CIRCLE') || modelName.toUpperCase().includes('NOISE') || modelName.toUpperCase().includes('STORM')
 
-  const proModels = [
-    'FEB_ARROW11', 'FEB_ARROW12', 'FEB_ARROW13', 
-    'FEB_NOISE01', 'FEB_NOISE02', 'FEB_NOISE03', 
-    'FEB_STORM01', 'FEB_STORM02', 
-    'FEB_WIND01', 'FEB_WIND03', 
-    'FEB_CIRCLE02'
-  ]
-  const isProItem = proModels.includes(modelName.toUpperCase())
+  const isProItem = PRO_MODELS.includes(modelName.toUpperCase())
 
   return (
-    <div 
+    <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
@@ -42,10 +35,10 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
         overflow: 'hidden'
       }}
     >
-      <div style={{ 
-        width: '100%', 
-        paddingTop: '100%', 
-        background: 'transparent', 
+      <div style={{
+        width: '100%',
+        paddingTop: '100%',
+        background: 'transparent',
         flexShrink: 0,
         position: 'relative',
         overflow: 'hidden'
@@ -56,9 +49,9 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
           left: 0,
           right: 0,
           bottom: 0,
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center', 
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           padding: '2px',
           boxSizing: 'border-box'
         }}>
@@ -90,10 +83,10 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
               100% { width: 150%; height: 150%; opacity: 1; }
             }
           `}</style>
-          <div 
-            style={{ 
-              width: '100%', 
-              height: '100%', 
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
               WebkitMaskImage: `url(${svgUrl})`,
               WebkitMaskSize: 'contain',
               WebkitMaskRepeat: 'no-repeat',
@@ -104,7 +97,7 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
             }}
           />
           {isCircle && (
-            <div 
+            <div
               style={{
                 position: 'absolute',
                 background: isLight ? '#ffffff' : '#2a2a2a',
@@ -122,27 +115,37 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
         <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: isLight ? '#111827' : '#fff', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
           {modelName.replace(/^Feb_/i, '')}
         </div>
-        
+
         {/* Button container (fixed height) */}
         <div style={{ display: 'flex', gap: '5px', marginTop: '6px', height: '24px' }}>
-          <button 
-            onClick={(e) => { 
-              e.stopPropagation(); 
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
               if (isProItem && !isUserPro) { onProClick?.(); return; }
-              onAdd(modelName); 
+              onAdd(modelName);
             }}
             style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: (isProItem && !isUserPro) ? (isLight ? '#f59e0b' : '#fbbf24') : '#3b82f6', color: (isProItem && !isUserPro) && !isLight ? '#000' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
           >
-            {(isProItem && !isUserPro) ? 'PRO' : '+ ADD'}
+            {(isProItem && !isUserPro) ? 'PRO' : 'ADD'}
           </button>
           {hasSelection && (
-            <button 
-              onClick={(e) => { 
-                e.stopPropagation(); 
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
                 if (isProItem && !isUserPro) { onProClick?.(); return; }
-                onReplace(modelName); 
+                onReplace(modelName);
               }}
-              style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: isLight ? '#e5e7eb' : '#444', color: isLight ? '#111827' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+              style={{
+                flex: 1,
+                padding: '3px', /* reduce padding by 1px to account for 1px border */
+                fontSize: '0.7rem',
+                background: 'transparent',
+                color: (isProItem && !isUserPro) ? (isLight ? '#d97706' : '#fbbf24') : (isLight ? '#2563eb' : '#60a5fa'),
+                border: '1px solid ' + ((isProItem && !isUserPro) ? (isLight ? '#f59e0b' : '#fbbf24') : (isLight ? '#3b82f6' : '#60a5fa')),
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontWeight: 'bold'
+              }}
             >
               REPLACE
             </button>

@@ -2,7 +2,7 @@ import { useRef, useMemo, Suspense, useEffect, useState } from 'react'
 import { TransformControls, useHelper, Html, useGLTF, useCursor } from '@react-three/drei'
 import { SVGLoader } from 'three-stdlib'
 import { useFrame } from '@react-three/fiber'
-import { useEditorStore } from '../store/useEditorStore'
+import { useEditorStore, PRO_MODELS } from '../store/useEditorStore'
 import * as THREE from 'three'
 
 import { ErrorBoundary } from './ErrorBoundary'
@@ -447,6 +447,8 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
   const updateObjectTransform = useEditorStore((state) => state.updateObjectTransform)
   const objects = useEditorStore((state) => state.objects)
   const showEdges = useEditorStore((state) => state.showEdges)
+  const isPro = useEditorStore((state) => state.isPro)
+  const isLocked = !isPro && PRO_MODELS.some(proName => url.toUpperCase().includes(proName))
   
   const isSelected = selectedIds.includes(id)
   const isSingleSelection = isSelected && selectedIds.length === 1
@@ -500,11 +502,12 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
 
   return (
     <>
-      {isSingleSelection && ['translate', 'rotate', 'scale'].includes(transformMode) && (
+      {isSingleSelection && !isLocked && ['translate', 'rotate', 'scale'].includes(transformMode) && (
         <TransformControls 
           ref={transformControlRef}
           object={groupRef as any} 
           mode={transformMode as 'translate' | 'rotate' | 'scale'}
+          size={0.6}
           onMouseDown={handleTransformStart}
           onMouseUp={handleTransformEnd}
         />

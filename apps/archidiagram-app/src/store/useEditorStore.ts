@@ -16,6 +16,14 @@ export interface PlacedModel {
   materialOverrides?: Record<string, { color?: string, opacity?: number, isStandard?: boolean }>
 }
 
+export const PRO_MODELS = [
+  'FEB_ARROW11', 'FEB_ARROW12', 'FEB_ARROW13', 
+  'FEB_NOISE01', 'FEB_NOISE02', 'FEB_NOISE03', 
+  'FEB_STORM01', 'FEB_STORM02', 
+  'FEB_WIND01', 'FEB_WIND03', 
+  'FEB_CIRCLE02'
+]
+
 export interface SunpathSettings {
   showSky: boolean
   showCompass: boolean
@@ -43,6 +51,18 @@ interface EditorState {
   setSubscriptionInfo: (url: string | null, renewsAt: string | null) => void
   customAlert: { title: string, message: string } | null
   setCustomAlert: (alert: { title: string, message: string } | null) => void
+  customConfirm: { title: string, message: string, okText?: string, cancelText?: string, resolve: (val: boolean) => void } | null
+  setCustomConfirm: (confirm: { title: string, message: string, okText?: string, cancelText?: string, resolve: (val: boolean) => void } | null) => void
+  showConfirm: (title: string, message: string, okText?: string, cancelText?: string) => Promise<boolean>
+  customPrompt: { title: string, message: string, defaultValue?: string, resolve: (val: string | null) => void } | null
+  setCustomPrompt: (prompt: { title: string, message: string, defaultValue?: string, resolve: (val: string | null) => void } | null) => void
+  showPrompt: (title: string, message: string, defaultValue?: string) => Promise<string | null>
+
+  isCloudStorageModalOpen: boolean
+  setIsCloudStorageModalOpen: (isOpen: boolean) => void
+  cloudProjectId: string | null
+  cloudProjectName: string
+  setCloudProjectInfo: (id: string | null, name: string) => void
 
   transformMode: 'translate' | 'rotate' | 'scale' | 'pan' | 'orbit'
   setTransformMode: (mode: 'translate' | 'rotate' | 'scale' | 'pan' | 'orbit') => void
@@ -178,6 +198,25 @@ export const useEditorStore = create<EditorState>()(
       setSubscriptionInfo: (customerPortalUrl, renewsAt) => set({ customerPortalUrl, renewsAt }),
       customAlert: null,
       setCustomAlert: (customAlert) => set({ customAlert }),
+      customConfirm: null,
+      setCustomConfirm: (customConfirm) => set({ customConfirm }),
+      showConfirm: (title, message, okText, cancelText) => {
+        return new Promise((resolve) => {
+          set({ customConfirm: { title, message, okText, cancelText, resolve } })
+        })
+      },
+      customPrompt: null,
+      setCustomPrompt: (customPrompt) => set({ customPrompt }),
+      showPrompt: (title, message, defaultValue) => {
+        return new Promise((resolve) => {
+          set({ customPrompt: { title, message, defaultValue, resolve } })
+        })
+      },
+      isCloudStorageModalOpen: false,
+      setIsCloudStorageModalOpen: (isOpen) => set({ isCloudStorageModalOpen: isOpen }),
+      cloudProjectId: null,
+      cloudProjectName: 'Untitled Project',
+      setCloudProjectInfo: (id, name) => set({ cloudProjectId: id, cloudProjectName: name }),
 
       transformMode: 'translate',
   setTransformMode: (mode) => set({ transformMode: mode }),
@@ -326,7 +365,7 @@ export const useEditorStore = create<EditorState>()(
     const isSunpath = upperUrl.includes('SUNPATH')
     
     // LIMIT CHECK FOR FREE VERSION
-    if (!isSunpath) {
+    if (!isSunpath && !state.isPro) {
       const currentSymbolCount = state.objects.filter(o => !o.url.toUpperCase().includes('SUNPATH')).length
       if (currentSymbolCount >= 5) {
         alert('You have reached the limit of 5 Symbols on the Free plan. Please log in and upgrade to Pro to place unlimited items!')
@@ -351,7 +390,7 @@ export const useEditorStore = create<EditorState>()(
       url,
       position: finalPosition,
       rotation: [0, 0, 0],
-      scale: isSunpath ? [0.5, 0.5, 0.5] : (isCustomModel ? [1, 1, 1] : [4, 4, 4]),
+      scale: isSunpath ? [0.5, 0.5, 0.5] : [1, 1, 1],
       color: isSunpath ? '#ffffff' : (isCustomModel ? undefined : '#ef4444'),
       opacity: isSunpath ? 1 : (isCustomModel ? undefined : 0.8),
       castShadow: true,
@@ -472,11 +511,13 @@ export const useEditorStore = create<EditorState>()(
     if (objectsToDuplicate.length === 0) return state
 
     // LIMIT CHECK FOR FREE VERSION
-    const currentSymbolCount = state.objects.filter(o => !o.url.toUpperCase().includes('SUNPATH')).length
-    const nonSunpathDuplicates = objectsToDuplicate.filter(o => !o.url.toUpperCase().includes('SUNPATH')).length
-    if (currentSymbolCount + nonSunpathDuplicates > 5) {
-      alert('You have reached the limit of 5 Symbols on the Free plan. Please log in and upgrade to Pro to place unlimited items!')
-      return state
+    if (!state.isPro) {
+      const currentSymbolCount = state.objects.filter(o => !o.url.toUpperCase().includes('SUNPATH')).length
+      const nonSunpathDuplicates = objectsToDuplicate.filter(o => !o.url.toUpperCase().includes('SUNPATH')).length
+      if (currentSymbolCount + nonSunpathDuplicates > 5) {
+        alert('You have reached the limit of 5 Symbols on the Free plan. Please log in and upgrade to Pro to place unlimited items!')
+        return state
+      }
     }
 
     const newObjects = objectsToDuplicate.map(obj => ({
@@ -512,7 +553,9 @@ export const useEditorStore = create<EditorState>()(
         showEdges: state.showEdges,
         sunpathSettings: state.sunpathSettings,
         hudPosition: state.hudPosition,
-        savedViews: state.savedViews
+        savedViews: state.savedViews,
+        cloudProjectId: state.cloudProjectId,
+        cloudProjectName: state.cloudProjectName
       }),
     }
   )

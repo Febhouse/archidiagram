@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import Scene from './Scene'
-import { useEditorStore } from '../store/useEditorStore'
+import { useEditorStore, PRO_MODELS } from '../store/useEditorStore'
 import { LIBRARY_MODELS } from '../config/library'
 import LibraryItem from './LibraryItem'
 import { isDstActive } from './NativeSunpath'
 import { getDayOfYear } from './SunLight'
 import AuthModal from './AuthModal'
+import CloudStorageModal from './CloudStorageModal'
 import { supabase } from '../lib/supabase'
 import { GLTFLoader } from 'three-stdlib'
 
@@ -294,7 +295,7 @@ export default function Studio() {
   }, [addSavedView])
 
   // H2 Accordion State
-  const [activeH2, setActiveH2] = useState<'location' | 'sundiagram' | 'symbols' | 'import' | 'export' | 'info' | null>('location')
+  const [activeH2, setActiveH2] = useState<'global' | 'location' | 'sundiagram' | 'symbols' | 'import' | 'export' | 'info' | null>('location')
   
   // Tabs State within H2
   const [sunTab, setSunTab] = useState<'create' | 'shadow' | 'style'>('shadow')
@@ -321,11 +322,21 @@ export default function Studio() {
   const [isNotesExpanded, setIsNotesExpanded] = useState(window.innerWidth > 768)
   const [showAddSymbolMenu, setShowAddSymbolMenu] = useState(false)
   const [showGlobalMenu, setShowGlobalMenu] = useState(false)
+  const [showFileMenu, setShowFileMenu] = useState(false)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false)
 
   const customAlert = useEditorStore(state => state.customAlert)
   const setCustomAlert = useEditorStore(state => state.setCustomAlert)
+  const customConfirm = useEditorStore(state => state.customConfirm)
+  const setCustomConfirm = useEditorStore(state => state.setCustomConfirm)
+  const customPrompt = useEditorStore(state => state.customPrompt)
+  const setCustomPrompt = useEditorStore(state => state.setCustomPrompt)
+  
+  const isCloudStorageModalOpen = useEditorStore(state => state.isCloudStorageModalOpen)
+  const setIsCloudStorageModalOpen = useEditorStore(state => state.setIsCloudStorageModalOpen)
+  const cloudProjectName = useEditorStore(state => state.cloudProjectName)
+  const setCloudProjectInfo = useEditorStore(state => state.setCloudProjectInfo)
 
   useEffect(() => {
     const handleResize = () => {
@@ -437,7 +448,10 @@ export default function Studio() {
   }, [undo, redo, placingUrl, setPlacingUrl])
 
   useEffect(() => {
-    const handleClick = () => setContextMenu(null)
+    const handleClick = () => {
+      setContextMenu(null)
+      setShowFileMenu(false)
+    }
     window.addEventListener('click', handleClick)
     return () => window.removeEventListener('click', handleClick)
   }, [setContextMenu])
@@ -457,7 +471,7 @@ export default function Studio() {
   const getModelUrl = (name: string) => name === 'SUNPATH' ? 'https://pub-5837f996e3144244a501515264ddf495.r2.dev/SUNPATH/my_model.glb' : `/images/dynamicsymbols/${name}.svg`
   const filteredModels = LIBRARY_MODELS.filter(name => name.toLowerCase().includes(searchTerm.toLowerCase()))
 
-  const H2Header = ({ id, title, icon, onToggle }: { id: 'location' | 'sundiagram' | 'symbols' | 'import' | 'export' | 'info', title: string, icon?: string | React.ReactNode, onToggle?: () => void }) => (
+  const H2Header = ({ id, title, icon, onToggle }: { id: 'global' | 'location' | 'sundiagram' | 'symbols' | 'import' | 'export' | 'info', title: string, icon?: string | React.ReactNode, onToggle?: () => void }) => (
     <div 
       onClick={() => {
         setActiveH2(activeH2 === id ? null : id);
@@ -489,6 +503,7 @@ export default function Studio() {
   return (
     <>
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <CloudStorageModal isOpen={isCloudStorageModalOpen} onClose={() => setIsCloudStorageModalOpen(false)} onRequireAuth={() => setIsAuthModalOpen(true)} />
       
       {customAlert && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999999 }}>
@@ -504,6 +519,75 @@ export default function Studio() {
             >
               OK
             </button>
+          </div>
+        </div>
+      )}
+
+      {customConfirm && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999999 }}>
+          <div style={{ background: bgPanel, color: textMain, padding: '30px', borderRadius: '12px', width: '90%', maxWidth: '400px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', position: 'relative', textAlign: 'center' }}>
+            <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="ArchiDiagram" style={{ height: '32px', marginBottom: '15px' }} />
+            <h2 style={{ margin: '0 0 10px 0', fontSize: '1.2rem', fontWeight: 'bold' }}>{customConfirm.title}</h2>
+            <p style={{ margin: '0 0 20px 0', color: textMuted, fontSize: '0.9rem', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>
+              {customConfirm.message}
+            </p>
+            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+              <button 
+                onClick={() => { customConfirm.resolve(false); setCustomConfirm(null); }}
+                style={{ padding: '8px 24px', background: 'transparent', border: `1px solid ${borderCol}`, color: textMain, borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}
+              >
+                {customConfirm.cancelText || 'Cancel'}
+              </button>
+              <button 
+                onClick={() => { customConfirm.resolve(true); setCustomConfirm(null); }}
+                style={{ padding: '8px 24px', background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}
+              >
+                {customConfirm.okText || 'OK'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {customPrompt && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999999 }}>
+          <div style={{ background: bgPanel, color: textMain, padding: '30px', borderRadius: '12px', width: '90%', maxWidth: '400px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', position: 'relative', textAlign: 'center' }}>
+            <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="ArchiDiagram" style={{ height: '32px', marginBottom: '15px' }} />
+            <h2 style={{ margin: '0 0 10px 0', fontSize: '1.2rem', fontWeight: 'bold' }}>{customPrompt.title}</h2>
+            <p style={{ margin: '0 0 15px 0', color: textMuted, fontSize: '0.9rem', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>
+              {customPrompt.message}
+            </p>
+            <input 
+              type="text" 
+              defaultValue={customPrompt.defaultValue || ''} 
+              autoFocus 
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  customPrompt.resolve(e.currentTarget.value);
+                  setCustomPrompt(null);
+                }
+              }}
+              id="custom-prompt-input"
+              style={{ width: '100%', padding: '10px', marginBottom: '20px', borderRadius: '6px', border: `1px solid ${borderCol}`, background: isLight ? '#f9fafb' : '#333', color: textMain }}
+            />
+            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+              <button 
+                onClick={() => { customPrompt.resolve(null); setCustomPrompt(null); }}
+                style={{ padding: '8px 24px', background: 'transparent', border: `1px solid ${borderCol}`, color: textMain, borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={() => { 
+                  const val = (document.getElementById('custom-prompt-input') as HTMLInputElement)?.value;
+                  customPrompt.resolve(val); 
+                  setCustomPrompt(null); 
+                }}
+                style={{ padding: '8px 24px', background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}
+              >
+                OK
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -606,30 +690,241 @@ export default function Studio() {
         flexDirection: 'column', 
         borderRight: isMobile ? 'none' : `1px solid ${borderCol}`, 
         borderBottom: isMobile ? `1px solid ${borderCol}` : 'none',
-        zIndex: 100, 
-        overflow: 'hidden' 
+        zIndex: 100 
       }}>
         {/* Replaced floating close button */}
         
         {/* H1 & Global Toggle */}
-        <div style={{ padding: '10px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: `2px solid ${borderCol}`, minWidth: 0 }}>
+        <div style={{ position: 'relative', zIndex: 9999, padding: '10px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: `2px solid ${borderCol}`, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
             <img src="/images/LOGO/LOGO_FEBHOUSE1.svg" alt="Logo" style={{ height: '32px', flexShrink: 0 }} />
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
               <div style={{ display: isMobile ? 'none' : 'block', fontWeight: 900, fontSize: '0.85rem', letterSpacing: '1px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>ARCHI DIAGRAM</div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '32px', fontSize: '0.65rem', fontWeight: 'bold', background: 'transparent', color: '#3b82f6', padding: '0', flexShrink: 0, boxSizing: 'border-box', letterSpacing: '1px' }}>BETA</div>
-              {isPro && <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '32px', fontSize: '0.65rem', fontWeight: 'bold', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '0 10px', borderRadius: '6px', flexShrink: 0, boxSizing: 'border-box' }}>PRO</div>}
+              {isPro ? (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '32px', fontSize: '0.65rem', fontWeight: 'bold', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '0 10px', borderRadius: '6px', flexShrink: 0, boxSizing: 'border-box' }}>PRO</div>
+              ) : (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '32px', fontSize: '0.65rem', fontWeight: 'bold', background: 'transparent', color: '#3b82f6', padding: '0', flexShrink: 0, boxSizing: 'border-box', letterSpacing: '1px' }}>BETA</div>
+              )}
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexShrink: 0 }}>
-            {user ? (
+          
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+            <div style={{ display: 'flex', gap: '10px', position: 'relative', zIndex: 99999, alignItems: 'center' }}>
+
+
               <div 
-                onClick={() => setIsProfileModalOpen(true)}
-                style={{ display: 'flex', alignItems: 'center', gap: '6px', background: isLight ? '#f3f4f6' : '#374151', padding: '0 8px', height: '32px', borderRadius: '6px', border: `1px solid ${borderCol}`, cursor: 'pointer', boxSizing: 'border-box', flexShrink: 0, whiteSpace: 'nowrap' }}
+                style={{ 
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', height: '32px',
+                  fontSize: '0.8rem', padding: '0 12px', borderRadius: '6px', 
+                  background: showFileMenu ? '#3b82f6' : 'transparent', border: `1px solid ${borderCol}`,
+                  color: showFileMenu ? '#fff' : textMain, cursor: 'pointer', fontWeight: 'bold', boxSizing: 'border-box',
+                  transition: '0.2s', gap: '4px', whiteSpace: 'nowrap'
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowFileMenu(!showFileMenu);
+                }}
                 onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
                 onMouseLeave={(e) => e.currentTarget.style.borderColor = borderCol}
               >
-                <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{user.email?.split('@')[0]}</span>
+                FILE ▼
+              </div>
+              
+              {showFileMenu && (
+                <div 
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                  position: 'absolute', top: '100%', right: 0, marginTop: '4px',
+                  background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '6px',
+                  boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)', minWidth: '180px',
+                  display: 'flex', flexDirection: 'column', zIndex: 9999, overflow: 'hidden'
+                }}>
+                  <div style={{ padding: '10px 15px', borderBottom: `1px solid ${borderCol}` }}>
+                    <div style={{ fontSize: '0.65rem', fontWeight: 'bold', color: textMain, marginBottom: '6px', opacity: 0.6, letterSpacing: '0.5px' }}>PROJECT NAME</div>
+                    <input 
+                      type="text" 
+                      value={cloudProjectName} 
+                      onChange={(e) => setCloudProjectInfo(useEditorStore.getState().cloudProjectId, e.target.value)}
+                      style={{ 
+                        width: '100%', background: isLight ? '#f3f4f6' : '#374151', border: `1px solid ${borderCol}`, 
+                        color: textMain, fontSize: '0.8rem', padding: '6px 8px', borderRadius: '4px', outline: 'none',
+                        boxSizing: 'border-box'
+                      }}
+                      onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
+                      onBlur={(e) => e.target.style.borderColor = borderCol}
+                      placeholder="Untitled Project"
+                    />
+                  </div>
+                  <button
+                    onClick={async () => {
+                      if (await useEditorStore.getState().showConfirm("New Project", "Are you sure you want to create a new project? All unsaved changes will be lost.")) {
+                        useEditorStore.setState({ 
+                          objects: [], past: [], future: [], selectedIds: [],
+                          latitude: 21.0285, longitude: 105.8542,
+                          timezoneMode: 'auto', utcOffset: 8, dstMode: 'auto',
+                          cloudProjectId: null, cloudProjectName: 'Untitled Project'
+                        })
+                        setActiveH2('sundiagram')
+                        setSunTab('create')
+                        setSymbolTab('library')
+                        setTransformMode('translate')
+                        setShowFileMenu(false)
+                      }
+                    }}
+                    style={{ textAlign: 'left', padding: '10px 15px', background: 'transparent', border: 'none', borderBottom: `1px solid ${borderCol}`, color: textMain, cursor: 'pointer', fontSize: '0.8rem' }}
+                    onMouseEnter={e => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    ✨ New Project
+                  </button>
+
+                  <button
+                    onClick={async () => {
+                      setShowFileMenu(false)
+                      if (!user) {
+                        setIsAuthModalOpen(true);
+                      } else {
+                        try {
+                          const { user, isPro, customerPortalUrl, renewsAt, mapboxToken, past, future, ...safeState } = useEditorStore.getState()
+                          const stateJson = JSON.stringify(safeState)
+                          const sizeMb = (new Blob([stateJson]).size / (1024 * 1024)).toFixed(2)
+                          
+                          if (useEditorStore.getState().cloudProjectId) {
+                            const { error } = await supabase.from('projects').update({
+                              state_json: safeState,
+                              size_mb: sizeMb,
+                              updated_at: new Date().toISOString()
+                            }).eq('id', useEditorStore.getState().cloudProjectId);
+                            if (error) throw error;
+                            useEditorStore.getState().setCustomAlert({ title: 'Success', message: 'Project saved successfully!' });
+                          } else {
+                            const name = await useEditorStore.getState().showPrompt('Project Name', 'Enter project name:', useEditorStore.getState().cloudProjectName || 'Untitled Project')
+                            if (!name) return;
+                            const { data, error } = await supabase.from('projects').insert({
+                              user_id: user.id,
+                              name: name,
+                              state_json: safeState,
+                              size_mb: sizeMb,
+                              is_public: false
+                            }).select('id').single();
+                            if (error) throw error;
+                            if (data) {
+                              useEditorStore.getState().setCloudProjectInfo(data.id, name);
+                              useEditorStore.getState().setCustomAlert({ title: 'Success', message: `Project "${name}" saved to cloud!` });
+                            }
+                          }
+                        } catch (err: any) {
+                            useEditorStore.getState().setCustomAlert({ title: 'Error', message: 'Failed to save: ' + err.message });
+                        }
+                      }
+                    }}
+                    style={{ textAlign: 'left', padding: '10px 15px', background: 'transparent', border: 'none', color: '#3b82f6', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 'bold' }}
+                    onMouseEnter={e => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    ☁️ Save to Cloud
+                  </button>
+
+                  <button
+                    onClick={() => { setShowFileMenu(false); setIsCloudStorageModalOpen(true) }}
+                    style={{ textAlign: 'left', padding: '10px 15px', background: 'transparent', border: 'none', borderBottom: `1px solid ${borderCol}`, color: textMain, cursor: 'pointer', fontSize: '0.8rem' }}
+                    onMouseEnter={e => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    📂 My Projects
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setShowFileMenu(false)
+                      const input = document.createElement('input')
+                      input.type = 'file'
+                      input.accept = '.archi,.json'
+                      input.onchange = (e: any) => {
+                        const file = e.target.files[0]
+                        if (!file) return
+                        const reader = new FileReader()
+                        reader.onload = (ev) => {
+                          try {
+                            const data = JSON.parse(ev.target?.result as string)
+                            const currentState = useEditorStore.getState()
+                            useEditorStore.setState({ 
+                              ...data, 
+                              user: currentState.user, 
+                              isPro: currentState.isPro,
+                              customerPortalUrl: currentState.customerPortalUrl,
+                              renewsAt: currentState.renewsAt,
+                              mapboxToken: currentState.mapboxToken,
+                              cloudProjectId: null, // Loading local file unbinds from cloud
+                              cloudProjectName: file.name.replace('.archi', '').replace('.json', '')
+                            })
+                          } catch (err) {
+                            useEditorStore.getState().setCustomAlert({ title: 'Error', message: 'Invalid file!' });
+                          }
+                        }
+                        reader.readAsText(file)
+                      }
+                      input.click()
+                    }}
+                    style={{ textAlign: 'left', padding: '10px 15px', background: 'transparent', border: 'none', color: textMain, cursor: 'pointer', fontSize: '0.8rem' }}
+                    onMouseEnter={e => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    🖥️ Open Local
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setShowFileMenu(false)
+                      const { user, isPro, customerPortalUrl, renewsAt, mapboxToken, past, future, ...safeState } = useEditorStore.getState()
+                      const dataStr = JSON.stringify(safeState)
+                      const blob = new Blob([dataStr], { type: 'application/json' })
+                      const url = URL.createObjectURL(blob)
+                      const link = document.createElement('a')
+                      link.href = url
+                      link.download = `${cloudProjectName}.archi`
+                      link.click()
+                      URL.revokeObjectURL(url)
+                    }}
+                    style={{ textAlign: 'left', padding: '10px 15px', background: 'transparent', border: 'none', borderBottom: `1px solid ${borderCol}`, color: textMain, cursor: 'pointer', fontSize: '0.8rem' }}
+                    onMouseEnter={e => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    💻 Save Local
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setShowFileMenu(false)
+                      if (!useEditorStore.getState().cloudProjectId) {
+                        useEditorStore.getState().setCustomAlert({ title: 'Error', message: 'You must Save to Cloud first before sharing.' });
+                      } else {
+                        const shareUrl = `${window.location.origin}/?p=${useEditorStore.getState().cloudProjectId}`;
+                        navigator.clipboard.writeText(shareUrl);
+                        useEditorStore.getState().setCustomAlert({ title: 'Success', message: `Share link copied to clipboard!\n${shareUrl}` });
+                      }
+                    }}
+                    style={{ textAlign: 'left', padding: '10px 15px', background: 'transparent', border: 'none', color: '#10b981', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 'bold' }}
+                    onMouseEnter={e => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    🔗 Share Project
+                  </button>
+                </div>
+              )}
+            </div>
+            
+            <div style={{ display: isMobile ? 'none' : 'flex', height: '24px', width: '1px', background: borderCol, margin: '0 5px', flexShrink: 0 }} />
+            
+            <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexShrink: 0 }}>
+            {user ? (
+              <div 
+                onClick={() => setIsProfileModalOpen(true)}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', background: isLight ? '#f3f4f6' : '#374151', borderRadius: '6px', border: `1px solid ${borderCol}`, cursor: 'pointer', boxSizing: 'border-box', flexShrink: 0 }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = borderCol}
+                title={user.email}
+              >
                 <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.75rem', fontWeight: 'bold', flexShrink: 0 }}>
                   {user.email?.charAt(0).toUpperCase()}
                 </div>
@@ -648,237 +943,170 @@ export default function Studio() {
             >
               TOOLS
             </button>
-            <button 
-              onClick={() => { setShowGlobalMenu(!showGlobalMenu); if (isMobile && !showGlobalMenu) setShowMobileMenu(false); }}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '32px', background: showGlobalMenu ? '#3b82f6' : 'transparent', color: showGlobalMenu ? '#fff' : textMain, border: `1px solid ${borderCol}`, borderRadius: '6px', padding: '0 10px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem', transition: '0.2s', boxSizing: 'border-box', flexShrink: 0, whiteSpace: 'nowrap' }}
-            >
-              GLOBAL
-            </button>
-          </div>
-        </div>
-
-        {/* Global Toolbar (Dropdown) */}
-        {showGlobalMenu && (
-        <div style={{ padding: '15px', display: 'flex', flexDirection: 'column', gap: '15px', borderBottom: `2px solid ${borderCol}`, background: isLight ? '#f9fafb' : '#1a1a1a' }}>
-          
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-            <div style={{ display: 'flex', gap: '5px' }}>
-              <button
-                onClick={() => {
-                  if (window.confirm("Are you sure you want to create a new project? All unsaved changes will be lost.")) {
-                    useEditorStore.setState({ 
-                      objects: [], past: [], future: [], selectedIds: [],
-                      latitude: 21.0285, longitude: 105.8542,
-                      timezoneMode: 'auto', utcOffset: 8, dstMode: 'auto'
-                    })
-                    setActiveH2('sundiagram')
-                    setSunTab('create')
-                    setSymbolTab('library')
-                    setTransformMode('translate')
-                  }
-                }}
-                style={{ fontSize: '0.75rem', padding: '4px 8px', borderRadius: '4px', border: `1px solid ${borderCol}`, background: inputBg, color: textMain, cursor: 'pointer', fontWeight: 'bold' }}
-              >NEW</button>
-              
-              <button
-                onClick={() => {
-                  const { user, isPro, customerPortalUrl, renewsAt, mapboxToken, past, future, ...safeState } = useEditorStore.getState()
-                  const dataStr = JSON.stringify(safeState)
-                  const blob = new Blob([dataStr], { type: 'application/json' })
-                  const url = URL.createObjectURL(blob)
-                  const link = document.createElement('a')
-                  link.href = url
-                  link.download = 'project.archi'
-                  link.click()
-                  URL.revokeObjectURL(url)
-                }}
-                style={{ fontSize: '0.75rem', padding: '4px 8px', borderRadius: '4px', border: `1px solid ${borderCol}`, background: inputBg, color: textMain, cursor: 'pointer', fontWeight: 'bold' }}
-              >SAVE</button>
-
-              <button
-                onClick={() => {
-                  const input = document.createElement('input')
-                  input.type = 'file'
-                  input.accept = '.archi,.json'
-                  input.onchange = (e: any) => {
-                    const file = e.target.files[0]
-                    if (!file) return
-                    const reader = new FileReader()
-                    reader.onload = (ev) => {
-                      try {
-                        const data = JSON.parse(ev.target?.result as string)
-                        const currentState = useEditorStore.getState()
-                        useEditorStore.setState({ 
-                          ...data, 
-                          user: currentState.user, 
-                          isPro: currentState.isPro,
-                          customerPortalUrl: currentState.customerPortalUrl,
-                          renewsAt: currentState.renewsAt,
-                          mapboxToken: currentState.mapboxToken
-                        })
-                      } catch (err) {
-                        alert('Invalid file!')
-                      }
-                    }
-                    reader.readAsText(file)
-                  }
-                  input.click()
-                }}
-                style={{ fontSize: '0.75rem', padding: '4px 8px', borderRadius: '4px', border: `1px solid ${borderCol}`, background: inputBg, color: textMain, cursor: 'pointer', fontWeight: 'bold' }}
-              >LOAD</button>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {/* Row 1: Light/Dark Mode, Background, Grid, Axes */}
-            <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>Light</span>
-                <label style={{ position: 'relative', display: 'inline-block', width: '34px', height: '18px' }}>
-                  <input type="checkbox" checked={!isLight} onChange={(e) => { setEnvironment({ uiTheme: e.target.checked ? 'dark' : 'light' }); setMonthColor(17, e.target.checked ? '#464646' : '#ffffff'); }} style={{ opacity: 0, width: 0, height: 0 }} />
-                  <span style={{ position: 'absolute', cursor: 'pointer', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: isLight ? '#ccc' : '#2196F3', transition: '.4s', borderRadius: '18px' }}>
-                    <span style={{ position: 'absolute', content: '""', height: '14px', width: '14px', left: '2px', bottom: '2px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', transform: !isLight ? 'translateX(16px)' : 'translateX(0)' }}></span>
-                  </span>
-                </label>
-                <span style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>Dark</span>
-              </div>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ fontSize: '0.75rem' }}>Background Color</span>
-                <input 
-                  type="color" 
-                  value={monthColors[17] || (isLight ? '#ffffff' : '#000000')} 
-                  onChange={(e) => setMonthColor(17, e.target.value)}
-                  style={{ width: '20px', height: '20px', padding: 0, border: 'none', background: 'transparent', cursor: 'pointer' }}
-                />
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
-                <input 
-                  type="checkbox" 
-                  checked={sunpathSettings.showGrid} 
-                  onChange={(e) => setSunpathSettings({ showGrid: e.target.checked })}
-                />
-                <span style={{ fontSize: '0.75rem' }}>GRID</span>
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
-                <input 
-                  type="checkbox" 
-                  checked={sunpathSettings.showAxes} 
-                  onChange={(e) => setSunpathSettings({ showAxes: e.target.checked })}
-                />
-                <span style={{ fontSize: '0.75rem' }}>AXES</span>
-              </label>
-            </div>
-
-            {/* Row 2: Animation, Shadows, Default */}
-            <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexWrap: 'wrap' }}>
-              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                <input 
-                  type="checkbox" 
-                  checked={objects.some(o => o.isAnimated)} 
-                  onChange={(e) => {
-                    const ids = objects.map(o => o.id)
-                    useEditorStore.getState().updateObjectProperties(ids, { isAnimated: e.target.checked })
-                  }}
-                />
-                <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>ANIMATION</span>
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                <input 
-                  type="checkbox" 
-                  checked={shadowsEnabled} 
-                  onChange={(e) => setEnvironment({ shadowsEnabled: e.target.checked })}
-                />
-                <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>SHADOWS</span>
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                <input 
-                  type="checkbox" 
-                  checked={showEdges} 
-                  onChange={(e) => setEnvironment({ showEdges: e.target.checked })}
-                />
-                <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>EDGES</span>
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                <input 
-                  type="checkbox" 
-                  checked={showHUD} 
-                  onChange={(e) => setEnvironment({ showHUD: e.target.checked })}
-                />
-                <span style={{ marginLeft: '4px', fontSize: '0.75rem', color: showHUD ? '#3b82f6' : 'inherit' }}>NOTES</span>
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ fontSize: '0.75rem' }}>GLOBAL TEXT SIZE</span>
-                <input 
-                  type="number" min="0.1" max="10" step="0.1" 
-                  value={globalTextSize ?? 1} 
-                  onChange={(e) => setEnvironment({ globalTextSize: parseFloat(e.target.value) || 0.1 })}
-                  style={{ width: '60px', padding: '2px 4px', fontSize: '0.8rem', border: `1px solid ${inputBorder}`, borderRadius: '4px', background: inputBg, color: textMain }}
-                />
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ fontSize: '0.75rem' }}>GLOBAL UNIT</span>
-                <select 
-                  value={scaleRingUnit} 
-                  onChange={(e) => {
-                    const newUnit = e.target.value;
-                    setScaleRingUnit(newUnit);
-                    const store = useEditorStore.getState();
-                    if (newUnit === 'ft') {
-                      const ftValue = store.mapRadius * 3.28084;
-                      const snappedFt = Math.round(ftValue / 10) * 10;
-                      setMapRadius(snappedFt / 3.28084);
-                    } else {
-                      const mValue = store.mapRadius;
-                      const snappedM = Math.round(mValue / 10) * 10;
-                      setMapRadius(snappedM);
-                    }
-                  }}
-                  style={{ fontSize: '0.75rem', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }}
-                >
-                  <option value="m">M (m)</option>
-                  <option value="ft">FT (ft)</option>
-                </select>
-              </label>
-              <button 
-                title="Reset all colors and sizes to defaults"
-                onClick={() => {
-                  const defaultMonthColors = {
-                    1: '#cccccc', 2: '#cccccc', 3: '#cccccc', 4: '#cccccc', 5: '#cccccc', 
-                    6: '#ff0000', 7: '#cccccc', 8: '#cccccc', 9: '#00ff00', 10: '#cccccc', 
-                    11: '#cccccc', 12: '#0000ff', 13: '#ff0000', 14: '#233156', 15: '#233156', 
-                    16: '#ffd700', 17: '#ffffff', 18: '#ffcc00'
-                  }
-                  const defaultSunpathSettings = {
-                    showSky: true, showCompass: true, showMonths: true, showAnalemma: false, 
-                    showHourlySun: true, showText: true, sunSize: 1.2, 
-                    sunpathThickness: 2, compassThickness: 1, sunpathDashSize: 1, showGrid: true, showAxes: true
-                  }
-                  useEditorStore.getState().setEnvironment({ 
-                    visibleMonths: [6, 9, 12], 
-                    monthDates: { ...useEditorStore.getState().monthDates, 6: 21, 9: 21, 12: 21 }, 
-                    activeMonth: 6,
-                    uiTheme: 'light',
-                    globalTextSize: 2,
-                    monthColorsLight: defaultMonthColors,
-                    monthColorsDark: {
-                      1: '#cccccc', 2: '#cccccc', 3: '#cccccc', 4: '#cccccc', 5: '#cccccc', 
-                      6: '#ff0000', 7: '#cccccc', 8: '#cccccc', 9: '#00ff00', 10: '#cccccc', 
-                      11: '#cccccc', 12: '#0000ff', 13: '#ff0000', 14: '#ffffff', 15: '#999999', 
-                      16: '#ffd700', 17: '#000000', 18: '#ffcc00'
-                    }
-                  })
-                  useEditorStore.getState().setSunpathSettings(defaultSunpathSettings)
-                }} 
-                style={{ fontSize: '0.75rem', padding: '4px 8px', borderRadius: '4px', border: `1px solid ${borderCol}`, background: inputBg, color: textMain, cursor: 'pointer', fontWeight: 'bold', marginLeft: 'auto' }}
-              >
-                Default
-              </button>
-            </div>
           </div>
         </div>
       </div>
-    </div>
-  )}
 
-        <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', display: (!isMobile || showMobileMenu) ? 'block' : 'none', paddingBottom: isMobile ? '100px' : '20px' }}>
+      <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', display: (!isMobile || showMobileMenu) ? 'block' : 'none', paddingBottom: isMobile ? '100px' : '20px' }}>
           
+          {/* H2: Global Settings */}
+          <H2Header id="global" title="Global Settings" icon={
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          } />
+          {activeH2 === 'global' && (
+            <div style={{ background: isLight ? '#f9fafb' : '#1a1a1a', padding: '15px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                {/* Row 1: Light/Dark Mode, Background, Grid, Axes */}
+                <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>Light</span>
+                    <label style={{ position: 'relative', display: 'inline-block', width: '34px', height: '18px' }}>
+                      <input type="checkbox" checked={!isLight} onChange={(e) => { setEnvironment({ uiTheme: e.target.checked ? 'dark' : 'light' }); setMonthColor(17, e.target.checked ? '#464646' : '#ffffff'); }} style={{ opacity: 0, width: 0, height: 0 }} />
+                      <span style={{ position: 'absolute', cursor: 'pointer', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: isLight ? '#ccc' : '#2196F3', transition: '.4s', borderRadius: '18px' }}>
+                        <span style={{ position: 'absolute', content: '""', height: '14px', width: '14px', left: '2px', bottom: '2px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', transform: !isLight ? 'translateX(16px)' : 'translateX(0)' }}></span>
+                      </span>
+                    </label>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>Dark</span>
+                  </div>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <span style={{ fontSize: '0.75rem' }}>Background Color</span>
+                    <input 
+                      type="color" 
+                      value={monthColors[17] || (isLight ? '#ffffff' : '#000000')} 
+                      onChange={(e) => setMonthColor(17, e.target.value)}
+                      style={{ width: '20px', height: '20px', padding: 0, border: 'none', background: 'transparent', cursor: 'pointer' }}
+                    />
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={sunpathSettings.showGrid} 
+                      onChange={(e) => setSunpathSettings({ showGrid: e.target.checked })}
+                    />
+                    <span style={{ fontSize: '0.75rem' }}>GRID</span>
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={sunpathSettings.showAxes} 
+                      onChange={(e) => setSunpathSettings({ showAxes: e.target.checked })}
+                    />
+                    <span style={{ fontSize: '0.75rem' }}>AXES</span>
+                  </label>
+                </div>
+
+                {/* Row 2: Animation, Shadows, Default */}
+                <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={objects.some(o => o.isAnimated)} 
+                      onChange={(e) => {
+                        const ids = objects.map(o => o.id)
+                        useEditorStore.getState().updateObjectProperties(ids, { isAnimated: e.target.checked })
+                      }}
+                    />
+                    <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>ANIMATION</span>
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={shadowsEnabled} 
+                      onChange={(e) => setEnvironment({ shadowsEnabled: e.target.checked })}
+                    />
+                    <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>SHADOWS</span>
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={showEdges} 
+                      onChange={(e) => setEnvironment({ showEdges: e.target.checked })}
+                    />
+                    <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>EDGES</span>
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={showHUD} 
+                      onChange={(e) => setEnvironment({ showHUD: e.target.checked })}
+                    />
+                    <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>NOTES</span>
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <span style={{ fontSize: '0.75rem' }}>GLOBAL TEXT SIZE</span>
+                    <input 
+                      type="number" min="0.1" max="10" step="0.1" 
+                      value={globalTextSize ?? 1} 
+                      onChange={(e) => setEnvironment({ globalTextSize: parseFloat(e.target.value) || 0.1 })}
+                      style={{ width: '60px', padding: '2px 4px', fontSize: '0.8rem', border: `1px solid ${inputBorder}`, borderRadius: '4px', background: inputBg, color: textMain }}
+                    />
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <span style={{ fontSize: '0.75rem' }}>GLOBAL UNIT</span>
+                    <select 
+                      value={scaleRingUnit} 
+                      onChange={(e) => {
+                        const newUnit = e.target.value;
+                        setScaleRingUnit(newUnit);
+                        const store = useEditorStore.getState();
+                        if (newUnit === 'ft') {
+                          const ftValue = store.mapRadius * 3.28084;
+                          const snappedFt = Math.round(ftValue / 10) * 10;
+                          setMapRadius(snappedFt / 3.28084);
+                        } else {
+                          const mValue = store.mapRadius;
+                          const snappedM = Math.round(mValue / 10) * 10;
+                          setMapRadius(snappedM);
+                        }
+                      }}
+                      style={{ fontSize: '0.75rem', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }}
+                    >
+                      <option value="m">M (m)</option>
+                      <option value="ft">FT (ft)</option>
+                    </select>
+                  </label>
+                  <button 
+                    title="Reset all colors and sizes to defaults"
+                    onClick={() => {
+                      const defaultMonthColors = {
+                        1: '#cccccc', 2: '#cccccc', 3: '#cccccc', 4: '#cccccc', 5: '#cccccc', 
+                        6: '#ff0000', 7: '#cccccc', 8: '#cccccc', 9: '#00ff00', 10: '#cccccc', 
+                        11: '#cccccc', 12: '#0000ff', 13: '#ff0000', 14: '#233156', 15: '#233156', 
+                        16: '#ffd700', 17: '#ffffff', 18: '#ffcc00'
+                      }
+                      const defaultSunpathSettings = {
+                        showSky: true, showCompass: true, showMonths: true, showAnalemma: false, 
+                        showHourlySun: true, showText: true, sunSize: 1.2, 
+                        sunpathThickness: 2, compassThickness: 1, sunpathDashSize: 1, showGrid: true, showAxes: true
+                      }
+                      useEditorStore.getState().setEnvironment({ 
+                        visibleMonths: [6, 9, 12], 
+                        monthDates: { ...useEditorStore.getState().monthDates, 6: 21, 9: 21, 12: 21 }, 
+                        activeMonth: 6,
+                        uiTheme: 'light',
+                        globalTextSize: 2,
+                        monthColorsLight: defaultMonthColors,
+                        monthColorsDark: {
+                          1: '#cccccc', 2: '#cccccc', 3: '#cccccc', 4: '#cccccc', 5: '#cccccc', 
+                          6: '#ff0000', 7: '#cccccc', 8: '#cccccc', 9: '#00ff00', 10: '#cccccc', 
+                          11: '#cccccc', 12: '#0000ff', 13: '#ff0000', 14: '#ffffff', 15: '#999999', 
+                          16: '#ffd700', 17: '#000000', 18: '#ffcc00'
+                        }
+                      })
+                      useEditorStore.getState().setSunpathSettings(defaultSunpathSettings)
+                    }} 
+                    style={{ fontSize: '0.75rem', padding: '4px 8px', borderRadius: '4px', border: `1px solid ${borderCol}`, background: inputBg, color: textMain, cursor: 'pointer', fontWeight: 'bold', marginLeft: 'auto' }}
+                  >
+                    Default
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* H2: Location & Context */}
           <H2Header id="location" title="Location & Context" icon={
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1166,7 +1394,7 @@ export default function Studio() {
                           const file = e.target.files?.[0];
                           if (!file) return;
                           if (file.size > 5 * 1024 * 1024) {
-                            alert("File size exceeds 5MB limit. Please choose a smaller file.");
+                            useEditorStore.getState().setCustomAlert({ title: 'Error', message: "File size exceeds 5MB limit. Please choose a smaller file." });
                             e.target.value = '';
                             return;
                           }
@@ -2654,8 +2882,8 @@ export default function Studio() {
                   if (existingNote) {
                     return (
                       <button 
-                        onClick={() => {
-                          const name = prompt('Edit note name:', existingNote.name)
+                        onClick={async () => {
+                          const name = await useEditorStore.getState().showPrompt('Edit Note', 'Edit note name:', existingNote.name)
                           if (name && contextMenu.targetId) {
                             useEditorStore.getState().updateLegendItemName(existingNote.id, name)
                           }
@@ -2669,8 +2897,8 @@ export default function Studio() {
                   }
                   return (
                     <button 
-                      onClick={() => {
-                        const name = prompt('Note name for this symbol:')
+                      onClick={async () => {
+                        const name = await useEditorStore.getState().showPrompt('Note Name', 'Note name for this symbol:')
                         if (name && contextMenu.targetId) {
                           const obj = useEditorStore.getState().objects.find(o => o.id === contextMenu.targetId)
                           if (obj) {
@@ -2724,8 +2952,8 @@ export default function Studio() {
                   <div style={{ display: 'flex', gap: '4px' }}>
                     <button 
                       title="Rename view"
-                      onClick={() => {
-                        const newName = window.prompt("Enter new name for view:", view.name);
+                      onClick={async () => {
+                        const newName = await useEditorStore.getState().showPrompt("Rename View", "Enter new name for view:", view.name);
                         if (newName) useEditorStore.getState().updateSavedViewName(view.id, newName);
                       }}
                       style={{ background: 'transparent', color: textMain, border: 'none', cursor: 'pointer', padding: '2px 4px', fontSize: '0.7rem' }}

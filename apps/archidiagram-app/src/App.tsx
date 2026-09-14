@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useEffect, lazy, Suspense } from 'react'
 import { supabase } from './lib/supabase'
-import { useEditorStore } from './store/useEditorStore'
+import { useEditorStore, PRO_MODELS } from './store/useEditorStore'
 import Studio from './components/Studio'
 
 const DifyChat = lazy(() => import('./components/DifyChat'))
@@ -25,6 +25,45 @@ function Dashboard() {
 export default function App() {
   const setUser = useEditorStore(state => state.setUser)
   const setIsPro = useEditorStore(state => state.setIsPro)
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectId = urlParams.get('p');
+    if (projectId) {
+      const loadSharedProject = async () => {
+        try {
+          const { data, error } = await supabase.from('projects').select('state_json, name').eq('id', projectId).single();
+          if (error) throw error;
+          if (data && data.state_json) {
+            const { user, isPro, customerPortalUrl, renewsAt, mapboxToken } = useEditorStore.getState();
+            useEditorStore.setState({
+              ...data.state_json,
+              user,
+              isPro,
+              customerPortalUrl,
+              renewsAt,
+              mapboxToken
+            });
+            useEditorStore.getState().setCloudProjectInfo(projectId, data.name);
+            
+            const hasPro = data.state_json.objects?.some((obj: any) => obj.url && PRO_MODELS.some(proName => obj.url.toUpperCase().includes(proName)));
+            if (hasPro && !isPro) {
+              setTimeout(() => {
+                useEditorStore.getState().setCustomAlert({
+                  title: 'Pro Objects Detected',
+                  message: 'This file contains PRO objects. Since you are using a Free account, you will not be able to move, scale, or rotate these specific objects.'
+                });
+              }, 500);
+            }
+          }
+        } catch (err) {
+          console.error('Failed to load shared project:', err);
+          alert('Failed to load shared project. It might be deleted or private.');
+        }
+      };
+      loadSharedProject();
+    }
+  }, []);
 
   useEffect(() => {
     const checkProStatus = async (userId: string) => {

@@ -72,7 +72,8 @@ Information about copyright, Terms of Use, and Privacy Policy.
 ## 3. Account & Pricing Plans (PRO)
 - **Login:** Users can log in using their Google or Github accounts. Secure authentication platform provided by Supabase.
 - **User Versions:** Upon login, the app categorizes users into 2 groups: `Free` and `Pro`.
-- **Upgrade PRO:** If users want to unlock 4K/8K image export and the full Symbols library, they need to click the "Upgrade PRO" button on the Header toolbar.
+- **Free Plan Limits:** Users on the Free plan are limited to placing a maximum of 5 Symbols (e.g., trees, arrows, characters). Sunpath objects are unlimited.
+- **Upgrade PRO:** If users want to unlock 4K/8K image export, the full Symbols library, and unlimited symbol placement, they need to click the "Upgrade PRO" button on the Header toolbar.
 - **Payment:** Automated copyright payment system via Lemon Squeezy, secure globally.
 
 ## 4. Keyboard Shortcuts

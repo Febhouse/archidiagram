@@ -123,7 +123,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       } else {
         const { error } = await supabase.auth.signUp({ email, password })
         if (error) throw error
-        alert('Please check your email to verify your account!')
+        useEditorStore.getState().setCustomAlert({ title: 'Success', message: 'Please check your email to verify your account!' })
       }
       onClose()
     } catch (err: any) {

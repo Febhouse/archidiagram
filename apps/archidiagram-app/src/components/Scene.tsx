@@ -2,7 +2,7 @@ import { useState, Suspense, useRef, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment, TransformControls, Grid } from '@react-three/drei'
 import ModelLoader, { SvgMesh, GltfMesh } from './ModelLoader'
-import { useEditorStore } from '../store/useEditorStore'
+import { useEditorStore, PRO_MODELS } from '../store/useEditorStore'
 import * as THREE from 'three'
 import { ErrorBoundary } from './ErrorBoundary'
 
@@ -18,7 +18,7 @@ function PreviewModel({ url, position }: { url: string, position: [number, numbe
   const isCustomModel = url.startsWith('data:') || url.startsWith('blob:') || ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(url)
   
   return (
-    <group position={position} scale={isCustomModel ? [1, 1, 1] : [4, 4, 4]}>
+    <group position={position} scale={[1, 1, 1]}>
       <ErrorBoundary fallbackRender={() => null}>
         <Suspense fallback={null}>
           {['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(url) ? (
@@ -94,6 +94,12 @@ function MultiTransformManager() {
   const selectedIds = useEditorStore(state => state.selectedIds)
   const objects = useEditorStore(state => state.objects)
   const updateObjectTransforms = useEditorStore(state => state.updateObjectTransforms)
+  const isPro = useEditorStore(state => state.isPro)
+
+  const hasLockedObject = !isPro && selectedIds.some(id => {
+    const obj = objects.find(o => o.id === id)
+    return obj && PRO_MODELS.some(proName => obj.url.toUpperCase().includes(proName))
+  })
 
   const groupRef = useRef<THREE.Group>(null)
   const initialGroupPos = useRef(new THREE.Vector3())
@@ -120,6 +126,7 @@ function MultiTransformManager() {
   }, [selectedIds, objects])
 
   if (selectedIds.length <= 1) return null
+  if (hasLockedObject) return null
 
   // Multi-object move functionality
   return (
@@ -128,6 +135,7 @@ function MultiTransformManager() {
       <TransformControls 
         object={groupRef as any}
         mode="translate"
+        size={0.6}
         onMouseDown={() => {
           if (!groupRef.current) return
           isDragging.current = true
