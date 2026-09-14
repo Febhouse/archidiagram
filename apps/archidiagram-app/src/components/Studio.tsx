@@ -272,6 +272,23 @@ export default function Studio() {
     if (!hasFront) addSavedView({ id: 'default-front', name: 'Front', cameraPosition: [0, 0, 400], cameraTarget: [0, 0, 0] })
     if (!hasIso) addSavedView({ id: 'default-iso', name: 'Isometric', cameraPosition: [250, 250, 250], cameraTarget: [0, 0, 0], fov: 10 })
     if (!hasPersp) addSavedView({ id: 'default-persp', name: 'Perspective', cameraPosition: [200, 150, 200], cameraTarget: [0, 0, 0], fov: 50 })
+
+    if (!localStorage.getItem('archidiagram_has_loaded_sample')) {
+      fetch('/samples/Thesample1.archi')
+        .then(res => res.json())
+        .then(data => {
+          const currentState = useEditorStore.getState()
+          useEditorStore.setState({ 
+            ...data, 
+            user: currentState.user, 
+            isPro: currentState.isPro,
+            customerPortalUrl: currentState.customerPortalUrl,
+            renewsAt: currentState.renewsAt
+          })
+          localStorage.setItem('archidiagram_has_loaded_sample', 'true')
+        })
+        .catch(err => console.error('Failed to load sample:', err))
+    }
   }, [])
 
   // H2 Accordion State
@@ -685,7 +702,14 @@ export default function Studio() {
                     reader.onload = (ev) => {
                       try {
                         const data = JSON.parse(ev.target?.result as string)
-                        useEditorStore.setState(data)
+                        const currentState = useEditorStore.getState()
+                        useEditorStore.setState({ 
+                          ...data, 
+                          user: currentState.user, 
+                          isPro: currentState.isPro,
+                          customerPortalUrl: currentState.customerPortalUrl,
+                          renewsAt: currentState.renewsAt
+                        })
                       } catch (err) {
                         alert('Invalid file!')
                       }
