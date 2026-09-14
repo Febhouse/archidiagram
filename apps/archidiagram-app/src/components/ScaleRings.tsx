@@ -43,7 +43,7 @@ export default function ScaleRings() {
 
   return (
     <group 
-      position={[0, 0.5, 0]}
+      position={[0, 0.2, 0]}
       onClick={(e: any) => {
         e.stopPropagation();
         window.dispatchEvent(new CustomEvent('focus-location'));

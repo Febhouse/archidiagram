@@ -15,16 +15,20 @@ import ScaleRings from './ScaleRings'
 function PreviewModel({ url, position }: { url: string, position: [number, number, number] }) {
   if (url.toUpperCase().includes('SUNPATH')) return null
   
-  const isCustomModel = url.startsWith('data:') || url.startsWith('blob:') || url === 'BOX'
+  const isCustomModel = url.startsWith('data:') || url.startsWith('blob:') || ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(url)
   
   return (
-    <group position={position} scale={isCustomModel ? [1, 1, 1] : [20, 20, 20]}>
+    <group position={position} scale={isCustomModel ? [1, 1, 1] : [4, 4, 4]}>
       <ErrorBoundary fallbackRender={() => null}>
         <Suspense fallback={null}>
-          {url === 'BOX' ? (
-            <mesh position={[0, 2.5, 0]}>
-              <boxGeometry args={[5, 5, 5]} />
-              <meshStandardMaterial color="#3b82f6" opacity={0.5} transparent />
+          {['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(url) ? (
+            <mesh position={[0, 2.5, 0]} castShadow receiveShadow>
+              {url === 'BOX' && <boxGeometry args={[5, 5, 5]} />}
+              {url === 'CYLINDER' && <cylinderGeometry args={[2.5, 2.5, 5, 32]} />}
+              {url === 'CONE' && <coneGeometry args={[2.5, 5, 32]} />}
+              {url === 'SPHERE' && <sphereGeometry args={[2.5, 32, 32]} />}
+              {url === 'PYRAMID' && <cylinderGeometry args={[0, 2.5, 5, 4]} />}
+              <meshStandardMaterial color="#3b82f6" opacity={0.6} transparent />
             </mesh>
           ) : (url.startsWith('data:') || url.toLowerCase().endsWith('.glb') || url.toLowerCase().endsWith('.gltf')) ? (
             <GltfMesh url={url} opacity={0.5} />
@@ -181,7 +185,7 @@ function CameraManager() {
       const newObj = objects[objects.length - 1]
       if (newObj && newObj.url?.toUpperCase().includes('SUNPATH')) {
         setTimeout(() => {
-          camera.position.set(200, 150, 200)
+          camera.position.set(20, 14, 20)
           camera.lookAt(0, 0, 0)
           if (controls) {
             ;(controls as any).target.set(0, 0, 0)
@@ -206,7 +210,7 @@ function CameraManager() {
       invalidate();
     }
     const onZoomAll = () => {
-      camera.position.set(200, 150, 200)
+      camera.position.set(20, 14, 20)
       camera.lookAt(0, 0, 0)
       if (controls) {
         (controls as any).target.set(0, 0, 0)
@@ -287,12 +291,13 @@ export default function Scene() {
   const showSunDiagramLayer = useEditorStore(state => state.showSunDiagramLayer)
   const showDynamicSymbolsLayer = useEditorStore(state => state.showDynamicSymbolsLayer)
   const mapRadius = useEditorStore(state => state.mapRadius)
+  const gridSize = useEditorStore(state => state.gridSize)
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <Canvas 
         shadows 
-        camera={{ position: [200, 150, 200], fov: 50 }} 
+        camera={{ position: [20, 14, 20], fov: 50 }} 
         style={{ 
           background: bgColor, 
           cursor: transformMode === 'pan' ? 'grab' : 'auto' 
@@ -323,23 +328,23 @@ export default function Scene() {
         {/* Grid and Axes */}
         {sunpathSettings.showGrid && (
           <Grid 
-            args={[mapRadius * 2, mapRadius * 2]} 
-            position={[0, -0.5, 0]} 
-            cellColor={uiTheme === 'light' ? '#cccccc' : '#555555'} 
-            sectionColor={uiTheme === 'light' ? '#aaaaaa' : '#777777'} 
-            cellSize={10} 
-            sectionSize={100}
-            fadeDistance={500}
-            infiniteGrid={true}
+            args={[mapRadius * 2.5, mapRadius * 2.5]} 
+            position={[0, -0.01, 0]} 
+            cellColor={uiTheme === 'light' ? '#d1d5db' : '#777777'} 
+            sectionColor={uiTheme === 'light' ? '#d1d5db' : '#777777'} 
+            cellSize={gridSize || 1} 
+            sectionSize={gridSize || 1}
+            fadeDistance={mapRadius * 1.5}
+            infiniteGrid={false}
           />
         )}
-        {sunpathSettings.showAxes && <axesHelper args={[50]} position={[0, -0.02, 0]} />}
+        {sunpathSettings.showAxes && <axesHelper args={[50]} position={[0, 0, 0]} />}
 
         <MapBackground />
         <ScaleRings />
 
         {/* Invisible plane only to catch shadows */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
           <planeGeometry args={[1000, 1000]} />
           <shadowMaterial opacity={0.4} />
         </mesh>
@@ -361,7 +366,7 @@ export default function Scene() {
               <ModelLoader 
                 id={obj.id} 
                 url={obj.url} 
-                position={[obj.position[0], obj.position[1] + 0.1 + (index * 0.001), obj.position[2]]}
+                position={[obj.position[0], obj.position[1] + (index * 0.001), obj.position[2]]}
                 rotation={obj.rotation}
                 scale={obj.scale}
                 color={obj.color}

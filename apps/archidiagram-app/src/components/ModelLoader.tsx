@@ -1,5 +1,5 @@
 import { useRef, useMemo, Suspense, useEffect, useState } from 'react'
-import { TransformControls, useHelper, Html, useGLTF, useCursor } from '@react-three/drei'
+import { TransformControls, useHelper, Html, useGLTF, useCursor, Edges } from '@react-three/drei'
 import { SVGLoader } from 'three-stdlib'
 import { useFrame } from '@react-three/fiber'
 import { useEditorStore } from '../store/useEditorStore'
@@ -315,28 +315,97 @@ interface ModelLoaderProps {
   castShadow?: boolean
 }
 
-export function GltfMesh({ url, opacity, color }: { url: string, opacity: number, color?: string }) {
+export function GltfMesh({ url, opacity, color, materialOverrides, castShadow = true, receiveShadow = true }: { url: string, opacity: number, color?: string, materialOverrides?: Record<string, any>, castShadow?: boolean, receiveShadow?: boolean }) {
   const { scene } = useGLTF(url)
+  const showEdges = useEditorStore(state => state.showEdges)
+  
   const clone = useMemo(() => {
     const cloned = scene.clone(true)
     cloned.traverse((child: any) => {
       if (child.isMesh) {
-        child.castShadow = true
-        child.receiveShadow = true
+        const override = materialOverrides?.[child.material?.name || 'default']
+        child.visible = override?.visible ?? true
+        child.castShadow = castShadow
+        child.receiveShadow = receiveShadow
         if (child.material) {
-          // Clone material to avoid shared material opacity issues
-          child.material = child.material.clone()
-          child.material.transparent = opacity < 1
-          child.material.opacity = opacity
-          child.material.depthWrite = opacity === 1
-          if (color) {
+          const matName = child.material.name || 'default'
+          const override = materialOverrides?.[matName]
+          
+          let mat = child.material
+          const isStandard = override?.isStandard ?? true
+          
+          if (isStandard) {
+            if (mat.type === 'MeshBasicMaterial' || mat.type === 'LineBasicMaterial') {
+              mat = new THREE.MeshStandardMaterial({
+                color: mat.color,
+                map: mat.map,
+                side: mat.side,
+                name: mat.name,
+                roughness: 0.8,
+                metalness: 0.0
+              })
+            } else {
+              mat = mat.clone()
+              if (mat.emissive) mat.emissive.setHex(0x000000)
+              if (mat.roughness !== undefined) mat.roughness = 0.8
+              if (mat.metalness !== undefined) mat.metalness = 0.0
+            }
+          } else {
+            mat = mat.clone()
+          }
+          
+          child.material = mat
+          
+          const finalOpacity = override?.opacity ?? (opacity !== undefined ? opacity : child.material.opacity)
+          child.material.transparent = finalOpacity < 1
+          child.material.opacity = finalOpacity
+          child.material.depthWrite = finalOpacity === 1
+          child.material.shadowSide = THREE.DoubleSide
+          child.material.needsUpdate = true
+          
+          if (override?.color) {
+            child.material.color.set(override.color)
+          } else if (color) {
             child.material.color.set(color)
+          }
+          
+          if (override?.map) {
+            if (override.map === 'none') {
+              child.material.map = null
+            } else if (child.material.userData.currentMapUrl !== override.map) {
+              child.material.userData.currentMapUrl = override.map
+              new THREE.TextureLoader().load(override.map, (texture) => {
+                texture.flipY = false
+                child.material.map = texture
+                child.material.needsUpdate = true
+              })
+            }
+          }
+          
+          if (!child.geometry.attributes.normal) {
+            child.geometry.computeVertexNormals()
+          }
+        }
+        
+        // Add edges
+        if (!child.userData.hasEdges) {
+          const edgesGeometry = new THREE.EdgesGeometry(child.geometry, 15)
+          const edgesMaterial = new THREE.LineBasicMaterial({ color: '#000000', transparent: true, opacity: opacity * 0.3 })
+          const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial)
+          edges.name = 'custom-edges'
+          child.add(edges)
+          child.userData.hasEdges = true
+        } else {
+          const edges = child.children.find((c: any) => c.name === 'custom-edges')
+          if (edges) {
+            edges.material.opacity = opacity * 0.3
+            edges.material.transparent = true
           }
         }
       }
     })
     return cloned
-  }, [scene, opacity, color])
+  }, [scene, opacity, color, materialOverrides])
 
   // Center and normalize scale
   const box = useMemo(() => new THREE.Box3().setFromObject(clone), [clone])
@@ -351,6 +420,14 @@ export function GltfMesh({ url, opacity, color }: { url: string, opacity: number
       clone.position.set(-center.x * scale, -center.y * scale + (size.y * scale) / 2, -center.z * scale)
     }
   }, [clone, maxDim, center, size])
+
+  useEffect(() => {
+    clone.traverse((child: any) => {
+      if (child.name === 'custom-edges') {
+        child.visible = showEdges
+      }
+    })
+  }, [clone, showEdges])
 
   return <primitive object={clone} />
 }
@@ -369,6 +446,7 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
   const setSelectedIds = useEditorStore((state) => state.setSelectedIds)
   const updateObjectTransform = useEditorStore((state) => state.updateObjectTransform)
   const objects = useEditorStore((state) => state.objects)
+  const showEdges = useEditorStore((state) => state.showEdges)
   
   const isSelected = selectedIds.includes(id)
   const isSingleSelection = isSelected && selectedIds.length === 1
@@ -473,18 +551,46 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
           </group>
         )} onError={(err) => console.error("ModelMesh Crash:", err)}>
           <Suspense fallback={<ForceUpdateFallback />}>
-            {url.toUpperCase().includes('SUNPATH') ? (
-              <NativeSunpath color={color} opacity={objOpacity} />
-            ) : url === 'BOX' ? (
-              <mesh position={[0, 2.5, 0]} castShadow receiveShadow>
-                <boxGeometry args={[5, 5, 5]} />
-                <meshStandardMaterial color={color || '#cccccc'} opacity={objOpacity} transparent={objOpacity < 1} depthWrite={objOpacity === 1} />
-              </mesh>
-            ) : (url.startsWith('data:') || url.toLowerCase().endsWith('.glb') || url.toLowerCase().endsWith('.gltf')) ? (
-              <GltfMesh url={url} color={color} opacity={objOpacity} />
-            ) : (
-              <SvgMesh url={url} color={color} opacity={objOpacity} id={id} isAnimated={isAnimated} animationSpeed={animationSpeed} />
-            )}
+            <Suspense fallback={null}>
+              {url === 'SUNPATH' ? (
+                <SunpathDiagram opacity={objOpacity} color={color} />
+              ) : ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(url) ? (
+                  <mesh position={[0, 2.5, 0]} castShadow={objData?.castShadow ?? true} receiveShadow={objData?.receiveShadow ?? true}>
+                    {url === 'BOX' && <boxGeometry args={[5, 5, 5]} />}
+                    {url === 'CYLINDER' && <cylinderGeometry args={[2.5, 2.5, 5, 32]} />}
+                    {url === 'CONE' && <coneGeometry args={[2.5, 5, 32]} />}
+                    {url === 'SPHERE' && <sphereGeometry args={[2.5, 32, 32]} />}
+                    {url === 'PYRAMID' && <cylinderGeometry args={[0, 2.5, 5, 4]} />}
+                    {(() => {
+                      const finalColor = objData?.materialOverrides?.['default']?.color || color || '#cccccc';
+                      const finalOpacity = objData?.materialOverrides?.['default']?.opacity ?? objOpacity;
+                      const isStandard = objData?.materialOverrides?.['default']?.isStandard ?? true;
+                      
+                      return isStandard ? (
+                        <meshStandardMaterial color={finalColor} opacity={finalOpacity} transparent={finalOpacity < 1} depthWrite={finalOpacity === 1} />
+                      ) : (
+                        <meshBasicMaterial color={finalColor} opacity={finalOpacity} transparent={finalOpacity < 1} depthWrite={finalOpacity === 1} />
+                      );
+                    })()}
+                    {showEdges && (
+                      <lineSegments>
+                        <edgesGeometry attach="geometry" args={[
+                          url === 'BOX' ? new THREE.BoxGeometry(5, 5, 5) :
+                          url === 'CYLINDER' ? new THREE.CylinderGeometry(2.5, 2.5, 5, 32) :
+                          url === 'CONE' ? new THREE.ConeGeometry(2.5, 5, 32) :
+                          url === 'SPHERE' ? new THREE.SphereGeometry(2.5, 32, 32) :
+                          new THREE.CylinderGeometry(0, 2.5, 5, 4)
+                        ]} />
+                        <lineBasicMaterial attach="material" color="#000000" opacity={0.3} transparent />
+                      </lineSegments>
+                    )}
+                  </mesh>
+              ) : (url.startsWith('data:') || url.toLowerCase().endsWith('.glb') || url.toLowerCase().endsWith('.gltf')) ? (
+                <GltfMesh url={url} color={color} opacity={objOpacity} materialOverrides={objData?.materialOverrides} castShadow={objData?.castShadow ?? true} receiveShadow={objData?.receiveShadow ?? true} />
+              ) : (
+                <SvgMesh url={url} color={color} opacity={objOpacity} id={id} isAnimated={isAnimated} animationSpeed={animationSpeed} />
+              )}
+            </Suspense>
           </Suspense>
         </ErrorBoundary>
       </group>

@@ -159,7 +159,7 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
   const { latitude, longitude, activeMonth, monthDates, visibleMonths, monthColorsLight, monthColorsDark, timeOfDay, northOffset, sunpathSettings, timezoneMode, utcOffset, dstMode, shadowsEnabled, uiTheme, globalTextSize } = useEditorStore()
   const safeLat = latitude || 21.0285
   const safeLng = longitude || 105.8542
-  const R = 100 // Sky dome radius
+  const R = 45 // Sky dome radius (1:1 is 90m diameter)
   const S = sunpathSettings.sunSize ?? 0.5
   const T = globalTextSize ?? 2
 
@@ -398,7 +398,6 @@ export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
             <sphereGeometry args={[S * 1.3, 32, 32]} />
             <meshStandardMaterial color={mainColor} transparent opacity={opacity} emissive={mainColor} emissiveIntensity={0.5} />
           </mesh>
-          <pointLight color={mainColor} intensity={2} distance={R * 3} castShadow={shadowsEnabled} />
         </group>
       )}
 

@@ -7,6 +7,7 @@ import { isDstActive } from './NativeSunpath'
 import { getDayOfYear } from './SunLight'
 import AuthModal from './AuthModal'
 import { supabase } from '../lib/supabase'
+import { GLTFLoader } from 'three-stdlib'
 
 const TIMEZONES = [
   { offset: -12, label: '(UTC-12:00) International Date Line West' },
@@ -41,23 +42,219 @@ const TIMEZONES = [
   { offset: 10, label: '(UTC+10:00) Sydney, Melbourne, Brisbane' },
   { offset: 11, label: '(UTC+11:00) Solomon Is., New Caledonia' },
   { offset: 12, label: '(UTC+12:00) Auckland, Wellington, Fiji' },
-  { offset: 13, label: '(UTC+13:00) Nuku\'alofa' },
+  { offset: 13, label: '(UTC+13:00) Samoa' },
   { offset: 14, label: '(UTC+14:00) Kiritimati Island' },
 ]
+
+function CustomMaterialEditor({ obj }: { obj: any }) {
+  const [materials, setMaterials] = useState<Record<string, any>>({})
+  const [activeMaterial, setActiveMaterial] = useState<string>('')
+  const [loading, setLoading] = useState(false)
+  const updateObjectProperties = useEditorStore(state => state.updateObjectProperties)
+  const isLight = useEditorStore(state => state.uiTheme) === 'light'
+  const showEdges = useEditorStore(state => state.showEdges)
+  const setEnvironment = useEditorStore(state => state.setEnvironment)
+
+  const PRESET_COLORS = ['#ffffff', '#cccccc', '#6b7280', '#000000', '#ef4444', '#f97316', '#f59e0b', '#84cc16', '#22c55e', '#06b6d4', '#3b82f6', '#8b5cf6', '#d946ef']
+
+  useEffect(() => {
+    if (!obj || !obj.url || (!obj.url.startsWith('data:') && !obj.url.toLowerCase().endsWith('.glb') && !obj.url.toLowerCase().endsWith('.gltf') && !['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(obj.url))) return
+    
+    if (['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(obj.url)) {
+      // Special case for primitive
+      setMaterials({ 'default': { color: { getHexString: () => 'cccccc' }, opacity: 1 } })
+      setActiveMaterial('default')
+      return
+    }
+
+    setLoading(true)
+    const loader = new GLTFLoader()
+    loader.load(obj.url, (gltf) => {
+      const mats: Record<string, any> = {}
+      gltf.scene.traverse((child: any) => {
+        if (child.isMesh && child.material) {
+          mats[child.material.name || 'default'] = child.material
+        }
+      })
+      setMaterials(mats)
+      const firstMat = Object.keys(mats)[0]
+      if (firstMat) setActiveMaterial(firstMat)
+      setLoading(false)
+    }, undefined, () => setLoading(false))
+  }, [obj?.url])
+
+  if (loading) return <div style={{ padding: '15px', color: '#6b7280', fontSize: '0.85rem' }}>Loading materials...</div>
+  
+  const matEntries = Object.entries(materials)
+  if (matEntries.length === 0) return <div style={{ padding: '15px', color: '#6b7280', fontSize: '0.85rem' }}>No custom materials found.</div>
+
+  const handleOverride = (matName: string, key: string, value: any) => {
+    const current = obj.materialOverrides || {}
+    const matOverride = current[matName] || {}
+    updateObjectProperties([obj.id], {
+      materialOverrides: {
+        ...current,
+        [matName]: { ...matOverride, [key]: value }
+      }
+    })
+  }
+
+  const currentMatName = activeMaterial || matEntries[0][0]
+  const currentMat = materials[currentMatName]
+  const currentOverride = obj.materialOverrides?.[currentMatName] || {}
+  const origColorHex = currentMat?.color && typeof currentMat.color.getHexString === 'function' ? '#' + currentMat.color.getHexString() : '#cccccc'
+  const currentColor = currentOverride.color || origColorHex
+  const currentOpacity = currentOverride.opacity ?? (currentMat?.opacity !== undefined ? currentMat.opacity : 1)
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+      {/* Object-level Settings */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '10px', background: isLight ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.05)', borderRadius: '6px', border: `1px solid ${isLight ? '#e5e7eb' : '#333'}` }}>
+        <div style={{ fontWeight: 'bold', fontSize: '0.85rem', color: isLight ? '#111827' : '#f9fafb', marginBottom: '4px' }}>Object Options</div>
+        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '8px' }}>
+          <input type="checkbox" checked={showEdges} onChange={(e) => setEnvironment({ showEdges: e.target.checked })} />
+          <span style={{ fontSize: '0.8rem', color: isLight ? '#4b5563' : '#9ca3af' }}>Show Edges (Global)</span>
+        </label>
+        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '8px' }}>
+          <input type="checkbox" checked={obj.castShadow ?? true} onChange={(e) => updateObjectProperties([obj.id], { castShadow: e.target.checked })} />
+          <span style={{ fontSize: '0.8rem', color: isLight ? '#4b5563' : '#9ca3af' }}>Cast Shadow</span>
+        </label>
+        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '8px' }}>
+          <input type="checkbox" checked={obj.receiveShadow ?? true} onChange={(e) => updateObjectProperties([obj.id], { receiveShadow: e.target.checked })} />
+          <span style={{ fontSize: '0.8rem', color: isLight ? '#4b5563' : '#9ca3af' }}>Receive Shadow</span>
+        </label>
+      </div>
+
+      {/* Main Material Editor */}
+      {currentMat && (
+        <div style={{ display: 'flex', flexDirection: 'column', padding: '10px', background: isLight ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.05)', borderRadius: '6px', border: `1px solid ${isLight ? '#e5e7eb' : '#333'}`, gap: '10px' }}>
+          <div style={{ fontWeight: 'bold', fontSize: '0.85rem', color: isLight ? '#111827' : '#f9fafb' }}>Editing: {currentMatName}</div>
+          
+          {/* Standard Material Palette */}
+          <div>
+            <div style={{ fontSize: '0.75rem', color: isLight ? '#4b5563' : '#9ca3af', marginBottom: '6px' }}>Color Palette</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              {PRESET_COLORS.map(c => (
+                <div 
+                  key={c}
+                  onClick={() => handleOverride(currentMatName, 'color', c)}
+                  style={{ 
+                    width: '20px', height: '20px', borderRadius: '50%', background: c, cursor: 'pointer',
+                    border: currentColor.toLowerCase() === c ? '2px solid #3b82f6' : `1px solid ${isLight ? '#d1d5db' : '#4b5563'}`
+                  }}
+                  title={c}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ fontSize: '0.75rem', width: '45px', color: isLight ? '#4b5563' : '#9ca3af' }}>Custom</span>
+            <input type="color" value={currentColor} onChange={(e) => handleOverride(currentMatName, 'color', e.target.value)} style={{ cursor: 'pointer', padding: 0, border: 'none', width: '30px', height: '24px', borderRadius: '4px' }} />
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ fontSize: '0.75rem', width: '45px', color: isLight ? '#4b5563' : '#9ca3af' }}>Opacity</span>
+            <input type="range" min="0" max="1" step="0.05" value={currentOpacity} onChange={(e) => handleOverride(currentMatName, 'opacity', parseFloat(e.target.value))} style={{ flex: 1 }} />
+            <span style={{ fontSize: '0.75rem', width: '35px', textAlign: 'right', color: isLight ? '#4b5563' : '#9ca3af' }}>{Math.round(currentOpacity * 100)}%</span>
+          </div>
+
+          {currentMat.map && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '5px' }}>
+              <span style={{ fontSize: '0.75rem', width: '45px', color: isLight ? '#4b5563' : '#9ca3af' }}>Texture</span>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', flex: 1 }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
+                  <input type="checkbox" checked={currentOverride.map !== 'none'} onChange={(e) => handleOverride(currentMatName, 'map', e.target.checked ? undefined : 'none')} />
+                  <span style={{ fontSize: '0.75rem', color: isLight ? '#4b5563' : '#9ca3af' }}>Show Texture</span>
+                </label>
+                
+                {currentOverride.map !== 'none' && (
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    onChange={(e) => {
+                      const file = e.target.files?.[0]
+                      if (!file) return
+                      const reader = new FileReader()
+                      reader.onload = (event) => {
+                        if (typeof event.target?.result === 'string') {
+                          handleOverride(currentMatName, 'map', event.target.result)
+                        }
+                      }
+                      reader.readAsDataURL(file)
+                      e.target.value = ''
+                    }} 
+                    style={{ fontSize: '0.7rem', width: '100%' }} 
+                  />
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Multi-Material List */}
+      {matEntries.length > 1 && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+          <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: isLight ? '#111827' : '#f9fafb', marginBottom: '5px' }}>Sub-Materials ({matEntries.length})</div>
+          {matEntries.map(([name, mat], index) => {
+            const override = obj.materialOverrides?.[name] || {}
+            const origColorHex = mat.color && typeof mat.color.getHexString === 'function' ? '#' + mat.color.getHexString() : '#cccccc'
+            const color = override.color || origColorHex
+            const isVisible = override.visible ?? true
+            const isSelected = name === currentMatName
+
+            return (
+              <div 
+                key={name} 
+                style={{ 
+                  display: 'flex', alignItems: 'center', padding: '6px 8px', 
+                  background: isSelected ? (isLight ? '#e0e7ff' : '#374151') : (isLight ? '#f9fafb' : '#1f2937'), 
+                  border: `1px solid ${isSelected ? '#3b82f6' : (isLight ? '#e5e7eb' : '#333')}`,
+                  borderRadius: '4px', cursor: 'pointer', gap: '10px'
+                }}
+                onClick={() => setActiveMaterial(name)}
+              >
+                <div style={{ fontSize: '0.7rem', color: isLight ? '#6b7280' : '#9ca3af', width: '15px' }}>{index + 1}</div>
+                <div style={{ 
+                  width: '16px', height: '16px', borderRadius: '3px', background: color, 
+                  border: `1px solid ${isLight ? '#d1d5db' : '#4b5563'}`, flexShrink: 0 
+                }} />
+                <div style={{ fontSize: '0.75rem', color: isLight ? '#111827' : '#f9fafb', flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {name}
+                </div>
+                <div onClick={(e) => e.stopPropagation()}>
+                  <input 
+                    type="checkbox" 
+                    checked={isVisible} 
+                    onChange={(e) => handleOverride(name, 'visible', e.target.checked)} 
+                    title={isVisible ? 'Visible' : 'Hidden'}
+                    style={{ cursor: 'pointer' }}
+                  />
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function Studio() {
   const { 
     transformMode, setTransformMode, setPlacingUrl, placingUrl, 
     undo, redo, selectedIds, replaceObjectUrl, updateObjectProperties, 
     objects, recentColors, addRecentColor, hudPosition, contextMenu, setContextMenu,
-    latitude, longitude, activeMonth, monthDates, visibleMonths, timeOfDay, northOffset, shadowsEnabled, setEnvironment,
+    latitude, longitude, activeMonth, monthDates, visibleMonths, timeOfDay, northOffset, shadowsEnabled, showEdges, gridSize, setEnvironment,
     sunpathSettings, setSunpathSettings, timezoneMode, utcOffset, dstMode, showHUD, uiTheme,
     legendItems, showSunDiagramLayer,
     showMapBackground, mapZoom, mapStyle, mapOpacity, mapRadius,
     showScaleRings, scaleRingCount, scaleRingUnit,
     setShowMapBackground, setMapZoom, setMapStyle, setMapOpacity, setMapRadius,
     setShowScaleRings, setScaleRingCount, setScaleRingUnit,
-    exportWidth, exportHeight, setExportResolution, hudScale,
+    exportWidth, exportHeight, setExportResolution, hudScale, globalTextSize,
     user, setUser, isPro
   } = useEditorStore()
   const addSavedView = useEditorStore((state) => state.addSavedView)
@@ -83,6 +280,7 @@ export default function Studio() {
   // Tabs State within H2
   const [sunTab, setSunTab] = useState<'create' | 'shadow' | 'style'>('shadow')
   const [symbolTab, setSymbolTab] = useState<'library' | 'properties'>('library')
+  const [importTab, setImportTab] = useState<'import3d' | 'materials'>('import3d')
   const [exportFormat, setExportFormat] = useState<'PNG' | 'PDF' | 'VIDEO'>('PNG')
   const [exportSettings, setExportSettings] = useState<Record<number, { checked: boolean, start: number, end: number }>>({})
 
@@ -149,11 +347,19 @@ export default function Studio() {
             setSunTab('shadow')
           }
         } else {
-          if (obj.color) setSelectedColor(obj.color)
-          setSelectedOpacity(obj.opacity ?? 1)
-          if (showMobileMenu || !isMobile) {
-            setSymbolTab('properties')
-            setActiveH2('symbols')
+          const isCustomModel = obj.url.startsWith('data:') || obj.url.startsWith('blob:') || ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(obj.url) || obj.url.toLowerCase().endsWith('.glb') || obj.url.toLowerCase().endsWith('.gltf')
+          if (isCustomModel) {
+            if (showMobileMenu || !isMobile) {
+              setActiveH2('import')
+              setImportTab('materials')
+            }
+          } else {
+            if (obj.color) setSelectedColor(obj.color)
+            setSelectedOpacity(obj.opacity ?? 1)
+            if (showMobileMenu || !isMobile) {
+              setSymbolTab('properties')
+              setActiveH2('symbols')
+            }
           }
         }
       }
@@ -167,7 +373,12 @@ export default function Studio() {
         if (obj.url?.toUpperCase().includes('SUNPATH')) {
           if (showMobileMenu || !isMobile) { setActiveH2('sundiagram'); setSunTab('shadow'); }
         } else {
-          if (showMobileMenu || !isMobile) { setActiveH2('symbols'); setSymbolTab('properties'); }
+          const isCustomModel = obj.url.startsWith('data:') || obj.url.startsWith('blob:') || ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(obj.url) || obj.url.toLowerCase().endsWith('.glb') || obj.url.toLowerCase().endsWith('.gltf')
+          if (isCustomModel) {
+            if (showMobileMenu || !isMobile) { setActiveH2('import'); setImportTab('materials'); }
+          } else {
+            if (showMobileMenu || !isMobile) { setActiveH2('symbols'); setSymbolTab('properties'); }
+          }
         }
       }
     };
@@ -491,7 +702,7 @@ export default function Studio() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <span style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>Light</span>
                 <label style={{ position: 'relative', display: 'inline-block', width: '34px', height: '18px' }}>
-                  <input type="checkbox" checked={!isLight} onChange={(e) => { setEnvironment({ uiTheme: e.target.checked ? 'dark' : 'light' }); setMonthColor(17, e.target.checked ? '#000000' : '#ffffff'); }} style={{ opacity: 0, width: 0, height: 0 }} />
+                  <input type="checkbox" checked={!isLight} onChange={(e) => { setEnvironment({ uiTheme: e.target.checked ? 'dark' : 'light' }); setMonthColor(17, e.target.checked ? '#464646' : '#ffffff'); }} style={{ opacity: 0, width: 0, height: 0 }} />
                   <span style={{ position: 'absolute', cursor: 'pointer', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: isLight ? '#ccc' : '#2196F3', transition: '.4s', borderRadius: '18px' }}>
                     <span style={{ position: 'absolute', content: '""', height: '14px', width: '14px', left: '2px', bottom: '2px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', transform: !isLight ? 'translateX(16px)' : 'translateX(0)' }}></span>
                   </span>
@@ -549,6 +760,14 @@ export default function Studio() {
               <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                 <input 
                   type="checkbox" 
+                  checked={showEdges} 
+                  onChange={(e) => setEnvironment({ showEdges: e.target.checked })}
+                />
+                <span style={{ marginLeft: '4px', fontSize: '0.75rem' }}>EDGES</span>
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                <input 
+                  type="checkbox" 
                   checked={showHUD} 
                   onChange={(e) => setEnvironment({ showHUD: e.target.checked })}
                 />
@@ -557,10 +776,10 @@ export default function Studio() {
               <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <span style={{ fontSize: '0.75rem' }}>GLOBAL TEXT SIZE</span>
                 <input 
-                  type="range" min="1" max="10" step="0.5" 
-                  value={useEditorStore.getState().globalTextSize ?? 2} 
-                  onChange={(e) => setEnvironment({ globalTextSize: parseFloat(e.target.value) })}
-                  style={{ width: '80px' }}
+                  type="number" min="0.1" max="10" step="0.1" 
+                  value={globalTextSize ?? 1} 
+                  onChange={(e) => setEnvironment({ globalTextSize: parseFloat(e.target.value) || 0.1 })}
+                  style={{ width: '60px', padding: '2px 4px', fontSize: '0.8rem', border: `1px solid ${inputBorder}`, borderRadius: '4px', background: inputBg, color: textMain }}
                 />
               </label>
               <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
@@ -774,12 +993,39 @@ export default function Studio() {
                           <span style={{ fontSize: '0.85rem' }}>{scaleRingCount}</span>
                         </div>
                         <input 
-                          type="range" min="2" max="20" step="2" 
+                          type="range" min="1" max="20" step="1" 
                           value={scaleRingCount} onChange={(e) => setScaleRingCount(Number(e.target.value))} 
                           style={{ width: '100%' }}
                         />
                       </div>
                     </div>
+                    <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontWeight: 'bold', marginTop: '15px' }}>
+                      <input 
+                        type="checkbox" 
+                        checked={sunpathSettings.showGrid} 
+                        onChange={(e) => setSunpathSettings({ showGrid: e.target.checked })}
+                      />
+                      <span style={{ marginLeft: '8px', fontSize: '0.9rem' }}>Enable Grid</span>
+                    </label>
+                    {sunpathSettings.showGrid && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', marginTop: '15px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', flex: 1 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>Grid Cell Size ({scaleRingUnit})</span>
+                            <span style={{ fontSize: '0.85rem' }}>{scaleRingUnit === 'ft' ? Math.round(gridSize * 3.28084) : Math.round(gridSize)}{scaleRingUnit}</span>
+                          </div>
+                          <input 
+                            type="range" min="1" max={scaleRingUnit === 'ft' ? 60 : 20} step="1" 
+                            value={scaleRingUnit === 'ft' ? Math.round(gridSize * 3.28084) : Math.round(gridSize)} 
+                            onChange={(e) => {
+                              const v = Number(e.target.value);
+                              setEnvironment({ gridSize: scaleRingUnit === 'ft' ? v / 3.28084 : v });
+                            }} 
+                            style={{ width: '100%' }}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -795,47 +1041,84 @@ export default function Studio() {
             </svg>
           } />
           {activeH2 === 'import' && (
-            <div style={{ background: isLight ? '#f9fafb' : '#1a1a1a', padding: '15px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
-              <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>ADD BASIC SHAPES</div>
-              <button
-                onClick={() => setPlacingUrl('BOX')}
-                style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}
-              >
-                + Add 3D Box
-              </button>
+            <div style={{ background: isLight ? '#f9fafb' : '#1a1a1a', padding: '10px' }}>
+              <div style={{ display: 'flex', marginBottom: '15px', borderBottom: `1px solid ${borderCol}` }}>
+                {['import3d', 'materials'].map(tab => (
+                  <div 
+                    key={tab} onClick={() => setImportTab(tab as any)}
+                    style={{ 
+                      flex: 1, textAlign: 'center', padding: '8px 5px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: importTab === tab ? 'bold' : 'normal',
+                      borderBottom: importTab === tab ? '2px solid #3b82f6' : 'none', color: importTab === tab ? '#3b82f6' : textMuted
+                    }}
+                  >
+                    {tab === 'import3d' ? 'Import 3D' : 'Custom Material'}
+                  </div>
+                ))}
+              </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '10px' }}>
-                <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>IMPORT CUSTOM 3D</div>
-              </div>
-              <p style={{ fontSize: '0.8rem', color: textMuted }}>
-                Import custom 3D files (.glb, .gltf) up to 5MB. Large files may cause performance issues.
-              </p>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <input 
-                  type="file" 
-                  accept=".glb,.gltf"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (!file) return;
-                    if (file.size > 5 * 1024 * 1024) {
-                      alert("File size exceeds 5MB limit. Please choose a smaller file.");
-                      e.target.value = '';
-                      return;
+              {importTab === 'import3d' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                  <div style={{ fontWeight: 'bold', fontSize: '1rem', color: textMain }}>ADD BASIC SHAPES</div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                    <button onClick={() => setPlacingUrl('BOX')} style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}>Box</button>
+                    <button onClick={() => setPlacingUrl('CYLINDER')} style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}>Cylinder</button>
+                    <button onClick={() => setPlacingUrl('CONE')} style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}>Cone</button>
+                    <button onClick={() => setPlacingUrl('SPHERE')} style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}>Sphere</button>
+                    <button onClick={() => setPlacingUrl('PYRAMID')} style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold', gridColumn: '1 / -1' }}>Pyramid</button>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '10px' }}>
+                    <div style={{ fontWeight: 'bold', fontSize: '1rem', color: textMain }}>IMPORT CUSTOM 3D</div>
+                  </div>
+                  <p style={{ fontSize: '0.8rem', color: textMuted }}>
+                    Import custom 3D files (.glb, .gltf) up to 5MB. Large files may cause performance issues.
+                  </p>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    <label style={{ 
+                        background: '#3b82f6', color: '#fff', border: 'none', padding: '12px', borderRadius: '4px', 
+                        cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold', textAlign: 'center', display: 'block' 
+                      }}>
+                      + Choose 3D File
+                      <input 
+                        type="file" 
+                        accept=".glb,.gltf"
+                        style={{ display: 'none' }}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          if (file.size > 5 * 1024 * 1024) {
+                            alert("File size exceeds 5MB limit. Please choose a smaller file.");
+                            e.target.value = '';
+                            return;
+                          }
+                          const reader = new FileReader();
+                          reader.onload = (event) => {
+                            const dataUrl = event.target?.result;
+                            if (typeof dataUrl === 'string') {
+                              setPlacingUrl(dataUrl);
+                            }
+                          };
+                          reader.readAsDataURL(file);
+                          e.target.value = '';
+                        }}
+                      />
+                    </label>
+                  </div>
+                </div>
+              )}
+
+              {importTab === 'materials' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {(() => {
+                    const activeObj = objects.find(o => selectedIds.includes(o.id) && (o.url.startsWith('data:') || o.url.startsWith('blob:') || ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(o.url) || o.url.toLowerCase().endsWith('.glb') || o.url.toLowerCase().endsWith('.gltf')));
+                    if (!activeObj) {
+                      return <div style={{ fontSize: '0.85rem', color: textMuted }}>Please select a custom imported 3D object to edit its materials.</div>
                     }
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                      const dataUrl = event.target?.result;
-                      if (typeof dataUrl === 'string') {
-                        setPlacingUrl(dataUrl);
-                      }
-                    };
-                    reader.readAsDataURL(file);
-                    e.target.value = '';
-                  }}
-                  style={{ fontSize: '0.8rem', color: textMain }}
-                />
-              </div>
+                    return <CustomMaterialEditor obj={activeObj} />
+                  })()}
+                </div>
+              )}
             </div>
           )}
 
@@ -1917,9 +2200,7 @@ export default function Studio() {
               if (posStyles.transform) posStyles.transform = 'translate(-50%, -50%)';
               else posStyles.transform = 'translateX(-50%)';
             }
-            const baseExportScale = activeH2 === 'export' ? Math.max(exportWidth, exportHeight) / 1080 : 1;
-            const userScale = hudScale || 1;
-            const totalScale = baseExportScale * userScale;
+            const totalScale = hudScale || 1;
 
             if (posStyles.transform) {
               posStyles.transform = `${posStyles.transform} scale(${totalScale})`;

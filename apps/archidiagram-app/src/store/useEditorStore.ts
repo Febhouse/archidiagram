@@ -12,6 +12,8 @@ export interface PlacedModel {
   isAnimated?: boolean
   animationSpeed?: number
   castShadow?: boolean
+  receiveShadow?: boolean
+  materialOverrides?: Record<string, { color?: string, opacity?: number, isStandard?: boolean }>
 }
 
 export interface SunpathSettings {
@@ -57,6 +59,8 @@ interface EditorState {
   timeOfDay: number 
   northOffset: number
   shadowsEnabled: boolean
+  showEdges: boolean
+  gridSize: number
   timezoneMode: 'auto' | 'manual'
   utcOffset: number
   dstMode: 'auto' | 'off' | 'on'
@@ -65,7 +69,7 @@ interface EditorState {
   hudScale: number
   uiTheme: 'light' | 'dark'
   globalTextSize: number
-  setEnvironment: (env: Partial<Pick<EditorState, 'latitude' | 'longitude' | 'activeMonth' | 'monthDates' | 'visibleMonths' | 'monthColorsLight' | 'monthColorsDark' | 'timeOfDay' | 'northOffset' | 'shadowsEnabled' | 'timezoneMode' | 'utcOffset' | 'dstMode' | 'showHUD' | 'hudPosition' | 'hudScale' | 'uiTheme' | 'globalTextSize'>>) => void
+  setEnvironment: (env: Partial<Pick<EditorState, 'latitude' | 'longitude' | 'activeMonth' | 'monthDates' | 'visibleMonths' | 'monthColorsLight' | 'monthColorsDark' | 'timeOfDay' | 'northOffset' | 'shadowsEnabled' | 'showEdges' | 'gridSize' | 'timezoneMode' | 'utcOffset' | 'dstMode' | 'showHUD' | 'hudPosition' | 'hudScale' | 'uiTheme' | 'globalTextSize'>>) => void
 
   // Mapbox Settings
   showMapBackground: boolean
@@ -120,6 +124,7 @@ interface EditorState {
     activeMonth?: number,
     timeOfDay?: number,
     shadowsEnabled?: boolean,
+    showEdges?: boolean,
     fov?: number
   }[]
   addSavedView: (view: { 
@@ -131,6 +136,7 @@ interface EditorState {
     activeMonth?: number,
     timeOfDay?: number,
     shadowsEnabled?: boolean,
+    showEdges?: boolean,
     fov?: number
   }) => void
   removeSavedView: (id: string) => void
@@ -179,7 +185,7 @@ export const useEditorStore = create<EditorState>()(
   // Environment & Shadows default
   latitude: 21.0285, // Hanoi
   longitude: 105.8542,
-  activeMonth: 6, // June
+  activeMonth: 12, // December
   monthDates: { 1: 21, 2: 21, 3: 21, 4: 21, 5: 21, 6: 21, 7: 21, 8: 21, 9: 21, 10: 21, 11: 21, 12: 21 },
   visibleMonths: [6, 9, 12], // Default check June, Sep, Dec
   monthColorsLight: {
@@ -192,27 +198,29 @@ export const useEditorStore = create<EditorState>()(
     1: '#cccccc', 2: '#cccccc', 3: '#cccccc', 4: '#cccccc', 5: '#cccccc', 
     6: '#ff0000', 7: '#cccccc', 8: '#cccccc', 9: '#00ff00', 10: '#cccccc', 
     11: '#cccccc', 12: '#0000ff', 13: '#ff0000', 14: '#ffffff', 15: '#999999', 
-    16: '#ffd700', 17: '#000000', 18: '#ffcc00'
+    16: '#ffd700', 17: '#464646', 18: '#ffcc00'
   },
-  timeOfDay: 12, // 12:00 PM
+  timeOfDay: 15, // 15:00 PM
   northOffset: 0,
-  shadowsEnabled: false,
+  shadowsEnabled: true,
+  showEdges: true,
+  gridSize: 1,
   timezoneMode: 'auto',
   utcOffset: 7,
   dstMode: 'auto',
   showHUD: true,
   hudPosition: 'bottom-left',
   hudScale: 1,
-  uiTheme: 'light',
-  globalTextSize: 2,
+  uiTheme: 'dark',
+  globalTextSize: 1,
 
   // Mapbox Settings
   showMapBackground: false,
   mapZoom: 18,
   mapboxToken: import.meta.env.VITE_MAPBOX_TOKEN || '',
-  mapStyle: 'light-v11',
-  mapOpacity: 0.3,
-  mapRadius: 250,
+  mapStyle: 'dark-v11',
+  mapOpacity: 1.0,
+  mapRadius: 20,
   showScaleRings: true,
   scaleRingStep: 10,
   scaleRingCount: 4,
@@ -240,12 +248,12 @@ export const useEditorStore = create<EditorState>()(
     showAnalemma: false,
     showHourlySun: true,
     showText: true,
-    sunSize: 1.2,
-    sunpathScale: 1.0,
+    sunSize: 0.7,
+    sunpathScale: 0.2,
     sunpathThickness: 2,
     compassThickness: 1,
     sunpathDashSize: 1,
-    showGrid: false,
+    showGrid: true,
     showAxes: true
   },
   setSunpathSettings: (settings) => set((state) => ({
@@ -325,16 +333,28 @@ export const useEditorStore = create<EditorState>()(
       }
     }
     const isAnimatedSymbol = !isSunpath && (upperUrl.includes('ARROW') || upperUrl.includes('WIND') || upperUrl.includes('CIRCLE') || upperUrl.includes('NOISE') || upperUrl.includes('STORM'))
-    const isCustomModel = url.startsWith('data:') || url.startsWith('blob:') || url === 'BOX'
+    const isCustomModel = url.startsWith('data:') || url.startsWith('blob:') || ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(url)
+
+    let finalY = position[1];
+    if (!isSunpath) {
+      if (isCustomModel) {
+        finalY = 0; // Imported 3D objects
+      } else {
+        finalY = 0.4; // Symbols Library objects
+      }
+    }
+    const finalPosition = [position[0], finalY, position[2]] as [number, number, number];
+
     const newObject: PlacedModel = {
       id: Math.random().toString(36).substring(2, 9),
       url,
-      position,
+      position: finalPosition,
       rotation: [0, 0, 0],
-      scale: isSunpath ? [0.1, 0.1, 0.1] : (isCustomModel ? [1, 1, 1] : [20, 20, 20]),
-      color: isSunpath ? '#ffffff' : '#ef4444',
-      opacity: isSunpath ? 1 : 0.8,
-      castShadow: false,
+      scale: isSunpath ? [0.5, 0.5, 0.5] : (isCustomModel ? [1, 1, 1] : [4, 4, 4]),
+      color: isSunpath ? '#ffffff' : (isCustomModel ? undefined : '#ef4444'),
+      opacity: isSunpath ? 1 : (isCustomModel ? undefined : 0.8),
+      castShadow: true,
+      receiveShadow: true,
       isAnimated: isAnimatedSymbol,
       animationSpeed: 1
     }
@@ -488,6 +508,7 @@ export const useEditorStore = create<EditorState>()(
         timeOfDay: state.timeOfDay,
         northOffset: state.northOffset,
         shadowsEnabled: state.shadowsEnabled,
+        showEdges: state.showEdges,
         sunpathSettings: state.sunpathSettings,
         hudPosition: state.hudPosition,
         savedViews: state.savedViews
