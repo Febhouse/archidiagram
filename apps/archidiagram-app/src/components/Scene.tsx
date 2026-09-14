@@ -15,8 +15,6 @@ import ScaleRings from './ScaleRings'
 function PreviewModel({ url, position }: { url: string, position: [number, number, number] }) {
   if (url.toUpperCase().includes('SUNPATH')) return null
   
-  const isCustomModel = url.startsWith('data:') || url.startsWith('blob:') || ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(url)
-  
   return (
     <group position={position} scale={[1, 1, 1]}>
       <ErrorBoundary fallbackRender={() => null}>

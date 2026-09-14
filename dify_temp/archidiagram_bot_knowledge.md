@@ -69,6 +69,16 @@ The core feature of the software, consisting of 3 Tabs:
 ### 2.7. About & Credits
 Information about copyright, Terms of Use, and Privacy Policy.
 
+### 2.8. File & Cloud Management (Save & Share)
+- **Save Project:** Users must log in to save their projects to the Cloud. The project state (including 3D models, sunpath settings, and properties) is saved securely to Supabase.
+- **My Projects (Cloud Storage):** Users can manage their saved projects by accessing "Cloud Storage" from the FILE menu. 
+  - **Storage Limits:** Free accounts have a limit of 10MB of cloud storage. PRO accounts have 100MB.
+  - **Actions:** Users can open, rename, or delete their saved projects.
+- **Share Project & Privacy:** After saving a project, users can share it by clicking "Share" in the Cloud Storage modal. They will be prompted to choose a privacy setting:
+  - **Make Public:** The project becomes public, a shareable link (e.g., `?p=PROJECT_ID`) is copied to the clipboard, and anyone with the link can view the 3D scene.
+  - **Keep Private:** The project is locked. Only the project owner can view it, even if they have the link. No shareable link is generated for others.
+- **UI Dialogs:** All interactions (alerts, confirms, prompts like renaming or deleting projects) use custom, app-styled modal dialogs (glassmorphism/dark mode) instead of native browser popups to ensure a seamless premium experience.
+
 ## 3. Account & Pricing Plans (PRO)
 - **Login:** Users can log in using their Google or Github accounts. Secure authentication platform provided by Supabase.
 - **User Versions:** Upon login, the app categorizes users into 2 groups: `Free` and `Pro`.
@@ -92,3 +102,4 @@ Information about copyright, Terms of Use, and Privacy Policy.
 - **Troubleshooting Support:** 
   - If reporting shadows not appearing: Remind the user to check if the "Shadows" button in the top left corner is checked.
   - If the Imported model is black: Remind the user to check the materials from SketchUp/Rhino before exporting to GLB.
+  - If a Free user asks why they cannot move, scale, or rotate certain objects (or why Transform Controls are missing): Explain that the file contains PRO objects (usually because it was shared by a PRO user). Free accounts can view these PRO objects in a shared file but are locked out of manipulating (moving, scaling, rotating) them. The app displays a "Pro Objects Detected" alert upon opening such files. To edit these objects, they must upgrade to PRO.

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Scene from './Scene'
-import { useEditorStore, PRO_MODELS } from '../store/useEditorStore'
+import { useEditorStore } from '../store/useEditorStore'
 import { LIBRARY_MODELS } from '../config/library'
 import LibraryItem from './LibraryItem'
 import { isDstActive } from './NativeSunpath'
