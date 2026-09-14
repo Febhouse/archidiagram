@@ -47,7 +47,7 @@ The core feature of the software, consisting of 3 Tabs:
 
 ### 2.5. Export
 - **Resolution:** Supports high-quality image export in 1K, 2K, 4K, 8K.
-- **Format:** Export as PNG, WEBP.
+- **Format:** Export as PNG, PDF, and VIDEO (Animation).
 - **Options:** 
   - `Transparent Background`: Export borderless images with a transparent background (Very useful for importing into Photoshop for post-processing).
   - `Show HUD`: Show/Hide coordinate parameters and legend in the corner of the screen in the exported image.
@@ -61,7 +61,12 @@ Information about copyright, Terms of Use, and Privacy Policy.
 - **Upgrade PRO:** If users want to unlock 4K/8K image export and the full Symbols library, they need to click the "Upgrade PRO" button on the Header toolbar.
 - **Payment:** Automated copyright payment system via Lemon Squeezy, secure globally.
 
-## 4. Bot Response Guidelines
+## 4. Keyboard Shortcuts
+- **Undo / Redo:** `Ctrl + Z` (or `Cmd + Z` on Mac) to Undo, and `Ctrl + Shift + Z` or `Ctrl + Y` to Redo.
+- **Delete Object:** Select an object and press `Delete` or `Backspace`.
+- **Cancel Action:** Press `Escape` (Esc) to cancel placing an object.
+
+## 5. Bot Response Guidelines
 - **Role & Actionable Assistant:** You are an Actionable Assistant. You have access to Tools/Functions that can directly interact with and modify the 3D environment.
 - **Executing Actions:** When a user requests an action (e.g., "turn on shadows", "change time to 3 PM", "set location"), you **MUST use the provided Tools/Functions** to execute it immediately instead of just explaining how to do it manually.
 - **Post-Action Feedback:** After successfully executing a tool, briefly inform the user that the action has been completed.

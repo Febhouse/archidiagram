@@ -81,7 +81,7 @@ function CustomMaterialEditor({ obj }: { obj: any }) {
       if (firstMat) setActiveMaterial(firstMat)
       setLoading(false)
     }, undefined, () => setLoading(false))
-  }, [obj?.url])
+  }, [obj])
 
   if (loading) return <div style={{ padding: '15px', color: '#6b7280', fontSize: '0.85rem' }}>Loading materials...</div>
   
@@ -291,7 +291,7 @@ export default function Studio() {
         })
         .catch(err => console.error('Failed to load sample:', err))
     }
-  }, [])
+  }, [addSavedView])
 
   // H2 Accordion State
   const [activeH2, setActiveH2] = useState<'location' | 'sundiagram' | 'symbols' | 'import' | 'export' | 'info' | null>('location')
@@ -420,7 +420,10 @@ export default function Studio() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && placingUrl) setPlacingUrl(null)
-      if ((e.ctrlKey || e.metaKey) && e.key === 'z') e.shiftKey ? redo() : undo()
+      if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+        if (e.shiftKey) redo()
+        else undo()
+      }
       else if ((e.ctrlKey || e.metaKey) && e.key === 'y') redo()
       else if (e.key === 'Delete' || e.key === 'Backspace') {
         const store = useEditorStore.getState()
@@ -892,7 +895,7 @@ export default function Studio() {
                   <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Paste Address / Lat, Lng</span>
                   <input 
                     type="text" 
-                    placeholder="e.g. 40.701, -73.948"
+                    placeholder="e.g. 40.701, -73.948 or 'Hanoi' then press Enter"
                     onChange={(e) => {
                       const val = e.target.value
                       const parts = val.split(',')
@@ -904,8 +907,56 @@ export default function Studio() {
                         }
                       }
                     }}
+                    onKeyDown={async (e) => {
+                      if (e.key === 'Enter') {
+                        const val = e.currentTarget.value.trim();
+                        if (!val) return;
+                        
+                        // Prevent searching if it's already a valid Lat, Lng
+                        const parts = val.split(',');
+                        if (parts.length === 2 && !isNaN(parseFloat(parts[0])) && !isNaN(parseFloat(parts[1]))) {
+                          return;
+                        }
+
+                        setCustomAlert({ title: 'Searching...', message: `Looking up location for "${val}"` });
+                        try {
+                          // Try Mapbox API first if token exists
+                          const mapboxToken = useEditorStore.getState().mapboxToken;
+                          if (mapboxToken) {
+                            const res = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(val)}.json?access_token=${mapboxToken}&limit=1`);
+                            const data = await res.json();
+                            if (data.features && data.features.length > 0) {
+                              const [lng, lat] = data.features[0].center;
+                              setEnvironment({ latitude: lat, longitude: lng });
+                              setCustomAlert({ title: 'Location Found', message: data.features[0].place_name });
+                              setTimeout(() => setCustomAlert(null), 4000);
+                              return;
+                            }
+                          }
+                          
+                          // Fallback to Nominatim
+                          const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(val)}&format=json&limit=1`);
+                          const data = await res.json();
+                          if (data && data.length > 0) {
+                            const lat = parseFloat(data[0].lat);
+                            const lng = parseFloat(data[0].lon);
+                            setEnvironment({ latitude: lat, longitude: lng });
+                            setCustomAlert({ title: 'Location Found', message: data[0].display_name });
+                            setTimeout(() => setCustomAlert(null), 4000);
+                          } else {
+                            setCustomAlert({ title: 'Not Found', message: 'Could not find the specified location.' });
+                            setTimeout(() => setCustomAlert(null), 3000);
+                          }
+                        } catch (err) {
+                          console.error(err);
+                          setCustomAlert({ title: 'Error', message: 'Failed to search location.' });
+                          setTimeout(() => setCustomAlert(null), 3000);
+                        }
+                      }
+                    }}
                     style={{ width: '100%', padding: '8px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} 
                   />
+                  <div style={{ fontSize: '0.75rem', color: textMuted, marginTop: '-2px' }}>Type an address and press Enter to search</div>
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
