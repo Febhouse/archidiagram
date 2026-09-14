@@ -271,7 +271,7 @@ export default function Studio() {
 
     if (!hasTop) addSavedView({ id: 'default-top', name: 'Top', cameraPosition: [0, mapRadius * 2, 0.001], cameraTarget: [0, 0, 0] })
     if (!hasFront) addSavedView({ id: 'default-front', name: 'Front', cameraPosition: [0, 0, mapRadius * 2], cameraTarget: [0, 0, 0] })
-    if (!hasIso) addSavedView({ id: 'default-iso', name: 'Isometric', cameraPosition: [mapRadius * 2, mapRadius * 2, mapRadius * 2], cameraTarget: [0, 0, 0], fov: 10 })
+    if (!hasIso) addSavedView({ id: 'default-iso', name: 'Isometric', cameraPosition: [mapRadius * 4, mapRadius * 4, mapRadius * 4], cameraTarget: [0, 0, 0], fov: 10 })
     if (!hasPersp) addSavedView({ id: 'default-persp', name: 'Perspective', cameraPosition: [mapRadius, mapRadius * 0.75, mapRadius], cameraTarget: [0, 0, 0], fov: 50 })
 
     if (!localStorage.getItem('archidiagram_has_loaded_sample')) {
