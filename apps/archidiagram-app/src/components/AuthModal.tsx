@@ -123,11 +123,11 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       } else {
         const { error } = await supabase.auth.signUp({ email, password })
         if (error) throw error
-        alert('Vui lòng kiểm tra email để xác nhận tài khoản!')
+        alert('Please check your email to verify your account!')
       }
       onClose()
     } catch (err: any) {
-      setError(err.message || 'Đã có lỗi xảy ra.')
+      setError(err.message || 'An error occurred.')
     } finally {
       setLoading(false)
     }

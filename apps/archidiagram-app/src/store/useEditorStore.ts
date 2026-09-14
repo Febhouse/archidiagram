@@ -328,7 +328,7 @@ export const useEditorStore = create<EditorState>()(
     if (!isSunpath) {
       const currentSymbolCount = state.objects.filter(o => !o.url.toUpperCase().includes('SUNPATH')).length
       if (currentSymbolCount >= 5) {
-        alert('Bạn đã đạt giới hạn 5 Symbols của gói Free. Hãy đăng nhập và nâng cấp Pro để đặt không giới hạn!')
+        alert('You have reached the limit of 5 Symbols on the Free plan. Please log in and upgrade to Pro to place unlimited items!')
         return state
       }
     }
@@ -474,7 +474,7 @@ export const useEditorStore = create<EditorState>()(
     const currentSymbolCount = state.objects.filter(o => !o.url.toUpperCase().includes('SUNPATH')).length
     const nonSunpathDuplicates = objectsToDuplicate.filter(o => !o.url.toUpperCase().includes('SUNPATH')).length
     if (currentSymbolCount + nonSunpathDuplicates > 5) {
-      alert('Bạn đã đạt giới hạn 5 Symbols của gói Free. Hãy đăng nhập và nâng cấp Pro để đặt không giới hạn!')
+      alert('You have reached the limit of 5 Symbols on the Free plan. Please log in and upgrade to Pro to place unlimited items!')
       return state
     }
 
