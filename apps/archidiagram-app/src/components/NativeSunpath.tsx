@@ -156,7 +156,7 @@ export function getSunPosition(dayOfYear: number, timeOfDay: number, latitude: n
 import { getDayOfYear } from './SunLight'
 
 export default function NativeSunpath({ opacity = 1 }: NativeSunpathProps) {
-  const { latitude, longitude, activeMonth, monthDates, visibleMonths, monthColorsLight, monthColorsDark, timeOfDay, northOffset, sunpathSettings, timezoneMode, utcOffset, dstMode, shadowsEnabled, uiTheme, globalTextSize } = useEditorStore()
+  const { latitude, longitude, activeMonth, monthDates, visibleMonths, monthColorsLight, monthColorsDark, timeOfDay, northOffset, sunpathSettings, timezoneMode, utcOffset, dstMode, uiTheme, globalTextSize } = useEditorStore()
   const safeLat = latitude || 21.0285
   const safeLng = longitude || 105.8542
   const R = 45 // Sky dome radius (1:1 is 90m diameter)

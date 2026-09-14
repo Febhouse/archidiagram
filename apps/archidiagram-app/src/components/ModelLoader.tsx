@@ -1,5 +1,5 @@
 import { useRef, useMemo, Suspense, useEffect, useState } from 'react'
-import { TransformControls, useHelper, Html, useGLTF, useCursor, Edges } from '@react-three/drei'
+import { TransformControls, useHelper, Html, useGLTF, useCursor } from '@react-three/drei'
 import { SVGLoader } from 'three-stdlib'
 import { useFrame } from '@react-three/fiber'
 import { useEditorStore } from '../store/useEditorStore'
@@ -553,7 +553,7 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
           <Suspense fallback={<ForceUpdateFallback />}>
             <Suspense fallback={null}>
               {url === 'SUNPATH' ? (
-                <SunpathDiagram opacity={objOpacity} color={color} />
+                <NativeSunpath opacity={objOpacity} />
               ) : ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(url) ? (
                   <mesh position={[0, 2.5, 0]} castShadow={objData?.castShadow ?? true} receiveShadow={objData?.receiveShadow ?? true}>
                     {url === 'BOX' && <boxGeometry args={[5, 5, 5]} />}
