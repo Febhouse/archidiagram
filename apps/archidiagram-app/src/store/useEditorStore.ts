@@ -306,9 +306,10 @@ export const useEditorStore = create<EditorState>()(
   setContextMenu: (menu) => set({ contextMenu: menu }),
   
   savedViews: [
-    { id: 'default-top', name: 'Top', cameraPosition: [0, 100, 0.001], cameraTarget: [0, 0, 0] },
-    { id: 'default-front', name: 'Front', cameraPosition: [0, 0, 100], cameraTarget: [0, 0, 0] },
-    { id: 'default-iso', name: 'Isometric', cameraPosition: [200, 200, 200], cameraTarget: [0, 0, 0], fov: 10 }
+    { id: 'default-top', name: 'Top', cameraPosition: [0, 40, 0.001], cameraTarget: [0, 0, 0] },
+    { id: 'default-front', name: 'Front', cameraPosition: [0, 0, 40], cameraTarget: [0, 0, 0] },
+    { id: 'default-iso', name: 'Isometric', cameraPosition: [40, 40, 40], cameraTarget: [0, 0, 0], fov: 10 },
+    { id: 'default-persp', name: 'Perspective', cameraPosition: [20, 15, 20], cameraTarget: [0, 0, 0], fov: 50 }
   ],
   addSavedView: (view) => set((state) => ({ savedViews: [...state.savedViews, view] })),
   removeSavedView: (id) => set((state) => ({ savedViews: state.savedViews.filter(v => v.id !== id) })),
