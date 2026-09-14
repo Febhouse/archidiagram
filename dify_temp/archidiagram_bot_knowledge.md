@@ -23,7 +23,11 @@ Where to set the geographical location for sun calculations:
 ### 2.2. Import
 - Supports users to upload 3D models of the project.
 - **Supported formats:** `.glb`, `.gltf` (Recommended as they are lightweight and web-optimized), `.obj`, `.fbx`.
-
+- **Material Editing (Customization):**
+  - Once a custom 3D model is imported and selected, users can access the **Materials Tab** to change its visual properties directly within the app.
+  - Users can edit **Colors** and **Opacity** for individual materials/layers of the imported `.glb` or `.gltf` model.
+  - Users can toggle **Cast Shadow** and **Receive Shadow** on or off.
+  - Users can toggle **Show Edges (Global)** to display the wireframe/edges of the 3D geometry for a stylized look.
 ### 2.3. Sun Diagram (Sunpath & Shadow)
 The core feature of the software, consisting of 3 Tabs:
 - **Create:** 
