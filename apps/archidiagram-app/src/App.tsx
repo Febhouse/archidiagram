@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import { supabase } from './lib/supabase'
 import { useEditorStore } from './store/useEditorStore'
 import Studio from './components/Studio'
 
+const DifyChat = lazy(() => import('./components/DifyChat'))
 function Dashboard() {
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '800px', margin: '0 auto' }}>
@@ -69,11 +70,16 @@ export default function App() {
   }, [setUser, setIsPro])
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Studio />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Studio />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </Router>
+      <Suspense fallback={null}>
+        <DifyChat />
+      </Suspense>
+    </>
   )
 }
