@@ -7,6 +7,7 @@ This document contains all information about the ArchiDiagram Web App. You are a
 - **URL:** https://app.archidiagram.com
 - **Developer:** Febhouse Studio
 - **Purpose:** A professional cloud-based tool for Architects and Architecture Students to create Context Diagrams, Sunpath Diagrams, and Shadow Analysis on an interactive 3D platform.
+- **Platform:** Works seamlessly anywhere, directly in a web browser with no installation required.
 - **Status:** In Beta phase.
 
 ## 2. Using the Main Tools (Left Menu)
@@ -15,14 +16,16 @@ The main interface of the app includes a left toolbar with the following items:
 
 ### 2.1. Location & Context
 Where to set the geographical location for sun calculations:
-- **Coordinates:** Users can enter the Latitude and Longitude of the project.
-- **Timezone & Daylight Saving Time (DST):** Choose the timezone manually or leave it in Auto mode.
-- **Map Background:** Toggle the satellite map/street map as the ground background. Can adjust Opacity and display Radius.
-- **Scale Rings:** Display concentric circles indicating distance scale (radius 100m, 200m...).
+- **Fully Automated Location Search:** Users simply type a city or address and press Enter. The app handles everything automatically: instantly updating coordinates, shifting the 3D Sun path, and jumping to the correct UTC timezone without any manual calculation.
+- **Coordinates:** Users can enter the Latitude and Longitude of the project if they have specific numbers.
+- **Smart Timezone & DST Visualization:** Timezones (UTC) and Daylight Saving Time (DST) shifts are fully automated. The app detects the exact local time rules based on the location. Even more impressive, the UTC offset for each specific month (factoring in DST changes) is directly visualized and displayed right on the 3D Sun path diagram, ensuring 100% real-world accuracy for sun and shadow analysis. Users can also manually override this if needed.
+- **Map Background:** Deeply integrated satellite and street maps. Once a location is set, the map background is perfectly aligned and precisely scaled to the real-world coordinates. Users can adjust Opacity and display Radius.
+- **Scale Rings:** Display concentric circles indicating distance scale (radius 100m, 200m...). The Radius distance scale is highly accurate against the map, making it a crucial and powerful feature for professional Site Analysis diagrams.
 
 ### 2.2. Import
 - Supports users to upload 3D models of the project.
 - **Supported formats:** `.glb`, `.gltf` (Recommended as they are lightweight and web-optimized), `.obj`, `.fbx`.
+- **Scale & Units:** The native unit of the software is **Meters (m)**. Users must ensure their 3D models are exported in Meters before importing.
 - **Material Editing (Customization):**
   - Once a custom 3D model is imported and selected, users can access the **Materials Tab** to change its visual properties directly within the app.
   - Users can edit **Colors** and **Opacity** for individual materials/layers of the imported `.glb` or `.gltf` model.
@@ -48,6 +51,7 @@ The core feature of the software, consisting of 3 Tabs:
   - **Scale:** Scale objects up / down.
   - Free drag and drop objects on the ground plane.
 - **Properties:** Change colors and adjust the transparency of selected symbols.
+- **Smart Notes Workflow:** The application features an intelligent Notes system that automatically updates and lists new Symbols as they are added to the scene, streamlining the annotation and diagramming process.
 
 ### 2.5. Export
 - **Resolution:** Supports high-quality image export in 1K, 2K, 4K, 8K.
@@ -56,7 +60,13 @@ The core feature of the software, consisting of 3 Tabs:
   - `Transparent Background`: Export borderless images with a transparent background (Very useful for importing into Photoshop for post-processing).
   - `Show HUD`: Show/Hide coordinate parameters and legend in the corner of the screen in the exported image.
 
-### 2.6. About & Credits
+### 2.6. Viewport & Display Settings
+- **Camera Views:** Quick access to standard preset views: Top, Front, Isometric, and Perspective.
+- **Camera Navigation:** Pan and Orbit modes for moving around the 3D scene.
+- **Grid & Axes:** Toggle the display of the ground grid and 3D axes (X, Y, Z).
+- **UI Theme:** Switch the user interface between Light and Dark mode.
+
+### 2.7. About & Credits
 Information about copyright, Terms of Use, and Privacy Policy.
 
 ## 3. Account & Pricing Plans (PRO)
