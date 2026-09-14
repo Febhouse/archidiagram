@@ -283,7 +283,8 @@ export default function Studio() {
             user: currentState.user, 
             isPro: currentState.isPro,
             customerPortalUrl: currentState.customerPortalUrl,
-            renewsAt: currentState.renewsAt
+            renewsAt: currentState.renewsAt,
+            mapboxToken: currentState.mapboxToken
           })
           localStorage.setItem('archidiagram_has_loaded_sample', 'true')
         })
@@ -677,8 +678,8 @@ export default function Studio() {
               
               <button
                 onClick={() => {
-                  const state = useEditorStore.getState()
-                  const dataStr = JSON.stringify(state)
+                  const { user, isPro, customerPortalUrl, renewsAt, mapboxToken, ...safeState } = useEditorStore.getState()
+                  const dataStr = JSON.stringify(safeState)
                   const blob = new Blob([dataStr], { type: 'application/json' })
                   const url = URL.createObjectURL(blob)
                   const link = document.createElement('a')
@@ -708,7 +709,8 @@ export default function Studio() {
                           user: currentState.user, 
                           isPro: currentState.isPro,
                           customerPortalUrl: currentState.customerPortalUrl,
-                          renewsAt: currentState.renewsAt
+                          renewsAt: currentState.renewsAt,
+                          mapboxToken: currentState.mapboxToken
                         })
                       } catch (err) {
                         alert('Invalid file!')
