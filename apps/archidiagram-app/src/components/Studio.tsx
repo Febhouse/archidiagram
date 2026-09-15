@@ -301,7 +301,7 @@ export default function Studio() {
   const [sunTab, setSunTab] = useState<'create' | 'shadow' | 'style'>('shadow')
   const [symbolTab, setSymbolTab] = useState<'library' | 'properties'>('library')
   const [importTab, setImportTab] = useState<'import3d' | 'materials'>('import3d')
-  const [exportFormat, setExportFormat] = useState<'PNG' | 'PDF' | 'VIDEO'>('PNG')
+  const [exportFormat, setExportFormat] = useState<'JPG' | 'PDF' | 'VIDEO'>('JPG')
   const [pdfExportMode, setPdfExportMode] = useState<'SINGLE' | 'MULTI'>('SINGLE')
   const [exportSettings, setExportSettings] = useState<Record<number, { checked: boolean, start: number, end: number }>>({})
 
@@ -2081,7 +2081,7 @@ export default function Studio() {
                 <div>
                   <div style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '5px' }}>Export Format</div>
                   <div style={{ display: 'flex', gap: '10px' }}>
-                    {(['PNG', 'PDF', 'VIDEO'] as const).map(fmt => (
+                    {(['JPG', 'PDF', 'VIDEO'] as const).map(fmt => (
                       <button 
                         key={fmt}
                         onClick={() => {
@@ -2163,7 +2163,7 @@ export default function Studio() {
                     
                     let safariTab: Window | null = null;
                     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-                    if (isSafari && (exportFormat === 'PNG' || exportFormat === 'PDF')) {
+                    if (isSafari && (exportFormat === 'JPG' || exportFormat === 'PDF')) {
                       safariTab = window.open('', '_blank');
                       if (safariTab) {
                         safariTab.document.write('<html><head><title>Exporting...</title><style>body{margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#111;flex-direction:column;font-family:sans-serif;color:white}h2{opacity:0.8}</style></head><body><h2>Processing Export... Please wait</h2></body></html>');
@@ -2427,7 +2427,7 @@ export default function Studio() {
                       }
                     };
 
-                    if (exportFormat === 'PNG') {
+                    if (exportFormat === 'JPG') {
                       useEditorStore.getState().setIsExporting(true);
                       await new Promise(r => setTimeout(r, 100));
                       const dataUrl = processExportImage();
@@ -2443,7 +2443,7 @@ export default function Studio() {
                           const a = document.createElement('a');
                           a.style.display = 'none';
                           a.href = url;
-                          a.download = `archidiagram_export_${Date.now()}.png`;
+                          a.download = `archidiagram_export_${Date.now()}.jpg`;
                           a.target = '_blank';
                           document.body.appendChild(a);
                           a.click();
@@ -2486,7 +2486,7 @@ export default function Studio() {
                                 if (!isFirstPage) {
                                   doc.addPage([ptW, ptH], orientation);
                                 }
-                                doc.addImage(dataUrl, 'PNG', 0, 0, ptW, ptH, undefined, 'NONE');
+                                doc.addImage(dataUrl, 'JPEG', 0, 0, ptW, ptH, undefined, 'NONE');
                                 isFirstPage = false;
                               }
                             }
@@ -2525,7 +2525,7 @@ export default function Studio() {
                               const { jsPDF } = await import('jspdf');
                               const orientation = exportWidth > exportHeight ? 'landscape' : 'portrait';
                               const doc = new jsPDF({ orientation, unit: 'pt', format: [exportWidth * 0.75, exportHeight * 0.75] });
-                              doc.addImage(dataUrl, 'PNG', 0, 0, exportWidth * 0.75, exportHeight * 0.75, undefined, 'NONE');
+                              doc.addImage(dataUrl, 'JPEG', 0, 0, exportWidth * 0.75, exportHeight * 0.75, undefined, 'NONE');
                               const blob = doc.output('blob');
                               const url = URL.createObjectURL(blob);
                               if (safariTab) {
