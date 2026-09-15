@@ -3163,6 +3163,23 @@ export default function Studio() {
               onClick={() => {
                 const state = useEditorStore.getState();
                 if (state.selectedIds.length > 0) {
+                  state.duplicateObjects(state.selectedIds);
+                }
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+              style={{ padding: '6px 12px', background: 'transparent', border: `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer', color: textMain, opacity: selectedIds.length > 0 ? 1 : 0.5 }}
+              title="Duplicate Selected"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+            <button
+              onClick={() => {
+                const state = useEditorStore.getState();
+                if (state.selectedIds.length > 0) {
                   state.removeObjects(state.selectedIds);
                 }
               }}
