@@ -302,6 +302,7 @@ export default function Studio() {
   const [symbolTab, setSymbolTab] = useState<'library' | 'properties'>('library')
   const [importTab, setImportTab] = useState<'import3d' | 'materials'>('import3d')
   const [exportFormat, setExportFormat] = useState<'JPG' | 'PDF' | 'VIDEO'>('JPG')
+  const [exportQuality, setExportQuality] = useState<number>(70)
   const [pdfExportMode, setPdfExportMode] = useState<'SINGLE' | 'MULTI'>('SINGLE')
   const [exportSettings, setExportSettings] = useState<Record<number, { checked: boolean, start: number, end: number }>>({})
 
@@ -2094,6 +2095,20 @@ export default function Studio() {
                       </button>
                     ))}
                   </div>
+                  {(exportFormat === 'JPG' || exportFormat === 'PDF') && (
+                    <div style={{ marginTop: '15px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>Quality (Compression)</span>
+                        <span style={{ fontSize: '0.85rem', color: textMuted }}>{exportQuality}%</span>
+                      </div>
+                      <input 
+                        type="range" min="10" max="100" step="5"
+                        value={exportQuality} 
+                        onChange={e => setExportQuality(parseInt(e.target.value))} 
+                        style={{ width: '100%', cursor: 'pointer' }}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -2136,21 +2151,16 @@ export default function Studio() {
                           <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', cursor: 'pointer' }}>
                             <input 
                               type="radio" 
-                              name="exportMonthGroup"
+                              value={m}
                               checked={settings.checked} 
-                              onChange={e => {
-                                if (e.target.checked) {
-                                  setExportSettings(p => {
-                                    const next = { ...p };
-                                    visibleMonths.forEach(km => {
-                                      if (!next[km]) next[km] = { checked: false, start: 6, end: 18 };
-                                      else next[km] = { ...next[km], checked: false };
-                                    });
-                                    if (!next[m]) next[m] = { checked: true, start: 6, end: 18 };
-                                    else next[m] = { ...next[m], checked: true };
-                                    return next;
+                              onChange={() => {
+                                setExportSettings(p => {
+                                  const next = { ...p };
+                                  visibleMonths.forEach(km => {
+                                    next[km] = { ...(p[km] || { start: 6, end: 18 }), checked: km === m };
                                   });
-                                }
+                                  return next;
+                                });
                               }} 
                               disabled={!isPro} 
                             />
@@ -2158,7 +2168,7 @@ export default function Studio() {
                           </label>
                           <span style={{ fontSize: '0.8rem', color: '#3b82f6' }}>Day: {monthDates[m] || 21} | UTC {utcString} {isDst && '(DST)'}</span>
                         </div>
-                        {exportFormat === 'VIDEO' && (
+                        {(exportFormat === 'VIDEO' || (exportFormat === 'PDF' && pdfExportMode === 'MULTI')) && (
                           <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
                             <span style={{ fontSize: '0.85rem' }}>Start (h): <input type="number" value={settings.start} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, start: parseInt(e.target.value) || 6 } }))} disabled={!isPro} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
                             <span style={{ fontSize: '0.85rem' }}>End (h): <input type="number" value={settings.end} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, end: parseInt(e.target.value) || 18 } }))} disabled={!isPro} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
@@ -2434,8 +2444,8 @@ export default function Studio() {
                         // Draw HUD vector text natively at 4K/5K resolution so it stays razor sharp
                         drawHUDOnCanvas(ctx, safeW, safeH);
                         
-                        // Export as JPEG with 70% quality to drastically reduce file size
-                        return cropCanvas.toDataURL('image/jpeg', 0.7);
+                        // Export as JPEG with chosen quality to reduce file size
+                        return cropCanvas.toDataURL('image/jpeg', exportQuality / 100);
                       } finally {
                         restorePhases.forEach(({ material, phase }) => {
                           if (material.userData && material.userData.uClipPhase) {
@@ -2492,26 +2502,31 @@ export default function Studio() {
                             
                             const store = useEditorStore.getState();
                             const originalMonth = store.activeMonth;
+                            const originalTime = store.timeOfDay;
                             
-                            for (const month of visibleMonths) {
-                              if (!exportSettings[month]?.checked) continue;
+                            const selectedMonth = visibleMonths.find(m => exportSettings[m]?.checked);
+                            if (selectedMonth) {
+                              const settings = exportSettings[selectedMonth] || { start: 6, end: 18 };
+                              store.setEnvironment({ activeMonth: selectedMonth });
                               
-                              store.setEnvironment({ activeMonth: month });
-                              // Wait for shadows/sun to update
-                              await new Promise(r => setTimeout(r, 250));
-                              
-                              const dataUrl = processExportImage();
-                              if (dataUrl) {
-                                if (!isFirstPage) {
-                                  doc.addPage([ptW, ptH], orientation);
+                              for (let h = settings.start; h <= settings.end; h += 1) {
+                                store.setEnvironment({ timeOfDay: h });
+                                // Wait for shadows/sun to update
+                                await new Promise(r => setTimeout(r, 250));
+                                
+                                const dataUrl = processExportImage();
+                                if (dataUrl) {
+                                  if (!isFirstPage) {
+                                    doc.addPage([ptW, ptH], orientation);
+                                  }
+                                  doc.addImage(dataUrl, 'JPEG', 0, 0, ptW, ptH, undefined, 'NONE');
+                                  isFirstPage = false;
                                 }
-                                doc.addImage(dataUrl, 'JPEG', 0, 0, ptW, ptH, undefined, 'NONE');
-                                isFirstPage = false;
                               }
                             }
                             
-                            // Restore original month
-                            store.setEnvironment({ activeMonth: originalMonth });
+                            // Restore original state
+                            store.setEnvironment({ activeMonth: originalMonth, timeOfDay: originalTime });
                             useEditorStore.getState().setIsExporting(false);
                             
                             if (!isFirstPage) {
