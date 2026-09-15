@@ -104,8 +104,8 @@ function CustomMaterialEditor({ obj }: { obj: any }) {
   const currentMat = materials[currentMatName]
   const currentOverride = obj.materialOverrides?.[currentMatName] || {}
   const origColorHex = currentMat?.color && typeof currentMat.color.getHexString === 'function' ? '#' + currentMat.color.getHexString() : '#cccccc'
-  const currentColor = currentOverride.color || origColorHex
-  const currentOpacity = currentOverride.opacity ?? (currentMat?.opacity !== undefined ? currentMat.opacity : 1)
+  const currentColor = currentOverride.color || obj.color || origColorHex
+  const currentOpacity = currentOverride.opacity ?? obj.opacity ?? (currentMat?.opacity !== undefined ? currentMat.opacity : 1)
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>

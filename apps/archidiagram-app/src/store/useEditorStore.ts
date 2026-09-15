@@ -447,9 +447,30 @@ export const useEditorStore = create<EditorState>()(
   }),
 
   replaceObjectUrl: (ids, newUrl) => set((state) => {
-    const newObjects = state.objects.map(obj => 
-      ids.includes(obj.id) ? { ...obj, url: newUrl } : obj
-    )
+    const newObjects = state.objects.map(obj => {
+      if (ids.includes(obj.id)) {
+        let inheritedColor = obj.color;
+        let inheritedOpacity = obj.opacity;
+        
+        // Extract color and opacity from materialOverrides if they exist
+        if (obj.materialOverrides) {
+          for (const key in obj.materialOverrides) {
+            const mat = obj.materialOverrides[key];
+            if (!inheritedColor && mat?.color) inheritedColor = mat.color;
+            if (inheritedOpacity === undefined && mat?.opacity !== undefined) inheritedOpacity = mat.opacity;
+          }
+        }
+        
+        return { 
+          ...obj, 
+          url: newUrl,
+          color: inheritedColor,
+          opacity: inheritedOpacity,
+          materialOverrides: undefined // Reset material overrides since material names will change
+        };
+      }
+      return obj;
+    })
     return {
       past: [...state.past, state.objects],
       future: [],
