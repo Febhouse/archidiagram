@@ -46,3 +46,16 @@ The following domain-specific names are critical and must NOT be changed:
 - **Distance Rings** (Not Scale Rings).
 - **True North (Offset North)**.
 - **Time zone** & **Sunpath Scale**.
+
+## Technical Decisions & Resolved Edge Cases
+
+### State Persistence & Save Mechanisms
+- **Zustand Persistence:** All user UI settings (e.g., `legendItems`, `showHUD`), map configurations (`mapRadius`, `showMapBackground`), and environment settings must be explicitly included in the `partialize` configuration of Zustand's `persist` middleware. Failure to do so will cause them to be lost upon page reloads (F5).
+- **File Save (Local/Cloud):** The `useEditorStore` contains circular WebGL references (`glRenderer`, `glScene`, `glCamera`) and DOM/function references (`customAlert`, etc.). These MUST be omitted/destructured out from the `safeState` before calling `JSON.stringify()`. Attempting to stringify these will result in `Converting circular structure to JSON` crashes.
+- **Security:** Save files (`.archi`) are purely JSON data. They are parsed using `JSON.parse()` without code execution. React's built-in XSS protection sanitizes any malicious strings rendered to the DOM, ensuring safe file sharing.
+
+### UI & Rendering Logic
+- **Batch Export UI:** The batch export panel must use Radio buttons for month selection (enforcing single-month iteration per export) and default to unselected. The `onChange` must be `onClick` to guarantee state updates, and export must be blocked if no month is selected.
+- **HUD Notes (Legend) Icons:** Custom 3D files (`data:`/`blob:` URLs) and primitive shapes (`BOX`, `CYLINDER`, etc.) do not have `.png` thumbnails. In the Notes/Legend menu, they must be rendered using a generic 3D SVG icon instead of an `<img>` tag to prevent broken image links.
+- **Context Map Scaling:** The `MapBackground` component must force `mapPhysicalSize` to exactly equal `mapRadius * 2` (with `uRadiusUV` = 0.5). This ensures that the satellite image scales dynamically with the "Diagram Radius" slider, filling the radius while preserving the user's chosen Zoom Level and 1:1 aspect ratio.
+- **Symbol Replacement Inheritance:** When a user replaces an existing symbol with a new one from the library, the new object must inherit the previous object's `color` and `opacity` (via `materialOverrides`) to maintain visual continuity.
