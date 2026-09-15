@@ -82,7 +82,7 @@ function CustomMaterialEditor({ obj }: { obj: any }) {
       if (firstMat) setActiveMaterial(firstMat)
       setLoading(false)
     }, undefined, () => setLoading(false))
-  }, [obj])
+  }, [obj?.url])
 
   if (loading) return <div style={{ padding: '15px', color: '#6b7280', fontSize: '0.85rem' }}>Loading materials...</div>
   

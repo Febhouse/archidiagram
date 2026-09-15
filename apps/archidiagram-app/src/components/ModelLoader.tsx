@@ -358,6 +358,7 @@ export function GltfMesh({ url, opacity, color, materialOverrides, castShadow = 
           child.material = mat
           
           const finalOpacity = override?.opacity ?? (opacity !== undefined ? opacity : child.material.opacity)
+          child.castShadow = castShadow && finalOpacity >= 0.3
           child.material.transparent = finalOpacity < 1
           child.material.opacity = finalOpacity
           child.material.depthWrite = finalOpacity === 1
@@ -559,7 +560,7 @@ export default function ModelLoader({ id, url, position, rotation, scale, color,
               {url === 'SUNPATH' ? (
                 <NativeSunpath opacity={objOpacity} />
               ) : ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(url) ? (
-                  <mesh position={[0, 2.5, 0]} castShadow={objData?.castShadow ?? true} receiveShadow={objData?.receiveShadow ?? true}>
+                  <mesh position={[0, 2.5, 0]} castShadow={(objData?.castShadow ?? true) && (objData?.materialOverrides?.['default']?.opacity ?? objOpacity) >= 0.3} receiveShadow={objData?.receiveShadow ?? true}>
                     {url === 'BOX' && <boxGeometry args={[5, 5, 5]} />}
                     {url === 'CYLINDER' && <cylinderGeometry args={[2.5, 2.5, 5, 32]} />}
                     {url === 'CONE' && <coneGeometry args={[2.5, 5, 32]} />}
