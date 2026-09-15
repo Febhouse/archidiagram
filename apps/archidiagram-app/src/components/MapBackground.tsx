@@ -85,23 +85,30 @@ function MapBackgroundInner() {
   // Calculate UV radius for the fade effect based on the true physical size
   const uRadiusUV = mapRadius / mapPhysicalSize
 
+  const northOffset = useEditorStore(state => state.northOffset)
+  const northOffsetRad = THREE.MathUtils.degToRad(northOffset)
+
   if (error) {
     return (
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.0, 0]}>
-        <planeGeometry args={[mapPhysicalSize, mapPhysicalSize]} />
-        <meshBasicMaterial color="#ffcccc" opacity={0.5} transparent />
-      </mesh>
+      <group rotation={[0, northOffsetRad, 0]}>
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.0, 0]}>
+          <planeGeometry args={[mapPhysicalSize, mapPhysicalSize]} />
+          <meshBasicMaterial color="#ffcccc" opacity={0.5} transparent />
+        </mesh>
+      </group>
     )
   }
 
   if (!texture) return null
 
   return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.0, 0]} receiveShadow>
-      <planeGeometry args={[mapPhysicalSize, mapPhysicalSize]} />
-      {/* @ts-ignore */}
-      <fadeMapMaterial uMap={texture} uOpacity={mapOpacity} uRadiusUV={uRadiusUV} transparent depthWrite={false} />
-    </mesh>
+    <group rotation={[0, northOffsetRad, 0]}>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.0, 0]} receiveShadow>
+        <planeGeometry args={[mapPhysicalSize, mapPhysicalSize]} />
+        {/* @ts-ignore */}
+        <fadeMapMaterial uMap={texture} uOpacity={mapOpacity} uRadiusUV={uRadiusUV} transparent depthWrite={false} />
+      </mesh>
+    </group>
   )
 }
 
