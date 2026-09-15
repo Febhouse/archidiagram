@@ -3140,7 +3140,7 @@ export default function Studio() {
         <div style={{ position: 'absolute', top: isMobile ? '10px' : '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 10, display: isMobile && (showMobileMenu || showGlobalMenu) ? 'none' : 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px', background: bgPanel, padding: '8px', borderRadius: '8px', border: `1px solid ${borderCol}`, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', width: isMobile ? '90%' : 'auto' }}>
           
           <div style={{ display: 'flex', gap: '5px', borderRight: `1px solid ${borderCol}`, paddingRight: '10px' }}>
-            {['move', 'rotate', 'scale', 'pan', 'orbit'].map((mode) => {
+            {['move', 'rotate', 'scale'].map((mode) => {
               const actualMode = mode === 'move' ? 'translate' : mode
               return (
                 <button
