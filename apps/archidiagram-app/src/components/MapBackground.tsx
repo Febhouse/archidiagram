@@ -76,15 +76,11 @@ function MapBackgroundInner() {
     )
   }, [latitude, longitude, mapZoom, mapboxToken, mapStyle])
 
-  // Calculate true physical size of the Mapbox image in meters
-  // metersPerPixel = (Math.cos(latitude * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.pow(2, mapZoom))
-  const safeLat = latitude || 21.0285
-  const metersPerPixel = (Math.cos(safeLat * Math.PI / 180) * 2 * Math.PI * 6378137) / (256 * Math.pow(2, mapZoom))
-  const mapSize = 1024
-  const mapPhysicalSize = mapSize * metersPerPixel
+  // Force the physical size of the map to match the Diagram Radius
+  const mapPhysicalSize = mapRadius * 2
   
-  // Calculate UV radius for the fade effect
-  const uRadiusUV = mapRadius / mapPhysicalSize
+  // Since the plane exactly matches the radius, the UV radius for fading is always 0.5
+  const uRadiusUV = 0.5
 
   if (error) {
     return (
