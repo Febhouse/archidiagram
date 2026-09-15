@@ -2472,7 +2472,7 @@ export default function Studio() {
                             for (const month of visibleMonths) {
                               if (!exportSettings[month]?.checked) continue;
                               
-                              store.setActiveMonth(month);
+                              store.setEnvironment({ activeMonth: month });
                               // Wait for shadows/sun to update
                               await new Promise(r => setTimeout(r, 250));
                               
@@ -2487,7 +2487,7 @@ export default function Studio() {
                             }
                             
                             // Restore original month
-                            store.setActiveMonth(originalMonth);
+                            store.setEnvironment({ activeMonth: originalMonth });
                             useEditorStore.getState().setIsExporting(false);
                             
                             if (!isFirstPage) {
