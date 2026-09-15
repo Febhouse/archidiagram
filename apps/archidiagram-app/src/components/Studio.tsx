@@ -2402,6 +2402,10 @@ export default function Studio() {
                         cropCanvas.height = safeH;
                         const ctx = cropCanvas.getContext('2d');
                         if (!ctx) return null;
+                        // Fill solid background for JPEG compression
+                        const isDark = useEditorStore.getState().uiTheme === 'dark';
+                        ctx.fillStyle = isDark ? '#111827' : '#ffffff';
+                        ctx.fillRect(0, 0, safeW, safeH);
                         
                         // Use high quality image smoothing to upscale the 2K 3D render to 4K/5K
                         ctx.imageSmoothingEnabled = true;
@@ -2411,7 +2415,8 @@ export default function Studio() {
                         // Draw HUD vector text natively at 4K/5K resolution so it stays razor sharp
                         drawHUDOnCanvas(ctx, safeW, safeH);
                         
-                        return cropCanvas.toDataURL('image/png', 1.0);
+                        // Export as JPEG with 70% quality to drastically reduce file size
+                        return cropCanvas.toDataURL('image/jpeg', 0.7);
                       } finally {
                         restorePhases.forEach(({ material, phase }) => {
                           if (material.userData && material.userData.uClipPhase) {
@@ -2541,8 +2546,62 @@ export default function Studio() {
                             } else if (safariTab) { safariTab.close(); }
                           }
                     } else if (exportFormat === 'VIDEO') {
-                      const canvas = document.querySelector('canvas');
+                      const canvas = document.querySelector('canvas') as HTMLCanvasElement | null;
                       if (!canvas) return;
+                      // Save originals
+                      const store = useEditorStore.getState();
+                      const gl = store.glRenderer;
+                      const scene = store.glScene;
+                      const camera = store.glCamera;
+                      if (!gl || !scene || !camera) return;
+                      
+                      const origPixelRatio = gl.getPixelRatio();
+                      const origAspect = camera.aspect;
+                      const origFov = camera.fov;
+                      const cssW = canvas.clientWidth || (canvas.width / origPixelRatio);
+                      const cssH = canvas.clientHeight || (canvas.height / origPixelRatio);
+                      
+                      let safeW = exportWidth;
+                      let safeH = exportHeight;
+                      
+                      // Upscaling Trick for High-Res Video
+                      let renderW = safeW;
+                      let renderH = safeH;
+                      const MAX_RENDER_DIM = 2560; // 2K Standard
+                      if (Math.max(renderW, renderH) > MAX_RENDER_DIM) {
+                        const scaleDown = MAX_RENDER_DIM / Math.max(renderW, renderH);
+                        renderW = Math.floor(renderW * scaleDown);
+                        renderH = Math.floor(renderH * scaleDown);
+                      }
+                      
+                      const exportAspect = renderW / renderH;
+                      const tempCssW = cssW;
+                      const tempCssH = cssW / exportAspect;
+                      const exportPixelRatio = renderW / tempCssW;
+                      
+                      const scaleX = cssW / safeW;
+                      const scaleY = cssH / safeH;
+                      const renderScale = Math.min(scaleX, scaleY);
+                      const cropBoxH = safeH * renderScale;
+                      
+                      const vFovRad = origFov * Math.PI / 180;
+                      const cropFovRad = 2 * Math.atan((cropBoxH / cssH) * Math.tan(vFovRad / 2));
+                      const cropFovDeg = cropFovRad * 180 / Math.PI;
+                      
+                      camera.aspect = exportAspect;
+                      camera.fov = cropFovDeg;
+                      camera.updateProjectionMatrix();
+                      gl.setPixelRatio(exportPixelRatio);
+                      gl.setSize(tempCssW, tempCssH, false);
+                      
+                      const restoreRenderer = () => {
+                        camera.aspect = origAspect;
+                        camera.fov = origFov;
+                        camera.updateProjectionMatrix();
+                        gl.setPixelRatio(origPixelRatio);
+                        gl.setSize(cssW, cssH, false);
+                        gl.render(scene, camera);
+                      };
                       
                       let isCancelled = false;
                       const overlay = document.createElement('div');
@@ -2596,6 +2655,7 @@ export default function Studio() {
                       const chunks: Blob[] = [];
                       recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
                       recorder.onstop = () => {
+                        restoreRenderer(); // Restore camera/canvas on stop
                         if (!isCancelled) {
                           const blob = new Blob(chunks, { type: mimeType });
                           const url = URL.createObjectURL(blob);
@@ -2621,20 +2681,10 @@ export default function Studio() {
                       const drawLoop = () => {
                         if (!recording) return;
                         if (vctx && canvas) {
-                          const sAspect = canvas.width / canvas.height;
-                          const dAspect = exportWidth / exportHeight;
-                          let sx = 0, sy = 0, sw = canvas.width, sh = canvas.height;
-                          if (sAspect > dAspect) {
-                            sw = canvas.height * dAspect;
-                            sx = (canvas.width - sw) / 2;
-                          } else {
-                            sh = canvas.width / dAspect;
-                            sy = (canvas.height - sh) / 2;
-                          }
-                          vctx.drawImage(canvas, sx, sy, sw, sh, 0, 0, exportWidth, exportHeight);
+                          vctx.drawImage(canvas, 0, 0, renderW, renderH, 0, 0, exportWidth, exportHeight);
                           
                           if (showHUD) {
-                            drawHUDOnCanvas(vctx);
+                            drawHUDOnCanvas(vctx, exportWidth, exportHeight);
                           }
                         }
                         requestAnimationFrame(drawLoop);
