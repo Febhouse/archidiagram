@@ -8,6 +8,13 @@
 - **UI Framework**: React (functional components).
 - **3D Engine**: `@react-three/fiber` and `@react-three/drei`.
 
+## Data Flow & State Interconnection (Anti-Bug Patterns)
+To avoid desync bugs, always adhere to this one-way data flow:
+1. **User Action (UI)**: Buttons and sliders in `Studio.tsx` (or other UI overlays) MUST NEVER hold local React state for global settings. They must only call the `set()` functions provided by `useEditorStore` (e.g., `setEnvironment({ timeOfDay: 12 })`).
+2. **Central Store (Zustand)**: `useEditorStore.ts` acts as the single source of truth. It instantly updates the values and triggers re-renders ONLY for components subscribing to those specific state slices.
+3. **3D Reactivity**: 3D components in `Scene.tsx` (like `NativeSunpath`, `SunLight`, `MapBackground`) subscribe directly to the Zustand store. They automatically react to changes (e.g. `MapBackground` rotates when `northOffset` updates in the store). 
+**Rule of thumb**: Never pass props down the component tree from `Studio` to `Scene`. Use Zustand to bridge the DOM UI and the WebGL Canvas.
+
 ## Key Files & Responsibilities
 - **`src/components/Studio.tsx`**: The main IDE layout. It contains the resizable Left Panel (sidebar) with H2 accordion sections (`Sun Diagram`, `Dynamic Symbols`, `Export`) and the Floating Top Toolbar (Transform tools, Global toggles, Theme/Background controls).
 - **`src/components/Scene.tsx`**: The `<Canvas>` wrapper. It handles the rendering of the `Environment`, `Grid`, and iterates over `objects` to render `ModelLoader` or `NativeSunpath`.
@@ -92,7 +99,7 @@ The following domain-specific names are critical and must NOT be changed:
 ### UI & Rendering Logic
 - **Batch Export UI:** The batch export panel must use Radio buttons for month selection (enforcing single-month iteration per export) and default to unselected. The `onChange` must be `onClick` to guarantee state updates, and export must be blocked if no month is selected.
 - **HUD Notes (Legend) Icons:** Custom 3D files (`data:`/`blob:` URLs) and primitive shapes (`BOX`, `CYLINDER`, etc.) do not have `.png` thumbnails. In the Notes/Legend menu, they must be rendered using a generic 3D SVG icon instead of an `<img>` tag to prevent broken image links.
-- **Context Map Scaling & Strict 1:1 Scale:** The `MapBackground` component MUST enforce a strict 1:1 physical scale for the satellite image. `mapPhysicalSize` must always be calculated as `mapSize * metersPerPixel` (where `metersPerPixel` is derived from the map's latitude and `mapZoom`). NEVER artificially stretch the map geometry to fit `mapRadius`, as this destroys real-world scaling and breaks measurement accuracy. To maximize coverage, request the maximum API size of `1280x1280`. If `mapRadius` exceeds `mapPhysicalSize / 2`, the map will appear cut off (as a square); the user must lower the Zoom Level to cover a larger physical area.
+- **Context Map Scaling & Strict 1:1 Scale:** The `MapBackground` component MUST enforce a strict 1:1 physical scale for the satellite image. `mapPhysicalSize` must always be calculated as `mapSize * metersPerPixel` (where `metersPerPixel` is derived from the map's latitude and `mapZoom`). NEVER artificially stretch the map geometry to fit `mapRadius`, as this destroys real-world scaling and breaks measurement accuracy. To maximize coverage, request the maximum API size of `1280x1280`. If `mapRadius` exceeds `mapPhysicalSize / 2`, the map will appear cut off (as a square); the user must lower the Zoom Level to cover a larger physical area. Additionally, the map MUST rotate together with the sunpath by wrapping the map mesh in `<group rotation={[0, northOffsetRad, 0]}>` so that it aligns perfectly with the "True North" setting.
 - **Symbol Replacement Inheritance:** When a user replaces an existing symbol with a new one from the library, the new object must inherit the previous object's `color` and `opacity` (via `materialOverrides`) to maintain visual continuity.
 # Sunpath & HUD UI Design Rules
 
