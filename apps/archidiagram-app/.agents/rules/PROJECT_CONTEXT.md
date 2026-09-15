@@ -3,6 +3,8 @@
 ## Project Overview
 **Archi Diagram** (by Febhouse) is a web-based 3D architectural diagramming tool built with React, Three.js (React Three Fiber), and Zustand. It allows users to create interactive Sun Paths (Shadow Analysis) and place 3D "Dynamic Symbols" into a scene.
 
+> **CRITICAL RULE FOR AI:** Whenever you add, modify, or remove a UI feature or workflow in `archidiagram-app`, you **MUST** simultaneously update `dify_temp/archidiagram_bot_knowledge.md`. This ensures the external Dify Customer Support Chatbot is always aware of the latest features.
+
 ## Core Architecture
 - **State Management**: `zustand` (`src/store/useEditorStore.ts`). Handles global states like environment settings (latitude, longitude, time, theme), sunpath settings, and the array of 3D objects (`PlacedModel`).
 - **UI Framework**: React (functional components).

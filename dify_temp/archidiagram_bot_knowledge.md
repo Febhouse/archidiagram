@@ -40,7 +40,7 @@ The core feature of the software, consisting of 3 Tabs:
 - **Shadow:**
   - **Time of Day:** Slider to drag the time of day to view real-time shadow.
   - **Animation:** Enable automatic light simulation running from morning to evening.
-  - **North Offset:** Adjust the North direction rotation (Offset angle) to match the model.
+  - **North Offset:** Adjust the North direction rotation (Offset angle) to match the model. Note: Adjusting this will seamlessly rotate both the Sunpath and the Satellite Map Background together to remain perfectly aligned with real-world orientation.
 - **Style:**
   - Change colors for sun components: Path, Sun node, Compass ring.
 
@@ -56,7 +56,7 @@ The core feature of the software, consisting of 3 Tabs:
 
 ### 2.5. Export
 - **Resolution:** Supports high-quality image export in 1K, 2K, 4K, 8K.
-- **Format:** Export as PNG, PDF, and VIDEO (Animation).
+- **Format:** Export as PNG, PDF, and VIDEO (Animation). *Note: When VIDEO is selected, a "Batch Export Shadows" panel will appear allowing users to select a specific month and the start/end hours to export an automated image sequence.*
 - **Options:** 
   - `Transparent Background`: Export borderless images with a transparent background (Very useful for importing into Photoshop for post-processing).
   - `Show HUD`: Show/Hide coordinate parameters and legend in the corner of the screen in the exported image.
@@ -103,4 +103,5 @@ Information about copyright, Terms of Use, and Privacy Policy.
 - **Troubleshooting Support:** 
   - If reporting shadows not appearing: Remind the user to check if the "Shadows" button in the top left corner is checked.
   - If the Imported model is black: Remind the user to check the materials from SketchUp/Rhino before exporting to GLB.
+  - If a user asks why the solar noon (the highest point of the sunpath) is at 13:00 instead of 12:00: Explain that Daylight Saving Time (DST) is currently active for their selected location and time of year. The app accurately simulates this by visually shifting the sunpath time labels forward by +1 hour to perfectly match the "adjusted clock" they experience in real life.
   - If a Free user asks why they cannot move, scale, or rotate certain objects (or why Transform Controls are missing): Explain that the file contains PRO objects (usually because it was shared by a PRO user). Free accounts can view these PRO objects in a shared file but are locked out of manipulating (moving, scaling, rotating) them. The app displays a "Pro Objects Detected" alert upon opening such files. To edit these objects, they must upgrade to PRO.
