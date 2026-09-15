@@ -320,7 +320,8 @@ export default function Scene() {
         
         <SunLight />
         
-        <Environment preset="city" />
+        <ambientLight intensity={0.4} />
+        <Environment preset="city" environmentIntensity={0.3} />
         
         <OrbitControls 
           makeDefault 
