@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Scene from './Scene'
 import { useEditorStore } from '../store/useEditorStore'
 import { LIBRARY_MODELS } from '../config/library'
@@ -300,8 +300,7 @@ export default function Studio() {
   // Location Search Suggestions State
   const [locQuery, setLocQuery] = useState('')
   const [locSuggestions, setLocSuggestions] = useState<any[]>([])
-  const [isSearchingLoc, setIsSearchingLoc] = useState(false)
-  const locSearchTimeout = useRef<NodeJS.Timeout | null>(null)
+  const locSearchTimeout = useRef<any>(null)
 
   // Tabs State within H2
   const [sunTab, setSunTab] = useState<'create' | 'shadow' | 'style'>('shadow')
@@ -1154,7 +1153,6 @@ export default function Studio() {
                       locSearchTimeout.current = setTimeout(async () => {
                         const mapboxToken = useEditorStore.getState().mapboxToken;
                         if (!mapboxToken) return;
-                        setIsSearchingLoc(true)
                         try {
                           const res = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(val)}.json?access_token=${mapboxToken}&limit=5`);
                           const data = await res.json();
@@ -1162,7 +1160,6 @@ export default function Studio() {
                             setLocSuggestions(data.features)
                           }
                         } catch (err) {}
-                        setIsSearchingLoc(false)
                       }, 400)
                     }}
                     onKeyDown={async (e) => {
@@ -1212,7 +1209,6 @@ export default function Studio() {
                         }
                       }
                     }}
-                    style={{ width: '100%', padding: '8px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} 
                   />
                   {locSuggestions.length > 0 && (
                     <div style={{ 
