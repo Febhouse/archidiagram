@@ -787,7 +787,7 @@ export default function Studio() {
                         setIsAuthModalOpen(true);
                       } else {
                         try {
-                          const { user, isPro, customerPortalUrl, renewsAt, mapboxToken, past, future, ...safeState } = useEditorStore.getState()
+                          const { user, isPro, customerPortalUrl, renewsAt, mapboxToken, past, future, glRenderer, glScene, glCamera, customAlert, customConfirm, customPrompt, ...safeState } = useEditorStore.getState()
                           const stateJson = JSON.stringify(safeState)
                           const sizeMb = (new Blob([stateJson]).size / (1024 * 1024)).toFixed(2)
                           
@@ -878,7 +878,7 @@ export default function Studio() {
                   <button
                     onClick={() => {
                       setShowFileMenu(false)
-                      const { user, isPro, customerPortalUrl, renewsAt, mapboxToken, past, future, ...safeState } = useEditorStore.getState()
+                      const { user, isPro, customerPortalUrl, renewsAt, mapboxToken, past, future, glRenderer, glScene, glCamera, customAlert, customConfirm, customPrompt, ...safeState } = useEditorStore.getState()
                       const dataStr = JSON.stringify(safeState)
                       const blob = new Blob([dataStr], { type: 'application/json' })
                       const url = URL.createObjectURL(blob)
