@@ -21,6 +21,7 @@ Where to set the geographical location for sun calculations:
 - **Smart Timezone & DST Visualization:** Timezones (UTC) and Daylight Saving Time (DST) shifts are fully automated. The app detects the exact local time rules based on the location. Even more impressive, the UTC offset for each specific month (factoring in DST changes) is directly visualized and displayed right on the 3D Sun path diagram, ensuring 100% real-world accuracy for sun and shadow analysis. Users can also manually override this if needed.
 - **Map Background:** Deeply integrated satellite and street maps. Once a location is set, the map background is perfectly aligned and **precisely scaled 1:1 to the real-world coordinates** (matching exactly with the Diagram Radius and Scale Rings). Users can adjust Opacity and display Radius.
   - *Troubleshooting Map Size:* If a user asks why the satellite map does not expand further when they increase the Diagram Radius, explain that the map image is limited to a maximum physical resolution of 1280x1280 pixels. To cover a larger physical radius without breaking the strict 1:1 scale, the user MUST decrease the Zoom Level (zoom out) so that each pixel covers more real-world meters.
+- **True North (North Offset):** Adjust the North direction rotation (Offset angle) to match the imported 3D model. Note: Adjusting this will seamlessly rotate both the Sunpath and the Satellite Map Background together to remain perfectly aligned with real-world orientation without needing to rotate the 3D model itself.
 - **Scale Rings:** Display concentric circles indicating distance scale (radius 100m, 200m...). The Radius distance scale is highly accurate against the map, making it a crucial and powerful feature for professional Site Analysis diagrams.
 
 ### 2.2. Import
@@ -40,7 +41,6 @@ The core feature of the software, consisting of 3 Tabs:
 - **Shadow:**
   - **Time of Day:** Slider to drag the time of day to view real-time shadow.
   - **Animation:** Enable automatic light simulation running from morning to evening.
-  - **North Offset:** Adjust the North direction rotation (Offset angle) to match the model. Note: Adjusting this will seamlessly rotate both the Sunpath and the Satellite Map Background together to remain perfectly aligned with real-world orientation.
 - **Style:**
   - Change colors for sun components: Path, Sun node, Compass ring.
 

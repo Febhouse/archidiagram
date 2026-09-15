@@ -50,6 +50,7 @@ When maintaining, refactoring, or upgrading `archidiagram-app` (specifically com
 
 ### Step 1: Location & Context
 - **Coordinates Input:** Users must be able to input Latitude/Longitude or paste an address.
+- **True North (Offset North):** A slider to rotate the compass and map to match the project's real-world orientation.
 - **Diagram Radius:** A slider to adjust the working area radius (in meters or feet).
 - **Context Map:** A toggle to display the Mapbox Satellite map. Must include Opacity and Zoom controls.
 - **Distance Rings:** A toggle to display distance measurement rings radiating from the center.
@@ -61,7 +62,6 @@ When maintaining, refactoring, or upgrading `archidiagram-app` (specifically com
 ### Step 3: Sun Diagram (Solar Analysis)
 - **3D Sun path Tab:**
   - `Scale Sun path`: Adjusts the overall size of the solar dome. **This must remain independent of the `Diagram Radius`.**
-  - `True North (Offset North)`: A slider to rotate the compass to match the project's real-world orientation.
   - `Time Zone` & `DST`: Auto or manual settings for accurate solar calculation. The DST calculation uses a 0KB heuristic algorithm that must be preserved.
 - **Shadow Tab:**
   - `Enable Environment Shadows`: Toggles shadow casting.

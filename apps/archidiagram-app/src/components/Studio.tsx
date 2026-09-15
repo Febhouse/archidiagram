@@ -1211,6 +1211,19 @@ export default function Studio() {
               <div style={{ borderTop: `1px solid ${borderCol}`, paddingTop: '20px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>True North (Offset North)</span>
+                    <span style={{ color: textMuted, fontSize: '0.9rem' }}>{northOffset}°</span>
+                  </div>
+                  <input type="range" min="-180" max="180" value={northOffset} onChange={(e) => setEnvironment({ northOffset: parseInt(e.target.value) })} style={{ width: '100%' }} />
+                  <div style={{ fontSize: '0.75rem', color: textMuted, marginTop: '4px', fontStyle: 'italic' }}>
+                    * Rotate the compass & map to match your project's True North.
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ borderTop: `1px solid ${borderCol}`, paddingTop: '20px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>Diagram Radius ({scaleRingUnit})</span>
                     <span style={{ fontSize: '0.85rem' }}>{scaleRingUnit === 'ft' ? Math.round(mapRadius * 3.28084) : mapRadius}{scaleRingUnit}</span>
                   </div>
@@ -1521,16 +1534,7 @@ export default function Studio() {
                     </div>
                   </div>
 
-                  <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
-                      <span style={{ fontSize: '0.9rem' }}>True North (Offset North)</span>
-                      <span style={{ color: textMuted, fontSize: '0.9rem' }}>{northOffset}°</span>
-                    </div>
-                    <input type="range" min="-180" max="180" value={northOffset} onChange={(e) => setEnvironment({ northOffset: parseInt(e.target.value) })} style={{ width: '100%' }} />
-                    <div style={{ fontSize: '0.75rem', color: textMuted, marginTop: '4px', fontStyle: 'italic' }}>
-                      * Rotate the compass to match your project's True North.
-                    </div>
-                  </div>
+
                 </div>
               )}
 
