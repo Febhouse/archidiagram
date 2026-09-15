@@ -2116,7 +2116,7 @@ export default function Studio() {
                     const drawHUDOnCanvas = (targetCtx: any) => {
                       if (!showHUD) return;
                       const store = useEditorStore.getState();
-                      const scale = (Math.max(exportWidth, exportHeight) / 1080) * (store.hudScale || 1);
+                      const scale = (exportHeight / 1080) * (store.hudScale || 1);
                       const padding = 15 * scale;
                       const lineH = 22 * scale;
                       
@@ -2263,10 +2263,19 @@ export default function Studio() {
                     if (exportFormat === 'PNG') {
                       const dataUrl = processExportImage();
                       if (dataUrl) {
-                        const a = document.createElement('a');
-                        a.href = dataUrl;
-                        a.download = `archidiagram_export_${Date.now()}.png`;
-                        a.click();
+                        fetch(dataUrl).then(res => res.blob()).then(blob => {
+                          const url = URL.createObjectURL(blob);
+                          const a = document.createElement('a');
+                          a.style.display = 'none';
+                          a.href = url;
+                          a.download = `archidiagram_export_${Date.now()}.png`;
+                          document.body.appendChild(a);
+                          a.click();
+                          setTimeout(() => {
+                            document.body.removeChild(a);
+                            URL.revokeObjectURL(url);
+                          }, 100);
+                        });
                       }
                     } else if (exportFormat === 'PDF') {
                       const dataUrl = processExportImage();
@@ -2275,7 +2284,19 @@ export default function Studio() {
                         const orientation = exportWidth > exportHeight ? 'landscape' : 'portrait';
                         const doc = new jsPDF({ orientation, unit: 'px', format: [exportWidth, exportHeight] });
                         doc.addImage(dataUrl, 'PNG', 0, 0, exportWidth, exportHeight);
-                        doc.save(`archidiagram_export_${Date.now()}.pdf`);
+                        const blob = doc.output('blob');
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.style.display = 'none';
+                        a.href = url;
+                        a.download = `archidiagram_export_${Date.now()}.pdf`;
+                        a.target = '_blank';
+                        document.body.appendChild(a);
+                        a.click();
+                        setTimeout(() => {
+                          document.body.removeChild(a);
+                          URL.revokeObjectURL(url);
+                        }, 100);
                       }
                     } else if (exportFormat === 'VIDEO') {
                       const canvas = document.querySelector('canvas');
@@ -2335,10 +2356,17 @@ export default function Studio() {
                       recorder.onstop = () => {
                         if (!isCancelled) {
                           const blob = new Blob(chunks, { type: mimeType });
+                          const url = URL.createObjectURL(blob);
                           const a = document.createElement('a');
-                          a.href = URL.createObjectURL(blob);
+                          a.style.display = 'none';
+                          a.href = url;
                           a.download = `archidiagram_shadows_${Date.now()}.${mimeType === 'video/mp4' ? 'mp4' : 'webm'}`;
+                          document.body.appendChild(a);
                           a.click();
+                          setTimeout(() => {
+                            document.body.removeChild(a);
+                            URL.revokeObjectURL(url);
+                          }, 100);
                         }
                         if (document.body.contains(overlay)) {
                           document.body.removeChild(overlay);
@@ -2473,40 +2501,56 @@ export default function Studio() {
       </div>
 
       {/* Main 3D Canvas */}
-      <div style={{ flex: 1, position: 'relative', background: bgMain, overflow: 'hidden', order: isMobile ? 1 : 2 }}>
+      <div id="studio-main-container" style={{ flex: 1, position: 'relative', background: bgMain, overflow: 'hidden', order: isMobile ? 1 : 2 }}>
         <Scene />
         
         {/* Footer (Centered in Scene) */}
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: isMobile ? '10px 15px 30px' : '10px 15px', borderTop: `1px solid ${borderCol}`, fontSize: '0.75rem', color: textMuted, display: 'flex', flexWrap: 'wrap', gap: '10px', background: bgPanel, alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
-          <div>© 2026 Febhouse Studio</div>
-          <div>|</div>
-          <a href="https://febhouse.com/privacy-policy/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Privacy Policy</a>
-          <div>|</div>
-          <a href="https://febhouse.com/terms-of-use/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Terms of Use</a>
-          <div>|</div>
-          <a href="https://febhouse.com/refund-policy/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Refund Policy</a>
-          <div>|</div>
-          <a href="https://febhouse.com/legal-notice/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Legal Notice</a>
-        </div>
+        {activeH2 !== 'export' && (
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: isMobile ? '10px 15px 30px' : '10px 15px', borderTop: `1px solid ${borderCol}`, fontSize: '0.75rem', color: textMuted, display: 'flex', flexWrap: 'wrap', gap: '10px', background: bgPanel, alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
+            <div>© 2026 Febhouse Studio</div>
+            <div>|</div>
+            <a href="https://febhouse.com/privacy-policy/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Privacy Policy</a>
+            <div>|</div>
+            <a href="https://febhouse.com/terms-of-use/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Terms of Use</a>
+            <div>|</div>
+            <a href="https://febhouse.com/refund-policy/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Refund Policy</a>
+            <div>|</div>
+            <a href="https://febhouse.com/legal-notice/" target="_blank" rel="noreferrer" style={{ color: textMuted, textDecoration: 'none' }}>Legal Notice</a>
+          </div>
+        )}
         
         {/* Crop Overlay and HUD Logic */}
         {(() => {
           let hudContent = null;
           if (showHUD) {
+            const container = typeof document !== 'undefined' ? document.getElementById('studio-main-container') : null;
+            const windowW = container ? container.clientWidth : (typeof window !== 'undefined' ? window.innerWidth : 1920);
+            const windowH = container ? container.clientHeight : (typeof window !== 'undefined' ? window.innerHeight : 1080);
+            const scaleX = windowW / (exportWidth || 1920);
+            const scaleY = windowH / (exportHeight || 1080);
+            const renderScale = Math.min(scaleX, scaleY);
+            const renderHeight = (exportHeight || 1080) * renderScale;
+
+            const currentHeight = (activeH2 === 'export') ? renderHeight : windowH;
+            const totalScale = (currentHeight / 1080) * (hudScale || 1);
+
             const posStyles: any = {}
             const [vert, horz] = (hudPosition || 'bottom-left').split('-')
-            if (vert === 'top') posStyles.top = '20px'
-            else if (vert === 'bottom') posStyles.bottom = isMobile ? '90px' : '60px'
+            
+            const offsetMargin = (activeH2 === 'export') ? 20 * totalScale : 20;
+            const bottomMargin = (activeH2 === 'export') ? 20 * totalScale : (isMobile ? 90 : 60);
+
+            if (vert === 'top') posStyles.top = `${offsetMargin}px`
+            else if (vert === 'bottom') posStyles.bottom = `${bottomMargin}px`
             else if (vert === 'middle') { posStyles.top = '50%'; posStyles.transform = 'translateY(-50%)' }
 
-            if (horz === 'left') posStyles.left = '20px'
-            else if (horz === 'right') posStyles.right = '20px'
+            if (horz === 'left') posStyles.left = `${offsetMargin}px`
+            else if (horz === 'right') posStyles.right = `${offsetMargin}px`
             else if (horz === 'center') { 
               posStyles.left = '50%'; 
               if (posStyles.transform) posStyles.transform = 'translate(-50%, -50%)';
               else posStyles.transform = 'translateX(-50%)';
             }
-            const totalScale = hudScale || 1;
 
             if (posStyles.transform) {
               posStyles.transform = `${posStyles.transform} scale(${totalScale})`;
@@ -2723,17 +2767,27 @@ export default function Studio() {
                       fillRule="evenodd" 
                     />
                     <rect x="0" y="0" width={exportWidth} height={exportHeight} fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="2" strokeDasharray="10" vectorEffect="non-scaling-stroke" />
+                  </svg>
+                  
+                  {/* WYSIWYG Export HUD via HTML instead of foreignObject for Safari/Mobile compatibility */}
+                  {showHUD && hudContent && (() => {
+                    const container = typeof document !== 'undefined' ? document.getElementById('studio-main-container') : null;
+                    const windowW = container ? container.clientWidth : (typeof window !== 'undefined' ? window.innerWidth : 1920);
+                    const windowH = container ? container.clientHeight : (typeof window !== 'undefined' ? window.innerHeight : 1080);
+                    const scaleX = windowW / (exportWidth || 1920);
+                    const scaleY = windowH / (exportHeight || 1080);
+                    const renderScale = Math.min(scaleX, scaleY);
+                    const renderW = (exportWidth || 1920) * renderScale;
+                    const renderH = (exportHeight || 1080) * renderScale;
                     
-                    {/* WYSIWYG Export HUD */}
-                    {showHUD && hudContent && (
-                      <foreignObject x="0" y="0" width={exportWidth} height={exportHeight}>
-                        {/* @ts-ignore */}
-                        <div xmlns="http://www.w3.org/1999/xhtml" style={{ width: '100%', height: '100%', position: 'relative' }}>
+                    return (
+                      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <div style={{ width: renderW, height: renderH, position: 'relative' }}>
                           {hudContent}
                         </div>
-                      </foreignObject>
-                    )}
-                  </svg>
+                      </div>
+                    );
+                  })()}
                 </div>
               )}
 
