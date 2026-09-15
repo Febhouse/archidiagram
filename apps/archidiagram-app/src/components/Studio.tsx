@@ -2987,6 +2987,9 @@ export default function Studio() {
                           {item.iconUrl && (() => {
                             const obj = objects.find(o => o.id === item.targetId)
                             const isSvg = item.iconUrl.toLowerCase().endsWith('.svg')
+                            const isPrimitive = ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(item.iconUrl)
+                            const isCustom = item.iconUrl.startsWith('data:') || item.iconUrl.startsWith('blob:')
+                            
                             if (isSvg) {
                               return (
                                 <div style={{
@@ -2997,6 +3000,16 @@ export default function Studio() {
                                   WebkitMaskPosition: 'center',
                                   backgroundColor: obj ? obj.color : '#9ca3af',
                                 }} />
+                              )
+                            } else if (isPrimitive || isCustom) {
+                              return (
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', justifyContent: 'center', width: '100%' }}>
+                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={obj ? obj.color : "currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                  </svg>
+                                </div>
                               )
                             } else {
                               const pngUrl = item.iconUrl.replace('.glb', '.png')
@@ -3042,7 +3055,14 @@ export default function Studio() {
                           }
                           return availableObjects.map(obj => {
                             const libraryModelName = LIBRARY_MODELS.find(name => obj.url.includes(name))
-                            const displayName = libraryModelName || 'Symbol'
+                            
+                            const isPrimitive = ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'PYRAMID'].includes(obj.url)
+                            const isCustom = obj.url.startsWith('data:') || obj.url.startsWith('blob:')
+                            
+                            let displayName = libraryModelName || 'Symbol'
+                            if (isPrimitive) displayName = `Primitive: ${obj.url}`
+                            if (isCustom) displayName = 'Custom 3D Model'
+
                             const isSvg = obj.url.toLowerCase().endsWith('.svg')
                             return (
                               <div 
@@ -3070,11 +3090,17 @@ export default function Studio() {
                                       WebkitMaskPosition: 'center',
                                       backgroundColor: obj.color || '#9ca3af',
                                     }} />
+                                  ) : (isPrimitive || isCustom) ? (
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={obj.color || (isLight ? '#111827' : '#fff')} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                      <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                    </svg>
                                   ) : (
                                     <img src={obj.url.replace('.glb', '.png')} style={{ width: '16px', height: '16px', objectFit: 'contain' }} alt="icon" />
                                   )}
                                 </div>
-                                <span style={{ fontSize: '0.85em' }}>{displayName}</span>
+                                <span style={{ fontSize: '0.85em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{displayName}</span>
                               </div>
                             )
                           })
