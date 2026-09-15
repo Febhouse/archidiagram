@@ -33,7 +33,7 @@ async function recover() {
           }
         }
       }
-    } catch (e) {}
+    } catch (e) { }
   }
 }
 

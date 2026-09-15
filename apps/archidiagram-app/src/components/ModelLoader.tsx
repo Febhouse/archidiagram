@@ -19,6 +19,7 @@ const ForceUpdateFallback = () => {
 }
 
 function Animator({ scene1, scene2, isAnimated, animationSpeed = 1, isCenterExpand }: { scene1: THREE.Group, scene2?: THREE.Group, isAnimated?: boolean, animationSpeed?: number, isCenterExpand: boolean }) {
+  const isExporting = useEditorStore(s => s.isExporting)
   const maxRadiusRef = useRef(0)
   const mats1Ref = useRef<any[]>([])
   const mats2Ref = useRef<any[]>([])
@@ -78,7 +79,7 @@ function Animator({ scene1, scene2, isAnimated, animationSpeed = 1, isCenterExpa
       }
     }
 
-    if (!isAnimated) {
+    if (!isAnimated || isExporting) {
       update(mats1Ref.current, 0, 0, 0)
       if (scene2) update(mats2Ref.current, -1, 0, 0)
       return

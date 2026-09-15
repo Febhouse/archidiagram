@@ -115,6 +115,12 @@ interface EditorState {
   setScaleRingCount: (count: number) => void
   setScaleRingUnit: (unit: string) => void
   setExportResolution: (width: number, height: number) => void
+  isExporting: boolean
+  setIsExporting: (exporting: boolean) => void
+  glRenderer: any
+  glScene: any
+  glCamera: any
+  setGlRefs: (gl: any, scene: any, camera: any) => void
 
   // Sunpath Settings
   sunpathSettings: SunpathSettings
@@ -278,6 +284,12 @@ export const useEditorStore = create<EditorState>()(
   setScaleRingCount: (count) => set({ scaleRingCount: count }),
   setScaleRingUnit: (unit) => set({ scaleRingUnit: unit }),
   setExportResolution: (width, height) => set({ exportWidth: width, exportHeight: height }),
+  isExporting: false,
+  setIsExporting: (exporting) => set({ isExporting: exporting }),
+  glRenderer: null,
+  glScene: null,
+  glCamera: null,
+  setGlRefs: (gl, scene, camera) => set({ glRenderer: gl, glScene: scene, glCamera: camera }),
 
   // Sunpath default
   sunpathSettings: {

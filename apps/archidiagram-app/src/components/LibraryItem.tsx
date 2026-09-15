@@ -124,7 +124,20 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
               if (isProItem && !isUserPro) { onProClick?.(); return; }
               onAdd(modelName);
             }}
-            style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: (isProItem && !isUserPro) ? (isLight ? '#f59e0b' : '#fbbf24') : '#3b82f6', color: (isProItem && !isUserPro) && !isLight ? '#000' : '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+            style={{
+              flex: 1, padding: hasSelection ? '3px' : '4px', fontSize: '0.7rem',
+              background: (isProItem && !isUserPro)
+                ? (isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)')
+                : (hasSelection ? 'transparent' : '#3b82f6'),
+              color: (isProItem && !isUserPro)
+                ? (isLight ? '#999' : '#666')
+                : (hasSelection ? (isLight ? '#2563eb' : '#60a5fa') : '#fff'),
+              border: (isProItem && !isUserPro)
+                ? '1px solid ' + (isLight ? '#ddd' : '#444')
+                : (hasSelection ? '1px solid ' + (isLight ? '#3b82f6' : '#60a5fa') : 'none'),
+              borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold',
+              opacity: (isProItem && !isUserPro) ? 0.6 : 1
+            }}
           >
             {(isProItem && !isUserPro) ? 'PRO' : 'ADD'}
           </button>
@@ -137,14 +150,21 @@ export default function LibraryItem({ modelName, onAdd, onReplace, hasSelection,
               }}
               style={{
                 flex: 1,
-                padding: '3px', /* reduce padding by 1px to account for 1px border */
+                padding: (isProItem && !isUserPro) ? '3px' : '4px',
                 fontSize: '0.7rem',
-                background: 'transparent',
-                color: (isProItem && !isUserPro) ? (isLight ? '#d97706' : '#fbbf24') : (isLight ? '#2563eb' : '#60a5fa'),
-                border: '1px solid ' + ((isProItem && !isUserPro) ? (isLight ? '#f59e0b' : '#fbbf24') : (isLight ? '#3b82f6' : '#60a5fa')),
+                background: (isProItem && !isUserPro)
+                  ? 'transparent'
+                  : '#3b82f6',
+                color: (isProItem && !isUserPro)
+                  ? (isLight ? '#999' : '#666')
+                  : '#fff',
+                border: (isProItem && !isUserPro)
+                  ? '1px solid ' + (isLight ? '#ddd' : '#444')
+                  : 'none',
                 borderRadius: '4px',
                 cursor: 'pointer',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                opacity: (isProItem && !isUserPro) ? 0.6 : 1
               }}
             >
               REPLACE

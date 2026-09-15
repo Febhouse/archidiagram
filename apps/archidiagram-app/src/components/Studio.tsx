@@ -302,6 +302,7 @@ export default function Studio() {
   const [symbolTab, setSymbolTab] = useState<'library' | 'properties'>('library')
   const [importTab, setImportTab] = useState<'import3d' | 'materials'>('import3d')
   const [exportFormat, setExportFormat] = useState<'PNG' | 'PDF' | 'VIDEO'>('PNG')
+  const [pdfExportMode, setPdfExportMode] = useState<'SINGLE' | 'MULTI'>('SINGLE')
   const [exportSettings, setExportSettings] = useState<Record<number, { checked: boolean, start: number, end: number }>>({})
 
   
@@ -1366,11 +1367,22 @@ export default function Studio() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                   <div style={{ fontWeight: 'bold', fontSize: '1rem', color: textMain }}>ADD BASIC SHAPES</div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                    <button onClick={() => setPlacingUrl('BOX')} style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}>Box</button>
-                    <button onClick={() => setPlacingUrl('CYLINDER')} style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}>Cylinder</button>
-                    <button onClick={() => setPlacingUrl('CONE')} style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}>Cone</button>
-                    <button onClick={() => setPlacingUrl('SPHERE')} style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}>Sphere</button>
-                    <button onClick={() => setPlacingUrl('PYRAMID')} style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold', gridColumn: '1 / -1' }}>Pyramid</button>
+                    {(() => {
+                      const selectedObj = objects.find(o => selectedIds.includes(o.id));
+                      const selectedUrl = selectedObj?.url || '';
+                      const shapeActive = (shape: string) => selectedUrl === shape || placingUrl === shape
+                        ? { background: '#3b82f6', color: '#fff', border: 'none', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' as const }
+                        : { background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, padding: '8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' as const };
+                      return (
+                        <>
+                          <button onClick={() => setPlacingUrl('BOX')} style={shapeActive('BOX')}>Box</button>
+                          <button onClick={() => setPlacingUrl('CYLINDER')} style={shapeActive('CYLINDER')}>Cylinder</button>
+                          <button onClick={() => setPlacingUrl('CONE')} style={shapeActive('CONE')}>Cone</button>
+                          <button onClick={() => setPlacingUrl('SPHERE')} style={shapeActive('SPHERE')}>Sphere</button>
+                          <button onClick={() => setPlacingUrl('PYRAMID')} style={{...shapeActive('PYRAMID'), gridColumn: '1 / -1'}}>Pyramid</button>
+                        </>
+                      );
+                    })()}
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '10px' }}>
@@ -1946,18 +1958,38 @@ export default function Studio() {
                 <div>
                   <div style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '5px' }}>Aspect Ratio</div>
                   <div style={{ display: 'flex', gap: '5px', marginBottom: '15px' }}>
-                    <button onClick={() => setExportResolution(exportWidth, exportWidth)} style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>1:1</button>
-                    <button onClick={() => setExportResolution(exportWidth, Math.round(exportWidth * 9 / 16))} style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>16:9</button>
-                    <button onClick={() => setExportResolution(exportWidth, Math.round(exportWidth * 16 / 9))} style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>9:16</button>
+                    {(() => {
+                      const ratio = Math.round((exportWidth / exportHeight) * 100) / 100;
+                      const is1to1 = Math.abs(ratio - 1) < 0.05;
+                      const is16to9 = Math.abs(ratio - 16/9) < 0.05;
+                      const is9to16 = Math.abs(ratio - 9/16) < 0.05;
+                      const activeStyle = { flex: 1, padding: '4px', fontSize: '0.75rem', background: '#3b82f6', color: '#fff', border: '1px solid #3b82f6', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' as const };
+                      const defaultStyle = { flex: 1, padding: '4px', fontSize: '0.75rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' };
+                      return (
+                        <>
+                          <button onClick={() => setExportResolution(exportWidth, exportWidth)} style={is1to1 ? activeStyle : defaultStyle}>1:1</button>
+                          <button onClick={() => setExportResolution(exportWidth, Math.round(exportWidth * 9 / 16))} style={is16to9 ? activeStyle : defaultStyle}>16:9</button>
+                          <button onClick={() => setExportResolution(exportWidth, Math.round(exportWidth * 16 / 9))} style={is9to16 ? activeStyle : defaultStyle}>9:16</button>
+                        </>
+                      );
+                    })()}
                   </div>
 
                   <div style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '5px' }}>Resolution</div>
                   <div style={{ display: 'flex', gap: '5px', marginBottom: '10px' }}>
-                    <button onClick={() => setExportResolution(1920, 1080)} style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>FHD</button>
-                    <button onClick={() => setExportResolution(2560, 1440)} style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>2K</button>
-                    <button onClick={() => setExportResolution(3200, 1800)} style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>3K</button>
-                    <button onClick={() => setExportResolution(3840, 2160)} style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>4K</button>
-                    <button onClick={() => setExportResolution(5120, 2880)} style={{ flex: 1, padding: '4px', fontSize: '0.7rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' }}>5K</button>
+                    {(() => {
+                      const resActive = { flex: 1, padding: '4px', fontSize: '0.7rem', background: '#3b82f6', color: '#fff', border: '1px solid #3b82f6', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' as const };
+                      const resDef = { flex: 1, padding: '4px', fontSize: '0.7rem', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px', cursor: 'pointer' };
+                      return (
+                        <>
+                          <button onClick={() => setExportResolution(1920, 1080)} style={exportWidth === 1920 ? resActive : resDef}>FHD</button>
+                          <button onClick={() => setExportResolution(2560, 1440)} style={exportWidth === 2560 ? resActive : resDef}>2K</button>
+                          <button onClick={() => setExportResolution(3200, 1800)} style={exportWidth === 3200 ? resActive : resDef}>3K</button>
+                          <button onClick={() => setExportResolution(3840, 2160)} style={exportWidth === 3840 ? resActive : resDef}>4K</button>
+                          <button onClick={() => setExportResolution(5120, 2880)} style={exportWidth === 5120 ? resActive : resDef}>5K</button>
+                        </>
+                      );
+                    })()}
                   </div>
                   <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                     <input 
@@ -2065,15 +2097,28 @@ export default function Studio() {
                 </div>
               </div>
 
-              {exportFormat === 'VIDEO' && (
-                <div style={{ position: 'relative' }}>
+              {exportFormat === 'PDF' && (
+                <div style={{ marginTop: '15px', marginBottom: '15px' }}>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '5px' }}>PDF Export Mode</div>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <button onClick={() => setPdfExportMode('SINGLE')} style={{ flex: 1, padding: '6px', fontSize: '0.85rem', background: pdfExportMode === 'SINGLE' ? '#3b82f6' : bgPanel, color: pdfExportMode === 'SINGLE' ? '#fff' : textMain, border: pdfExportMode === 'SINGLE' ? 'none' : `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer' }}>Single Page</button>
+                    <button onClick={() => setPdfExportMode('MULTI')} style={{ flex: 1, padding: '6px', fontSize: '0.85rem', background: pdfExportMode === 'MULTI' ? '#3b82f6' : bgPanel, color: pdfExportMode === 'MULTI' ? '#fff' : textMain, border: pdfExportMode === 'MULTI' ? 'none' : `1px solid ${borderCol}`, borderRadius: '4px', cursor: 'pointer' }}>
+                      Multi Page
+                      {!isPro && <span style={{ marginLeft: '6px', fontSize: '0.5rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '2px 4px', borderRadius: '3px' }}>PRO</span>}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {(exportFormat === 'VIDEO' || (exportFormat === 'PDF' && pdfExportMode === 'MULTI')) && (
+                <div style={{ position: 'relative', marginTop: exportFormat === 'VIDEO' ? '15px' : '0' }}>
                   {!isPro && (
                      <div onClick={(e) => { e.stopPropagation(); setIsAuthModalOpen(true); }} style={{ position: 'absolute', inset: -5, zIndex: 10, cursor: 'pointer', background: 'rgba(0,0,0,0.01)' }} />
                   )}
                   <div style={{ opacity: isPro ? 1 : 0.5 }}>
                     <div style={{ fontWeight: 'bold', fontSize: '1rem', marginBottom: '15px' }}>BATCH EXPORT SHADOWS</div>
                     <p style={{ fontSize: '0.85rem', color: textMuted, marginBottom: '20px' }}>
-                      Select months to export shadow study images/videos.
+                      Select months to export shadow study {exportFormat === 'VIDEO' ? 'videos' : 'images'}.
                     </p>
                     
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -2094,10 +2139,12 @@ export default function Studio() {
                           </label>
                           <span style={{ fontSize: '0.8rem', color: '#3b82f6' }}>Day: {monthDates[m] || 21} | UTC {utcString} {isDst && '(DST)'}</span>
                         </div>
-                        <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-                          <span style={{ fontSize: '0.85rem' }}>Start (h): <input type="number" value={settings.start} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, start: parseInt(e.target.value) || 6 } }))} disabled={!isPro} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
-                          <span style={{ fontSize: '0.85rem' }}>End (h): <input type="number" value={settings.end} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, end: parseInt(e.target.value) || 18 } }))} disabled={!isPro} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
-                        </div>
+                        {exportFormat === 'VIDEO' && (
+                          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                            <span style={{ fontSize: '0.85rem' }}>Start (h): <input type="number" value={settings.start} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, start: parseInt(e.target.value) || 6 } }))} disabled={!isPro} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
+                            <span style={{ fontSize: '0.85rem' }}>End (h): <input type="number" value={settings.end} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, end: parseInt(e.target.value) || 18 } }))} disabled={!isPro} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
+                          </div>
+                        )}
                       </div>
                     )
                   })}
@@ -2113,10 +2160,22 @@ export default function Studio() {
                       setIsAuthModalOpen(true);
                       return;
                     }
-                    const drawHUDOnCanvas = (targetCtx: any) => {
+                    
+                    let safariTab: Window | null = null;
+                    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                    if (isSafari && (exportFormat === 'PNG' || exportFormat === 'PDF')) {
+                      safariTab = window.open('', '_blank');
+                      if (safariTab) {
+                        safariTab.document.write('<html><head><title>Exporting...</title><style>body{margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#111;flex-direction:column;font-family:sans-serif;color:white}h2{opacity:0.8}</style></head><body><h2>Processing Export... Please wait</h2></body></html>');
+                      }
+                    }
+                    
+                    const drawHUDOnCanvas = (targetCtx: any, canvasW?: number, canvasH?: number) => {
                       if (!showHUD) return;
                       const store = useEditorStore.getState();
-                      const scale = (exportHeight / 1080) * (store.hudScale || 1);
+                      const actualW = canvasW || exportWidth;
+                      const actualH = canvasH || exportHeight;
+                      const scale = (actualH / 1080) * (store.hudScale || 1);
                       const padding = 15 * scale;
                       const lineH = 22 * scale;
                       
@@ -2125,15 +2184,15 @@ export default function Studio() {
                       const rectH = (numItems * lineH) + (padding * 2) + (10 * scale);
                       
                       let hx = 20 * scale;
-                      let hy = exportHeight - rectH - 20 * scale;
+                      let hy = actualH - rectH - 20 * scale;
                       
                       const [vert, horz] = (store.hudPosition || 'bottom-left').split('-');
                       if (vert === 'top') hy = 20 * scale;
-                      else if (vert === 'middle') hy = (exportHeight - rectH) / 2;
+                      else if (vert === 'middle') hy = (actualH - rectH) / 2;
                       
                       if (horz === 'left') hx = 20 * scale;
-                      else if (horz === 'right') hx = exportWidth - rectW - 20 * scale;
-                      else if (horz === 'center') hx = (exportWidth - rectW) / 2;
+                      else if (horz === 'right') hx = actualW - rectW - 20 * scale;
+                      else if (horz === 'center') hx = (actualW - rectW) / 2;
 
                       targetCtx.fillStyle = isLight ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)';
                       targetCtx.beginPath();
@@ -2149,7 +2208,7 @@ export default function Studio() {
                       let startX = hx + padding;
                       
                       targetCtx.font = `bold ${14 * scale}px Quicksand, sans-serif`;
-                      targetCtx.fillText('ARCHIDIAGRAM.COM', startX, currentY);
+                      targetCtx.fillText('ARCHI DIAGRAM', startX, currentY);
                       currentY += lineH;
                       
                       targetCtx.font = `${13 * scale}px Quicksand, sans-serif`;
@@ -2237,67 +2296,250 @@ export default function Studio() {
                     };
 
                     const processExportImage = () => {
-                      const canvas = document.querySelector('canvas');
+                      const canvas = document.querySelector('canvas') as HTMLCanvasElement | null;
                       if (!canvas) return null;
-                      const cropCanvas = document.createElement('canvas');
-                      cropCanvas.width = exportWidth;
-                      cropCanvas.height = exportHeight;
-                      const ctx = cropCanvas.getContext('2d');
-                      if (!ctx) return null;
-
-                      const sAspect = canvas.width / canvas.height;
-                      const dAspect = exportWidth / exportHeight;
-                      let sx = 0, sy = 0, sw = canvas.width, sh = canvas.height;
-                      if (sAspect > dAspect) {
-                        sw = canvas.height * dAspect;
-                        sx = (canvas.width - sw) / 2;
-                      } else {
-                        sh = canvas.width / dAspect;
-                        sy = (canvas.height - sh) / 2;
+                      
+                      const store = useEditorStore.getState();
+                      const gl = store.glRenderer;
+                      const scene = store.glScene;
+                      const camera = store.glCamera;
+                      
+                      if (!gl || !scene || !camera) {
+                        const fb = document.createElement('canvas');
+                        fb.width = exportWidth; fb.height = exportHeight;
+                        const fbCtx = fb.getContext('2d');
+                        if (!fbCtx) return null;
+                        fbCtx.drawImage(canvas, 0, 0, exportWidth, exportHeight);
+                        drawHUDOnCanvas(fbCtx);
+                        return fb.toDataURL('image/png', 1.0);
                       }
-                      ctx.drawImage(canvas, sx, sy, sw, sh, 0, 0, exportWidth, exportHeight);
-                      drawHUDOnCanvas(ctx);
-                      return cropCanvas.toDataURL('image/png', 1.0);
+                      
+                      // Save originals
+                      const origPixelRatio = gl.getPixelRatio();
+                      const origAspect = camera.aspect;
+                      const origFov = camera.fov;
+                      const cssW = canvas.clientWidth || (canvas.width / origPixelRatio);
+                      const cssH = canvas.clientHeight || (canvas.height / origPixelRatio);
+                      
+                      // Clamp to GPU max texture size or PDF Multi-page RAM limits
+                      const maxSize = gl.capabilities.maxTextureSize;
+                      let safeW = exportWidth;
+                      let safeH = exportHeight;
+                      
+                      if (exportFormat === 'PDF' && pdfExportMode === 'MULTI') {
+                        const MAX_PDF_MULTI_DIM = 1920;
+                        if (safeW > MAX_PDF_MULTI_DIM || safeH > MAX_PDF_MULTI_DIM) {
+                          const ms = MAX_PDF_MULTI_DIM / Math.max(safeW, safeH);
+                          safeW = Math.floor(safeW * ms);
+                          safeH = Math.floor(safeH * ms);
+                        }
+                      }
+                      
+                      if (safeW > maxSize || safeH > maxSize) {
+                        const cs = maxSize / Math.max(safeW, safeH);
+                        safeW = Math.floor(safeW * cs);
+                        safeH = Math.floor(safeH * cs);
+                      }
+                      
+                      // Upscaling Trick for High-Res Line Thickness:
+                      // WebGL lines are strictly 1px. To make lines thicker in 4K/5K, 
+                      // we render the 3D scene at a max of 2K, then upscale it to 4K/5K via 2D Canvas.
+                      let renderW = safeW;
+                      let renderH = safeH;
+                      const MAX_RENDER_DIM = 2560; // 2K Standard
+                      if (Math.max(renderW, renderH) > MAX_RENDER_DIM) {
+                        const scaleDown = MAX_RENDER_DIM / Math.max(renderW, renderH);
+                        renderW = Math.floor(renderW * scaleDown);
+                        renderH = Math.floor(renderH * scaleDown);
+                      }
+                      
+                      const exportAspect = renderW / renderH;
+                      const tempCssW = cssW;
+                      const tempCssH = cssW / exportAspect;
+                      const exportPixelRatio = renderW / tempCssW;
+                      
+                      // Perfect WYSIWYG FOV calculation:
+                      const scaleX = cssW / safeW;
+                      const scaleY = cssH / safeH;
+                      const renderScale = Math.min(scaleX, scaleY);
+                      const cropBoxH = safeH * renderScale;
+                      
+                      const vFovRad = origFov * Math.PI / 180;
+                      const cropFovRad = 2 * Math.atan((cropBoxH / cssH) * Math.tan(vFovRad / 2));
+                      const cropFovDeg = cropFovRad * 180 / Math.PI;
+                      
+                      camera.aspect = exportAspect;
+                      camera.fov = cropFovDeg;
+                      camera.updateProjectionMatrix();
+                      gl.setPixelRatio(exportPixelRatio);
+                      gl.setSize(tempCssW, tempCssH, false);
+                      
+                      const restoreRenderer = () => {
+                        camera.aspect = origAspect;
+                        camera.fov = origFov;
+                        camera.updateProjectionMatrix();
+                        gl.setPixelRatio(origPixelRatio);
+                        gl.setSize(cssW, cssH, false);
+                        gl.render(scene, camera);
+                      };
+                      
+                      const restorePhases: { material: any, phase: number }[] = [];
+                      try {
+                        // Force all SVG animations to be fully drawn synchronously
+                        scene.traverse((child: any) => {
+                          if (child.isMesh && child.material && child.material.userData && child.material.userData.uClipPhase) {
+                            restorePhases.push({ material: child.material, phase: child.material.userData.uClipPhase.value });
+                            child.material.userData.uClipPhase.value = 0; // 0 means draw fully 100%
+                          }
+                        });
+                        
+                        scene.updateMatrixWorld(true);
+                        gl.render(scene, camera);
+                        
+                        // Copy to a 2D canvas of the EXACT target resolution (safeW x safeH)
+                        const cropCanvas = document.createElement('canvas');
+                        cropCanvas.width = safeW;
+                        cropCanvas.height = safeH;
+                        const ctx = cropCanvas.getContext('2d');
+                        if (!ctx) return null;
+                        
+                        // Use high quality image smoothing to upscale the 2K 3D render to 4K/5K
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
+                        ctx.drawImage(canvas, 0, 0, renderW, renderH, 0, 0, safeW, safeH);
+                        
+                        // Draw HUD vector text natively at 4K/5K resolution so it stays razor sharp
+                        drawHUDOnCanvas(ctx, safeW, safeH);
+                        
+                        return cropCanvas.toDataURL('image/png', 1.0);
+                      } finally {
+                        restorePhases.forEach(({ material, phase }) => {
+                          if (material.userData && material.userData.uClipPhase) {
+                            material.userData.uClipPhase.value = phase;
+                          }
+                        });
+                        restoreRenderer();
+                      }
                     };
 
                     if (exportFormat === 'PNG') {
+                      useEditorStore.getState().setIsExporting(true);
+                      await new Promise(r => setTimeout(r, 100));
                       const dataUrl = processExportImage();
+                      useEditorStore.getState().setIsExporting(false);
                       if (dataUrl) {
-                        fetch(dataUrl).then(res => res.blob()).then(blob => {
+                        if (safariTab) {
+                          safariTab.document.write(`<html><head><title>Export Image</title><style>body{margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#111;flex-direction:column;font-family:sans-serif;color:white}img{max-width:95%;max-height:80vh;object-fit:contain}p{margin-top:20px;font-size:14px;opacity:0.7}</style></head><body><img src="${dataUrl}" /><p>Long press (iPad) or right-click to save image</p></body></html>`);
+                          safariTab.document.close();
+                        } else {
+                          const res = await fetch(dataUrl);
+                          const blob = await res.blob();
                           const url = URL.createObjectURL(blob);
                           const a = document.createElement('a');
                           a.style.display = 'none';
                           a.href = url;
                           a.download = `archidiagram_export_${Date.now()}.png`;
+                          a.target = '_blank';
                           document.body.appendChild(a);
                           a.click();
                           setTimeout(() => {
                             document.body.removeChild(a);
                             URL.revokeObjectURL(url);
                           }, 100);
-                        });
-                      }
+                        }
+                      } else if (safariTab) { safariTab.close(); }
                     } else if (exportFormat === 'PDF') {
-                      const dataUrl = processExportImage();
-                      if (dataUrl) {
-                        const { jsPDF } = await import('jspdf');
-                        const orientation = exportWidth > exportHeight ? 'landscape' : 'portrait';
-                        const doc = new jsPDF({ orientation, unit: 'px', format: [exportWidth, exportHeight] });
-                        doc.addImage(dataUrl, 'PNG', 0, 0, exportWidth, exportHeight);
-                        const blob = doc.output('blob');
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.style.display = 'none';
-                        a.href = url;
-                        a.download = `archidiagram_export_${Date.now()}.pdf`;
-                        a.target = '_blank';
-                        document.body.appendChild(a);
-                        a.click();
-                        setTimeout(() => {
-                          document.body.removeChild(a);
-                          URL.revokeObjectURL(url);
-                        }, 100);
-                      }
+                          const isMultiPageSelected = exportFormat === 'PDF' && pdfExportMode === 'MULTI' && visibleMonths.some(m => exportSettings[m]?.checked);
+                          if (isMultiPageSelected && !isPro) {
+                            if (safariTab) safariTab.close();
+                            setIsAuthModalOpen(true);
+                            return;
+                          }
+                          
+                          if (isMultiPageSelected) {
+                            const { jsPDF } = await import('jspdf');
+                            const orientation = exportWidth > exportHeight ? 'landscape' : 'portrait';
+                            const ptW = exportWidth * 0.75;
+                            const ptH = exportHeight * 0.75;
+                            const doc = new jsPDF({ orientation, unit: 'pt', format: [ptW, ptH] });
+                            
+                            useEditorStore.getState().setIsExporting(true);
+                            let isFirstPage = true;
+                            
+                            const store = useEditorStore.getState();
+                            const originalMonth = store.activeMonth;
+                            
+                            for (const month of visibleMonths) {
+                              if (!exportSettings[month]?.checked) continue;
+                              
+                              store.setActiveMonth(month);
+                              // Wait for shadows/sun to update
+                              await new Promise(r => setTimeout(r, 250));
+                              
+                              const dataUrl = processExportImage();
+                              if (dataUrl) {
+                                if (!isFirstPage) {
+                                  doc.addPage([ptW, ptH], orientation);
+                                }
+                                doc.addImage(dataUrl, 'PNG', 0, 0, ptW, ptH, undefined, 'NONE');
+                                isFirstPage = false;
+                              }
+                            }
+                            
+                            // Restore original month
+                            store.setActiveMonth(originalMonth);
+                            useEditorStore.getState().setIsExporting(false);
+                            
+                            if (!isFirstPage) {
+                              const blob = doc.output('blob');
+                              const url = URL.createObjectURL(blob);
+                              if (safariTab) {
+                                safariTab.location.href = url;
+                              } else {
+                                const a = document.createElement('a');
+                                a.style.display = 'none';
+                                a.href = url;
+                                a.download = `archidiagram_multipage_${Date.now()}.pdf`;
+                                a.target = '_blank';
+                                document.body.appendChild(a);
+                                a.click();
+                                setTimeout(() => {
+                                  document.body.removeChild(a);
+                                  URL.revokeObjectURL(url);
+                                }, 100);
+                              }
+                            } else if (safariTab) {
+                              safariTab.close();
+                            }
+                          } else {
+                            useEditorStore.getState().setIsExporting(true);
+                            await new Promise(r => setTimeout(r, 100));
+                            const dataUrl = processExportImage();
+                            useEditorStore.getState().setIsExporting(false);
+                            if (dataUrl) {
+                              const { jsPDF } = await import('jspdf');
+                              const orientation = exportWidth > exportHeight ? 'landscape' : 'portrait';
+                              const doc = new jsPDF({ orientation, unit: 'pt', format: [exportWidth * 0.75, exportHeight * 0.75] });
+                              doc.addImage(dataUrl, 'PNG', 0, 0, exportWidth * 0.75, exportHeight * 0.75, undefined, 'NONE');
+                              const blob = doc.output('blob');
+                              const url = URL.createObjectURL(blob);
+                              if (safariTab) {
+                                safariTab.location.href = url;
+                              } else {
+                                const a = document.createElement('a');
+                                a.style.display = 'none';
+                                a.href = url;
+                                a.download = `archidiagram_export_${Date.now()}.pdf`;
+                                a.target = '_blank';
+                                document.body.appendChild(a);
+                                a.click();
+                                setTimeout(() => {
+                                  document.body.removeChild(a);
+                                  URL.revokeObjectURL(url);
+                                }, 100);
+                              }
+                            } else if (safariTab) { safariTab.close(); }
+                          }
                     } else if (exportFormat === 'VIDEO') {
                       const canvas = document.querySelector('canvas');
                       if (!canvas) return;
@@ -2454,7 +2696,7 @@ export default function Studio() {
           {activeH2 === 'info' && (
             <div style={{ padding: '15px', borderBottom: `1px solid ${borderCol}`, fontSize: '0.85rem', color: textMuted, lineHeight: '1.5' }}>
               <div style={{ marginBottom: '15px', color: textMain }}>
-                <strong style={{ fontSize: '1rem' }}>ARCHIDIAGRAM.COM</strong><br/>
+                <strong style={{ fontSize: '1rem' }}>ARCHI DIAGRAM</strong><br/>
                 <span style={{ fontSize: '0.8rem' }}>Built with passion by Nam Nguyen (Febhouse)</span>
               </div>
               
@@ -2588,7 +2830,7 @@ export default function Studio() {
                 
                 {isNotesExpanded && (
                   <div style={{ padding: '10px 15px', fontSize: '0.85rem', display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                    <div><strong>ARCHIDIAGRAM.COM</strong></div>
+                    <div><strong>ARCHI DIAGRAM</strong></div>
                     <div>Location: {latitude?.toFixed(4)}, {longitude?.toFixed(4)}</div>
                     <div>Day: {monthDates[activeMonth] || 21} {monthNames[activeMonth - 1]}</div>
                     {(() => {

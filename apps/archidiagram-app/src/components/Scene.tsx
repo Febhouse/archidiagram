@@ -309,8 +309,9 @@ export default function Scene() {
           cursor: transformMode === 'pan' ? 'grab' : 'auto' 
         }}
         gl={{ localClippingEnabled: true, preserveDrawingBuffer: true }}
-        onCreated={({ gl }) => {
+        onCreated={({ gl, scene, camera }) => {
           gl.localClippingEnabled = true
+          useEditorStore.getState().setGlRefs(gl, scene, camera)
         }}
       >
         <color attach="background" args={[bgColor]} />
