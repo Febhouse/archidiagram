@@ -297,6 +297,12 @@ export default function Studio() {
   // H2 Accordion State
   const [activeH2, setActiveH2] = useState<'global' | 'location' | 'sundiagram' | 'symbols' | 'import' | 'export' | 'info' | null>('location')
   
+  // Location Search Suggestions State
+  const [locQuery, setLocQuery] = useState('')
+  const [locSuggestions, setLocSuggestions] = useState<any[]>([])
+  const [isSearchingLoc, setIsSearchingLoc] = useState(false)
+  const locSearchTimeout = useRef<NodeJS.Timeout | null>(null)
+
   // Tabs State within H2
   const [sunTab, setSunTab] = useState<'create' | 'shadow' | 'style'>('shadow')
   const [symbolTab, setSymbolTab] = useState<'library' | 'properties'>('library')
@@ -1121,21 +1127,43 @@ export default function Studio() {
             <div style={{ background: isLight ? '#f9fafb' : '#1a1a1a', padding: '15px' }}>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginBottom: '20px' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', position: 'relative' }}>
                   <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Paste Address / Lat, Lng</span>
                   <input 
                     type="text" 
-                    placeholder="e.g. 40.701, -73.948 or 'Hanoi' then press Enter"
+                    value={locQuery}
+                    placeholder="e.g. 40.701, -73.948 or 'Hanoi'"
+                    style={{ width: '100%', padding: '8px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }}
                     onChange={(e) => {
                       const val = e.target.value
+                      setLocQuery(val)
+                      
                       const parts = val.split(',')
-                      if (parts.length === 2) {
-                        const lat = Math.max(-90, Math.min(90, parseFloat(parts[0].trim())))
-                        const lng = Math.max(-180, Math.min(180, parseFloat(parts[1].trim())))
-                        if (!isNaN(lat) && !isNaN(lng)) {
-                          setEnvironment({ latitude: lat, longitude: lng })
-                        }
+                      if (parts.length === 2 && !isNaN(parseFloat(parts[0])) && !isNaN(parseFloat(parts[1]))) {
+                        setLocSuggestions([])
+                        return
                       }
+
+                      if (locSearchTimeout.current) clearTimeout(locSearchTimeout.current)
+                      
+                      if (val.trim().length < 3) {
+                        setLocSuggestions([])
+                        return
+                      }
+
+                      locSearchTimeout.current = setTimeout(async () => {
+                        const mapboxToken = useEditorStore.getState().mapboxToken;
+                        if (!mapboxToken) return;
+                        setIsSearchingLoc(true)
+                        try {
+                          const res = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(val)}.json?access_token=${mapboxToken}&limit=5`);
+                          const data = await res.json();
+                          if (data.features) {
+                            setLocSuggestions(data.features)
+                          }
+                        } catch (err) {}
+                        setIsSearchingLoc(false)
+                      }, 400)
                     }}
                     onKeyDown={async (e) => {
                       if (e.key === 'Enter') {
@@ -1186,6 +1214,30 @@ export default function Studio() {
                     }}
                     style={{ width: '100%', padding: '8px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} 
                   />
+                  {locSuggestions.length > 0 && (
+                    <div style={{ 
+                      position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 100, 
+                      background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '4px',
+                      boxShadow: '0 4px 6px rgba(0,0,0,0.1)', marginTop: '4px', overflow: 'hidden'
+                    }}>
+                      {locSuggestions.map((sug, i) => (
+                        <div 
+                          key={i}
+                          style={{ padding: '8px 10px', cursor: 'pointer', borderBottom: i === locSuggestions.length - 1 ? 'none' : `1px solid ${borderCol}`, fontSize: '0.85rem' }}
+                          onClick={() => {
+                            const [lng, lat] = sug.center
+                            setEnvironment({ latitude: lat, longitude: lng })
+                            setLocQuery(sug.place_name)
+                            setLocSuggestions([])
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget.style.background = isLight ? '#f3f4f6' : '#374151')}
+                          onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                        >
+                          {sug.place_name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <div style={{ fontSize: '0.75rem', color: textMuted, marginTop: '-2px' }}>Type an address and press Enter to search</div>
                 </div>
 
