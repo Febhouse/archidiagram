@@ -2128,13 +2128,32 @@ export default function Studio() {
                     const baseUtc = timezoneMode === 'auto' ? (Math.round((longitude || 105)/15)) : utcOffset
                     const actualUtc = baseUtc + (isDst ? 1 : 0)
                     const utcString = actualUtc >= 0 ? `+${actualUtc}` : `${actualUtc}`
-                    const settings = exportSettings[m] || { checked: true, start: 6, end: 18 }
+                    const settings = exportSettings[m] || { checked: m === activeMonth, start: 6, end: 18 }
 
                     return (
                       <div key={m} style={{ background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '6px', padding: '10px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                           <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', cursor: 'pointer' }}>
-                            <input type="checkbox" checked={settings.checked} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, checked: e.target.checked } }))} disabled={!isPro} />
+                            <input 
+                              type="radio" 
+                              name="exportMonthGroup"
+                              checked={settings.checked} 
+                              onChange={e => {
+                                if (e.target.checked) {
+                                  setExportSettings(p => {
+                                    const next = { ...p };
+                                    visibleMonths.forEach(km => {
+                                      if (!next[km]) next[km] = { checked: false, start: 6, end: 18 };
+                                      else next[km] = { ...next[km], checked: false };
+                                    });
+                                    if (!next[m]) next[m] = { checked: true, start: 6, end: 18 };
+                                    else next[m] = { ...next[m], checked: true };
+                                    return next;
+                                  });
+                                }
+                              }} 
+                              disabled={!isPro} 
+                            />
                             <span style={{ marginLeft: '8px' }}>{monthNames[m-1]}</span>
                           </label>
                           <span style={{ fontSize: '0.8rem', color: '#3b82f6' }}>Day: {monthDates[m] || 21} | UTC {utcString} {isDst && '(DST)'}</span>
