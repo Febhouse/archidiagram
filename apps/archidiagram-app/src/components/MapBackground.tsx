@@ -91,7 +91,7 @@ function MapBackgroundInner() {
   if (error) {
     return (
       <group rotation={[0, northOffsetRad, 0]}>
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.0, 0]}>
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.2, 0]}>
           <planeGeometry args={[mapPhysicalSize, mapPhysicalSize]} />
           <meshBasicMaterial color="#ffcccc" opacity={0.5} transparent />
         </mesh>
@@ -103,7 +103,7 @@ function MapBackgroundInner() {
 
   return (
     <group rotation={[0, northOffsetRad, 0]}>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.0, 0]} receiveShadow>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.2, 0]} receiveShadow>
         <planeGeometry args={[mapPhysicalSize, mapPhysicalSize]} />
         {/* @ts-ignore */}
         <fadeMapMaterial uMap={texture} uOpacity={mapOpacity} uRadiusUV={uRadiusUV} transparent depthWrite={false} />
