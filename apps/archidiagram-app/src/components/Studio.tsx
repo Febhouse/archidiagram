@@ -2143,7 +2143,7 @@ export default function Studio() {
                     const baseUtc = timezoneMode === 'auto' ? (Math.round((longitude || 105)/15)) : utcOffset
                     const actualUtc = baseUtc + (isDst ? 1 : 0)
                     const utcString = actualUtc >= 0 ? `+${actualUtc}` : `${actualUtc}`
-                    const settings = exportSettings[m] || { checked: m === activeMonth, start: 6, end: 18 }
+                    const settings = exportSettings[m] || { checked: false, start: 6, end: 18 }
 
                     return (
                       <div key={m} style={{ background: bgPanel, border: `1px solid ${borderCol}`, borderRadius: '6px', padding: '10px' }}>
@@ -2151,9 +2151,10 @@ export default function Studio() {
                           <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', cursor: 'pointer' }}>
                             <input 
                               type="radio" 
+                              name="exportMonthGroup"
                               value={m}
                               checked={settings.checked} 
-                              onChange={() => {
+                              onClick={() => {
                                 setExportSettings(p => {
                                   const next = { ...p };
                                   visibleMonths.forEach(km => {
@@ -2161,7 +2162,8 @@ export default function Studio() {
                                   });
                                   return next;
                                 });
-                              }} 
+                              }}
+                              onChange={() => {}} 
                               disabled={!isPro} 
                             />
                             <span style={{ marginLeft: '8px' }}>{monthNames[m-1]}</span>
@@ -2169,7 +2171,7 @@ export default function Studio() {
                           <span style={{ fontSize: '0.8rem', color: '#3b82f6' }}>Day: {monthDates[m] || 21} | UTC {utcString} {isDst && '(DST)'}</span>
                         </div>
                         {(exportFormat === 'VIDEO' || (exportFormat === 'PDF' && pdfExportMode === 'MULTI')) && (
-                          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                          <div style={{ display: 'flex', gap: '15px', alignItems: 'center', opacity: settings.checked ? 1 : 0.5, pointerEvents: settings.checked ? 'auto' : 'none' }}>
                             <span style={{ fontSize: '0.85rem' }}>Start (h): <input type="number" value={settings.start} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, start: parseInt(e.target.value) || 6 } }))} disabled={!isPro} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
                             <span style={{ fontSize: '0.85rem' }}>End (h): <input type="number" value={settings.end} onChange={e => setExportSettings(p => ({ ...p, [m]: { ...settings, end: parseInt(e.target.value) || 18 } }))} disabled={!isPro} style={{ width: '40px', padding: '2px 4px', background: inputBg, color: textMain, border: `1px solid ${inputBorder}`, borderRadius: '4px' }} /></span>
                           </div>
@@ -2187,6 +2189,12 @@ export default function Studio() {
                   onClick={async () => {
                     if (exportFormat === 'VIDEO' && !isPro) {
                       setIsAuthModalOpen(true);
+                      return;
+                    }
+                    
+                    const isMultiSelected = (exportFormat === 'VIDEO' || (exportFormat === 'PDF' && pdfExportMode === 'MULTI'))
+                    if (isMultiSelected && !visibleMonths.some(m => exportSettings[m]?.checked)) {
+                      alert('Please select a month to export.');
                       return;
                     }
                     
